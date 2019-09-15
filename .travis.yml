@@ -2,15 +2,41 @@ matrix:
   include:
     #Here is the python tests
     - language: python
+      #Decide on python version
       python:
       before_script:
-        - cd Testing/PiTest
+        - cd Pi/Tests
 
       install:
       - pip install -r requirements.txt
       script:
         #- python -m unittest discover 
         #- pytest
+      android:
+        components:
+
+    - language: java
+      #decide on jdk
+      jdk:
+      before_script:
+      - cd Android/Tests
+      #There needs to be an gradlew file in the folder for the install and script to work.
+      install: 
+      - ./gradlew assemble
+      script:
+      -./gradlew check
+
+      #This part will cache some stuff and make the testing faster if the gradle isn't changed
+      before_cache:
+      - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+      - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      cache:
+      directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+      script:
 
 
-    - language: android
+
+     
