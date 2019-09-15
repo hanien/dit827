@@ -1,8 +1,11 @@
 package com.example.aptiv;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import com.example.aptiv.adapter.ViewPagerAdapter;
@@ -23,12 +26,16 @@ public class MainActivity extends AppCompatActivity {
         addTabs(viewPager);
         ((TabLayout) findViewById(R.id.tabs)).setupWithViewPager( viewPager );
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+        }
     }
 
     private void addTabs(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new DashboardFragment(), "Dashboard");
-        adapter.addFrag(new AudioFragment(), "Audio");
+        adapter.addFrag(new DashboardFragment(this), "Dashboard");
+        adapter.addFrag(new AudioFragment(this), "Audio");
         viewPager.setAdapter(adapter);
     }
 }
