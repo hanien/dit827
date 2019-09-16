@@ -34,4 +34,8 @@ jobs:
             pipenv run pytest
       - store_test_results:
           path: test-results
+
+  #Android build
+  build:
+    working_directory: ~/Project
     
