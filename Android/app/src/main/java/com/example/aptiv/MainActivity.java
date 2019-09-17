@@ -2,11 +2,16 @@ package com.example.aptiv;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.example.aptiv.adapter.ViewPagerAdapter;
 import com.example.aptiv.fragments.AudioFragment;
@@ -37,5 +42,24 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFrag(new DashboardFragment(this), "Dashboard");
         adapter.addFrag(new AudioFragment(this), "Audio");
         viewPager.setAdapter(adapter);
+    }
+
+    public int getHotspotColor (int hotspotId, int x, int y, Fragment g) {
+        ImageView img = g.getView().findViewById(hotspotId);
+        img.setDrawingCacheEnabled(true);
+        Bitmap hotspots = Bitmap.createBitmap(img.getDrawingCache());
+        img.setDrawingCacheEnabled(false);
+        return hotspots.getPixel(x, y);
+    }
+
+    public boolean closeMatch (int color1, int color2) {
+        int tolerance = 50;
+        if ((int) Math.abs (Color.red (color1) - Color.red (color2)) > tolerance )
+            return false;
+        if ((int) Math.abs (Color.green (color1) - Color.green (color2)) > tolerance )
+            return false;
+        if ((int) Math.abs (Color.blue (color1) - Color.blue (color2)) > tolerance )
+            return false;
+        return true;
     }
 }

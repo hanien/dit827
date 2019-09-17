@@ -1,7 +1,9 @@
 package com.example.aptiv.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -11,12 +13,12 @@ import androidx.fragment.app.Fragment;
 import com.example.aptiv.MainActivity;
 import com.example.aptiv.R;
 
-public class DashboardFragment extends Fragment implements View.OnClickListener {
+public class DashboardFragment extends Fragment implements View.OnClickListener , View.OnTouchListener {
 
     private MainActivity _owner;
     private View _view;
     private ImageView _frontSeat;
-    private ImageView _defaultCar;
+    private ImageView _carMaskView;
     private ImageView _driverSeat;
     private ImageView _backSeat;
     private Boolean _frontSeatSelected = false;
@@ -40,15 +42,12 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     }
 
     private void SetupEvents() {
-        _frontSeat.setOnClickListener(this);
-        _defaultCar.setOnClickListener(this);
-        _backSeat.setOnClickListener(this);
-        _driverSeat.setOnClickListener(this);
+        _carMaskView.setOnTouchListener(this);
     }
 
     private void SetupButton() {
+        _carMaskView = _view.findViewById(R.id.car_mask);
         _frontSeat = _view.findViewById(R.id.frontseat);
-        _defaultCar = _view.findViewById(R.id.default_car);
         _backSeat = _view.findViewById(R.id.backseat);
         _driverSeat = _view.findViewById(R.id.driverseat);
     }
@@ -58,38 +57,54 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         switch (view.getId()) {
             case R.id.frontseat:
-                if(_frontSeatSelected){
-                    _frontSeat.setImageResource(R.drawable.frontseat);
-                }else{
-                    _frontSeat.setImageResource(R.drawable.frontseatselected);
-                }
-                _frontSeatSelected = !_frontSeatSelected;
+
                 break;
-            case R.id.default_car:
-                _frontSeatSelected = false;
-                _backSeatSelected = false;
-                _driverSeatSelected = false;
-                _frontSeat.setImageResource(R.drawable.frontseat);
-                _backSeat.setImageResource(R.drawable.backseat);
-                _driverSeat.setImageResource(R.drawable.driverseat);
+
+        }
+    }
+
+    @Override
+    public boolean onTouch (View v, MotionEvent ev) {
+        final int action = ev.getAction();
+        final int evX = (int) ev.getX();
+        final int evY = (int) ev.getY();
+        switch (action) {
+            case MotionEvent.ACTION_DOWN :
                 break;
-            case R.id.backseat:
-                if(_backSeatSelected){
-                    _backSeat.setImageResource(R.drawable.backseat);
+            case MotionEvent.ACTION_UP :
+                int touchColor = _owner.getHotspotColor(R.id.car_mask, evX, evY,this);
+                if (_owner.closeMatch (Color.RED, touchColor)) {
+                    if(_driverSeatSelected){
+                        _driverSeat.setVisibility(View.INVISIBLE);
+                    }else{
+                        _driverSeat.setVisibility(View.VISIBLE);
+                    }
+                    _driverSeatSelected = !_driverSeatSelected ;
+                } else if(_owner.closeMatch (Color.BLUE, touchColor)){
+                    if(_frontSeatSelected){
+                        _frontSeat.setVisibility(View.INVISIBLE);
+                    }else{
+                        _frontSeat.setVisibility(View.VISIBLE);
+                    }
+                    _frontSeatSelected = !_frontSeatSelected;
+                }else if(_owner.closeMatch (Color.YELLOW, touchColor)){
+                    if(_backSeatSelected){
+                        _backSeat.setVisibility(View.INVISIBLE);
+                    }else{
+                        _backSeat.setVisibility(View.VISIBLE);
+                    }
+                    _backSeatSelected = !_backSeatSelected;
                 }else{
-                    _backSeat.setImageResource(R.drawable.backseatselected);
+                    _frontSeatSelected = false;
+                    _backSeatSelected = false;
+                    _driverSeatSelected = false;
+                    _frontSeat.setVisibility(View.INVISIBLE);
+                    _backSeat.setVisibility(View.INVISIBLE);
+                    _driverSeat.setVisibility(View.INVISIBLE);
                 }
-                _backSeatSelected = !_backSeatSelected;
-                break;
-            case R.id.driverseat:
-                if(_driverSeatSelected){
-                    _driverSeat.setImageResource(R.drawable.driverseat);
-                }else{
-                    _driverSeat.setImageResource(R.drawable.driverseatselected);
-                }
-                _driverSeatSelected = !_driverSeatSelected ;
                 break;
         }
+        return true;
     }
 
 
