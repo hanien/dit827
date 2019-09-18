@@ -1,12 +1,12 @@
-version: 2
+version: 2.1
 jobs:
   # Python build
   build:
     working_directory: ~/Project
     docker:
       - image: circleci/python:3.6.4
-        environment:
-          PIPENV_VENV_IN_PROJECT: true
+      environment:
+        PIPENV_VENV_IN_PROJECT: true
     steps:
       - checkout
         #This gives circleCi access to dependency locations
@@ -18,7 +18,6 @@ jobs:
         # Here we install the dependencies 
       - run: 
           command: |
-            cd Pi
             sudo pip install pipenv
             pipenv install pytest
         # Here the dependencies are saved in a cache.
@@ -35,4 +34,43 @@ jobs:
             pipenv run pytest
       - store_test_results:
           path: test-results
-    
+
+  #Android build
+  build:
+    working_directory: ~/Project
+    environment:
+      # Configure the JVM and Gradle to avoid OOM errors
+      _JAVA_OPTIONS: "-Xmx3g"
+      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
+    docker:
+      - image: circleci/openjdk:11.0.3-jdk-stretch
+      - image: circleci/postgres:12-alpine
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - restore_cache:
+          key: v1-gradle-cache-{{ checksum "build.gradle" }}    
+      - run:
+          name: ./gradlew test 
+          command: |
+            cd Android/Tests/java
+            # Get list of classnames of tests that should run on this node
+            CLASSNAMES=$(circleci tests glob "**/*.java" \
+              | cut -c 1- | sed 's@/@.@g' \
+              | sed 's/.\{5\}$//' \
+              | circleci tests split --split-by=timings --timings-type=classname)
+            cd ../../..
+            # Format the arguments to "./gradlew test"
+            GRADLE_ARGS=$(echo $CLASSNAMES | awk '{for (i=1; i<=NF; i++) print "--tests",$i}')
+            echo "Prepared arguments for Gradle: $GRADLE_ARGS"
+            ./gradlew test $GRADLE_ARGS
+      - save_cache:
+          paths:
+            - ~/.gradle/wrapper
+          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - save_cache:
+          paths:
+            - ~/.gradle/caches
+          key: v1-gradle-cache-{{ checksum "build.gradle" }}
