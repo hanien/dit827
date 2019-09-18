@@ -56,7 +56,8 @@ jobs:
       - run:
           name: ./gradlew test 
           command: |
-            cd Android\Tests\java
+            ls
+            cd Android/Tests/java
             # Get list of classnames of tests that should run on this node
             CLASSNAMES=$(circleci tests glob "**/*.java" \
             cd ../../..
