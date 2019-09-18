@@ -1,5 +1,6 @@
 package com.example.aptiv.fragment;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -62,22 +63,22 @@ public class CarLayoutFragment extends Fragment implements View.OnTouchListener{
             case MotionEvent.ACTION_DOWN :
                 break;
             case MotionEvent.ACTION_UP :
-                int touchColor = _owner.getHotspotColor(R.id.car_mask, evX, evY,this);
-                if (_owner.closeMatch (Color.RED, touchColor)) {
+                int touchColor = getHotspotColor(R.id.car_mask, evX, evY,this);
+                if (closeMatch (Color.RED, touchColor)) {
                     if(_driverSeatSelected){
                         _driverSeat.setVisibility(View.INVISIBLE);
                     }else{
                         _driverSeat.setVisibility(View.VISIBLE);
                     }
                     _driverSeatSelected = !_driverSeatSelected ;
-                } else if(_owner.closeMatch (Color.BLUE, touchColor)){
+                } else if(closeMatch (Color.BLUE, touchColor)){
                     if(_frontSeatSelected){
                         _frontSeat.setVisibility(View.INVISIBLE);
                     }else{
                         _frontSeat.setVisibility(View.VISIBLE);
                     }
                     _frontSeatSelected = !_frontSeatSelected;
-                }else if(_owner.closeMatch (Color.YELLOW, touchColor)){
+                }else if(closeMatch (Color.YELLOW, touchColor)){
                     if(_backSeatSelected){
                         _backSeat.setVisibility(View.INVISIBLE);
                     }else{
@@ -94,6 +95,25 @@ public class CarLayoutFragment extends Fragment implements View.OnTouchListener{
                 }
                 break;
         }
+        return true;
+    }
+
+    private int getHotspotColor (int hotspotId, int x, int y, Fragment g) {
+        ImageView img = g.getView().findViewById(hotspotId);
+        img.setDrawingCacheEnabled(true);
+        Bitmap hotspots = Bitmap.createBitmap(img.getDrawingCache());
+        img.setDrawingCacheEnabled(false);
+        return hotspots.getPixel(x, y);
+    }
+
+    private boolean closeMatch (int color1, int color2) {
+        int tolerance = 50;
+        if ((int) Math.abs (Color.red (color1) - Color.red (color2)) > tolerance )
+            return false;
+        if ((int) Math.abs (Color.green (color1) - Color.green (color2)) > tolerance )
+            return false;
+        if ((int) Math.abs (Color.blue (color1) - Color.blue (color2)) > tolerance )
+            return false;
         return true;
     }
 }

@@ -38,23 +38,4 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFrag(new AudioFragment(this), "Audio");
         viewPager.setAdapter(adapter);
     }
-
-    public int getHotspotColor (int hotspotId, int x, int y, Fragment g) {
-        ImageView img = g.getView().findViewById(hotspotId);
-        img.setDrawingCacheEnabled(true);
-        Bitmap hotspots = Bitmap.createBitmap(img.getDrawingCache());
-        img.setDrawingCacheEnabled(false);
-        return hotspots.getPixel(x, y);
-    }
-
-    public boolean closeMatch (int color1, int color2) {
-        int tolerance = 50;
-        if ((int) Math.abs (Color.red (color1) - Color.red (color2)) > tolerance )
-            return false;
-        if ((int) Math.abs (Color.green (color1) - Color.green (color2)) > tolerance )
-            return false;
-        if ((int) Math.abs (Color.blue (color1) - Color.blue (color2)) > tolerance )
-            return false;
-        return true;
-    }
 }
