@@ -57,9 +57,9 @@ jobs:
           name: ./gradlew test 
           command: |
             ls
-            cd Android/Tests/java
+            cd Android/Tests
             # Get list of classnames of tests that should run on this node
-            CLASSNAMES=$(circleci tests glob "**/*.java" \
+            CLASSNAMES=$(circleci tests glob "*.java" \
             cd ../../..
             # Format the arguments to "./gradlew test"
             GRADLE_ARGS=$(echo $CLASSNAMES | awk '{for (i=1; i<=NF; i++) print "--tests",$i}')
