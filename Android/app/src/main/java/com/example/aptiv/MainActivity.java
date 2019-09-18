@@ -3,9 +3,6 @@ package com.example.aptiv;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
@@ -16,9 +13,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.example.aptiv.adapter.ViewPagerAdapter;
-import com.example.aptiv.fragments.AudioFragment;
-import com.example.aptiv.fragments.CarLayoutFragment;
-import com.example.aptiv.fragments.DashboardFragment;
+import com.example.aptiv.fragment.AudioFragment;
+import com.example.aptiv.fragment.DashboardFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {

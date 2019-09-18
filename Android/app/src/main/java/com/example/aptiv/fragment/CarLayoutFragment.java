@@ -1,4 +1,4 @@
-package com.example.aptiv.fragments;
+package com.example.aptiv.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
