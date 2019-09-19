@@ -4,6 +4,12 @@
             "type": "java",
             "name": "CodeLens (Launch) - MyTestRunner",
             "request": "launch",
+            "mainClass": "MyTestRunner"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MyTestRunner",
+            "request": "launch",
             "mainClass": "de.vogella.junit.first.MyTestRunner"
         }
     ]

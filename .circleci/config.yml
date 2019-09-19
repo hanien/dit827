@@ -38,40 +38,28 @@ jobs:
 
   #Android build
   Android:
-    working_directory: ~/Project
-    environment:
-      # Configure the JVM and Gradle to avoid OOM errors
-      _JAVA_OPTIONS: "-Xmx3g"
-      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
+    working_directory: ~/code
     docker:
-      - image: circleci/openjdk:11.0.3-jdk-stretch
-      - image: circleci/postgres:12-alpine
-
+      - image: circleci/android:api-25-alpha
+    environment:
+      JVM_OPTS: -Xmx3200m
     steps:
       - checkout
       - restore_cache:
-          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - restore_cache:
-          key: v1-gradle-cache-{{ checksum "build.gradle" }}    
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+#      - run:
+#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+#         command: sudo chmod +x ./gradlew
       - run:
-          name: ./gradlew test 
-          command: |
-            cd Android/Tests
-            # Get list of classnames of tests that should run on this node
-            CLASSNAMES=$(circleci tests glob "*.java")
-            # Format the arguments to "./gradlew test"
-            cd ../..
-            GRADLE_ARGS=$(echo $CLASSNAMES | awk '{for (i=1; i<=NF; i++) print "--tests",$i}')
-            echo "Prepared arguments for Gradle: $GRADLE_ARGS"
-            ./gradlew test $GRADLE_ARGS
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
       - save_cache:
           paths:
-            - ~/.gradle/wrapper
-          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - save_cache:
-          paths:
-            - ~/.gradle/caches
-          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Run Tests
+          command: ./gradlew lint test
 workflows:
   version: 2
   build_and_test:
