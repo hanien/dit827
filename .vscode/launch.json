@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MyTestRunner",
+            "request": "launch",
+            "mainClass": "de.vogella.junit.first.MyTestRunner"
+        }
+    ]
+}

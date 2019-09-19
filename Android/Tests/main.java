@@ -1,8 +1,8 @@
-package de.vogella.junit.first;
-
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
+
+import static org.mockito.Mockito.*;
 
 public class MyTestRunner {
   public static void main(String[] args) {
