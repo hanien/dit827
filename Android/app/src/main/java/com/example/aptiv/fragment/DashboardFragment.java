@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -16,6 +17,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
     private MainActivity _owner;
     private View _view;
+    private TextView _soundTextView;
 
 
     public DashboardFragment(MainActivity Owner) {
@@ -43,7 +45,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     }
 
     private void SetupEvents() {
-
+        _soundTextView = _view.findViewById(R.id.SoundValueID);
     }
 
     private void SetupButton() {
@@ -61,6 +63,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         }
 
         */
+    }
+    public void SetUpSound(String val){
+        _soundTextView.setText(val);
     }
 
 

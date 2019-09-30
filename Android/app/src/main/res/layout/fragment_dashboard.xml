@@ -53,14 +53,16 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/top_margin_cardview"
                         android:orientation="horizontal">
+
                         <TextView
+                            android:id="@+id/SoundValueID"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="20 C"
                             android:textColor="@color/CardViewTextColor"
                             android:textSize="60dp"
-                            android:textStyle="italic"/>
+                            android:textStyle="italic" />
                         <LinearLayout
                             android:id="@+id/LinearLayoutArrows"
                             android:layout_width="wrap_content"
