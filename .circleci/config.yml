@@ -45,6 +45,14 @@ jobs:
       JVM_OPTS: -Xmx3200m
     steps:
       - checkout
+       - run:
+          name: Entering the correct project. 
+          command: 
+            cd Android
+       - run:
+          name: Checking location 
+          command: 
+            ls
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 #      - run:
@@ -53,8 +61,6 @@ jobs:
       - run:
           name: Download Dependencies
           command: 
-            cd Android
-            ls
             ./gradlew androidDependencies
       - save_cache:
           paths:
