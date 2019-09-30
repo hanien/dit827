@@ -56,8 +56,7 @@ jobs:
           name: Download Dependencies
           command: |
             cd Android
-            ./gradlew tasks
-            #./gradlew testImplementation
+            ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
