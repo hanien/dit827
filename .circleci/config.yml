@@ -45,29 +45,23 @@ jobs:
       JVM_OPTS: -Xmx3200m
     steps:
       - checkout
-      - run:
-          name: Entering the correct project. 
-          command: 
-            cd Android
-      - run:
-          name: Checking location 
-          command: 
-            ls
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: jars-{{ checksum "Android/build.gradle" }}-{{ checksum  "Android/app/build.gradle" }}
 #      - run:
 #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
 #         command: sudo chmod +x ./gradlew
       - run:
           name: Download Dependencies
-          command: 
+          command: |
+            cd Android
             ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: jars-{{ checksum "Android/build.gradle" }}-{{ checksum  "Android/app/build.gradle" }}
       - run:
-          name: Run Tests
+          name: Run Tests |
+          command: cd Android
           command: ./gradlew lint test
 workflows:
   version: 2
