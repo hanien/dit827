@@ -45,11 +45,11 @@ jobs:
       JVM_OPTS: -Xmx3200m
     steps:
       - checkout
-       - run:
+      - run:
           name: Entering the correct project. 
           command: 
             cd Android
-       - run:
+      - run:
           name: Checking location 
           command: 
             ls
