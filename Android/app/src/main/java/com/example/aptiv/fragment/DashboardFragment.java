@@ -45,7 +45,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     }
 
     private void SetupEvents() {
-        _soundTextView = _view.findViewById(R.id.SoundValueID);
+        _soundTextView = _view.findViewById(R.id.soundTextView);
     }
 
     private void SetupButton() {
@@ -64,6 +64,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         */
     }
+
     public void SetUpSound(String val){
         _soundTextView.setText(val);
     }

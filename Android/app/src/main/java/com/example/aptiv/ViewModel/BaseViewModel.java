@@ -1,15 +1,15 @@
 package com.example.aptiv.ViewModel;
 
+import com.example.aptiv.Interface.IVolleyCollback;
 import com.example.aptiv.MainActivity;
 import com.example.aptiv.Service.AptivService;
 
 import java.lang.reflect.Array;
 
-public class BaseViewModel {
+public class BaseViewModel implements IVolleyCollback {
 
     private AptivService _aptiveService;
     private MainActivity _activity;
-    public String AllMeasurements;
 
     public BaseViewModel(MainActivity activity){
         _activity = activity;
@@ -22,6 +22,11 @@ public class BaseViewModel {
     }
 
     public void InitalizeViewModel(){
-        AllMeasurements = _aptiveService.GetAllMeasurements(_activity);
+        _aptiveService.GetAllMeasurements(this);
+    }
+
+    @Override
+    public void GetSound(String value) {
+        _activity._dashboardFragment.SetUpSound(value);
     }
 }

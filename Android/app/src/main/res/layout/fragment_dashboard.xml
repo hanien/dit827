@@ -57,23 +57,26 @@
                             android:layout_gravity="center"
                             android:weightSum="2"
                             android:gravity="center">
+
                             <ImageView
-                                android:layout_weight="1"
                                 android:id="@+id/sound"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                card_view:srcCompat="@drawable/sun"
                                 android:layout_gravity="center"
-                                android:gravity="center"/>
-                            <TextView
                                 android:layout_weight="1"
+                                android:gravity="center"
+                                card_view:srcCompat="@drawable/light" />
+
+                            <TextView
+                                android:id="@+id/lightTextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="22 C"
-                                android:textSize="40dp"
                                 android:layout_gravity="center"
+                                android:layout_weight="1"
                                 android:gravity="center"
-                                android:textColor="@color/CardViewTextColor"></TextView>
+                                android:text="22 C"
+                                android:textColor="@color/CardViewTextColor"
+                                android:textSize="40dp"></TextView>
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -253,23 +256,26 @@
                             android:layout_gravity="center"
                             android:weightSum="2"
                             android:gravity="center">
+
                             <ImageView
-                                android:layout_weight="1"
                                 android:id="@+id/imageView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                card_view:srcCompat="@drawable/sun"
                                 android:layout_gravity="center"
-                                android:gravity="center"/>
-                            <TextView
                                 android:layout_weight="1"
+                                android:gravity="center"
+                                card_view:srcCompat="@drawable/sound" />
+
+                            <TextView
+                                android:id="@+id/soundTextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="22 C"
-                                android:textSize="40dp"
                                 android:layout_gravity="center"
+                                android:layout_weight="1"
                                 android:gravity="center"
-                                android:textColor="@color/CardViewTextColor"></TextView>
+                                android:text="22 C"
+                                android:textColor="@color/CardViewTextColor"
+                                android:textSize="40dp"></TextView>
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
