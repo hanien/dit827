@@ -62,10 +62,14 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "Android/build.gradle" }}-{{ checksum  "Android/app/build.gradle" }}
       - run:
+          name: Testing License acceptance. #Remove afterwards
+          command: |
+            cd Android
+            y | sdkmanager --licenses
+      - run:
           name: Run Tests 
           command: |
             cd Android
-            yes | sdkmanager --licenses
             ./gradlew --stop
             ./gradlew lint test
 workflows:
