@@ -65,7 +65,7 @@ jobs:
           name: Testing License acceptance. #Remove afterwards
           command: |
             cd Android
-            yes | sdkmanager --licenses
+            sdkmanager --licenses
       - run:
           name: Run Tests 
           command: |
