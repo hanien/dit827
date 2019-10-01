@@ -65,7 +65,7 @@ jobs:
           name: Run Tests 
           command: |
             cd Android
-            sdkmanager --licenses
+            yes | sdkmanager --licenses
             ./gradlew --stop
             ./gradlew lint test
 workflows:
