@@ -4,8 +4,6 @@ import com.example.aptiv.Interface.IVolleyCollback;
 import com.example.aptiv.MainActivity;
 import com.example.aptiv.Service.AptivService;
 
-import java.lang.reflect.Array;
-
 public class BaseViewModel implements IVolleyCollback {
 
     private AptivService _aptiveService;
@@ -22,7 +20,7 @@ public class BaseViewModel implements IVolleyCollback {
     }
 
     public void InitalizeViewModel(){
-        _aptiveService.GetAllMeasurements(this);
+        _aptiveService.GetSound(this);
     }
 
     @Override

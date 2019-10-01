@@ -19,7 +19,7 @@ public class AptivService implements IAptivService {
     public  AptivService(MainActivity activity){ _activity = activity; }
 
     @Override
-    public void GetAllMeasurements(final IVolleyCollback _collback) {
+    public void GetSound(final IVolleyCollback _collback) {
         RequestQueue queue = Volley.newRequestQueue(_activity);
         String url = _activity.getResources().getString(R.string.GetSoundURL);;
 
