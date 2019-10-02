@@ -68,7 +68,7 @@ jobs:
           name: Run Tests 
           command: |
             cd Android
-            ./gradlew test
+            ./gradlew test --stacktrace
             #./gradlew lint test
 workflows:
   version: 2
