@@ -20,7 +20,7 @@ public class BaseViewModel implements IVolleyCollback {
     }
 
     public void InitalizeViewModel(){
-        _aptiveService.GetAllMeasurements(this);
+        _aptiveService.GetSound(this);
     }
 
     @Override
