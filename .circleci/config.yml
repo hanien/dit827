@@ -23,7 +23,7 @@ jobs:
             pipenv install pytest
         # Here the dependencies are saved in a cache.
       - save_cache:
-          key: raspberry-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          key: raspberry-{{ .Branch }}-{{ checksum "Pi/Pipfile.lock" }}
           paths:
             - ".venv"
             - "/usr/local/bin"
@@ -65,7 +65,7 @@ jobs:
           name: Run Tests 
           command: |
             cd Android
-            sdkmanager --licenses
+            yes | sdkmanager --licenses
             ./gradlew lint test
 workflows:
   version: 2
