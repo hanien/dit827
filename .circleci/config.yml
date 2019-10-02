@@ -68,8 +68,11 @@ jobs:
           name: Run Tests 
           command: |
             cd Android
-            ./gradlew test --stacktrace
+            ./gradlew test
             #./gradlew lint test
+      - run:
+          name: Run Tests 
+          command: lp ///home/circleci/code/Android/app/build/reports/tests/testDebugUnitTest/index.html
 workflows:
   version: 2
   build_and_test:
