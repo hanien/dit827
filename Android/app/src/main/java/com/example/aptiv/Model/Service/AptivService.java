@@ -1,18 +1,15 @@
-package com.example.aptiv.Service;
+package com.example.aptiv.Model.Service;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.aptiv.Interface.IAptivService;
+import com.example.aptiv.Model.Interface.IAptivService;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.example.aptiv.Interface.IVolleyCollback;
-import com.example.aptiv.MainActivity;
+import com.example.aptiv.Model.Interface.IVolleyCollback;
+import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.R;
-import com.example.aptiv.ViewModel.BaseViewModel;
-
-import java.lang.reflect.Array;
 
 public class AptivService implements IAptivService {
     private MainActivity _activity;

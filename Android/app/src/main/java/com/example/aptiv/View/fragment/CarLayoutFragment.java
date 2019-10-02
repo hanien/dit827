@@ -1,4 +1,4 @@
-package com.example.aptiv.fragment;
+package com.example.aptiv.View.fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.aptiv.MainActivity;
+import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.R;
 
 public class CarLayoutFragment extends Fragment implements View.OnTouchListener{

@@ -1,6 +1,4 @@
-package com.example.aptiv.Interface;
-
-import java.lang.reflect.Array;
+package com.example.aptiv.Model.Interface;
 
 public interface IAptivService{
     void GetAllMeasurements(IVolleyCollback value);
