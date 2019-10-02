@@ -69,6 +69,7 @@ jobs:
           command: |
             cd Android
             ./gradlew test
+            #./gradlew lint test
 workflows:
   version: 2
   build_and_test:
