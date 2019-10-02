@@ -68,7 +68,6 @@ jobs:
           name: Run Tests 
           command: |
             cd Android
-            yes | sdkmanager --licenses
             ./gradlew lint test
 workflows:
   version: 2
