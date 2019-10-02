@@ -40,7 +40,7 @@ jobs:
   Android:
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-25-alpha
+      - image: circleci/android:api-25
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -52,9 +52,9 @@ jobs:
           command: |
             cd Android
             sudo chmod +x ./gradlew
-      - run:
-          name: Copy SDK License
-          command: printf "8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e\n24333f8a63b6825ea9c5514f83c2829b004d1fee\n" > ~/android-sdk-linux/licenses/android-sdk-license
+      #- run:
+          #name: Copy SDK License
+          #command: printf "8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e\n24333f8a63b6825ea9c5514f83c2829b004d1fee\n" > ~/android-sdk-linux/licenses/android-sdk-license
       - run:
           name: Download Dependencies
           command: |
