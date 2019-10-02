@@ -71,7 +71,7 @@ jobs:
             ./gradlew test
             #./gradlew lint test
       - run:
-          name: Run Tests 
+          name: See effects of testing
           command: lp ///home/circleci/code/Android/app/build/reports/tests/testDebugUnitTest/index.html
 workflows:
   version: 2
