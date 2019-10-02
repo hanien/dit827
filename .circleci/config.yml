@@ -14,7 +14,7 @@ jobs:
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
         #Restores the cache if no changes have been made to the Pipfile
       - restore_cache:
-          key: raspberry-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          key: raspberry-{{ .Branch }}-{{ checksum "Pi/Pipfile.lock" }}
         # Here we install the dependencies 
       - run: 
           command: | #Add all requirements for python code here.
@@ -68,11 +68,8 @@ jobs:
           name: Run Tests 
           command: |
             cd Android
-            ./gradlew test
+            ./gradlew test & lp app/build/reports/tests/testDebugUnitTest/index.html
             #./gradlew lint test
-      - run:
-          name: See effects of testing
-          command: lp ///home/circleci/code/Android/app/build/reports/tests/testDebugUnitTest/index.html
 workflows:
   version: 2
   build_and_test:
