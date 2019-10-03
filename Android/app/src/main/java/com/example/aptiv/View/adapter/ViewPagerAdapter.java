@@ -1,4 +1,4 @@
-package com.example.aptiv.adapter;
+package com.example.aptiv.View.adapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

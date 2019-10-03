@@ -1,4 +1,9 @@
 package com.example.aptiv.ViewModel;
 
-public class DashboardViewModel extends BaseViewModel {
+import com.example.aptiv.View.MainActivity;
+
+public class DashboardViewModel extends BaseViewModel  {
+    public DashboardViewModel(MainActivity activity) {
+        super(activity);
+    }
 }

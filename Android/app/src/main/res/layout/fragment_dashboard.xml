@@ -4,138 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/graybackground"
+    android:background="@drawable/background"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:weightSum="3">
-
-        <LinearLayout
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:weightSum="2">
-            <androidx.cardview.widget.CardView
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:minHeight="40dp"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/default_margin_cardview"
-                android:layout_marginTop="@dimen/default_margin_cardview"
-                android:layout_marginRight="@dimen/default_margin_cardview"
-                android:layout_marginBottom="@dimen/default_margin_cardview"
-                card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                card_view:cardBackgroundColor = "@color/CardViewColor"
-                card_view:cardUseCompatPadding="true">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/tempretureText"
-                        android:textColor="@color/CardViewTextColor"
-                        android:textSize="@dimen/cardview_text_size"
-                        android:textStyle="italic"/>
-                    <LinearLayout
-                        android:id="@+id/tempWithArrows"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_marginTop="@dimen/top_margin_cardview"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="20 C"
-                            android:textColor="@color/CardViewTextColor"
-                            android:textSize="60dp"
-                            android:textStyle="italic"/>
-                        <LinearLayout
-                            android:id="@+id/LinearLayoutArrows"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:orientation="vertical"
-                            android:weightSum="2">
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                card_view:srcCompat="@android:drawable/arrow_up_float" />
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                card_view:srcCompat="@android:drawable/arrow_down_float" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:minHeight="40dp"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/default_margin_cardview"
-                android:layout_marginTop="@dimen/default_margin_cardview"
-                android:layout_marginRight="@dimen/default_margin_cardview"
-                android:layout_marginBottom="@dimen/default_margin_cardview"
-                card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                card_view:cardBackgroundColor = "@color/CardViewColor"
-                card_view:cardUseCompatPadding="true">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_gravity="center"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PHONE"
-                        android:textColor="@color/CardViewTextColor"
-                        android:textSize="@dimen/cardview_text_size"
-                        android:layout_marginTop="@dimen/default_margin_cardview"
-                        android:layout_marginBottom="@dimen/default_margin_cardview"/>
-                    <Switch
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Speaker"
-                        android:textColor="@color/CardViewTextColor"
-                        android:textSize="@dimen/cardview_text_size"
-                        android:layout_marginTop="@dimen/default_margin_cardview"
-                        android:layout_marginBottom="@dimen/default_margin_cardview"
-                        android:textStyle="italic"
-                        android:switchPadding="20dp"/>
-                    <Switch
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Mute"
-                        android:textColor="@color/CardViewTextColor"
-                        android:textSize="@dimen/cardview_text_size"
-                        android:layout_marginTop="@dimen/default_margin_cardview"
-                        android:layout_marginBottom="@dimen/default_margin_cardview"
-                        android:textStyle="italic"
-                        android:switchPadding="20dp"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
+        android:weightSum="2">
 
         <LinearLayout
             android:layout_width="50dp"
@@ -153,126 +29,12 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:weightSum="2">
-
-            <androidx.cardview.widget.CardView
-                android:layout_weight="1"
+            android:orientation="horizontal">
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:minHeight="40dp"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/default_margin_cardview"
-                android:layout_marginTop="@dimen/default_margin_cardview"
-                android:layout_marginRight="@dimen/default_margin_cardview"
-                android:layout_marginBottom="@dimen/default_margin_cardview"
-                card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                card_view:cardBackgroundColor = "@color/CardViewColor"
-                card_view:cardUseCompatPadding="true">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/tempretureText"
-                        android:textColor="@color/CardViewTextColor"
-                        android:textSize="@dimen/cardview_text_size"
-                        android:textStyle="italic"/>
-                    <LinearLayout
-                        android:id="@+id/tempWithArrows2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_marginTop="@dimen/top_margin_cardview"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="20 C"
-                            android:textColor="@color/CardViewTextColor"
-                            android:textSize="60dp"
-                            android:textStyle="italic"/>
-                        <LinearLayout
-                            android:id="@+id/LinearLayoutArrows2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:orientation="vertical"
-                            android:weightSum="2">
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                card_view:srcCompat="@android:drawable/arrow_up_float" />
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                card_view:srcCompat="@android:drawable/arrow_down_float" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:minHeight="40dp"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/default_margin_cardview"
-                android:layout_marginTop="@dimen/default_margin_cardview"
-                android:layout_marginRight="@dimen/default_margin_cardview"
-                android:layout_marginBottom="@dimen/default_margin_cardview"
-                card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                card_view:cardBackgroundColor = "@color/CardViewColor"
-                card_view:cardUseCompatPadding="true">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_gravity="center"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PHONE"
-                        android:textColor="@color/CardViewTextColor"
-                        android:textSize="@dimen/cardview_text_size"
-                        android:layout_marginTop="@dimen/default_margin_cardview"
-                        android:layout_marginBottom="@dimen/default_margin_cardview"
-                        android:textStyle="italic"/>
-                    <Switch
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Speaker"
-                        android:textColor="@color/CardViewTextColor"
-                        android:textSize="@dimen/cardview_text_size"
-                        android:layout_marginTop="@dimen/default_margin_cardview"
-                        android:layout_marginBottom="@dimen/default_margin_cardview"
-                        android:textStyle="italic"
-                        android:switchPadding="20dp"/>
-                    <Switch
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Mute"
-                        android:textColor="@color/CardViewTextColor"
-                        android:textSize="@dimen/cardview_text_size"
-                        android:layout_marginTop="@dimen/default_margin_cardview"
-                        android:layout_marginBottom="@dimen/default_margin_cardview"
-                        android:textStyle="italic"
-                        android:switchPadding="20dp"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
+                android:layout_height="match_parent"
+                android:id="@+id/fragmentPlaceHolderCar">
+            </FrameLayout>
         </LinearLayout>
 
     </LinearLayout>
