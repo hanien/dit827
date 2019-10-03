@@ -1,56 +1,78 @@
-# Python CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-python/ for more details
-#
-version: 2
+version: 2.0
 jobs:
-  build:
+  # Python build
+  Python:
+    working_directory: ~/Project
     docker:
-      # specify the version you desire here
-      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.6.1
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    working_directory: ~/repo
-
+      - image: circleci/python:3.6.4
+    environment:
+      PIPENV_VENV_IN_PROJECT: true
     steps:
       - checkout
-
-      # Download and cache dependencies
+        #This gives circleCi access to dependency locations
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+        #Restores the cache if no changes have been made to the Pipfile
       - restore_cache:
-          keys:
-            #- v1-dependencies-{{ checksum "requirements.txt" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - run:
-          name: install dependencies
+          key: raspberry-{{ .Branch }}-{{ checksum "Pi/Pipfile.lock" }}
+        # Here we install the dependencies 
+      - run: 
+          command: | #Add all requirements for python code here.
+            cd Pi
+            sudo pip install pipenv
+            pipenv install pytest
+        # Here the dependencies are saved in a cache.
+      - save_cache:
+          key: raspberry-{{ .Branch }}-{{ checksum "Pi/Pipfile.lock" }}
+          paths:
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.6/site-packages"
+          #Here the tests are run.
+      - run: 
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip3 install -r adafruit-circuitpython-tsl2561
-            pip3 install adafruit-circuitpython-bme280
+            cd Pi
+            pipenv run pytest
+      - store_test_results:
+          path: test-results
 
+  #Android build
+  Android:
+    working_directory: ~/code
+    docker:
+      - image: circleci/android:api-29
+    environment:
+      JVM_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "Android/build.gradle" }}-{{ checksum  "Android/app/build.gradle" }}
+      - run:
+          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+          command: |
+            cd Android
+            sudo chmod +x ./gradlew
+      #- run:
+          #name: Copy SDK License
+          #command: printf "8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e\n24333f8a63b6825ea9c5514f83c2829b004d1fee\n" > ~/android-sdk-linux/licenses/android-sdk-license
+      - run:
+          name: Download Dependencies
+          command: |
+            cd Android
+            ./gradlew androidDependencies
       - save_cache:
           paths:
-            - ./venv
-          key: v1-dependencies-
-
-      # run tests!
-      # this example uses Django's built-in test-runner
-      # other common Python testing frameworks include pytest and nose
-      # https://pytest.org
-      # https://nose.readthedocs.io
+            - ~/.gradle
+          key: jars-{{ checksum "Android/build.gradle" }}-{{ checksum  "Android/app/build.gradle" }}
       - run:
-          name: run tests
+          name: Run Tests 
           command: |
-            . venv/bin/activate
-            pytest
-
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
+            cd Android
+            ./gradlew test
+            #./gradlew lint test
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - Android
+      - Python
