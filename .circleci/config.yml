@@ -1,0 +1,78 @@
+version: 2.0
+jobs:
+  # Python build
+  Python:
+    working_directory: ~/Project
+    docker:
+      - image: circleci/python:3.6.4
+    environment:
+      PIPENV_VENV_IN_PROJECT: true
+    steps:
+      - checkout
+        #This gives circleCi access to dependency locations
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+        #Restores the cache if no changes have been made to the Pipfile
+      - restore_cache:
+          key: raspberry-{{ .Branch }}-{{ checksum "Pi/Pipfile.lock" }}
+        # Here we install the dependencies 
+      - run: 
+          command: | #Add all requirements for python code here.
+            cd Pi
+            sudo pip install pipenv
+            pipenv install pytest
+        # Here the dependencies are saved in a cache.
+      - save_cache:
+          key: raspberry-{{ .Branch }}-{{ checksum "Pi/Pipfile.lock" }}
+          paths:
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.6/site-packages"
+          #Here the tests are run.
+      - run: 
+          command: |
+            cd Pi
+            pipenv run pytest
+      - store_test_results:
+          path: test-results
+
+  #Android build
+  Android:
+    working_directory: ~/code
+    docker:
+      - image: circleci/android:api-29
+    environment:
+      JVM_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "Android/build.gradle" }}-{{ checksum  "Android/app/build.gradle" }}
+      - run:
+          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+          command: |
+            cd Android
+            sudo chmod +x ./gradlew
+      #- run:
+          #name: Copy SDK License
+          #command: printf "8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e\n24333f8a63b6825ea9c5514f83c2829b004d1fee\n" > ~/android-sdk-linux/licenses/android-sdk-license
+      - run:
+          name: Download Dependencies
+          command: |
+            cd Android
+            ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "Android/build.gradle" }}-{{ checksum  "Android/app/build.gradle" }}
+      - run:
+          name: Run Tests 
+          command: |
+            cd Android
+            ./gradlew test
+            #./gradlew lint test
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - Android
+      - Python
