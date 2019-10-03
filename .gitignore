@@ -1,0 +1,3 @@
+.vscode
+.pytest_cache
+Testing/PiTest/__pycache__
