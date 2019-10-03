@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.aptiv.R;
 import com.example.aptiv.ViewModel.BaseViewModel;
@@ -37,5 +38,13 @@ public class MainActivity extends AppCompatActivity  {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(_dashboardFragment, "Dashboard");
         viewPager.setAdapter(adapter);
+    }
+
+    public void OpenVolumeFragment(View v) {
+        _dashboardFragment.OpenVolumeFragment();
+    }
+
+    public void CloseVolumeFragment(View v){
+        _dashboardFragment.CloseVolumeFragment();
     }
 }

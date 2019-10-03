@@ -15,13 +15,14 @@ import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.R;
 import com.example.aptiv.ViewModel.BaseViewModel;
 
-public class DashboardFragment extends Fragment implements View.OnClickListener {
+public class DashboardFragment extends Fragment {
 
     private MainActivity _owner;
     private View _view;
-    private TextView _soundTextView;
     private BaseViewModel _baseViewModel;
-
+    public  CarLayoutFragment CarLayoutFragment;
+    public  DefaultLayoutFragment DefaultLayoutFragment;
+    public SoundLayoutFragment SoundLayoutFragment;
     public DashboardFragment(MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
         _baseViewModel = viewModel;
@@ -33,63 +34,34 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                              Bundle savedInstanceState) {
         _view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         SetupCarLayoutFragment();
-        SetupTimer();
-        SetupButton();
-        SetupEvents();
 
         return _view;
-    }
-
-    private void SetupTimer(){
-        new CountDownTimer(30000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-            }
-
-            public void onFinish() {
-                UpdateData();
-                SetupTimer();
-            }
-        }.start();
-    }
-
-    private void UpdateData() {
-        _baseViewModel.UpdateSoundValue();
     }
 
     private void SetupCarLayoutFragment(){
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        CarLayoutFragment CarFragment = new CarLayoutFragment(_owner);
-        fragmentTransaction.replace(R.id.fragmentPlaceHolderDashboard, CarFragment).commit();
-    }
+        CarLayoutFragment = new CarLayoutFragment(_owner);
+        fragmentTransaction.replace(R.id.fragmentPlaceHolderCar, CarLayoutFragment).commit();
 
-    private void SetupEvents() {
-        _soundTextView = _view.findViewById(R.id.soundTextView);
-    }
-
-    private void SetupButton() {
+        FragmentManager fm1 = getFragmentManager();
+        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
+        DefaultLayoutFragment = new DefaultLayoutFragment(_owner,_baseViewModel);
+        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, DefaultLayoutFragment).commit();
 
     }
 
-    @Override
-    public void onClick(View view){
-        /*
-        switch (view.getId()) {
-            case R.id.frontseat:
-
-                break;
-
-        }
-
-        */
+    public void OpenVolumeFragment() {
+        FragmentManager fm1 = getFragmentManager();
+        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
+        SoundLayoutFragment = new SoundLayoutFragment(_owner,_baseViewModel);
+        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, SoundLayoutFragment).commit();
     }
 
-    public void SetUpSound(String val){
-        _soundTextView.setText(val);
+    public void CloseVolumeFragment() {
+        FragmentManager fm1 = getFragmentManager();
+        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
+        DefaultLayoutFragment = new DefaultLayoutFragment(_owner,_baseViewModel);
+        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, DefaultLayoutFragment).commit();
     }
-
-
-
-
 }
