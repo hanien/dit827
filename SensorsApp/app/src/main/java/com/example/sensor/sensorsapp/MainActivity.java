@@ -1,7 +1,7 @@
 package com.example.sensor.sensorsapp;
 
 
-import android.annotation.SuppressLint;
+
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -9,15 +9,22 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.view.InputQueue;
+
 import android.widget.TextView;
 import android.util.Log;
-import android.media.MediaRecorder;
-import android.os.Bundle;
+
 import android.os.Handler;
 import android.os.PowerManager;
-import java.io.IOException;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends Activity implements SensorEventListener {
@@ -27,6 +34,9 @@ public class MainActivity extends Activity implements SensorEventListener {
     private SensorManager sensorManager;
     private VoiceSensor voiceSensor;
 
+    RequestQueue queue;
+    double lightvalue;
+
     private Handler Handler = new Handler();
     private PowerManager.WakeLock WakeLock;
 
@@ -35,6 +45,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     private boolean Recording = false;
 
+    private String url = "https://dit827aptiv.herokuapp.com/light";
 
     TextView LightView;
     TextView TempView;
@@ -127,10 +138,36 @@ public class MainActivity extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         Sensor sensor = event.sensor;
+         lightvalue = event.values[0];
+         queue = Volley.newRequestQueue(this);
 
         if (sensor.getType() == sensor.TYPE_LIGHT) {
 
-            LightView.setText("Light Value: " + event.values[0]);
+            LightView.setText("Light Value: " + lightvalue);
+
+            StringRequest patchRequest = new StringRequest(Request.Method.PATCH, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.d("Response", response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            LightView.setText("Not sending Light sensor data!");
+                        }
+                    }
+            ) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("light", String.valueOf(lightvalue));
+                    return params;
+                }
+            };
+            queue.add(patchRequest);
+
         }
 
         if (sensor.getType() == sensor.TYPE_AMBIENT_TEMPERATURE) {
