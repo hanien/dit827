@@ -1,7 +1,5 @@
 package com.example.sensor.sensorsapp;
 
-
-
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -20,12 +18,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends Activity implements SensorEventListener {
 
@@ -34,23 +31,25 @@ public class MainActivity extends Activity implements SensorEventListener {
     private SensorManager sensorManager;
     private VoiceSensor voiceSensor;
 
-    RequestQueue queue;
-    double lightvalue;
-
-    private Handler Handler = new Handler();
-    private PowerManager.WakeLock WakeLock;
+    private RequestQueue queue;
 
     private Sensor Light;
     private Sensor Temp;
 
+    private double lightvalue;
+    private double tempvalue;
+    private double amp;
+
+    private Handler Handler = new Handler();
+    private PowerManager.WakeLock WakeLock;
+
     private boolean Recording = false;
 
-    private String url = "https://dit827aptiv.herokuapp.com/light";
+    private String url = "https://dit827aptiv.herokuapp.com";
 
-    TextView LightView;
-    TextView TempView;
-    TextView VoiceView;
-
+    private TextView LightView;
+    private TextView TempView;
+    private TextView VoiceView;
 
 
     private Runnable SleepTask = new Runnable() {
@@ -62,8 +61,36 @@ public class MainActivity extends Activity implements SensorEventListener {
     private Runnable PollTask = new Runnable() {
         public void run() {
 
-            double amp = voiceSensor.getAmplitude();
+            amp = voiceSensor.getAmplitude();
             VoiceView.setText("Voice value: " + amp);
+
+            queue = Volley.newRequestQueue(MainActivity.this);
+
+            JSONObject param = new JSONObject();
+            try {
+                param.put("type", "sound");
+                param.put("value", String.valueOf(amp));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            JsonObjectRequest soundPatch = new JsonObjectRequest(Request.Method.PATCH, url + "/sound", param,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                        }
+                    }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+
+            });
+
+            queue.add(soundPatch);
 
             Handler.postDelayed(PollTask, 300);
 
@@ -125,11 +152,12 @@ public class MainActivity extends Activity implements SensorEventListener {
         if (WakeLock.isHeld()) {
             WakeLock.release();
         }
+
         Handler.removeCallbacks(SleepTask);
         Handler.removeCallbacks(PollTask);
 
         voiceSensor.stop();
-        VoiceView.setText("--Stop--");
+        VoiceView.setText("-- Stop Rec! --");
 
         Recording = false;
 
@@ -137,42 +165,80 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        Sensor sensor = event.sensor;
-         lightvalue = event.values[0];
-         queue = Volley.newRequestQueue(this);
+
+         Sensor sensor = event.sensor;
+
 
         if (sensor.getType() == sensor.TYPE_LIGHT) {
 
+            lightvalue = event.values[0];
             LightView.setText("Light Value: " + lightvalue);
 
-            StringRequest patchRequest = new StringRequest(Request.Method.PATCH, url,
-                    new Response.Listener<String>() {
+
+            queue = Volley.newRequestQueue(this);
+
+            JSONObject param = new JSONObject();
+            try {
+                param.put("type", "light");
+                param.put("value", String.valueOf(lightvalue));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            JsonObjectRequest lightPatch = new JsonObjectRequest(Request.Method.PATCH, url + "/light", param,
+                    new Response.Listener<JSONObject>() {
                         @Override
-                        public void onResponse(String response) {
-                            Log.d("Response", response);
+                        public void onResponse(JSONObject response) {
+
                         }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            LightView.setText("Not sending Light sensor data!");
-                        }
-                    }
-            ) {
+                    }, new Response.ErrorListener() {
+
                 @Override
-                protected Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("light", String.valueOf(lightvalue));
-                    return params;
+                public void onErrorResponse(VolleyError error) {
+
                 }
-            };
-            queue.add(patchRequest);
+
+            });
+
+            queue.add(lightPatch);
+
 
         }
 
         if (sensor.getType() == sensor.TYPE_AMBIENT_TEMPERATURE) {
 
-            TempView.setText("Temperature Value: " + event.values[0]);
+            tempvalue = event.values[0];
+            TempView.setText("Temperature Value: " + tempvalue);
+
+            queue = Volley.newRequestQueue(this);
+
+            JSONObject param = new JSONObject();
+            try {
+                param.put("type", "temp");
+                param.put("value", String.valueOf(tempvalue));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            JsonObjectRequest tempPatch = new JsonObjectRequest(Request.Method.PATCH, url + "/temp", param,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                        }
+                    }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+
+            });
+
+            queue.add(tempPatch);
+
         }
 
     }
@@ -189,6 +255,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         if (Light != null) {
 
             sensorManager.registerListener(this, Light, SensorManager.SENSOR_DELAY_NORMAL);
+
         } else {
             LightView.setText("Light Sensor Not Available!");
             Log.d(TAG, "Sensor Not Available!");
