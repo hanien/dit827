@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
+    //initial design was with tabs, kept this code for possible future improvements
+    //it has been set to invisible from xml file
     public void addTabs(ViewPager viewPager) {
         _dashboardFragment = new DashboardFragment(this , _viewModel);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -40,11 +42,13 @@ public class MainActivity extends AppCompatActivity  {
         viewPager.setAdapter(adapter);
     }
 
+    //TODO: those should be moved to fragment, for now keep it here ,there is a bug i cant figure it out
     public void OpenVolumeFragment(View v) {
         _dashboardFragment.OpenVolumeFragment();
     }
 
+    //TODO: those should be moved to fragment, for now keep it here ,there is a bug i cant figure it out
     public void CloseVolumeFragment(View v){
-        _dashboardFragment.CloseVolumeFragment();
+        _dashboardFragment.SetupCarLayoutFragment();
     }
 }

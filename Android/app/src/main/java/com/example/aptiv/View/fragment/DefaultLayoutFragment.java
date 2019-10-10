@@ -13,11 +13,12 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;
 
-public class DefaultLayoutFragment extends Fragment  implements View.OnClickListener {
+public class DefaultLayoutFragment extends Fragment  implements View.OnClickListener , IZoneSelection{
 
     private View _view;
     private MainActivity _owner;
@@ -48,7 +49,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
     }
 
     private void SetupTimer(){
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(4000, 1000) {
 
             public void onTick(long millisUntilFinished) {
             }
@@ -61,7 +62,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
     }
 
     private void UpdateData() {
-        _baseViewModel.UpdateSoundValue();
+        _baseViewModel.UpdateData();
     }
 
     public void SetUpSound(String val){
@@ -83,5 +84,10 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
 
     }
 
+    //When a zone is selected on the car
+    //values needs to be changes base on zone
+    @Override
+    public void zoneIsSelected() {
 
+    }
 }

@@ -15,30 +15,31 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.R;
 import com.example.aptiv.ViewModel.BaseViewModel;
 
-public class DashboardFragment extends Fragment implements View.OnTouchListener{
+public class DashboardFragment extends Fragment implements View.OnTouchListener {
 
     private MainActivity _owner;
     private View _view;
     private BaseViewModel _baseViewModel;
     public  DefaultLayoutFragment DefaultLayoutFragment;
-    public SoundLayoutFragment SoundLayoutFragment;
+    private SoundLayoutFragment SoundLayoutFragment;
+    private IZoneSelection _callback;
     private ImageView _carMaskView;
     private ImageView _frontSeat;
     private ImageView _driverSeat;
     private ImageView _backSeat;
-    private Boolean _frontSeatSelected = false;
-    private Boolean _backSeatSelected = false;
-    private Boolean _driverSeatSelected = false;
+    public Boolean _frontSeatSelected = false;
+    public Boolean _backSeatSelected = false;
+    public Boolean _driverSeatSelected = false;
 
     public DashboardFragment(MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
         _baseViewModel = viewModel;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,28 +64,25 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener{
         _carMaskView.setOnTouchListener(this);
     }
 
-    private void SetupCarLayoutFragment(){
+    //setup default fragment with all values
+    public void SetupCarLayoutFragment(){
         FragmentManager fm1 = getFragmentManager();
         FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
         DefaultLayoutFragment = new DefaultLayoutFragment(_owner,_baseViewModel);
         fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, DefaultLayoutFragment).commit();
-
+        _callback = DefaultLayoutFragment;
     }
 
+    //Open volume fragment
     public void OpenVolumeFragment() {
         FragmentManager fm1 = getFragmentManager();
         FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
-        SoundLayoutFragment = new SoundLayoutFragment(_owner,_baseViewModel);
+        SoundLayoutFragment = new SoundLayoutFragment(this,_owner,_baseViewModel);
         fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, SoundLayoutFragment).commit();
+        _callback = SoundLayoutFragment;
     }
 
-    public void CloseVolumeFragment() {
-        FragmentManager fm1 = getFragmentManager();
-        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
-        DefaultLayoutFragment = new DefaultLayoutFragment(_owner,_baseViewModel);
-        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, DefaultLayoutFragment).commit();
-    }
-
+    //onTouch event that is connected to the car image to read which seat is seleted
     @Override
     public boolean onTouch (View v, MotionEvent ev) {
         final int action = ev.getAction();
@@ -124,11 +122,15 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener{
                     _backSeat.setVisibility(View.INVISIBLE);
                     _driverSeat.setVisibility(View.INVISIBLE);
                 }
+                _callback.zoneIsSelected();
                 break;
         }
         return true;
     }
 
+    //seat selection in the car image is base on color
+    //in the background of the car image there is img with 3 colors representing every single zone
+    //check car_mask.png
     private int getHotspotColor (int hotspotId, int x, int y, Fragment g) {
         ImageView img = g.getView().findViewById(hotspotId);
         img.setDrawingCacheEnabled(true);
@@ -137,6 +139,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener{
         return hotspots.getPixel(x, y);
     }
 
+    //check if color that has been selected is in the tolerance range
     private boolean closeMatch (int color1, int color2) {
         int tolerance = 50;
         if ((int) Math.abs (Color.red (color1) - Color.red (color2)) > tolerance )
@@ -147,4 +150,5 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener{
             return false;
         return true;
     }
+
 }
