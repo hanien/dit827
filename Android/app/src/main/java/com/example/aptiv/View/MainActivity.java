@@ -51,4 +51,8 @@ public class MainActivity extends AppCompatActivity  {
     public void CloseVolumeFragment(View v){
         _dashboardFragment.SetupCarLayoutFragment();
     }
+
+    public void OpenTempFragment(View v) {
+        _dashboardFragment.OpenTempFragment();
+    }
 }
