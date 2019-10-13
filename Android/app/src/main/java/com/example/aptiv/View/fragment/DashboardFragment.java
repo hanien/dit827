@@ -28,6 +28,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     public  DefaultLayoutFragment DefaultLayoutFragment;
     private SoundLayoutFragment SoundLayoutFragment;
     private TempLayoutFragment TempLayoutFragment;
+    private AirpLayoutFragment AirpLayoutFragment;
     private IZoneSelection _callback;
     private ImageView _carMaskView;
     private ImageView _frontSeat;
@@ -89,6 +90,15 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         TempLayoutFragment = new TempLayoutFragment(this,_owner,_baseViewModel);
         fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, TempLayoutFragment).commit();
         _callback = TempLayoutFragment;
+    }
+
+    //Open ap fragment
+    public void OpenAPFragment() {
+        FragmentManager fm1 = getFragmentManager();
+        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
+        AirpLayoutFragment = new AirpLayoutFragment(this,_owner,_baseViewModel);
+        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard,AirpLayoutFragment).commit();
+        _callback = AirpLayoutFragment;
     }
 
     //onTouch event that is connected to the car image to read which seat is seleted

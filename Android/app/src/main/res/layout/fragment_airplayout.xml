@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/airPressure"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/default_margin_cardview"
+        android:layout_marginTop="@dimen/default_margin_cardview"
+        android:layout_marginRight="@dimen/default_margin_cardview"
+        android:layout_marginBottom="@dimen/default_margin_cardview"
+        card_view:cardBackgroundColor="@color/CardViewColor"
+        card_view:cardCornerRadius="@dimen/cardview_corner_radius"
+        card_view:cardUseCompatPadding="true">
+
+        <ImageView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="0dp"
+            android:clickable="true"
+            android:onClick="CloseVolumeFragment"
+            card_view:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+        <TextView
+            android:id="@+id/apTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="78dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:text="AIR PRESSURE"
+            android:textAllCaps="true"
+            android:textColor="@color/CardViewTextColor"
+            android:textSize="30dp"
+            android:textStyle="italic" />
+
+        <ImageView
+            android:id="@+id/ap"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="130dp"
+            card_view:srcCompat="@drawable/ap" />
+
+        <TextView
+            android:id="@+id/Avr_apValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="130dp"
+            android:text="160 Hg"
+            android:textAllCaps="true"
+            android:textColor="@color/CardViewTextColor"
+            android:textSize="70dp"
+            android:textStyle="italic" />
+
+        <View
+            android:id="@+id/Line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+     android:layout_marginTop="450dp"
+            android:background="@android:color/white"
+            android:paddingLeft="40dp"
+            android:paddingTop="0dp"
+            android:paddingRight="40dp" />
+
+
+        <LinearLayout
+            android:id="@+id/apZones"
+            android:layout_width="match_parent"
+            android:layout_height="318dp"
+            android:layout_marginTop="300dp"
+            android:layout_marginBottom="200dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/zonesList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="75dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/Zone1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/Zone1Label"
+                        android:layout_width="159dp"
+
+                        android:layout_height="wrap_content"
+                        android:text="Zone 1"
+                        android:textAllCaps="true"
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="30dp"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/Zone1Value"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:text="159 Hg"
+                        android:textAllCaps="true"
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="30dp"
+                        android:textStyle="italic" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Zone2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="0dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Zone2Label"
+                        android:layout_width="180dp"
+
+                        android:layout_height="wrap_content"
+                        android:text="Zone 2"
+                        android:textAllCaps="true"
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="30dp"
+                        android:textStyle="italic" />
+
+
+                    <TextView
+                        android:id="@+id/Zone2Value"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:text="161 Hg"
+                        android:textAllCaps="true"
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="30dp"
+                        android:textStyle="italic" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Zone3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="0dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Zone3Label"
+                        android:layout_width="180dp"
+
+                        android:layout_height="wrap_content"
+                        android:text="Zone 3"
+                        android:textAllCaps="true"
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="30dp"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/Zone3Value"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:text="161 Hg"
+                        android:textAllCaps="true"
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="30dp"
+                        android:textStyle="italic" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/selectAPlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="550dp"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:id="@+id/SelectLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/plus"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="55dp"
+                    card_view:srcCompat="@drawable/plus" />
+
+                <ImageView
+                    android:id="@+id/minus"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="310dp"
+                    card_view:srcCompat="@drawable/minus" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+</LinearLayout>
