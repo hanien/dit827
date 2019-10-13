@@ -20,6 +20,7 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
     private DashboardFragment _parentFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
+    private TextView SetText;
 
     private LinearLayout Set1;
     private LinearLayout Set2;
@@ -44,6 +45,7 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private void setUpView() {
+        SetText = _view.findViewById(R.id.ZoneSelectText);
         Set1 = _view.findViewById(R.id.Set1);
         Set2 = _view.findViewById(R.id.Set2);
         Set3 = _view.findViewById(R.id.Set3);
@@ -54,13 +56,13 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
     @Override
     public void zoneIsSelected() {
         if(_parentFragment._backSeatSelected || _parentFragment._driverSeatSelected || _parentFragment._frontSeatSelected ){
-
+            SetText.setVisibility(View.GONE);
             Set1.setVisibility(View.VISIBLE);
             Set2.setVisibility(View.VISIBLE);
             Set3.setVisibility(View.VISIBLE);
             Set4.setVisibility(View.VISIBLE);
         }else{
-
+            SetText.setVisibility(View.VISIBLE);
             Set1.setVisibility(View.GONE);
             Set2.setVisibility(View.GONE);
             Set3.setVisibility(View.GONE);
