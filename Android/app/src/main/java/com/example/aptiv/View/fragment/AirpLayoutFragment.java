@@ -21,6 +21,11 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
     private View _view;
     private BaseViewModel _baseViewModel;
 
+    private TextView SetText;
+    private TextView SetAPText;
+    private LinearLayout SetAP;
+
+
     public AirpLayoutFragment(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
         _baseViewModel = viewModel;
@@ -39,7 +44,9 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private void setUpView() {
-
+        SetText = _view.findViewById(R.id.ZoneSelectText);
+        SetAPText = _view.findViewById(R.id.setAP_value);
+        SetAP = _view.findViewById(R.id.selectAPlayout);
 
     }
 
@@ -47,10 +54,14 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
     @Override
     public void zoneIsSelected() {
         if(_parentFragment._backSeatSelected || _parentFragment._driverSeatSelected || _parentFragment._frontSeatSelected ){
-
+            SetText.setVisibility(View.GONE);
+            SetAPText.setVisibility(View.VISIBLE);
+            SetAP.setVisibility(View.VISIBLE);
 
         }else{
-
+            SetText.setVisibility(View.VISIBLE);
+            SetAPText.setVisibility(View.GONE);
+            SetAP.setVisibility(View.GONE);
 
         }
     }

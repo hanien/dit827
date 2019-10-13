@@ -70,6 +70,18 @@
             android:paddingTop="0dp"
             android:paddingRight="40dp" />
 
+        <TextView
+            android:id="@+id/setAP_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="185dp"
+            android:layout_marginTop="515dp"
+            android:text="162 Hg"
+            android:textAllCaps="true"
+            android:textColor="@color/CardViewTextColor"
+            android:textSize="70dp"
+            android:textStyle="italic" />
+
 
         <LinearLayout
             android:id="@+id/apZones"
@@ -186,7 +198,7 @@
             android:id="@+id/selectAPlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="550dp"
+            android:layout_marginTop="520dp"
             android:orientation="horizontal">
 
 
@@ -211,6 +223,27 @@
                     card_view:srcCompat="@drawable/minus" />
 
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/NoteLabel"
+            android:layout_width="360dp"
+            android:layout_height="130dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="520dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/ZoneSelectText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Please click on specific zone to change value in it"
+                android:textColor="@color/CardViewTextColor"
+                android:textSize="25dp"
+                android:visibility="gone" />
+
         </LinearLayout>
 
 
