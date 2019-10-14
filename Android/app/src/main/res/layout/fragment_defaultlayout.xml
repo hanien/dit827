@@ -219,14 +219,15 @@
                         </LinearLayout>
 
                         <TextView
-                            android:layout_weight="1"
+                            android:id="@+id/InTempTextView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="22 C"
-                            android:textSize="40dp"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@color/CardViewTextColor"></TextView>
+                            android:text="22 C"
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="40dp"></TextView>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -276,6 +277,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/OutTempTextView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
@@ -387,15 +389,17 @@
                             card_view:srcCompat="@drawable/air_pressure"
                             android:layout_gravity="center"
                             android:gravity="center"/>
+
                         <TextView
-                            android:layout_weight="1"
+                            android:id="@+id/airPressurTextView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="22 Hg"
-                            android:textSize="40dp"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@color/CardViewTextColor"></TextView>
+                            android:text="22 Hg"
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="40dp"></TextView>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -427,15 +431,17 @@
                             card_view:srcCompat="@drawable/humidity"
                             android:layout_gravity="center"
                             android:gravity="center"/>
+
                         <TextView
-                            android:layout_weight="1"
+                            android:id="@+id/HumidityTextView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="20 %"
-                            android:textSize="40dp"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@color/CardViewTextColor"></TextView>
+                            android:text="20 %"
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="40dp"></TextView>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

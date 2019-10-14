@@ -8,4 +8,5 @@ public interface IVolleyCollback {
     void GetPassengerReadings(Zone value);
     void GetAverageReadings(Zone value);
     void GetBackseatReadings(Zone value);
+    void OutTempreture(double temp);
 }

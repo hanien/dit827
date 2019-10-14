@@ -23,6 +23,14 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
     private View _view;
     private MainActivity _owner;
     private TextView _soundTextView;
+    private TextView _airPressurTextView;
+    private TextView _humidityTextView;
+    private TextView _luxTextView;
+    private TextView _fullTextView;
+    private TextView _inTempTextView;
+    private TextView _outTempTextView;
+    private TextView _altitudeTextView;
+
     private BaseViewModel _baseViewModel;
     private CardView _volumeCard;
 
@@ -36,16 +44,23 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
                              Bundle savedInstanceState) {
         _view = inflater.inflate(R.layout.fragment_defaultlayout, container, false);
 
-        SetupEvents();
+        SetupComponents();
         UpdateData();
         SetupTimer();
 
         return _view;
     }
 
-    private void SetupEvents() {
+    private void SetupComponents() {
         _soundTextView = _view.findViewById(R.id.soundTextView);
         _volumeCard = _view.findViewById(R.id.VolumeCard);
+        _airPressurTextView = _view.findViewById(R.id.airPressurTextView);
+        _humidityTextView = _view.findViewById(R.id.HumidityTextView);
+        _luxTextView = _view.findViewById(R.id.lightTextView);
+        _fullTextView = _view.findViewById(R.id.fullTextView);
+        _inTempTextView = _view.findViewById(R.id.InTempTextView);
+        _outTempTextView = _view.findViewById(R.id.OutTempTextView);
+        _altitudeTextView = _view.findViewById(R.id.altitudeTextView);
     }
 
     private void SetupTimer(){
@@ -68,6 +83,13 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
 
     private void updateView() {
         _soundTextView.setText(_baseViewModel.MiddleZone.getTemperature());
+        _airPressurTextView.setText(_baseViewModel.MiddleZone.getPressure());
+        _humidityTextView.setText(_baseViewModel.MiddleZone.getHumidity());
+        _luxTextView.setText(_baseViewModel.MiddleZone.getLight());
+        _fullTextView.setText(_baseViewModel.MiddleZone.getFull());
+        _inTempTextView.setText(_baseViewModel.MiddleZone.getTemperature());
+        _outTempTextView.setText(String.valueOf(_baseViewModel.OutTempreture) + " C");
+        _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitiude());
     }
 
     @Override
