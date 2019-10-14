@@ -32,15 +32,13 @@ public class AptivService implements IAptivService {
             public void onResponse(JSONObject response) {
                 Gson gson = new Gson();
                 String dataArray = null;
-                try {
-                    dataArray = response.getString("driver");
-                } catch (JSONException e) {
+                try{
+                    dataArray = response.toString();
+                    final Zone Zone = gson.fromJson(dataArray, Zone.class);
+                    _collback.GetDriverReadings(Zone);
+                }catch (Exception e){
                     Log.e(this.getClass().toString(), e.getMessage());
                 }
-
-                final Zone Zone = gson.fromJson(dataArray, Zone.class);
-                _collback.GetDriverReadings(Zone);
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -48,6 +46,7 @@ public class AptivService implements IAptivService {
                 Log.e(this.getClass().toString(), error.getMessage());
             }
         });
+        queue.add(stringRequest);
     }
 
     @Override
@@ -61,14 +60,12 @@ public class AptivService implements IAptivService {
                 Gson gson = new Gson();
                 String dataArray = null;
                 try {
-                    dataArray = response.getString("passenger");
-                } catch (JSONException e) {
+                    dataArray = response.toString();
+                    final Zone Zone = gson.fromJson(dataArray, Zone.class);
+                    _collback.GetPassengerReadings(Zone);
+                } catch (Exception e) {
                     Log.e(this.getClass().toString(), e.getMessage());
                 }
-
-                final Zone Zone = gson.fromJson(dataArray, Zone.class);
-                _collback.GetPassengerReadings(Zone);
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -76,6 +73,7 @@ public class AptivService implements IAptivService {
                 Log.e(this.getClass().toString(), error.getMessage());
             }
         });
+        queue.add(stringRequest);
     }
 
     @Override
@@ -89,14 +87,12 @@ public class AptivService implements IAptivService {
                 Gson gson = new Gson();
                 String dataArray = null;
                 try {
-                    dataArray = response.getString("middle");
-                } catch (JSONException e) {
+                    dataArray = response.toString();
+                    final Zone Zone = gson.fromJson(dataArray, Zone.class);
+                    _collback.GetAverageReadings(Zone);
+                } catch (Exception e) {
                     Log.e(this.getClass().toString(), e.getMessage());
                 }
-
-                final Zone Zone = gson.fromJson(dataArray, Zone.class);
-                _collback.GetAverageReadings(Zone);
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -104,6 +100,7 @@ public class AptivService implements IAptivService {
                 Log.e(this.getClass().toString(), error.getMessage());
             }
         });
+        queue.add(stringRequest);
     }
 
     @Override
@@ -117,14 +114,12 @@ public class AptivService implements IAptivService {
                     Gson gson = new Gson();
                     String dataArray = null;
                     try {
-                        dataArray = response.getString("backseat");
-                    } catch (JSONException e) {
+                        dataArray = response.toString();
+                        final Zone Zone = gson.fromJson(dataArray, Zone.class);
+                        _collback.GetBackseatReadings(Zone);
+                    } catch (Exception e) {
                         Log.e(this.getClass().toString(), e.getMessage());
                     }
-
-                    final Zone Zone = gson.fromJson(dataArray, Zone.class);
-                    _collback.GetBackseatReadings(Zone);
-
                 }
             }, new Response.ErrorListener() {
             @Override

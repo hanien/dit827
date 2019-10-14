@@ -45,15 +45,17 @@
                     android:layout_height="wrap_content"
                     card_view:srcCompat="@drawable/speaker"
                     android:layout_marginRight="50dp"/>
+
                 <TextView
+                    android:id="@+id/TempratureTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="50dp"
                     android:text="10"
-                    android:textColor="@color/CardViewTextColor"/>
+                    android:textColor="@color/CardViewTextColor"
+                    android:textSize="50dp" />
             </LinearLayout>
             <com.sdsmdg.harjot.crollerTest.Croller
-                android:id="@+id/croller"
+                android:id="@+id/DefaultController"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -93,26 +95,28 @@
                     android:textSize="25dp"
                     android:visibility="gone"/>
                 <LinearLayout
-                    android:id="@+id/zoneCroller"
+                    android:id="@+id/zoneCrollerLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center">
+
                     <com.sdsmdg.harjot.crollerTest.Croller
+                        android:id="@+id/ZoneController"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
+                        android:layout_gravity="center"
                         app:back_circle_color="#EDEDED"
                         app:indicator_color="#0B3C49"
                         app:indicator_width="10"
                         app:is_continuous="true"
+                        app:label=""
                         app:label_color="#FFFFFF"
-                        app:label =""
                         app:main_circle_color="#FFFFFF"
                         app:max="1000"
                         app:progress_primary_color="#0B3C49"
                         app:progress_secondary_color="#EEEEEE"
-                        app:start_offset="45"
-                        android:layout_gravity="center"/>
+                        app:start_offset="45" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

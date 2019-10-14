@@ -2,8 +2,8 @@
     <string name="app_name">Aptiv</string>
     <string name="tempretureText">TEMPERATURE</string>
     <string name="autoText">SOUND VOLUME</string>
-    <string name="GetAverageReadings">https://dit827aptiv.herokuapp.com/middle</string>
-    <string name="GetDriverReadings">https://dit827aptiv.herokuapp.com/driver</string>
-    <string name="GetPassengerReadings">https://dit827aptiv.herokuapp.com/passenger</string>
-    <string name="GetBackseatReadings">https://dit827aptiv.herokuapp.com/back</string>
+    <string name="GetAverageReadings">https://dit827aptiv.herokuapp.com/api/sensors/middle</string>
+    <string name="GetDriverReadings">https://dit827aptiv.herokuapp.com/api/sensors/driver</string>
+    <string name="GetPassengerReadings">https://dit827aptiv.herokuapp.com/api/sensors/passenger</string>
+    <string name="GetBackseatReadings">https://dit827aptiv.herokuapp.com/api/sensors/back</string>
 </resources>

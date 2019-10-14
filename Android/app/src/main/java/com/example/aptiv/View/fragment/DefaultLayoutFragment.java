@@ -62,24 +62,23 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
     }
 
     private void UpdateData() {
+        updateView();
         _baseViewModel.UpdateData();
     }
 
-    public void SetUpSound(String val){
-        _soundTextView.setText(val);
+    private void updateView() {
+        _soundTextView.setText(_baseViewModel.MiddleZone.getTemperature());
     }
 
     @Override
     public void onClick(View view){
 
         switch (view.getId()) {
-
             case R.id.soundImageView:
                 _owner._dashboardFragment.OpenVolumeFragment();
                 break;
             case R.id.VolumeCard:
                 break;
-
         }
 
     }

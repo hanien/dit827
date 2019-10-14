@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BaseViewModel implements IVolleyCollback {
 
-    private AptivService _aptiveService;
+    private AptivService _aptivService;
     private MainActivity _activity;
     public Zone DriverZone;
     public Zone PassengerZone;
@@ -20,15 +20,15 @@ public class BaseViewModel implements IVolleyCollback {
 
     public BaseViewModel(MainActivity activity){
         _activity = activity;
-        _aptiveService = new AptivService(_activity);
+        _aptivService = new AptivService(_activity);
         UpdateData();
     }
 
     public void UpdateData() {
-        _aptiveService.GetAverageReadings(this);
-        _aptiveService.GetBackseatReadings(this);
-        _aptiveService.GetDriverReadings(this);
-        _aptiveService.GetPassengerReadings(this);
+        _aptivService.GetAverageReadings(this);
+        _aptivService.GetBackseatReadings(this);
+        _aptivService.GetDriverReadings(this);
+        _aptivService.GetPassengerReadings(this);
     }
 
     @Override

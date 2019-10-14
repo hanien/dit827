@@ -1,69 +1,108 @@
 package com.example.aptiv.Model.Classe;
 
 public class Zone {
-    private int Temperature;
-    private int Humidity;
-    private int Gain;
-    private int Luminosity;
-    private int Spectrum;
-    private int Ir;
+    public String temperature;
+    private String humidity;
+    private String gain;
+    private String luminosity;
+    private String full;
+    private String ir;
+    private String pressure;
+    private String sound;
+    private String altitiude;
+    private String light;
 
+    public Zone(String temperature, String humidity, String gain, String luminosity, String full, String ir,
+                String pressure , String sound, String altitiude, String lightt){
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.gain = gain;
+        this.luminosity = luminosity;
+        this.full = full;
+        this.ir = ir;
+        this.pressure = pressure;
+        this.sound = sound;
+        this.altitiude = altitiude;
+        this.light = lightt;
 
-    public Zone(int _temp, int _humidity, int _gain, int _luminosity, int _spectrum, int _ir){
-        this.Temperature = _temp;
-        this.Humidity = _humidity;
-        this.Gain = _gain;
-        this.Luminosity = _luminosity;
-        this.Spectrum = _spectrum;
-        this.Ir = _ir;
+    }
+    public String getTemperature() {
+        return temperature;
     }
 
-
-    public int getTemperature() {
-        return Temperature;
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
     }
 
-    public void setTemperature(int temperature) {
-        Temperature = temperature;
+    public String getHumidity() {
+        return humidity;
     }
 
-    public int getHumidity() {
-        return Humidity;
+    public void setHumidity(String humidity) {
+        this.humidity = humidity;
     }
 
-    public void setHumidity(int humidity) {
-        Humidity = humidity;
+    public String getGain() {
+        return gain;
     }
 
-    public int getGain() {
-        return Gain;
+    public void setGain(String gain) {
+        this.gain = gain;
     }
 
-    public void setGain(int gain) {
-        Gain = gain;
+    public String getLuminosity() {
+        return luminosity;
     }
 
-    public int getLuminosity() {
-        return Luminosity;
+    public void setLuminosity(String luminosity) {
+        this.luminosity = luminosity;
     }
 
-    public void setLuminosity(int luminosity) {
-        Luminosity = luminosity;
+    public String getFull() {
+        return full;
     }
 
-    public int getSpectrum() {
-        return Spectrum;
+    public void setFull(String full) {
+        this.full = full;
     }
 
-    public void setSpectrum(int spectrum) {
-        Spectrum = spectrum;
+    public String getIr() {
+        return ir;
     }
 
-    public int getIr() {
-        return Ir;
+    public void setIr(String ir) {
+        this.ir = ir;
     }
 
-    public void setIr(int ir) {
-        Ir = ir;
+    public String getPressure() {
+        return pressure;
+    }
+
+    public void setPressure(String pressure) {
+        this.pressure = pressure;
+    }
+
+    public String getSound() {
+        return sound;
+    }
+
+    public void setSound(String sound) {
+        this.sound = sound;
+    }
+
+    public String getAltitiude() {
+        return altitiude;
+    }
+
+    public void setAltitiude(String altitiude) {
+        this.altitiude = altitiude;
+    }
+
+    public String getLight() {
+        return light;
+    }
+
+    public void setLight(String light) {
+        this.light = light;
     }
 }
