@@ -87,7 +87,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         _humidityTextView.setText(_baseViewModel.MiddleZone.getHumidity());
         _luxTextView.setText(_baseViewModel.MiddleZone.getLight());
         _fullTextView.setText(_baseViewModel.MiddleZone.getFull());
-        _inTempTextView.setText(_baseViewModel.MiddleZone.getTemperature());
+        _inTempTextView.setText(_baseViewModel.MiddleZone.getTemperature() + "C");
         _outTempTextView.setText(String.valueOf(_baseViewModel.OutTempreture) + " C");
         _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitiude());
     }
