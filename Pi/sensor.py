@@ -53,7 +53,8 @@ def average_and_send():
     "ir": str(ir_total/counter),
     "full": str(full_total/counter)
     }
-    r = requests.put("http://127.0.0.1:5000/api/sensors/driver", data=json.dumps(req))
+    r = requests.put("http://dit827aptiv.herokuapp.com/api/sensors/back", data=json.dumps(req))
+    #r = requests.put("http://127.0.0.1:5000/api/sensors/driver", data=json.dumps(req))
     print(r.status_code)
     print(r.content)
     reset()
