@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -30,6 +31,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
     private TextView _inTempTextView;
     private TextView _outTempTextView;
     private TextView _altitudeTextView;
+    private Switch _tempChange;
 
     private BaseViewModel _baseViewModel;
     private CardView _volumeCard;
@@ -61,6 +63,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         _inTempTextView = _view.findViewById(R.id.InTempTextView);
         _outTempTextView = _view.findViewById(R.id.OutTempTextView);
         _altitudeTextView = _view.findViewById(R.id.altitudeTextView);
+        _tempChange = _view.findViewById(R.id.tempSwitch);
     }
 
     private void SetupTimer(){
@@ -87,8 +90,13 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         _humidityTextView.setText(_baseViewModel.MiddleZone.getHumidity());
         _luxTextView.setText(_baseViewModel.MiddleZone.getLight());
         _fullTextView.setText(_baseViewModel.MiddleZone.getFull());
-        _inTempTextView.setText(_baseViewModel.MiddleZone.getTemperature() + "C");
-        _outTempTextView.setText(String.valueOf(_baseViewModel.OutTempreture) + " C");
+
+        String tempType = (_tempChange.isChecked()) ? " °F":" C";
+        double currentTemp = Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
+        currentTemp = (_tempChange.isChecked()) ? (1.8*currentTemp)+32 : currentTemp;
+
+        _inTempTextView.setText(currentTemp + tempType);
+        _outTempTextView.setText(currentTemp + tempType);
         _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitiude());
     }
 
