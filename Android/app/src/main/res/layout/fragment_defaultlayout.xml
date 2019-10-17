@@ -168,11 +168,13 @@
             card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
             card_view:cardBackgroundColor = "@color/CardViewColor"
             card_view:cardUseCompatPadding="true">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:onClick="OpenTempFragment"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/temp"
@@ -188,27 +190,23 @@
                     card_view:cardBackgroundColor="@color/CardViewColor"
                     card_view:cardCornerRadius="@dimen/cardview_corner_radius"
                     card_view:cardUseCompatPadding="true">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
-                        android:weightSum="2"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_weight="1">
+                            android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="IN\nTEMP"
-                                android:textColor="@color/CardViewTextColor"
-                                android:textSize="20dp"></TextView>
                             <ImageView
                                 android:id="@+id/imageView2"
                                 android:layout_width="match_parent"
@@ -216,6 +214,13 @@
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 card_view:srcCompat="@drawable/hot" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="IN\nTEMP"
+                                android:textColor="@color/CardViewTextColor"
+                                android:textSize="20dp"></TextView>
                         </LinearLayout>
 
                         <TextView
@@ -245,28 +250,23 @@
                     card_view:cardBackgroundColor="@color/CardViewColor"
                     card_view:cardCornerRadius="@dimen/cardview_corner_radius"
                     card_view:cardUseCompatPadding="true">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:weightSum="2">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_weight="1">
+                            android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="OUT\nTEMP"
-                                android:textColor="@color/CardViewTextColor"
-                                android:textSize="20dp"></TextView>
                             <ImageView
                                 android:id="@+id/imageView3"
                                 android:layout_width="match_parent"
@@ -274,6 +274,13 @@
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 card_view:srcCompat="@drawable/hot" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="OUT\nTEMP"
+                                android:textColor="@color/CardViewTextColor"
+                                android:textSize="20dp"></TextView>
                         </LinearLayout>
 
                         <TextView

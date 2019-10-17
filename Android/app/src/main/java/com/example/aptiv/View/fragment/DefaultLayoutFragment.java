@@ -77,7 +77,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
     }
 
     private void UpdateData() {
-        updateView();
+        //updateView();
         _baseViewModel.UpdateData();
     }
 

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.aptiv.R;
+import com.example.aptiv.View.fragment.TempLayoutFragment;
 import com.example.aptiv.ViewModel.BaseViewModel;
 import com.example.aptiv.View.adapter.ViewPagerAdapter;
 import com.example.aptiv.View.fragment.DashboardFragment;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity  {
 
     private BaseViewModel _viewModel;
     public DashboardFragment _dashboardFragment;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,4 +54,9 @@ public class MainActivity extends AppCompatActivity  {
     public void CloseVolumeFragment(View v){
         _dashboardFragment.SetupCarLayoutFragment();
     }
+
+    public void OpenTempFragment(View v) {
+        _dashboardFragment.OpenTempFragment();
+    }
+
 }
