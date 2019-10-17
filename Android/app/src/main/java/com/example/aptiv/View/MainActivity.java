@@ -59,4 +59,8 @@ public class MainActivity extends AppCompatActivity  {
         _dashboardFragment.OpenTempFragment();
     }
 
+    public void OpenAPFragment(View v) {
+        _dashboardFragment.OpenAPFragment();
+    }
+
 }
