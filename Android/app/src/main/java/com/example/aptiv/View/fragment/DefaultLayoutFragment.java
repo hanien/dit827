@@ -85,7 +85,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
     }
 
     private void updateView() {
-        _soundTextView.setText(_baseViewModel.MiddleZone.getTemperature());
+        /*_soundTextView.setText(_baseViewModel.MiddleZone.getTemperature());
         _airPressurTextView.setText(_baseViewModel.MiddleZone.getPressure());
         _humidityTextView.setText(_baseViewModel.MiddleZone.getHumidity());
         _luxTextView.setText(_baseViewModel.MiddleZone.getLight());
@@ -97,7 +97,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
 
         _inTempTextView.setText(currentTemp + tempType);
         _outTempTextView.setText(currentTemp + tempType);
-        _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitiude());
+        _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitiude());*/
     }
 
     @Override
