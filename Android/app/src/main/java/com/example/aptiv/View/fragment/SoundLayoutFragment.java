@@ -57,9 +57,9 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
 
     private void setUpElements(){
         _zoneTextView.setText("Please click on specific zone to change value in it");
-        _textView.setText(_baseViewModel.MiddleZone.getTemperature());
-        _defaultController.setLabel(String.valueOf(_baseViewModel.MiddleZone.getTemperature()));
-        _defaultController.setProgress(Integer.valueOf(_baseViewModel.MiddleZone.getTemperature()));
+        _textView.setText(_baseViewModel.MiddleZone.getSound());
+        _defaultController.setLabel(String.valueOf(_baseViewModel.MiddleZone.getSound()));
+        _defaultController.setProgress(Integer.valueOf(_baseViewModel.MiddleZone.getSound()));
         _defaultController.setOnProgressChangedListener(new Croller.onProgressChangedListener() {
             @Override
             public void onProgressChanged(int progress) {
@@ -94,31 +94,31 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
     private void updateSoundValue(boolean Driver, boolean Passenger , boolean Back) {
         double temp = 0;
         if(Driver && Passenger && Back){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+  Double.parseDouble(_baseViewModel.PassengerZone.getTemperature()) + Double.parseDouble(_baseViewModel.BackseatZone.getTemperature()) +  Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
+            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound())+  Double.parseDouble(_baseViewModel.PassengerZone.getSound()) + Double.parseDouble(_baseViewModel.BackseatZone.getSound()) +  Double.parseDouble(_baseViewModel.DriverZone.getSound());
             temp = temp / 4;
         }
         else if(Driver && Passenger){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+  Double.parseDouble(_baseViewModel.PassengerZone.getTemperature()) +  Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
+            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound())+  Double.parseDouble(_baseViewModel.PassengerZone.getSound()) +  Double.parseDouble(_baseViewModel.DriverZone.getSound());
             temp = temp / 3;
         }
         else if(Passenger && Back){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+  Double.parseDouble(_baseViewModel.PassengerZone.getTemperature()) + Double.parseDouble(_baseViewModel.BackseatZone.getTemperature());
+            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound())+  Double.parseDouble(_baseViewModel.PassengerZone.getSound()) + Double.parseDouble(_baseViewModel.BackseatZone.getSound());
             temp = temp / 3;
         }
         else if(Driver && Back){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature()) + Double.parseDouble(_baseViewModel.BackseatZone.getTemperature()) +  Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
+            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound()) + Double.parseDouble(_baseViewModel.BackseatZone.getSound()) +  Double.parseDouble(_baseViewModel.DriverZone.getSound());
             temp = temp / 3;
         }
         else if(Driver){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
+            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound())+Double.parseDouble(_baseViewModel.DriverZone.getSound());
             temp = temp / 2;
         }
         else if(Passenger){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+Double.parseDouble(_baseViewModel.PassengerZone.getTemperature());
+            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound())+Double.parseDouble(_baseViewModel.PassengerZone.getSound());
             temp = temp / 2;
         }
         else if(Back){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+Double.parseDouble(_baseViewModel.BackseatZone.getTemperature());
+            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound())+Double.parseDouble(_baseViewModel.BackseatZone.getSound());
             temp = temp / 2;
         }
         _zoneController.setProgress((int)temp);
@@ -145,7 +145,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private void updateView() {
-        _textView.setText(_baseViewModel.MiddleZone.getTemperature());
+        _textView.setText(_baseViewModel.MiddleZone.getSound());
         updateSoundValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
     }
     //endregion

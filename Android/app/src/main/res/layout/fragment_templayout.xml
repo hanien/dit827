@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/Temperature"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/default_margin_cardview"
+        android:layout_marginTop="@dimen/default_margin_cardview"
+        android:layout_marginRight="@dimen/default_margin_cardview"
+        android:layout_marginBottom="@dimen/default_margin_cardview"
+        card_view:cardBackgroundColor="@color/CardViewColor"
+        card_view:cardCornerRadius="@dimen/cardview_corner_radius"
+        card_view:cardUseCompatPadding="true">
+
+
+        <ImageView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="0dp"
+            android:clickable="true"
+            android:onClick="CloseVolumeFragment"
+            card_view:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tempLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Current Temperature"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/CardViewTextColor"
+                android:textStyle="italic"
+                android:textSize="40dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center_horizontal">
+                <ImageView
+                    android:id="@+id/TempImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    card_view:srcCompat="@drawable/temp"
+                    android:layout_marginRight="50dp"/>
+
+                <TextView
+                    android:id="@+id/tempValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10° C"
+                    android:textColor="@color/CardViewTextColor"
+                    android:textSize="45dp" />
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/default_margin_cardview"
+                android:layout_marginTop="@dimen/default_margin_cardview"
+                android:layout_marginRight="@dimen/default_margin_cardview"
+                android:layout_marginBottom="@dimen/default_margin_cardview"
+                card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
+                card_view:cardBackgroundColor = "@color/CardViewColor"
+                card_view:cardUseCompatPadding="true">
+
+                <TextView
+                    android:id="@+id/SelectZoneTextView"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/CardViewTextColor"
+                    android:text="Please click on specific zone to change value in it"
+                    android:textSize="25dp"
+                    android:visibility="gone"/>
+
+
+                <TextView
+                    android:id="@+id/tempChangeValue"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/CardViewTextColor"
+                    android:text="10° C"
+                    android:textSize="50dp"
+                    android:visibility="visible"/>
+
+                <LinearLayout
+                    android:id="@+id/SetTempLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/minus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        card_view:srcCompat="@drawable/minus" />
+
+                    <ImageView
+                        android:id="@+id/arc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        card_view:srcCompat="@drawable/arc" />
+
+                    <ImageView
+                        android:id="@+id/plus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        card_view:srcCompat="@drawable/plus" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/SwitchContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical">
+
+                    <Switch
+                        android:id="@+id/TempTypeSwitch"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Change Temperature Scale"
+                        android:textColor="@color/CardViewTextColor" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

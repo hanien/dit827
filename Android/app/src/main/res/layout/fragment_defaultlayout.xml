@@ -171,7 +171,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="167dp"
+                android:layout_height="match_parent"
+                android:onClick="OpenTempFragment"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -206,12 +207,14 @@
                             android:gravity="center"
                             android:orientation="horizontal">
 
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="IN\nTEMP"
                                 android:textColor="@color/CardViewTextColor"
                                 android:textSize="20dp"></TextView>
+
 
                             <ImageView
                                 android:id="@+id/imageView2"
@@ -220,6 +223,13 @@
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 card_view:srcCompat="@drawable/hot" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="IN\nTEMP"
+                                android:textColor="@color/CardViewTextColor"
+                                android:textSize="20dp"></TextView>
                         </LinearLayout>
 
                         <TextView
@@ -266,12 +276,14 @@
                             android:gravity="center"
                             android:orientation="horizontal">
 
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="OUT\nTEMP"
                                 android:textColor="@color/CardViewTextColor"
                                 android:textSize="20dp"></TextView>
+
 
                             <ImageView
                                 android:id="@+id/imageView3"
@@ -280,6 +292,13 @@
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 card_view:srcCompat="@drawable/hot" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="OUT\nTEMP"
+                                android:textColor="@color/CardViewTextColor"
+                                android:textSize="20dp"></TextView>
                         </LinearLayout>
 
                         <TextView
@@ -294,70 +313,6 @@
                             android:textSize="40dp"></TextView>
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/ChangeContainer"
-                    android:layout_width="107dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/default_margin_cardview"
-                    android:layout_marginTop="@dimen/default_margin_cardview"
-                    android:layout_marginRight="@dimen/default_margin_cardview"
-                    android:layout_marginBottom="@dimen/default_margin_cardview"
-                    android:layout_weight="1"
-                    android:minHeight="40dp"
-                    card_view:cardBackgroundColor="@color/CardViewColor"
-                    card_view:cardCornerRadius="@dimen/cardview_corner_radius"
-                    card_view:cardUseCompatPadding="true">
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/temp"
-                        android:layout_width="107dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/default_margin_cardview"
-                        android:layout_marginRight="@dimen/default_margin_cardview"
-                        android:layout_weight="1"
-                        android:minHeight="40dp"
-                        card_view:cardBackgroundColor="@color/CardViewColor"
-                        card_view:cardCornerRadius="@dimen/cardview_corner_radius"
-                        card_view:cardUseCompatPadding="true">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:weightSum="2">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="right|top|left"
-                                    android:text="TEMP TYPE"
-                                    android:textColor="@color/CardViewTextColor"
-                                    android:textSize="20dp"></TextView>
-
-                            </LinearLayout>
-
-                            <Switch
-                                android:id="@+id/tempSwitch"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1" />
-
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
@@ -433,34 +388,38 @@
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:minHeight="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/default_margin_cardview"
                     android:layout_marginTop="@dimen/default_margin_cardview"
                     android:layout_marginRight="@dimen/default_margin_cardview"
                     android:layout_marginBottom="@dimen/default_margin_cardview"
-                    card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                    card_view:cardBackgroundColor = "@color/CardViewColor"
+                    android:layout_weight="1"
+                    android:minHeight="40dp"
+                    android:onClick="OpenAPFragment"
+                    card_view:cardBackgroundColor="@color/CardViewColor"
+                    card_view:cardCornerRadius="@dimen/cardview_corner_radius"
                     card_view:cardUseCompatPadding="true">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
-                        android:weightSum="2"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
                         <ImageView
-                            android:layout_weight="1"
                             android:id="@+id/airPressure"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            card_view:srcCompat="@drawable/air_pressure"
                             android:layout_gravity="center"
-                            android:gravity="center"/>
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            card_view:srcCompat="@drawable/air_pressure" />
 
                         <TextView
                             android:id="@+id/airPressurTextView"

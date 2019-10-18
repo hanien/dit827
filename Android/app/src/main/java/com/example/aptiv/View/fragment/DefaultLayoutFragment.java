@@ -31,7 +31,6 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
     private TextView _inTempTextView;
     private TextView _outTempTextView;
     private TextView _altitudeTextView;
-    private Switch _tempChange;
 
     private BaseViewModel _baseViewModel;
     private CardView _volumeCard;
@@ -63,7 +62,6 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         _inTempTextView = _view.findViewById(R.id.InTempTextView);
         _outTempTextView = _view.findViewById(R.id.OutTempTextView);
         _altitudeTextView = _view.findViewById(R.id.altitudeTextView);
-        _tempChange = _view.findViewById(R.id.tempSwitch);
     }
 
     private void SetupTimer(){
@@ -80,24 +78,19 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
     }
 
     private void UpdateData() {
-        updateView();
+        //updateView();
         _baseViewModel.UpdateData();
     }
 
     private void updateView() {
-        /*_soundTextView.setText(_baseViewModel.MiddleZone.getTemperature());
+        _soundTextView.setText(_baseViewModel.MiddleZone.getTemperature());
         _airPressurTextView.setText(_baseViewModel.MiddleZone.getPressure());
         _humidityTextView.setText(_baseViewModel.MiddleZone.getHumidity());
         _luxTextView.setText(_baseViewModel.MiddleZone.getLight());
         _fullTextView.setText(_baseViewModel.MiddleZone.getFull());
-
-        String tempType = (_tempChange.isChecked()) ? " °F":" C";
-        double currentTemp = Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
-        currentTemp = (_tempChange.isChecked()) ? (1.8*currentTemp)+32 : currentTemp;
-
-        _inTempTextView.setText(currentTemp + tempType);
-        _outTempTextView.setText(currentTemp + tempType);
-        _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitiude());*/
+        _inTempTextView.setText(_baseViewModel.MiddleZone.getTemperature() +"° C");
+        _outTempTextView.setText(_baseViewModel.MiddleZone.getTemperature() +"° C");
+        _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitiude());
     }
 
     @Override
@@ -107,6 +100,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
             case R.id.soundImageView:
                 _owner._dashboardFragment.OpenVolumeFragment();
                 break;
+
             case R.id.VolumeCard:
                 break;
         }
