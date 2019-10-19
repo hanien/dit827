@@ -127,7 +127,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
 
     //region Timer method
     private void setUpTimer(){
-        new CountDownTimer(4000, 1000) {
+        new CountDownTimer(30000, 1000) {
 
             public void onTick(long millisUntilFinished) {
             }
