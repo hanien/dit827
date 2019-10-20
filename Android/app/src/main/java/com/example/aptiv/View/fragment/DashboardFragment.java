@@ -29,6 +29,8 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     private SoundLayoutFragment SoundLayoutFragment;
     private TempLayoutFragment TempLayoutFragment;
     private AirpLayoutFragment AirpLayoutFragment;
+    private HumidityLayoutFragment HumidityLayoutFragment;
+    private LuxLayoutFragment LuxLayoutFragment;
     private IZoneSelection _callback;
     private ImageView _carMaskView;
     private ImageView _frontSeat;
@@ -100,6 +102,24 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         AirpLayoutFragment = new AirpLayoutFragment(this,_owner,_baseViewModel);
         fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard,AirpLayoutFragment).commit();
         _callback = AirpLayoutFragment;
+    }
+
+    //Open humidity fragment
+    public void OpenHumidityFragment() {
+        FragmentManager fm1 = getFragmentManager();
+        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
+        HumidityLayoutFragment = new HumidityLayoutFragment(this,_owner,_baseViewModel);
+        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard,HumidityLayoutFragment).commit();
+        _callback = HumidityLayoutFragment;
+    }
+
+    //Open lux fragment
+    public void OpenLuxFragment() {
+        FragmentManager fm1 = getFragmentManager();
+        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
+        LuxLayoutFragment = new LuxLayoutFragment(this,_owner,_baseViewModel);
+        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard,LuxLayoutFragment).commit();
+        _callback = LuxLayoutFragment;
     }
 
     //onTouch event that is connected to the car image to read which seat is seleted
