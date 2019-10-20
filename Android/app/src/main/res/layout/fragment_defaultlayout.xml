@@ -206,7 +206,12 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:orientation="horizontal">
-
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="IN\nTEMP"
+                                android:textColor="@color/CardViewTextColor"
+                                android:textSize="20dp"></TextView>
                             <ImageView
                                 android:id="@+id/imageView2"
                                 android:layout_width="match_parent"
@@ -214,13 +219,6 @@
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 card_view:srcCompat="@drawable/hot" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="IN\nTEMP"
-                                android:textColor="@color/CardViewTextColor"
-                                android:textSize="20dp"></TextView>
                         </LinearLayout>
 
                         <TextView
@@ -266,7 +264,12 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:orientation="horizontal">
-
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="OUT\nTEMP"
+                                android:textColor="@color/CardViewTextColor"
+                                android:textSize="20dp"></TextView>
                             <ImageView
                                 android:id="@+id/imageView3"
                                 android:layout_width="match_parent"
@@ -275,12 +278,6 @@
                                 android:gravity="center"
                                 card_view:srcCompat="@drawable/hot" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="OUT\nTEMP"
-                                android:textColor="@color/CardViewTextColor"
-                                android:textSize="20dp"></TextView>
                         </LinearLayout>
 
                         <TextView
