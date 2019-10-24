@@ -90,10 +90,11 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         _fullTextView.setText(_baseViewModel.MiddleZone.getFull());
 
         double temp = Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
-        temp = (_baseViewModel.tempType == _baseViewModel.getFahrenheit()) ? ((1.8*temp))+32 : temp;
+        String tempType = (_baseViewModel.getTempType()) ? _baseViewModel.getFahrenheit() : _baseViewModel.getCelsius();
+        temp = (_baseViewModel.getTempType()) ? ((1.8*temp))+32 : temp;
 
-        _inTempTextView.setText(temp + _baseViewModel.tempType);
-        _outTempTextView.setText(temp + _baseViewModel.tempType);
+        _inTempTextView.setText(temp + tempType);
+        _outTempTextView.setText(temp + tempType);
         _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitiude());
     }
 

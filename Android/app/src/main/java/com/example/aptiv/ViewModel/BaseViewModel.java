@@ -20,7 +20,7 @@ public class BaseViewModel implements IVolleyCollback {
     public Zone BackseatZone;
     public Zone MiddleZone;
     public Double OutTempreture;
-    public String tempType;
+    public Boolean tempType; //True here means that it is Fahrenheit
     private String fahrenheit;
     private String celsius;
 
@@ -31,6 +31,7 @@ public class BaseViewModel implements IVolleyCollback {
         _weatherService = new WeatherService(_activity);
         fahrenheit = "° F";
         celsius = "° C";
+        tempType = false;
         UpdateData();
     }
 
@@ -72,7 +73,7 @@ public class BaseViewModel implements IVolleyCollback {
         return fahrenheit;
     }
 
-    public String getTempType(){
+    public Boolean getTempType(){
         return tempType;
     }
     public String getCelsius(){

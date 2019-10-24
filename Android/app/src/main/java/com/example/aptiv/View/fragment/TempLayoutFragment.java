@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;
+import com.google.android.material.chip.ChipGroup;
 import com.sdsmdg.harjot.crollerTest.Croller;
 
 import androidx.fragment.app.Fragment;
@@ -59,12 +61,26 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         SetTempLayout = _view.findViewById(R.id.SetTempLayout);
         TempTypeSwitch = _view.findViewById(R.id.TempTypeSwitch);
 
+        TempTypeSwitch.setChecked(_baseViewModel.getTempType());
+        TempTypeSwitch.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        String tempType = (isChecked) ? _baseViewModel.getFahrenheit(): _baseViewModel.getCelsius();
+                        _baseViewModel.tempType = isChecked;
+                        updateTempValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+                    }
+                }
+        );
+
     }
 
     private void setUpElements(){
 
-        TempValue.setText(_baseViewModel.MiddleZone.getTemperature() + "° C");
-
+        double temp = Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
+        temp = (_baseViewModel.getTempType()) ? ((1.8*temp))+32 : temp;
+        String tempType = (_baseViewModel.getTempType()) ? _baseViewModel.getFahrenheit() : _baseViewModel.getCelsius();
+        TempValue.setText( temp + tempType);
     }
 
 
@@ -87,42 +103,41 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
 
     private void updateTempValue(boolean Driver, boolean Passenger , boolean Back) {
         double temp = 0;
-        String tempType = (TempTypeSwitch.isChecked()) ? _baseViewModel.getFahrenheit(): _baseViewModel.getCelsius();
-        _baseViewModel.tempType = tempType;
+        Boolean tempType = _baseViewModel.getTempType();
         String fahrenheit = _baseViewModel.getFahrenheit();
         String celsius = _baseViewModel.getCelsius();
 
         if(Driver && Passenger && Back){
             temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+  Double.parseDouble(_baseViewModel.PassengerZone.getTemperature()) + Double.parseDouble(_baseViewModel.BackseatZone.getTemperature()) +  Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
-            temp = (tempType == fahrenheit) ? ((1.8*temp)/4)+32 : temp/4;
+            temp = (tempType) ? ((1.8*temp)/4)+32 : temp/4;
         }
         else if(Driver && Passenger){
             temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+  Double.parseDouble(_baseViewModel.PassengerZone.getTemperature()) +  Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
-            temp = (tempType == fahrenheit) ? ((1.8*temp)/3)+32 : temp/3;
+            temp = (tempType) ? ((1.8*temp)/3)+32 : temp/3;
         }
         else if(Passenger && Back){
             temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+  Double.parseDouble(_baseViewModel.PassengerZone.getTemperature()) + Double.parseDouble(_baseViewModel.BackseatZone.getTemperature());
-            temp = (tempType == fahrenheit) ? ((1.8*temp)/3)+32 : temp/3;
+            temp = (tempType) ? ((1.8*temp)/3)+32 : temp/3;
         }
         else if(Driver && Back){
             temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature()) + Double.parseDouble(_baseViewModel.BackseatZone.getTemperature()) +  Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
-            temp = (tempType == fahrenheit) ? ((1.8*temp)/3)+32 : temp/3;
+            temp = (tempType) ? ((1.8*temp)/3)+32 : temp/3;
         }
         else if(Driver){
             temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
-            temp = (tempType == fahrenheit) ? ((1.8*temp)/2)+32 : temp/2;
+            temp = (tempType) ? ((1.8*temp)/2)+32 : temp/2;
         }
         else if(Passenger){
             temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+Double.parseDouble(_baseViewModel.PassengerZone.getTemperature());
-            temp = (tempType == fahrenheit) ? ((1.8*temp)/2)+32 : temp/2;
+            temp = (tempType) ? ((1.8*temp)/2)+32 : temp/2;
         }
         else if(Back){
             temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+Double.parseDouble(_baseViewModel.BackseatZone.getTemperature());
-            temp = (tempType == fahrenheit) ? ((1.8*temp)/2)+32 : temp/2;
+            temp = (tempType) ? ((1.8*temp)/2)+32 : temp/2;
         }
 
 
-        if(temp == 0 && tempType == celsius){
+        if(temp == 0 && !tempType){
             TempValue.setText(_baseViewModel.MiddleZone.getTemperature() + celsius);
             tempChangeValue.setText(_baseViewModel.MiddleZone.getTemperature() + celsius);
         }
@@ -133,9 +148,9 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
             tempChangeValue.setText(midTemp + fahrenheit);
         }
         else {
-
-            TempValue.setText(String.valueOf((int)temp) + tempType);
-            tempChangeValue.setText(String.valueOf((int)temp) + tempType);
+            String typeString = ((tempType)) ? fahrenheit : celsius;
+            TempValue.setText(String.valueOf((int)temp) + typeString);
+            tempChangeValue.setText(String.valueOf((int)temp) + typeString);
         }
 
 
