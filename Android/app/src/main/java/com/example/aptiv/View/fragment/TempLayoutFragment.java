@@ -33,7 +33,6 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
     private Switch TempTypeSwitch;
 
 
-
     public TempLayoutFragment(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
         _baseViewModel = viewModel;
@@ -88,9 +87,10 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
 
     private void updateTempValue(boolean Driver, boolean Passenger , boolean Back) {
         double temp = 0;
-        String fahrenheit = "° F";
-        String celsius = "° C";
-        String tempType =(TempTypeSwitch.isChecked()) ? fahrenheit: celsius;
+        String tempType = (TempTypeSwitch.isChecked()) ? _baseViewModel.getFahrenheit(): _baseViewModel.getCelsius();
+        _baseViewModel.tempType = tempType;
+        String fahrenheit = _baseViewModel.getFahrenheit();
+        String celsius = _baseViewModel.getCelsius();
 
         if(Driver && Passenger && Back){
             temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+  Double.parseDouble(_baseViewModel.PassengerZone.getTemperature()) + Double.parseDouble(_baseViewModel.BackseatZone.getTemperature()) +  Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
@@ -163,6 +163,4 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         TempValue.setText(_baseViewModel.MiddleZone.getTemperature()  + "° C");
         updateTempValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
     }
-
-
 }
