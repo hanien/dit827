@@ -21,6 +21,7 @@ jobs:
             cd Pi
             sudo pip install pipenv
             pipenv install pytest
+            pipenv install board
         # Here the dependencies are saved in a cache.
       - save_cache:
           key: raspberry-{{ .Branch }}-{{ checksum "Pi/Pipfile.lock" }}
