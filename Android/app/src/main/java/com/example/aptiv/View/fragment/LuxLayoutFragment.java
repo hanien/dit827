@@ -60,7 +60,7 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
 
     private void setUpElements(){
 
-        luxValue.setText(_baseViewModel.MiddleZone.getLight() + " lux");
+        luxValue.setText(_baseViewModel.MiddleZone.getIr() + " lux");
 
     }
 
@@ -85,41 +85,41 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
     private void updateLuxValue(boolean Driver, boolean Passenger , boolean Back) {
         double lux = 0;
         if(Driver && Passenger && Back){
-            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getLight())+  Double.parseDouble(_baseViewModel.PassengerZone.getLight()) + Double.parseDouble(_baseViewModel.BackseatZone.getLight()) +  Double.parseDouble(_baseViewModel.DriverZone.getLight());
+            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getIr())+  Double.parseDouble(_baseViewModel.PassengerZone.getIr()) + Double.parseDouble(_baseViewModel.BackseatZone.getIr()) +  Double.parseDouble(_baseViewModel.DriverZone.getIr());
             lux = lux / 4;
         }
         else if(Driver && Passenger){
-            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getLight())+  Double.parseDouble(_baseViewModel.PassengerZone.getLight()) +  Double.parseDouble(_baseViewModel.DriverZone.getLight());
+            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getIr())+  Double.parseDouble(_baseViewModel.PassengerZone.getIr()) +  Double.parseDouble(_baseViewModel.DriverZone.getIr());
             lux = lux / 3;
         }
         else if(Passenger && Back){
-            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getLight()) + Double.parseDouble(_baseViewModel.PassengerZone.getLight()) + Double.parseDouble(_baseViewModel.BackseatZone.getLight());
+            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getIr()) + Double.parseDouble(_baseViewModel.PassengerZone.getIr()) + Double.parseDouble(_baseViewModel.BackseatZone.getIr());
             lux = lux / 3;
         }
         else if(Driver && Back){
-            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getLight()) + Double.parseDouble(_baseViewModel.BackseatZone.getLight()) +  Double.parseDouble(_baseViewModel.DriverZone.getLight());
+            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getIr()) + Double.parseDouble(_baseViewModel.BackseatZone.getIr()) +  Double.parseDouble(_baseViewModel.DriverZone.getIr());
             lux = lux / 3;
         }
         else if(Driver){
-            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getLight()) + Double.parseDouble(_baseViewModel.DriverZone.getLight());
+            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getIr()) + Double.parseDouble(_baseViewModel.DriverZone.getIr());
             lux = lux / 2;
         }
         else if(Passenger){
-            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getLight()) + Double.parseDouble(_baseViewModel.PassengerZone.getLight());
+            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getIr()) + Double.parseDouble(_baseViewModel.PassengerZone.getIr());
             lux = lux / 2;
         }
         else if(Back){
-            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getLight()) + Double.parseDouble(_baseViewModel.BackseatZone.getLight());
+            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getIr()) + Double.parseDouble(_baseViewModel.BackseatZone.getIr());
             lux = lux / 2;
         }
 
 
         if(lux == 0){
-            luxValue.setText(_baseViewModel.MiddleZone.getLight() + " lux");
-            luxChangeValue.setText(_baseViewModel.MiddleZone.getLight() + " lux");
+            luxValue.setText(_baseViewModel.MiddleZone.getIr() + " lux");
+            luxChangeValue.setText(_baseViewModel.MiddleZone.getIr() + " lux");
         }
         else {
-            luxValue.setText(String.valueOf((int)lux) + " lux");
+            luxValue.setText(_baseViewModel.MiddleZone.getIr() + " lux");
             luxChangeValue.setText(String.valueOf((int)lux) + " lux");
 
         }
@@ -146,7 +146,7 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private void updateView() {
-        luxValue.setText(_baseViewModel.MiddleZone.getLight()  + " lux");
+        luxValue.setText(_baseViewModel.MiddleZone.getIr()  + " lux");
         updateLuxValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
     }
 

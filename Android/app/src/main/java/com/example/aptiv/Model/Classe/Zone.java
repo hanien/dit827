@@ -1,5 +1,7 @@
 package com.example.aptiv.Model.Classe;
 
+import static java.lang.Float.parseFloat;
+
 public class Zone {
     public String temperature;
     private String humidity;
@@ -35,7 +37,8 @@ public class Zone {
     }
 
     public String getHumidity() {
-        return humidity;
+        String hum = String.format("%.2f", parseFloat(humidity));
+        return hum;
     }
 
     public void setHumidity(String humidity) {
@@ -67,7 +70,8 @@ public class Zone {
     }
 
     public String getIr() {
-        return ir;
+        String infra = String.format("%.2f", parseFloat(ir));
+        return infra;
     }
 
     public void setIr(String ir) {

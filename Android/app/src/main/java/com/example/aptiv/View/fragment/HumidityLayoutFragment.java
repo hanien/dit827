@@ -119,7 +119,7 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
             HumidityChangeValue.setText(_baseViewModel.MiddleZone.getHumidity() +  " %");
         }
         else {
-            HumidityValue.setText(String.valueOf((int)hum) + " %");
+            HumidityValue.setText(_baseViewModel.MiddleZone.getHumidity() +  " %");
             HumidityChangeValue.setText(String.valueOf((int)hum) + " %");
 
         }
