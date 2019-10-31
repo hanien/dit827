@@ -85,7 +85,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         _soundTextView.setText(_baseViewModel.MiddleZone.getSound());
         _airPressurTextView.setText(_baseViewModel.MiddleZone.getPressure());
         _humidityTextView.setText(_baseViewModel.MiddleZone.getHumidity());
-        _luxTextView.setText(_baseViewModel.MiddleZone.getLight());
+        _luxTextView.setText(_baseViewModel.MiddleZone.getIr());
         _fullTextView.setText(_baseViewModel.MiddleZone.getFull());
         _inTempTextView.setText(_baseViewModel.MiddleZone.getTemperature() + " C");
         _outTempTextView.setText(String.valueOf(_baseViewModel.OutTempreture) + " C");

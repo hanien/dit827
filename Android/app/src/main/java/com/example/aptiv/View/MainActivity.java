@@ -67,4 +67,11 @@ public class MainActivity extends AppCompatActivity  {
         _dashboardFragment.OpenAPFragment();
     }
 
+    public void OpenHumidityFragment(View v) {
+        _dashboardFragment.OpenHumidityFragment();
+    }
+
+    public void OpenLuxFragment(View v) {
+        _dashboardFragment.OpenLuxFragment();
+    }
 }
