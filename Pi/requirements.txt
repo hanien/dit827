@@ -2,10 +2,10 @@ pytest
 board
 
 
-time
-adafruit_bme280
-python_tsl2591
-RPi.GPIO
 requests
 json
 threading
+adafruit_bme280
+python_tsl2591
+RPi.GPIO
+time
