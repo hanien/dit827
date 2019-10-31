@@ -1,11 +1,11 @@
 pytest
 board
-
-
-requests
-json
-threading
+digitalio 
+busio 
+time
 adafruit_bme280
 python_tsl2591
 RPi.GPIO
-time
+requests
+json
+threading

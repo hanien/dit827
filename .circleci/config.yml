@@ -20,10 +20,11 @@ jobs:
           command: | #Add all requirements for python code here.
             cd Pi
             pip install --upgrade pip
-            pipenv install -r requirements.txt
-            #pipenv install pytest
-            #pipenv install board
-            #pipenv install digitalio
+            pipenv sync
+            #pipenv install -r requirements.txt
+            pipenv install pytest
+            pipenv install board
+            pip3 install adafruit-circuitpython-lis3dh
             
         # Here the dependencies are saved in a cache.
       - save_cache:
