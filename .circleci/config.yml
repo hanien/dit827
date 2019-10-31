@@ -24,8 +24,9 @@ jobs:
             #pipenv install -r requirements.txt
             pipenv install pytest
             pipenv install board
-            pip3 install adafruit-circuitpython-lis3dh
-            
+            #pip3 install adafruit-circuitpython-lis3dh
+            pipenv install adafruit-circuitpython-lis3dh
+
         # Here the dependencies are saved in a cache.
       - save_cache:
           key: raspberry-{{ .Branch }}-{{ checksum "Pi/Pipfile.lock" }}
