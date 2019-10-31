@@ -20,12 +20,18 @@ public class BaseViewModel implements IVolleyCollback {
     public Zone BackseatZone = new Zone("0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
     public Zone MiddleZone = new Zone("0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
     public Double OutTempreture = 0.0;
+    public Boolean tempType; //True here means that it is Fahrenheit
+    private String fahrenheit;
+    private String celsius;
 
     public BaseViewModel(MainActivity activity){
         _activity = activity;
 
         _aptivService = new AptivService(_activity);
         _weatherService = new WeatherService(_activity);
+        fahrenheit = "° F";
+        celsius = "° C";
+        tempType = false;
         _weatherService.GetWeather(this);
 
         UpdateData();
@@ -62,4 +68,17 @@ public class BaseViewModel implements IVolleyCollback {
     public void GetBackseatReadings(Zone value) {
         BackseatZone = value;
     }
+
+    public String getFahrenheit(){
+        return fahrenheit;
+    }
+
+    public Boolean getTempType(){
+        return tempType;
+    }
+    public String getCelsius(){
+        return celsius;
+    }
+
+
 }

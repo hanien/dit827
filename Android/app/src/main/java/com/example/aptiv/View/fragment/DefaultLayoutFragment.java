@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -87,8 +88,14 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         _humidityTextView.setText(_baseViewModel.MiddleZone.getHumidity());
         _luxTextView.setText(_baseViewModel.MiddleZone.getIr());
         _fullTextView.setText(_baseViewModel.MiddleZone.getFull());
-        _inTempTextView.setText(_baseViewModel.MiddleZone.getTemperature() + " C");
-        _outTempTextView.setText(String.valueOf(_baseViewModel.OutTempreture) + " C");
+
+        double temp = Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
+        String tempType = (_baseViewModel.getTempType()) ? _baseViewModel.getFahrenheit() : _baseViewModel.getCelsius();
+        temp = (_baseViewModel.getTempType()) ? ((1.8*temp))+32 : temp;
+
+        _inTempTextView.setText(temp + tempType);
+        _outTempTextView.setText(temp + tempType);
+
         _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitiude());
     }
 
@@ -99,6 +106,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
             case R.id.soundImageView:
                 _owner._dashboardFragment.OpenVolumeFragment();
                 break;
+
             case R.id.VolumeCard:
                 break;
         }

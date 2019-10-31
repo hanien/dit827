@@ -130,6 +130,21 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/SwitchContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical">
+
+                    <Switch
+                        android:id="@+id/TempTypeSwitch"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Change Temperature Scale"
+                        android:textColor="@color/CardViewTextColor" />
+                </LinearLayout>
+
             </androidx.cardview.widget.CardView>
 
 
