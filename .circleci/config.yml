@@ -20,9 +20,10 @@ jobs:
           command: | #Add all requirements for python code here.
             cd Pi
             pip install --upgrade pip
-            pip install -r requirements.txt
-            #pipenv install pytest
-            #pipenv install board
+            #pip install -r requirements.txt
+            pipenv install pytest
+            pipenv install board
+            pipenv install digitalio
             
         # Here the dependencies are saved in a cache.
       - save_cache:
