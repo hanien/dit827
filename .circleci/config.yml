@@ -19,9 +19,8 @@ jobs:
       - run: 
           command: | #Add all requirements for python code here.
             cd Pi
-            sudo pip install pipenv
+            pip install --upgrade pip
             pip install -r requirements.txt
-            
             #pipenv install pytest
             #pipenv install board
             
