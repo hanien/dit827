@@ -20,8 +20,11 @@ jobs:
           command: | #Add all requirements for python code here.
             cd Pi
             sudo pip install pipenv
-            pipenv install pytest
-            pipenv install board
+            pip install -r requirements.txt
+            
+            #pipenv install pytest
+            #pipenv install board
+            
         # Here the dependencies are saved in a cache.
       - save_cache:
           key: raspberry-{{ .Branch }}-{{ checksum "Pi/Pipfile.lock" }}
