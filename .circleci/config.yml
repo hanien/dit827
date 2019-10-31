@@ -24,8 +24,13 @@ jobs:
             #pipenv install -r requirements.txt
             pipenv install pytest
             pipenv install board
-            #pip3 install adafruit-circuitpython-lis3dh
             pipenv install adafruit-circuitpython-lis3dh
+            ls
+
+      #- run: #This command makes the raspberry stuff work in our VM
+          #command: |
+            #cd .venv/lib/python3.6/site-packages
+            #sed 's/# board_id =/autologin=ubuntu/' board.py
 
         # Here the dependencies are saved in a cache.
       - save_cache:
