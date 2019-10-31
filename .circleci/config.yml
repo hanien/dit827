@@ -26,8 +26,8 @@ jobs:
             pipenv install board
             pipenv install adafruit-circuitpython-lis3dh
 
-      #- run: #This command makes the raspberry stuff work in our VM
-          #command: |
+      - run: #This command makes the raspberry stuff work in our VM
+          command: |
             cd pi/.venv/lib/python3.6/site-packages
             sed 's/#raise NotImplementedError("Board not supported {}".format(board_id))/from adafruit_blinka.board.raspi_40pin import *' board.py
 
