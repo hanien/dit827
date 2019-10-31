@@ -1,6 +1,6 @@
 pytest
 board
-
+digitalio
 busio
 time
 adafruit_bme280
