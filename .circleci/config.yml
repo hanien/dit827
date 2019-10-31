@@ -29,7 +29,8 @@ jobs:
       - run: #This command makes the raspberry stuff work in our VM
           command: |
             cd Pi/.venv/lib/python3.6/site-packages
-            sed "107s/.*/\ \ from adafruit_blinka.board.raspi_40pin\ import\ \*" board.py
+            #sed "107s/.*/from adafruit_blinka.board.raspi_40pin import *" board.py
+            sed "107s/.*/fromadafruit_blinka.board.raspi_40pin\import" board.py
 
         # Here the dependencies are saved in a cache.
       - save_cache:
