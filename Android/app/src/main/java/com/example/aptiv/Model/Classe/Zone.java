@@ -1,5 +1,7 @@
 package com.example.aptiv.Model.Classe;
 
+import static java.lang.Float.parseFloat;
+
 public class Zone {
     public String temperature;
     private String humidity;
@@ -9,11 +11,12 @@ public class Zone {
     private String ir;
     private String pressure;
     private String sound;
-    private String altitiude;
+    private String altitude;
     private String light;
+    private String lux;
 
     public Zone(String temperature, String humidity, String gain, String luminosity, String full, String ir,
-                String pressure , String sound, String altitiude, String lightt){
+                String pressure , String sound, String altitude, String light,String lux){
         this.temperature = temperature;
         this.humidity = humidity;
         this.gain = gain;
@@ -22,9 +25,9 @@ public class Zone {
         this.ir = ir;
         this.pressure = pressure;
         this.sound = sound;
-        this.altitiude = altitiude;
-        this.light = lightt;
-
+        this.altitude = altitude;
+        this.light = light;
+        this.lux = lux;
     }
     public String getTemperature() {
         return temperature;
@@ -35,7 +38,8 @@ public class Zone {
     }
 
     public String getHumidity() {
-        return humidity;
+        String hum = String.format("%.2f", parseFloat(humidity));
+        return hum;
     }
 
     public void setHumidity(String humidity) {
@@ -67,7 +71,8 @@ public class Zone {
     }
 
     public String getIr() {
-        return ir;
+        String infra = String.format("%.2f", parseFloat(ir));
+        return infra;
     }
 
     public void setIr(String ir) {
@@ -91,15 +96,15 @@ public class Zone {
     }
 
     public String getAltitiude() {
-        return altitiude;
+        return altitude;
     }
 
     public void setAltitiude(String altitiude) {
-        this.altitiude = altitiude;
+        this.altitude = altitiude;
     }
 
     public String getLight() {
-        return light;
+        return lux;
     }
 
     public void setLight(String light) {

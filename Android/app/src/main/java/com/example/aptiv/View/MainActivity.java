@@ -1,5 +1,7 @@
 package com.example.aptiv.View;
-
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCenter.start(getApplication(), "98489794-5ff9-4db1-bc55-a9d9fbea5220",
+                Analytics.class, Crashes.class);
         setContentView(R.layout.activity_main);
         _viewModel = new BaseViewModel(this);
         ViewPager viewPager = findViewById(R.id.viewPager);
@@ -63,4 +67,11 @@ public class MainActivity extends AppCompatActivity  {
         _dashboardFragment.OpenAPFragment();
     }
 
+    public void OpenHumidityFragment(View v) {
+        _dashboardFragment.OpenHumidityFragment();
+    }
+
+    public void OpenLuxFragment(View v) {
+        _dashboardFragment.OpenLuxFragment();
+    }
 }
