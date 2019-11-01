@@ -27,7 +27,7 @@ jobs:
             pipenv install requests
             pipenv install RPi.GPIO
             pipenv install python-tsl2591
-            pipenv install Adafruit-BME280
+            pipenv install adafruit-bme280
 
       - run: #This command makes the raspberry stuff work in our VM
           command: |
