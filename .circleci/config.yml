@@ -28,7 +28,7 @@ jobs:
 
       - run: #This command makes the raspberry stuff work in our VM
           command: |
-            sed "s/raise NotImplementedError("Board not supported {}".format(board_id))/from adafruit_blinka.board.raspi_40pin import */g" Pi/.venv/lib/python3.6/site-packages/board.py
+            sed 's/raise NotImplementedError("Board not supported {}".format(board_id))/from adafruit_blinka.board.raspi_40pin import */g' Pi/.venv/lib/python3.6/site-packages/board.py
 
         # Here the dependencies are saved in a cache.
       - save_cache:
