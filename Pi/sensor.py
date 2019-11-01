@@ -1,10 +1,10 @@
-import board #depends on rpi.gpio and says there is not Rpi module
+#import board #depends on rpi.gpio and says there is not Rpi module
 import digitalio
 import busio
 import time
-import adafruit_bme280 as bme280 #No module for this
-import python_tsl2591 as tsl2591 #No module for this
-import RPi.GPIO as GPIO #No module for this
+import adafruit_bme280 as bme280 
+import python_tsl2591 as tsl2591 
+#import RPi.GPIO as GPIO #Can only be run on a raspberry pi
 import requests
 import json
 import threading
@@ -61,22 +61,23 @@ def average_and_send():
     
     
 ## SETUP
-i2c = busio.I2C(board.SCL, board.SDA)
 
-tsl2591_sensor = tsl2591.tsl2591()
-bme280_sensor = bme280.Adafruit_BME280_I2C(i2c)
-bme280_sensor.sea_level_pressure = 1013.7
+#i2c = busio.I2C(board.SCL, board.SDA)
 
-average_and_send()
-while True:
-    (full, ir) = tsl2591_sensor.get_full_luminosity() #full and ir spectrum
-    lux = tsl2591_sensor.calculate_lux(full, ir)
-    full_total += full
-    ir_total += ir
-    lux_total += lux
-    gain_total += tsl2591_sensor.get_current()["gain"]
-    temperature_total += bme280_sensor.temperature
-    humidity_total += bme280_sensor.humidity
-    pressure_total += bme280_sensor.pressure
-    altitude_total += bme280_sensor.altitude
-    counter+=1
+#tsl2591_sensor = tsl2591.tsl2591()
+#bme280_sensor = bme280.Adafruit_BME280_I2C(i2c)
+#bme280_sensor.sea_level_pressure = 1013.7
+
+#average_and_send()
+#while True:
+ #   (full, ir) = tsl2591_sensor.get_full_luminosity() #full and ir spectrum
+ #   lux = tsl2591_sensor.calculate_lux(full, ir)
+ #   full_total += full
+#    ir_total += ir
+#    lux_total += lux
+#    gain_total += tsl2591_sensor.get_current()["gain"]
+#    temperature_total += bme280_sensor.temperature
+ #   humidity_total += bme280_sensor.humidity
+#    pressure_total += bme280_sensor.pressure
+ #   altitude_total += bme280_sensor.altitude
+#    counter+=1
