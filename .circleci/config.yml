@@ -24,7 +24,7 @@ jobs:
             pipenv install pytest
             pipenv install board
             pipenv install adafruit-circuitpython-lis3dh
-            pipenv install json
+            #pipenv install json
             pipenv install requests
             pipenv install threading
 
