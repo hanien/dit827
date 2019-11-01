@@ -31,7 +31,7 @@ jobs:
             cd Pi/.venv/lib/python3.6/site-packages
             #sed "107s/.*/from adafruit_blinka.board.raspi_40pin import *" board.py
             #sed -i "s/detector.board.any_raspberry_pi_40_pin/True" board.py
-            sed -i s/detector/True board.py
+            #sed -i "s/detector.board.any_raspberry_pi_40_pin/True" board.py
 
         # Here the dependencies are saved in a cache.
       - save_cache:
