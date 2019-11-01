@@ -3,12 +3,8 @@ package com.example.aptiv.View.fragment;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -54,7 +50,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
 
     private void SetupComponents() {
         _soundTextView = _view.findViewById(R.id.soundTextView);
-        _volumeCard = _view.findViewById(R.id.VolumeCard);
+        _volumeCard = _view.findViewById(R.id.CardViewVolume);
         _airPressurTextView = _view.findViewById(R.id.airPressurTextView);
         _humidityTextView = _view.findViewById(R.id.HumidityTextView);
         _luxTextView = _view.findViewById(R.id.lightTextView);
@@ -107,7 +103,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
                 _owner._dashboardFragment.OpenVolumeFragment();
                 break;
 
-            case R.id.VolumeCard:
+            case R.id.CardViewVolume:
                 break;
         }
 
