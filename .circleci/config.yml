@@ -19,7 +19,7 @@ jobs:
       - run: 
           command: | #Add all requirements for python code here.
             cd Pi
-            pip install --upgrade pip
+            #pip install --upgrade pip
             pipenv sync
             pipenv install pytest
             pipenv install board
