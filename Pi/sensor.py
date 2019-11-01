@@ -1,10 +1,10 @@
-#import board #depends on rpi.gpio and says there is not Rpi module
+import board #depends on rpi.gpio and says there is not Rpi module
 import digitalio
 import busio
 import time
 import adafruit_bme280 as bme280 
 import python_tsl2591 as tsl2591 
-#import RPi.GPIO as GPIO #Can only be run on a raspberry pi
+import RPi.GPIO as GPIO #Can only be run on a raspberry pi
 import requests
 import json
 import threading
@@ -70,14 +70,14 @@ def average_and_send():
 
 #average_and_send()
 #while True:
- #   (full, ir) = tsl2591_sensor.get_full_luminosity() #full and ir spectrum
- #   lux = tsl2591_sensor.calculate_lux(full, ir)
- #   full_total += full
+#    (full, ir) = tsl2591_sensor.get_full_luminosity() #full and ir spectrum
+#    lux = tsl2591_sensor.calculate_lux(full, ir)
+#    full_total += full
 #    ir_total += ir
 #    lux_total += lux
 #    gain_total += tsl2591_sensor.get_current()["gain"]
 #    temperature_total += bme280_sensor.temperature
- #   humidity_total += bme280_sensor.humidity
+#    humidity_total += bme280_sensor.humidity
 #    pressure_total += bme280_sensor.pressure
- #   altitude_total += bme280_sensor.altitude
+#    altitude_total += bme280_sensor.altitude
 #    counter+=1
