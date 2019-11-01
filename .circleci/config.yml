@@ -30,7 +30,7 @@ jobs:
           command: |
             cd Pi/.venv/lib/python3.6/site-packages
             #sed "107s/.*/from adafruit_blinka.board.raspi_40pin import *" board.py
-            sed -i '107s/.*/fromadafruit_blinka.board.raspi_40pinimport' board.py
+            sed 's/detector.board.any_raspberry_pi_40_pin/True' board.py
 
         # Here the dependencies are saved in a cache.
       - save_cache:
