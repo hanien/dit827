@@ -21,7 +21,6 @@ jobs:
             cd Pi
             pip install --upgrade pip
             pipenv sync
-            #pipenv install -r requirements.txt
             pipenv install pytest
             pipenv install board
             pipenv install adafruit-circuitpython-lis3dh
