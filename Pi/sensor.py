@@ -4,7 +4,7 @@ import busio
 import time
 import adafruit_bme280 as bme280
 import python_tsl2591 as tsl2591
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import requests
 import json
 import threading
