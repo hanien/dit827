@@ -24,9 +24,9 @@ jobs:
             pipenv install pytest
             pipenv install board
             pipenv install adafruit-circuitpython-lis3dh
-            #pipenv install json
             pipenv install requests
-            pipenv install threading
+            #pipenv install json
+            #pipenv install threading
 
       - run: #This command makes the raspberry stuff work in our VM
           command: |
