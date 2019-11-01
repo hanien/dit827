@@ -25,8 +25,9 @@ jobs:
             pipenv install board
             pipenv install adafruit-circuitpython-lis3dh
             pipenv install requests
-            #pipenv install json
-            #pipenv install threading
+            pipenv install RPi.GPIO
+            pipenv install python-tsl2591
+            pipenv install Adafruit-BME280
 
       - run: #This command makes the raspberry stuff work in our VM
           command: |

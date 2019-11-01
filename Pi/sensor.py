@@ -1,10 +1,10 @@
-#import board #depends on rpi.gpio and says there is not Rpi module
+import board #depends on rpi.gpio and says there is not Rpi module
 import digitalio
 import busio
 import time
-#import adafruit_bme280 as bme280 #No module for this
-#import python_tsl2591 as tsl2591 #No module for this
-#import RPi.GPIO as GPIO #No module for this
+import adafruit_bme280 as bme280 #No module for this
+import python_tsl2591 as tsl2591 #No module for this
+import RPi.GPIO as GPIO #No module for this
 import requests
 import json
 import threading
