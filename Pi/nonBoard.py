@@ -12,6 +12,7 @@ gain_total = 0
 lux_total = 0
 ir_total = 0
 full_total = 0
+seat = "back"
 
 
 def reset():
@@ -34,6 +35,7 @@ def reset():
     ir_total = 0
     full_total = 0
 
+
 def average_and_send():
     threading.Timer(4.0, average_and_send).start()
     
@@ -48,7 +50,7 @@ def average_and_send():
     "ir": str(ir_total/counter),
     "full": str(full_total/counter)
     }
-    r = requests.put("http://dit827aptiv.herokuapp.com/api/sensors/back", data=json.dumps(req))
+    r = requests.put("http://dit827aptiv.herokuapp.com/api/sensors/"+ seat, data=json.dumps(req))
     #r = requests.put("http://127.0.0.1:5000/api/sensors/driver", data=json.dumps(req))
     print(r.status_code)
     print(r.content)
