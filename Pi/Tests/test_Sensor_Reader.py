@@ -3,6 +3,7 @@ import requests
 from unittest import mock
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
 import nonBoard
+import json
 
 seat = "test"
 
@@ -28,7 +29,7 @@ def test_sendingData():
     nonBoard.seat = seat
     test_not_over = True
 
-    
+
 
 
 
