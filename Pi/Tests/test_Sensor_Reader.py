@@ -1,7 +1,7 @@
 import sys, os, pytest
 from unittest import mock
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
-import sensor
+import nonBoard
 
 
 def test_get_Light():
@@ -26,4 +26,5 @@ def test_get_Air_Pressure():
     assert 1==1
 
 def test_calling_Sensor():
-    assert sensor.temperature_total == 1
+    nonBoard.temperature_total = 1
+    assert nonBoard.temperature_total == 1
