@@ -18,7 +18,7 @@ def test_resetTestDatabase():
     "ir": "0",
     "full": "0"
     }
-    r = requests.put("http://dit827aptiv.herokuapp.com/api/sensors/"+ seat, data=json.dumps(req))
+    r = requests.post("http://dit827aptiv.herokuapp.com/api/sensors/"+ seat, data=json.dumps(req))
 
 
 def test_nonBoard_Stores_data():
