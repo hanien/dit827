@@ -40,22 +40,20 @@ def reset():
     full_total = 0
 
 def average_and_send():
-    threading.Timer(4.0, average_and_send).start()
+    threading.Timer(10.0, average_and_send).start()
     
     ## Assign request data
     req = {
-    "temperature": str(temperature_total/counter),
-    "humidity": str(humidity_total/counter),
-    "pressure": str(pressure_total/counter),
-    "altitude": str(altitude_total/counter),
-    "gain": str(gain_total/counter),
-    "lux": str(lux_total/counter),
-    "ir": str(ir_total/counter),
-    "full": str(full_total/counter)
+    "temperature": str(round(temperature_total/counter, 1)),
+    "humidity": str(round(humidity_total/counter, 1)),
+    "pressure": str(round(pressure_total/counter, 1)),
+    "altitude": str(round(altitude_total/counter, 1)),
+    "gain": str(round(gain_total/counter, 1)),
+    "lux": str(round(lux_total/counter, 1)),
+    "ir": str(round(ir_total/counter, 1)),
+    "full": str(round(full_total/counter, 1))
     }
     r = requests.put("http://dit827aptiv.herokuapp.com/api/sensors/back", data=json.dumps(req))
-    #r = requests.put("http://127.0.0.1:5000/api/sensors/driver", data=json.dumps(req))
-    print(r.status_code)
     print(r.content)
     reset()
     
@@ -80,3 +78,4 @@ while True:
     pressure_total += bme280_sensor.pressure
     altitude_total += bme280_sensor.altitude
     counter+=1
+
