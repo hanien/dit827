@@ -29,13 +29,13 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest2 {
+public class TestingAllFragments {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void mainActivityTest2() {
+    public void testingAllFragments() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
@@ -57,11 +57,12 @@ public class MainActivityTest2 {
         linearLayout.perform(click());
 
         ViewInteraction appCompatImageView = onView(
-                allOf(withId(R.id.cancel),
+                allOf(withId(R.id.cancelButton),
                         childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
+                                allOf(withId(R.id.Temperature),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.LinearLayout")),
+                                                0)),
                                 0),
                         isDisplayed()));
         appCompatImageView.perform(click());
@@ -77,9 +78,9 @@ public class MainActivityTest2 {
         cardView.perform(click());
 
         ViewInteraction appCompatImageView2 = onView(
-                allOf(withId(R.id.cancel),
+                allOf(withId(R.id.cancelButton),
                         childAtPosition(
-                                allOf(withId(R.id.AirPressure),
+                                allOf(withId(R.id.Temperature),
                                         childAtPosition(
                                                 withClassName(is("android.widget.LinearLayout")),
                                                 0)),
@@ -98,15 +99,57 @@ public class MainActivityTest2 {
         cardView2.perform(click());
 
         ViewInteraction appCompatImageView3 = onView(
-                allOf(withId(R.id.cancel),
+                allOf(withId(R.id.cancelButton),
                         childAtPosition(
-                                allOf(withId(R.id.Humidity),
+                                allOf(withId(R.id.Temperature),
                                         childAtPosition(
                                                 withClassName(is("android.widget.LinearLayout")),
                                                 0)),
                                 0),
                         isDisplayed()));
         appCompatImageView3.perform(click());
+
+        ViewInteraction linearLayout2 = onView(
+                allOf(withId(R.id.LinearLayoutTemp),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        1),
+                                0),
+                        isDisplayed()));
+        linearLayout2.perform(click());
+
+        ViewInteraction appCompatImageView4 = onView(
+                allOf(withId(R.id.cancelButton),
+                        childAtPosition(
+                                allOf(withId(R.id.Temperature),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.LinearLayout")),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        appCompatImageView4.perform(click());
+
+        ViewInteraction cardView3 = onView(
+                allOf(withId(R.id.CardViewLux),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("androidx.cardview.widget.CardView")),
+                                        0),
+                                0),
+                        isDisplayed()));
+        cardView3.perform(click());
+
+        ViewInteraction appCompatImageView5 = onView(
+                allOf(withId(R.id.cancelButton),
+                        childAtPosition(
+                                allOf(withId(R.id.Temperature),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.LinearLayout")),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        appCompatImageView5.perform(click());
     }
 
     private static Matcher<View> childAtPosition(

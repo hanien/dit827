@@ -347,7 +347,7 @@
                     android:layout_marginRight="@dimen/default_margin_cardview"
                     android:layout_marginBottom="@dimen/default_margin_cardview"
                     android:layout_weight="1"
-                    android:clickable="false"
+                    android:clickable="true"
                     android:minHeight="40dp"
                     android:onClick="OpenVolumeFragment"
                     card_view:cardBackgroundColor="@color/CardViewColor"
@@ -360,7 +360,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:clickable="true"
+                        android:clickable="false"
                         android:gravity="center"
                         android:onClick="OpenVolumeFragment"
                         android:orientation="vertical"
@@ -423,7 +423,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="center"
-                            card_view:srcCompat="@drawable/air_pressure" />
+                            card_view:srcCompat="@drawable/ap"/>
 
                         <TextView
                             android:id="@+id/airPressurTextView"

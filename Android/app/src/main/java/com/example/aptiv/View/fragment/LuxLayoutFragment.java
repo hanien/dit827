@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,7 +24,8 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
     private DashboardFragment _parentFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
-
+    private ImageView Image;
+    private TextView Label;
     private TextView SetText;
     private TextView luxValue;
     private TextView luxChangeValue;
@@ -40,7 +42,7 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        _view = inflater.inflate(R.layout.fragment_luxlayout, container, false);
+        _view = inflater.inflate(R.layout.fragment_templayout, container, false);
 
         setUpView();
         setUpElements();
@@ -52,18 +54,18 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
 
     private void setUpView() {
         SetText = _view.findViewById(R.id.SelectZoneTextView);
-        luxChangeValue = _view.findViewById(R.id.luxChangeValue);
-        luxValue = _view.findViewById(R.id.luxValue);
-        SetLuxLayout = _view.findViewById(R.id.SetLuxLayout);
-
+        luxChangeValue = _view.findViewById(R.id.tempChangeValue);
+        luxValue = _view.findViewById(R.id.tempValue);
+        SetLuxLayout = _view.findViewById(R.id.SetTempLayout);
+        Image = _view.findViewById(R.id.TempImage);
+        Label = _view.findViewById(R.id.tempLabel);
     }
 
     private void setUpElements(){
-
+        Label.setText("Current lux");
+        Image.setImageResource(R.drawable.light);
         luxValue.setText(_baseViewModel.MiddleZone.getIr() + " lux");
-
     }
-
 
     @Override
     public void zoneIsSelected() {
