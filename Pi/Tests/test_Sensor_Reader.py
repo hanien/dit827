@@ -51,7 +51,7 @@ def test_sendingData(monkeypatch):
         nonBoard.pressure_total += 30
         nonBoard.altitude_total += 30
         nonBoard.counter += 1
-        time.sleep(0.5) #This is around the rate at which the values are updated in the board file
+        #time.sleep(0.5) #This is around the rate at which the values are updated in the board file
 
     r = requests.get("http:(//dit827aptiv.herokuapp.com/api/sensors/"+ seat)
 
