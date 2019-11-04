@@ -41,7 +41,11 @@ def test_sendingData(monkeypatch):
 
     #The test should fail if any the values on the website are not 30
 
+    loopcount = 0
     while(test_not_over):
+        if(loopcount > 40):
+            assert(False)
+
         nonBoard.full_total += 30
         nonBoard.ir_total += 30
         nonBoard.lux_total += 30
@@ -51,8 +55,9 @@ def test_sendingData(monkeypatch):
         nonBoard.pressure_total += 30
         nonBoard.altitude_total += 30
         nonBoard.counter += 1
+        loopcount+= 1
         print(nonBoard.counter)
-        #time.sleep(0.5) #This is around the rate at which the values are updated in the board file
+        time.sleep(0.5) #This is around the rate at which the values are updated in the board file
 
     r = requests.get("http:(//dit827aptiv.herokuapp.com/api/sensors/"+ seat)
 
