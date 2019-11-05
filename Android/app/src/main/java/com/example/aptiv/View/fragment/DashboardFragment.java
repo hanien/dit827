@@ -31,6 +31,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     private AirpLayoutFragment AirpLayoutFragment;
     private HumidityLayoutFragment HumidityLayoutFragment;
     private LuxLayoutFragment LuxLayoutFragment;
+    private SettingsLayoutFragment SettingsLayoutFragment;
     private IZoneSelection _callback;
     private ImageView _carMaskView;
     private ImageView _frontSeat;
@@ -120,6 +121,15 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         LuxLayoutFragment = new LuxLayoutFragment(this,_owner,_baseViewModel);
         fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard,LuxLayoutFragment).commit();
         _callback = LuxLayoutFragment;
+    }
+
+    //Open settings fragment
+    public void OpenSettingsFragment() {
+        FragmentManager fm1 = getFragmentManager();
+        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
+        SettingsLayoutFragment = new SettingsLayoutFragment(this,_owner,_baseViewModel);
+        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard,SettingsLayoutFragment).commit();
+        _callback = SettingsLayoutFragment;
     }
 
     //onTouch event that is connected to the car image to read which seat is seleted
