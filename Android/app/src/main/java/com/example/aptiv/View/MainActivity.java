@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     //TODO: those should be moved to fragment, for now keep it here ,there is a bug i cant figure it out
-    public void CloseVolumeFragment(View v){
+    public void CloseFragment(View v){
         _dashboardFragment.SetupCarLayoutFragment();
     }
 
