@@ -74,4 +74,8 @@ public class MainActivity extends AppCompatActivity  {
     public void OpenLuxFragment(View v) {
         _dashboardFragment.OpenLuxFragment();
     }
+
+    public void OpenSettingsFragment(View v) {
+        _dashboardFragment.OpenSettingsFragment();
+    }
 }

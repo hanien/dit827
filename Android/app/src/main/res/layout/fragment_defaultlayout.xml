@@ -128,8 +128,7 @@
                     android:layout_marginBottom="@dimen/default_margin_cardview"
                     android:layout_weight="1"
                     android:minHeight="40dp"
-                    card_view:cardBackgroundColor="@color/CardViewColor"
-                    card_view:cardCornerRadius="@dimen/cardview_corner_radius"
+                    android:onClick="OpenSettingsFragment"
                     card_view:cardUseCompatPadding="true">
 
                     <LinearLayout
@@ -142,22 +141,22 @@
                         android:weightSum="2">
 
                         <ImageView
-                            android:id="@+id/fullImageView"
+                            android:id="@+id/settingsImageView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="center"
-                            card_view:srcCompat="@drawable/rainbow" />
+                            card_view:srcCompat="@drawable/settings" />
 
                         <TextView
-                            android:id="@+id/fullTextView"
+                            android:id="@+id/settingsTextView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="700"
+                            android:text="Settings"
                             android:textColor="@color/CardViewTextColor"
                             android:textSize="40dp"></TextView>
 

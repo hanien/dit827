@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/Settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/default_margin_cardview"
+        android:layout_marginTop="@dimen/default_margin_cardview"
+        android:layout_marginRight="@dimen/default_margin_cardview"
+        android:layout_marginBottom="@dimen/default_margin_cardview"
+        card_view:cardBackgroundColor="@color/CardViewColor"
+        card_view:cardCornerRadius="@dimen/cardview_corner_radius"
+        card_view:cardUseCompatPadding="true">
+
+
+        <ImageView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="0dp"
+            android:clickable="true"
+            android:onClick="CloseVolumeFragment"
+            card_view:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/settingsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Settings"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/CardViewTextColor"
+                android:textStyle="italic"
+                android:textSize="40dp" />
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/default_margin_cardview"
+                android:layout_marginTop="@dimen/default_margin_cardview"
+                android:layout_marginRight="@dimen/default_margin_cardview"
+                android:layout_marginBottom="@dimen/default_margin_cardview"
+                card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
+                card_view:cardBackgroundColor = "@color/CardViewColor"
+                card_view:cardUseCompatPadding="true">
+
+                <TextView
+                    android:id="@+id/SelectZoneTextView"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/CardViewTextColor"
+                    android:text="Please click on specific zone to change value in it"
+                    android:textSize="25dp"
+                    android:visibility="gone"/>
+
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

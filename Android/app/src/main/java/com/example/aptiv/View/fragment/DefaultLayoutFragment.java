@@ -23,7 +23,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
     private TextView _airPressurTextView;
     private TextView _humidityTextView;
     private TextView _luxTextView;
-    private TextView _fullTextView;
+    private TextView _settingsTextView;
     private TextView _inTempTextView;
     private TextView _outTempTextView;
     private TextView _altitudeTextView;
@@ -54,7 +54,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         _airPressurTextView = _view.findViewById(R.id.airPressurTextView);
         _humidityTextView = _view.findViewById(R.id.HumidityTextView);
         _luxTextView = _view.findViewById(R.id.lightTextView);
-        _fullTextView = _view.findViewById(R.id.fullTextView);
+        _settingsTextView = _view.findViewById(R.id.settingsTextView);
         _inTempTextView = _view.findViewById(R.id.InTempTextView);
         _outTempTextView = _view.findViewById(R.id.OutTempTextView);
         _altitudeTextView = _view.findViewById(R.id.altitudeTextView);
@@ -87,6 +87,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitiude());
         SetTempreture();
     }
+
 
     private void SetTempreture(){
         double temp = Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
