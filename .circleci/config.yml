@@ -38,7 +38,7 @@ jobs:
       - save_cache:
           key: raspberry-{{ .Branch }}-{{ checksum "Pi/Pipfile.lock" }}
           paths:
-            - ".venv"
+            - "Pi/.venv"
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
           #Here the tests are run.

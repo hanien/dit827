@@ -15,6 +15,7 @@ full_total = 0
 seat = "back"
 
 
+
 def reset():
     global counter
     global temperature_total
@@ -35,9 +36,14 @@ def reset():
     ir_total = 0
     full_total = 0
 
+sendThread = threading.Timer(10000.0, reset)
+
+
 
 def average_and_send():
-    threading.Timer(4.0, average_and_send).start()
+    global sendThread
+    sendThread = threading.Timer(4.0, average_and_send)
+    sendThread.start()
     
     ## Assign request data
     req = {
@@ -45,13 +51,18 @@ def average_and_send():
     "humidity": str(humidity_total/counter),
     "pressure": str(pressure_total/counter),
     "altitude": str(altitude_total/counter),
-    "gain": str(gain_total/counter),
+    "sound": str(gain_total/counter),
     "lux": str(lux_total/counter),
     "ir": str(ir_total/counter),
     "full": str(full_total/counter)
     }
     r = requests.put("http://dit827aptiv.herokuapp.com/api/sensors/"+ seat, data=json.dumps(req))
     #r = requests.put("http://127.0.0.1:5000/api/sensors/driver", data=json.dumps(req))
-    print(r.status_code)
-    print(r.content)
+    #print(r.status_code)
+    #print(r.content)
     reset()
+
+
+def endThread():
+    print("Endthread has been called")
+    sendThread.cancel()
