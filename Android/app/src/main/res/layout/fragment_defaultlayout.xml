@@ -119,16 +119,17 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/CardViewFull"
+                    android:layout_weight="1"
                     android:layout_width="match_parent"
+                    android:minHeight="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/default_margin_cardview"
                     android:layout_marginTop="@dimen/default_margin_cardview"
                     android:layout_marginRight="@dimen/default_margin_cardview"
                     android:layout_marginBottom="@dimen/default_margin_cardview"
-                    android:layout_weight="1"
-                    android:minHeight="40dp"
-                    android:onClick="OpenSettingsFragment"
+                    card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
+                    card_view:cardBackgroundColor = "@color/CardViewColor"
                     card_view:cardUseCompatPadding="true">
 
                     <LinearLayout
@@ -158,7 +159,7 @@
                             android:gravity="center"
                             android:text="Settings"
                             android:textColor="@color/CardViewTextColor"
-                            android:textSize="40dp"></TextView>
+                            android:textSize="30dp"></TextView>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

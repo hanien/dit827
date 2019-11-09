@@ -2,7 +2,8 @@ package com.example.aptiv.Model.Classe;
 
 import static java.lang.Float.parseFloat;
 
-public class Zone {
+public class Profile {
+    private String ProfileName;
     private String temperature;
     private String humidity;
     private String gain;
@@ -15,8 +16,10 @@ public class Zone {
     private String light;
     private String lux;
 
-    public Zone(String temperature, String humidity, String gain, String luminosity, String full, String ir,
-                String pressure , String sound, String altitude, String light,String lux){
+
+    public Profile (String ProfileName,String temperature, String humidity, String gain, String luminosity, String full, String ir,
+                    String pressure , String sound, String altitude, String light,String lux){
+        this.ProfileName = ProfileName;
         this.temperature = temperature;
         this.humidity = humidity;
         this.gain = gain;
@@ -29,6 +32,7 @@ public class Zone {
         this.light = light;
         this.lux = lux;
     }
+
     public String getTemperature() {
         return temperature;
     }

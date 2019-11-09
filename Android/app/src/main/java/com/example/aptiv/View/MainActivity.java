@@ -1,4 +1,5 @@
 package com.example.aptiv.View;
+import com.example.aptiv.ViewModel.DashboardViewModel;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
@@ -20,7 +21,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity  {
 
-    private BaseViewModel _viewModel;
+    private DashboardViewModel _viewModel;
     public DashboardFragment _dashboardFragment;
 
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity  {
         AppCenter.start(getApplication(), "98489794-5ff9-4db1-bc55-a9d9fbea5220",
                 Analytics.class, Crashes.class);
         setContentView(R.layout.activity_main);
-        _viewModel = new BaseViewModel(this);
+        _viewModel = new DashboardViewModel(this);
         ViewPager viewPager = findViewById(R.id.viewPager);
         addTabs(viewPager);
         ((TabLayout) findViewById(R.id.tabs)).setupWithViewPager( viewPager );
