@@ -80,6 +80,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Volume -" />
+
+                <ImageView
+                    android:id="@+id/IOT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    card_view:srcCompat="@drawable/cloud"
+                    android:layout_marginTop="50dp"
+                    android:layout_gravity="center"/>
             </LinearLayout>
 
 
