@@ -63,7 +63,7 @@ public class DevicesHandler extends Fragment {
                         Unpublish();
                         ShowBtns();
                     }
-                }, 5000);
+                }, 3000);
 
             }
         });
@@ -82,7 +82,7 @@ public class DevicesHandler extends Fragment {
                         Unpublish();
                         ShowBtns();
                     }
-                }, 5000);
+                }, 3000);
 
             }
         });
@@ -101,7 +101,7 @@ public class DevicesHandler extends Fragment {
                         Unpublish();
                         ShowBtns();
                     }
-                }, 5000);
+                }, 3000);
 
             }
         });
@@ -120,7 +120,7 @@ public class DevicesHandler extends Fragment {
                         Unpublish();
                         ShowBtns();
                     }
-                }, 5000);
+                }, 3000);
 
             }
         });
