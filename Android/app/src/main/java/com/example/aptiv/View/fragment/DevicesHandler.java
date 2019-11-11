@@ -128,14 +128,7 @@ public class DevicesHandler extends Fragment {
         return _view;
     }
 
-    @Override
-    public void onStop() {
 
-        Nearby.getMessagesClient(_owner).unpublish(mActiveMessage);
-        Nearby.getMessagesClient(_owner).unsubscribe(mMessageListener);
-
-        super.onStop();
-    }
 
     public void Publish(String message) {
         mActiveMessage = new Message(message.getBytes());

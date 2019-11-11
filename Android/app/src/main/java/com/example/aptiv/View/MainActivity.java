@@ -79,4 +79,8 @@ public class MainActivity extends AppCompatActivity  {
         _dashboardFragment.OpenDHFragment();
     }
 
+    public void CloseDHFragment(View v){
+        _dashboardFragment.SetupCarLayoutFragment();
+    }
+
 }
