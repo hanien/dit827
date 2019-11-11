@@ -1,7 +1,7 @@
 import sys, os, pytest
 from unittest import mock
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
-import sensor_reader 
+import sensor 
 
 
 def test_get_Light():
