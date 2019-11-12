@@ -57,6 +57,7 @@ def average_and_send():
     "full": str(full_total/counter)
     }
     r = requests.put("http://dit827aptiv.herokuapp.com/api/sensors/" + seat, data=json.dumps(req))
+    
     #print(r.content)
     reset()
 
