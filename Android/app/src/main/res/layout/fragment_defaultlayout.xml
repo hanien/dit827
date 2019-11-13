@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -22,26 +23,31 @@
                 android:layout_height="match_parent"
                 android:weightSum="3"
                 android:orientation="horizontal">
+
                 <androidx.cardview.widget.CardView
-                    android:layout_weight="1"
+                    android:id="@+id/CardViewLux"
                     android:layout_width="match_parent"
-                    android:minHeight="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/default_margin_cardview"
                     android:layout_marginTop="@dimen/default_margin_cardview"
                     android:layout_marginRight="@dimen/default_margin_cardview"
                     android:layout_marginBottom="@dimen/default_margin_cardview"
-                    card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                    card_view:cardBackgroundColor = "@color/CardViewColor"
+                    android:layout_weight="1"
+                    android:minHeight="40dp"
+                    android:onClick="OpenLuxFragment"
+                    card_view:cardBackgroundColor="@color/CardViewColor"
+                    card_view:cardCornerRadius="@dimen/cardview_corner_radius"
                     card_view:cardUseCompatPadding="true">
+
                     <LinearLayout
+                        android:id="@+id/LinearLayoutLux"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
-                        android:weightSum="2"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="2">
 
                         <ImageView
                             android:id="@+id/sound"
@@ -66,6 +72,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/CardViewAltitude"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:minHeight="40dp"
@@ -78,20 +85,82 @@
                     card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
                     card_view:cardBackgroundColor = "@color/CardViewColor"
                     card_view:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:id="@+id/LinearLayoutAltitude"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
+                        <ImageView
+                            android:id="@+id/altitudeimg"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            card_view:srcCompat="@drawable/altitude" />
+
+                        <TextView
+                            android:id="@+id/altitudeTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="1000"
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="40dp"></TextView>
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
-                    android:layout_weight="1"
+                    android:id="@+id/CardViewFull"
                     android:layout_width="match_parent"
-                    android:minHeight="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/default_margin_cardview"
                     android:layout_marginTop="@dimen/default_margin_cardview"
                     android:layout_marginRight="@dimen/default_margin_cardview"
                     android:layout_marginBottom="@dimen/default_margin_cardview"
-                    card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                    card_view:cardBackgroundColor = "@color/CardViewColor"
+                    android:layout_weight="1"
+                    android:minHeight="40dp"
+                    android:onClick="OpenSettingsFragment"
                     card_view:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:id="@+id/LinearLayoutFull"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
+                        <ImageView
+                            android:id="@+id/settingsImageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            card_view:srcCompat="@drawable/settings" />
+
+                        <TextView
+                            android:id="@+id/settingsTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Settings"
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="40dp"></TextView>
+
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
@@ -110,14 +179,17 @@
             card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
             card_view:cardBackgroundColor = "@color/CardViewColor"
             card_view:cardUseCompatPadding="true">
+
             <LinearLayout
+                android:id="@+id/LinearLayoutTemp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:onClick="OpenTempFragment"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/temp"
+                    android:id="@+id/CardViewInTemp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -130,20 +202,23 @@
                     card_view:cardBackgroundColor="@color/CardViewColor"
                     card_view:cardCornerRadius="@dimen/cardview_corner_radius"
                     card_view:cardUseCompatPadding="true">
+
                     <LinearLayout
+                        android:id="@+id/LinearLayoutInTemp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
-                        android:weightSum="2"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_weight="1">
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -151,6 +226,7 @@
                                 android:text="IN\nTEMP"
                                 android:textColor="@color/CardViewTextColor"
                                 android:textSize="20dp"></TextView>
+
                             <ImageView
                                 android:id="@+id/imageView2"
                                 android:layout_width="match_parent"
@@ -161,19 +237,21 @@
                         </LinearLayout>
 
                         <TextView
-                            android:layout_weight="1"
+                            android:id="@+id/InTempTextView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="22 C"
-                            android:textSize="40dp"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@color/CardViewTextColor"></TextView>
+                            android:text="22 C"
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="40dp"></TextView>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/CardViewOutTemp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -186,21 +264,23 @@
                     card_view:cardBackgroundColor="@color/CardViewColor"
                     card_view:cardCornerRadius="@dimen/cardview_corner_radius"
                     card_view:cardUseCompatPadding="true">
+
                     <LinearLayout
+                        android:id="@+id/LinearLayoutOutTemp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:weightSum="2">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_weight="1">
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -208,6 +288,7 @@
                                 android:text="OUT\nTEMP"
                                 android:textColor="@color/CardViewTextColor"
                                 android:textSize="20dp"></TextView>
+
                             <ImageView
                                 android:id="@+id/imageView3"
                                 android:layout_width="match_parent"
@@ -215,9 +296,11 @@
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 card_view:srcCompat="@drawable/hot" />
+
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/OutTempTextView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
@@ -229,7 +312,9 @@
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -252,7 +337,7 @@
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/VolumeCard"
+                    android:id="@+id/CardViewVolume"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -270,10 +355,13 @@
 
                     <LinearLayout
 
+                        android:id="@+id/LinearLayoutVolume"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
+                        android:clickable="false"
                         android:gravity="center"
+                        android:onClick="OpenVolumeFragment"
                         android:orientation="vertical"
                         android:weightSum="2">
 
@@ -301,87 +389,102 @@
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
-                    android:layout_weight="1"
+                    android:id="@+id/CardViewPressure"
                     android:layout_width="match_parent"
-                    android:minHeight="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/default_margin_cardview"
                     android:layout_marginTop="@dimen/default_margin_cardview"
                     android:layout_marginRight="@dimen/default_margin_cardview"
                     android:layout_marginBottom="@dimen/default_margin_cardview"
-                    card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                    card_view:cardBackgroundColor = "@color/CardViewColor"
+                    android:layout_weight="1"
+                    android:minHeight="40dp"
+                    android:onClick="OpenAPFragment"
+                    card_view:cardBackgroundColor="@color/CardViewColor"
+                    card_view:cardCornerRadius="@dimen/cardview_corner_radius"
                     card_view:cardUseCompatPadding="true">
+
                     <LinearLayout
+                        android:id="@+id/LinearLayoutPressure"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
-                        android:weightSum="2"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
                         <ImageView
-                            android:layout_weight="1"
                             android:id="@+id/airPressure"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            card_view:srcCompat="@drawable/air_pressure"
                             android:layout_gravity="center"
-                            android:gravity="center"/>
-                        <TextView
                             android:layout_weight="1"
+                            android:gravity="center"
+                            card_view:srcCompat="@drawable/ap"/>
+
+                        <TextView
+                            android:id="@+id/airPressurTextView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="22 Hg"
-                            android:textSize="40dp"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@color/CardViewTextColor"></TextView>
+                            android:text="22 Hg"
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="40dp"></TextView>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
-                    android:layout_weight="1"
+                    android:id="@+id/CardViewHumidity"
                     android:layout_width="match_parent"
-                    android:minHeight="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/default_margin_cardview"
                     android:layout_marginTop="@dimen/default_margin_cardview"
                     android:layout_marginRight="@dimen/default_margin_cardview"
                     android:layout_marginBottom="@dimen/default_margin_cardview"
-                    card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                    card_view:cardBackgroundColor = "@color/CardViewColor"
+                    android:layout_weight="1"
+                    android:minHeight="40dp"
+                    android:onClick="OpenHumidityFragment"
+                    card_view:cardBackgroundColor="@color/CardViewColor"
+                    card_view:cardCornerRadius="@dimen/cardview_corner_radius"
                     card_view:cardUseCompatPadding="true">
+
                     <LinearLayout
+                        android:id="@+id/LinearLayoutHumidity"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
-                        android:weightSum="2"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
                         <ImageView
-                            android:layout_weight="1"
                             android:id="@+id/humidity"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            card_view:srcCompat="@drawable/humidity"
                             android:layout_gravity="center"
-                            android:gravity="center"/>
-                        <TextView
                             android:layout_weight="1"
+                            android:gravity="center"
+                            card_view:srcCompat="@drawable/humidity" />
+
+                        <TextView
+                            android:id="@+id/HumidityTextView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="20 %"
-                            android:textSize="40dp"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@color/CardViewTextColor"></TextView>
+                            android:text="20 %"
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="40dp"></TextView>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
+</LinearLayout>
