@@ -9,7 +9,7 @@ pytest = "*"
 [packages]
 requests = "2.22.0"
 board = "1.0"
-pytest = "5.2.2"
+pytest = "*"
 
 [requires]
 python_version = "3.6"
