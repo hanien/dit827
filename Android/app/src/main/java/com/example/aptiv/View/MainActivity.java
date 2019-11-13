@@ -74,4 +74,13 @@ public class MainActivity extends AppCompatActivity  {
     public void OpenLuxFragment(View v) {
         _dashboardFragment.OpenLuxFragment();
     }
+
+    public void OpenDHFragment(View v) {
+        _dashboardFragment.OpenDHFragment();
+    }
+
+    public void CloseDHFragment(View v){
+        _dashboardFragment.SetupCarLayoutFragment();
+    }
+
 }
