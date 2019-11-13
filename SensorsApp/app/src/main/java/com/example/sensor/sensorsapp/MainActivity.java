@@ -45,7 +45,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     private boolean Recording = false;
 
-    private String url = "https://dit827aptiv.herokuapp.com";
+   // private String url = "https://dit827aptiv.herokuapp.com/api/sensors/driver";
 
     private TextView LightView;
     private TextView TempView;
@@ -63,7 +63,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 
             amp = voiceSensor.getAmplitude();
             VoiceView.setText("Voice value: " + amp);
-
+/*
             queue = Volley.newRequestQueue(MainActivity.this);
 
             JSONObject param = new JSONObject();
@@ -75,7 +75,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                 e.printStackTrace();
             }
 
-            JsonObjectRequest soundPatch = new JsonObjectRequest(Request.Method.PATCH, url + "/sound", param,
+            JsonObjectRequest soundPatch = new JsonObjectRequest(Request.Method.PATCH, url , param,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -91,7 +91,7 @@ public class MainActivity extends Activity implements SensorEventListener {
             });
 
             queue.add(soundPatch);
-
+*/
             Handler.postDelayed(PollTask, 300);
 
         }
@@ -174,7 +174,7 @@ public class MainActivity extends Activity implements SensorEventListener {
             lightvalue = event.values[0];
             LightView.setText("Light Value: " + lightvalue);
 
-
+/*
             queue = Volley.newRequestQueue(this);
 
             JSONObject param = new JSONObject();
@@ -203,14 +203,14 @@ public class MainActivity extends Activity implements SensorEventListener {
 
             queue.add(lightPatch);
 
-
+*/
         }
 
         if (sensor.getType() == sensor.TYPE_AMBIENT_TEMPERATURE) {
 
             tempvalue = event.values[0];
             TempView.setText("Temperature Value: " + tempvalue);
-
+/*
             queue = Volley.newRequestQueue(this);
 
             JSONObject param = new JSONObject();
@@ -238,7 +238,7 @@ public class MainActivity extends Activity implements SensorEventListener {
             });
 
             queue.add(tempPatch);
-
+*/
         }
 
     }
