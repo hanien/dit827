@@ -39,5 +39,30 @@
         android:textColor="#FF5722"
         android:textSize="18sp" />
 
+    <TextView
+        android:id="@+id/ReceiverText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IoT Receiver Service"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"/>
+
+    <Button
+        android:id="@+id/StartServicebtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="startReceiverService"
+        android:text="Enable" />
+
+    <Button
+        android:id="@+id/StopServicebtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="stopReceiverService"
+        android:text="Disable" />
+
 
 </LinearLayout>

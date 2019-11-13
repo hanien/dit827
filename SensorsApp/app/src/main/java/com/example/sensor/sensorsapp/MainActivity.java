@@ -2,12 +2,14 @@ package com.example.sensor.sensorsapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 
+import android.view.View;
 import android.widget.TextView;
 import android.util.Log;
 
@@ -23,6 +25,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import androidx.core.content.ContextCompat;
 
 public class MainActivity extends Activity implements SensorEventListener {
 
@@ -275,6 +279,17 @@ public class MainActivity extends Activity implements SensorEventListener {
             Log.d(TAG, "Sensor Not Available!");
         }
 
+    }
+
+    public void startReceiverService(View v) {
+
+        Intent serviceIntent = new Intent(this, ReceiverService.class);
+        ContextCompat.startForegroundService(this, serviceIntent);
+    }
+
+    public void stopReceiverService(View v) {
+        Intent serviceIntent = new Intent(this, ReceiverService.class);
+        stopService(serviceIntent);
     }
 
 

@@ -129,10 +129,6 @@ public class ReceiverService extends Service {
 
     @Override
     public void onDestroy() {
-
-        Nearby.getMessagesClient(this).unpublish(mActiveMessage);
-        Nearby.getMessagesClient(this).unsubscribe(mMessageListener);
-
         super.onDestroy();
     }
 
