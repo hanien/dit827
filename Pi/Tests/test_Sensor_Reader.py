@@ -17,6 +17,7 @@ def resetVariables():
     "pressure": "0",
     "altitude": "0",
     "gain": "0",
+    "sound": "o",
     "lux": "0",
     "ir": "0",
     "full": "0"
@@ -59,6 +60,7 @@ def test_sendingData(monkeypatch):
         nonBoard.ir_total += value
         nonBoard.lux_total += value
         nonBoard.gain_total += value
+        nonBoard.sound_total += value
         nonBoard.temperature_total += value
         nonBoard.humidity_total += value
         nonBoard.pressure_total += value
@@ -75,10 +77,11 @@ def test_sendingData(monkeypatch):
     humidity = float(reqJson['humidity'])
     pressure = float(reqJson['pressure'])
     sound = float(reqJson['sound'])
+    gain = float(reqJson['gain'])
     ir = float(reqJson['ir'])
 
-    totalSum = lux+ altitude + full + temperature + humidity + pressure + sound + ir
-    totalSum = totalSum/8 # 3 being the amount of values summed together
+    totalSum = lux + gain + altitude + full + temperature + humidity + pressure + sound + ir
+    totalSum = totalSum/9 # 3 being the amount of values summed together
     
     print("SendingDataTest ends \n")
     assert(totalSum > value - acceptable_error and totalSum < value + acceptable_error) #Being wrong with below 10% is counted as acceptable error. 

@@ -12,6 +12,7 @@ gain_total = 0
 lux_total = 0
 ir_total = 0
 full_total = 0
+sound_total = 0
 seat = "back"
 threadtime = 10.0
 
@@ -31,6 +32,7 @@ def reset():
     humidity_total = 0
     pressure_total = 0
     altitude_total = 0
+    sound_total = 0
     gain_total = 0
     lux_total = 0
     ir_total = 0
@@ -51,7 +53,8 @@ def average_and_send():
     "humidity": str(humidity_total/counter),
     "pressure": str(pressure_total/counter),
     "altitude": str(altitude_total/counter),
-    "sound": str(gain_total/counter),
+    "gain": str(gain_total/counter),
+    "sound": str(sound_total/counter),
     "lux": str(lux_total/counter),
     "ir": str(ir_total/counter),
     "full": str(full_total/counter)
