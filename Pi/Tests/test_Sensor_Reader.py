@@ -76,12 +76,12 @@ def test_sendingData(monkeypatch):
     temperature = float(reqJson['temperature'])
     humidity = float(reqJson['humidity'])
     pressure = float(reqJson['pressure'])
-    sound = float(reqJson['sound'])
+    #sound = float(reqJson['sound'])
     gain = float(reqJson['gain'])
     ir = float(reqJson['ir'])
 
-    totalSum = lux + gain + altitude + full + temperature + humidity + pressure + sound + ir
-    totalSum = totalSum/9 # 3 being the amount of values summed together
+    totalSum = lux + gain + altitude + full + temperature + humidity + pressure + ir #+sound
+    totalSum = totalSum/8 # 3 being the amount of values summed together
     
     print("SendingDataTest ends \n")
     assert(totalSum > value - acceptable_error and totalSum < value + acceptable_error) #Being wrong with below 10% is counted as acceptable error. 
