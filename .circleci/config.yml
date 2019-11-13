@@ -21,9 +21,9 @@ jobs:
             cd Pi
             #pip install --upgrade pip
             pipenv sync
-            pipenv install pytest
-            pipenv install board
-            pipenv install requests
+            #pipenv install pytest
+            #pipenv install board
+            #pipenv install requests
             #Below here are the dependencies of the raspberry board and the sensors
             #pipenv install adafruit-circuitpython-lis3dh
             #pipenv install RPi.GPIO
