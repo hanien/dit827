@@ -1,7 +1,6 @@
 import requests
 import json
 import threading
-import time
 
 counter = 1
 temperature_total = 0
@@ -43,6 +42,7 @@ sendThread = threading.Timer(10000.0, reset)
 
 
 def average_and_send():
+    print("averageSend Has been called")
     global sendThread
     global threadtime
     sendThread = threading.Timer(threadtime, average_and_send)
@@ -61,7 +61,7 @@ def average_and_send():
     }
     r = requests.put("http://dit827aptiv.herokuapp.com/api/sensors/" + seat, data=json.dumps(req))
     
-    #print(r.content)
+    print(r.content)
     reset()
 
 
