@@ -29,5 +29,4 @@ while True:
         nonBoard.altitude_total += bme280_sensor.altitude
         nonBoard.counter+=1
         print("increase now over")
-    
 
