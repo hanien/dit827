@@ -1,8 +1,10 @@
 package com.example.aptiv.Model.Classe;
 
+import java.io.Serializable;
+
 import static java.lang.Float.parseFloat;
 
-public class Profile {
+public class Profile implements Serializable {
     private String ProfileName;
     private String temperature;
     private String humidity;
@@ -18,7 +20,7 @@ public class Profile {
 
 
     public Profile (String ProfileName,String temperature, String humidity, String gain, String luminosity, String full, String ir,
-                    String pressure , String sound, String altitude, String light,String lux){
+                    String pressure , String sound, String altitude, String light,String lux) {
         this.ProfileName = ProfileName;
         this.temperature = temperature;
         this.humidity = humidity;
@@ -31,6 +33,12 @@ public class Profile {
         this.altitude = altitude;
         this.light = light;
         this.lux = lux;
+    }
+
+    public String getProfileName(){return this.ProfileName;}
+
+    public void setProfileName(String profileName) {
+        ProfileName = profileName;
     }
 
     public String getTemperature() {
