@@ -5,7 +5,8 @@ import adafruit_bme280 as bme280
 import python_tsl2591 as tsl2591 
 import RPi.GPIO as GPIO #Can only be run on a raspberry pi
 import nonBoard
-    
+import time
+
 ## SETUP
 
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -29,4 +30,5 @@ while True:
         nonBoard.altitude_total += bme280_sensor.altitude
         nonBoard.counter+=1
         print("increase now over")
+    time.sleep(0.1)
 
