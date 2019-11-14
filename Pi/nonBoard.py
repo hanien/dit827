@@ -15,7 +15,7 @@ sound_total = 0
 
 seat = "back"
 threadtime = 10.0
-
+lock = threading.RLock()
 
 def reset():
     global counter
@@ -43,26 +43,27 @@ sendThread = threading.Timer(10000.0, reset)
 
 def average_and_send():
     print("averageSend Has been called")
-    global sendThread
-    global threadtime
-    sendThread = threading.Timer(threadtime, average_and_send)
-    sendThread.start()
+    with lock:
+        print("Sending lock has been released")
+        global sendThread
+        global threadtime
 
-    ## Assign request data
-    req = {
-    "temperature": str(round(temperature_total/counter, 1)),
-    "humidity": str(round(humidity_total/counter, 1)),
-    "pressure": str(round(pressure_total/counter, 1)),
-    "altitude": str(round(altitude_total/counter, 1)),
-    "gain": str(round(gain_total/counter, 1)),
-    "lux": str(round(lux_total/counter, 1)),
-    "ir": str(round(ir_total/counter, 1)),
-    "full": str(round(full_total/counter, 1))
-    }
-    r = requests.put("http://dit827aptiv.herokuapp.com/api/sensors/" + seat, data=json.dumps(req))
-    
-    print(r.content)
-    reset()
+        sendThread = threading.Timer(threadtime, average_and_send)
+        sendThread.start()
+
+        ## Assign request data
+        req = {
+        "temperature": str(round(temperature_total/counter, 1)),
+        "humidity": str(round(humidity_total/counter, 1)),
+        "pressure": str(round(pressure_total/counter, 1)),
+        "altitude": str(round(altitude_total/counter, 1)),
+        "gain": str(round(gain_total/counter, 1)),
+        "lux": str(round(lux_total/counter, 1)),
+        "ir": str(round(ir_total/counter, 1)),
+        "full": str(round(full_total/counter, 1))
+        }
+        r = requests.put("http://dit827aptiv.herokuapp.com/api/sensors/" + seat, data=json.dumps(req))
+        reset()
 
 
 def endThread():

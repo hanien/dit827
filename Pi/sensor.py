@@ -15,17 +15,19 @@ bme280_sensor.sea_level_pressure = 1013.7
 
 nonBoard.average_and_send()
 while True:
-    print("counter: "+ str(nonBoard.counter))
-    (full, ir) = tsl2591_sensor.get_full_luminosity() #full and ir spectrum
-    lux = tsl2591_sensor.calculate_lux(full, ir)
-    nonBoard.full_total += full
-    nonBoard.ir_total += ir
-    nonBoard.lux_total += lux
-    nonBoard.gain_total += tsl2591_sensor.get_current()["gain"]
-    nonBoard.temperature_total += bme280_sensor.temperature
-    nonBoard.humidity_total += bme280_sensor.humidity
-    nonBoard.pressure_total += bme280_sensor.pressure
-    nonBoard.altitude_total += bme280_sensor.altitude
-    nonBoard.counter+=1
+    with nonBoard.lock:
+        print("counter: "+ str(nonBoard.counter))
+        (full, ir) = tsl2591_sensor.get_full_luminosity() #full and ir spectrum
+        lux = tsl2591_sensor.calculate_lux(full, ir)
+        nonBoard.full_total += full
+        nonBoard.ir_total += ir
+        nonBoard.lux_total += lux
+        nonBoard.gain_total += tsl2591_sensor.get_current()["gain"]
+        nonBoard.temperature_total += bme280_sensor.temperature
+        nonBoard.humidity_total += bme280_sensor.humidity
+        nonBoard.pressure_total += bme280_sensor.pressure
+        nonBoard.altitude_total += bme280_sensor.altitude
+        nonBoard.counter+=1
+        print("increase now over")
     
 
