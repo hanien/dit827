@@ -1,14 +1,11 @@
 package com.example.aptiv.ViewModel;
 
-import android.renderscript.Sampler;
-
 import com.example.aptiv.Model.Classe.Zone;
 import com.example.aptiv.Model.Interface.IVolleyCollback;
 import com.example.aptiv.Model.Service.WeatherService;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.Model.Service.AptivService;
 
-import java.util.List;
 
 public class BaseViewModel implements IVolleyCollback {
 

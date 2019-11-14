@@ -6,19 +6,14 @@ import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.aptiv.R;
-import com.example.aptiv.View.fragment.TempLayoutFragment;
-import com.example.aptiv.ViewModel.BaseViewModel;
 import com.example.aptiv.View.adapter.ViewPagerAdapter;
 import com.example.aptiv.View.fragment.DashboardFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -29,8 +24,6 @@ public class MainActivity extends AppCompatActivity  {
 
     private DashboardViewModel _viewModel;
     public DashboardFragment _dashboardFragment;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

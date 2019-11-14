@@ -7,15 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
-
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;
-import com.sdsmdg.harjot.crollerTest.Croller;
-import com.sdsmdg.harjot.crollerTest.OnCrollerChangeListener;
 
 public class SoundLayoutFragment extends Fragment implements IZoneSelection {
 
@@ -27,8 +23,6 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
     private TextView _zoneSoundTextView;
     private TextView _zoneTextView;
     private LinearLayout _zoneCrollerLayout;
-
-
 
     public SoundLayoutFragment(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
