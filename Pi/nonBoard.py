@@ -44,7 +44,6 @@ sendThread = threading.Timer(10000.0, reset)
 def average_and_send():
     print("averageSend Has been called")
     with lock:
-        print("Sending lock has been released")
         global sendThread
         global threadtime
 
@@ -60,9 +59,11 @@ def average_and_send():
         "gain": str(round(gain_total/counter, 1)),
         "lux": str(round(lux_total/counter, 1)),
         "ir": str(round(ir_total/counter, 1)),
-        "full": str(round(full_total/counter, 1))
+        "full": str(round(full_total/counter, 1)),
+        "sound": str(round(sound_total/counter, 1))
         }
         r = requests.put("http://dit827aptiv.herokuapp.com/api/sensors/" + seat, data=json.dumps(req))
+        print(r.content)
         reset()
 
 
