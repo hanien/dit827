@@ -63,7 +63,7 @@ def average_and_send():
         "sound": str(round(sound_total/counter, 1))
         }
         r = requests.put("http://dit827aptiv.herokuapp.com/api/sensors/" + seat, data=json.dumps(req))
-        print(r.content)
+        #print(r.content)
         reset()
 
 

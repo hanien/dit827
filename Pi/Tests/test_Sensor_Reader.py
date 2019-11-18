@@ -56,16 +56,17 @@ def test_sendingData(monkeypatch):
     loopcount = 0
 
     while(str(reqJson['lux']) == '0.0'):
-        nonBoard.full_total += value
-        nonBoard.ir_total += value
-        nonBoard.lux_total += value
-        nonBoard.gain_total += value
-        nonBoard.sound_total += value
-        nonBoard.temperature_total += value
-        nonBoard.humidity_total += value
-        nonBoard.pressure_total += value
-        nonBoard.altitude_total += value
-        nonBoard.counter += 1
+        with nonBoard.lock:
+            nonBoard.full_total += value
+            nonBoard.ir_total += value
+            nonBoard.lux_total += value
+            nonBoard.gain_total += value
+            nonBoard.sound_total += value
+            nonBoard.temperature_total += value
+            nonBoard.humidity_total += value
+            nonBoard.pressure_total += value
+            nonBoard.altitude_total += value
+            nonBoard.counter += 1
         time.sleep(0.5) #This is around the rate at which the values are updated in the board file
     nonBoard.endThread()
 
@@ -84,7 +85,7 @@ def test_sendingData(monkeypatch):
     totalSum = totalSum/8 # 3 being the amount of values summed together
     
     print("SendingDataTest ends \n")
-    assert(totalSum > value - acceptable_error and totalSum < value + acceptable_error) #Being wrong with below 10% is counted as acceptable error. 
+    assert(totalSum < value + acceptable_error and totalSum > value - acceptable_error) #Being wrong with below 10% is counted as acceptable error. 
 
 
 
