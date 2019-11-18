@@ -10,6 +10,17 @@ import nonBoard
 import time
 import math
 
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+TRIG = 16
+ECHO = 12
+LED = 21
+GPIO.setup(TRIG, GPIO.OUT)
+GPIO.setup(ECHO, GPIO.IN)
+GPIO.setup(LED, GPIO.OUT)
+StartTime = time.time()
+StopTime = time.time()
+
 ## SETUP
 
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -26,6 +37,29 @@ channel = AnalogIn(mcp, MCP.P0)
 nonBoard.average_and_send()
 while True:
     with nonBoard.lock:
+        GPIO.output(TRIG, False)
+        time.sleep(0.5)
+        GPIO.output(TRIG,True)
+        time.sleep(0.0001)
+        GPIO.output(TRIG,False)
+        GPIO.output(LED,GPIO.LOW)    
+        while GPIO.input(ECHO) ==0:
+            #print ('NOT DETECTED!!')
+            StartTime = time.time()
+            
+        while GPIO.input(ECHO) ==1:
+            #print ('DETECTED!')
+            StopTime = time.time()
+                
+        TimeElapsed = StopTime - StartTime
+        #distance = TimeElapsed * 17150
+        distance = round(TimeElapsed * 17150, 2)
+        if distance > 50:
+            GPIO.output(LED,GPIO.HIGH)
+        else:
+            GPIO.output(LED,GPIO.LOW)
+        print(distance)
+        time.sleep(0.005)
         #init data required for sampling sound
         start_milli = int(round(time.time() * 1000))
         peak_to_peak = 0
