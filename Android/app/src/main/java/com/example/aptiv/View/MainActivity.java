@@ -103,4 +103,12 @@ public class MainActivity extends AppCompatActivity  {
     public void OpenSettingsFragment(View v) {
         _dashboardFragment.OpenSettingsFragment();
     }
+  
+    public void OpenDHFragment(View v) {
+        _dashboardFragment.OpenDHFragment();
+    }
+
+    public void CloseDHFragment(View v){
+        _dashboardFragment.SetupCarLayoutFragment();
+    }
 }
