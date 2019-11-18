@@ -7,14 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
-
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;
-import com.sdsmdg.harjot.crollerTest.Croller;
 
 public class SoundLayoutFragment extends Fragment implements IZoneSelection {
 
@@ -22,12 +19,10 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
     private DashboardFragment _parentFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
-    private TextView _textView;
+    private TextView _soundTextView;
+    private TextView _zoneSoundTextView;
     private TextView _zoneTextView;
-    private LinearLayout _zoneControllerLayout;
-    private Croller _defaultController;
-    private Croller _zoneController;
-
+    private LinearLayout _zoneCrollerLayout;
 
     public SoundLayoutFragment(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
@@ -48,33 +43,17 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private void setUpView() {
-        _textView = _view.findViewById(R.id.TempratureTextView);
-        _zoneControllerLayout = _view.findViewById(R.id.zoneCrollerLayout);
-        _defaultController = _view.findViewById(R.id.DefaultController);
-        _zoneController = _view.findViewById(R.id.ZoneController);
+        _soundTextView = _view.findViewById(R.id.SoundValue);
+        _zoneSoundTextView = _view.findViewById(R.id.SoundZoneValue);
         _zoneTextView = _view.findViewById(R.id.SelectZoneTextView);
+        _zoneCrollerLayout = _view.findViewById(R.id.zoneCrollerLayout);
     }
 
     private void setUpElements(){
         _zoneTextView.setText("Please click on specific zone to change value in it");
-        _textView.setText(_baseViewModel.MiddleZone.getSound());
-        _defaultController.setLabel(String.valueOf(_baseViewModel.MiddleZone.getSound()));
-        _defaultController.setProgress(Integer.valueOf(_baseViewModel.MiddleZone.getSound()));
-        _defaultController.setOnProgressChangedListener(new Croller.onProgressChangedListener() {
-            @Override
-            public void onProgressChanged(int progress) {
-                _defaultController.setLabel(String.valueOf(progress));
-                _defaultController.setProgress(progress);
-            }
-        });
-        _zoneController.setOnProgressChangedListener(new Croller.onProgressChangedListener() {
-            @Override
-            public void onProgressChanged(int progress) {
-                _zoneController.setLabel(String.valueOf(progress));
-                _zoneController.setProgress(progress);
-            }
-        });
+        _soundTextView.setText(_baseViewModel.MiddleZone.getSound());
     }
+
 
     //When a zone is selected on the car
     //values needs to be changes base on zone
@@ -82,11 +61,13 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
     public void zoneIsSelected() {
         if(_parentFragment._backSeatSelected || _parentFragment._driverSeatSelected || _parentFragment._frontSeatSelected ){
             _zoneTextView.setVisibility(View.GONE);
-            _zoneControllerLayout.setVisibility(View.VISIBLE);
+            _zoneSoundTextView.setVisibility(View.VISIBLE);
+            _zoneCrollerLayout.setVisibility(View.VISIBLE);
             updateSoundValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
         }else{
             _zoneTextView.setVisibility(View.VISIBLE);
-            _zoneControllerLayout.setVisibility(View.GONE);
+            _zoneSoundTextView.setVisibility(View.GONE);
+            _zoneCrollerLayout.setVisibility(View.GONE);
         }
     }
 
@@ -121,8 +102,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
             temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound())+Double.parseDouble(_baseViewModel.BackseatZone.getSound());
             temp = temp / 2;
         }
-        _zoneController.setProgress((int)temp);
-        _zoneController.setLabel(String.valueOf((int)temp));
+        _zoneSoundTextView.setText(String.valueOf((int)temp));
     }
 
     //region Timer method
@@ -145,7 +125,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private void updateView() {
-        _textView.setText(_baseViewModel.MiddleZone.getSound());
+        _soundTextView.setText(_baseViewModel.MiddleZone.getSound());
         updateSoundValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
     }
     //endregion

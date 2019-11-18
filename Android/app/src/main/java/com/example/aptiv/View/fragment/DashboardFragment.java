@@ -3,18 +3,14 @@ package com.example.aptiv.View.fragment;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-//import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.R;
@@ -31,6 +27,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     private AirpLayoutFragment AirpLayoutFragment;
     private HumidityLayoutFragment HumidityLayoutFragment;
     private LuxLayoutFragment LuxLayoutFragment;
+    private SettingsLayoutFragment SettingsLayoutFragment;
     private DevicesHandler DevicesHandler;
     private IZoneSelection _callback;
     private ImageView _carMaskView;
@@ -122,6 +119,14 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard,LuxLayoutFragment).commit();
         _callback = LuxLayoutFragment;
     }
+
+    //Open settings fragment
+    public void OpenSettingsFragment() {
+        FragmentManager fm1 = getFragmentManager();
+        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
+        SettingsLayoutFragment = new SettingsLayoutFragment(this,_owner,_baseViewModel);
+        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard,SettingsLayoutFragment).commit();
+        _callback = SettingsLayoutFragment;
 
     //Open Devices Handler fragment
     public void OpenDHFragment() {

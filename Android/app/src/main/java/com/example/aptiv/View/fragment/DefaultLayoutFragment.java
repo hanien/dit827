@@ -3,17 +3,11 @@ package com.example.aptiv.View.fragment;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
-
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -27,7 +21,6 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
     private TextView _airPressurTextView;
     private TextView _humidityTextView;
     private TextView _luxTextView;
-    private TextView _fullTextView;
     private TextView _inTempTextView;
     private TextView _outTempTextView;
     private TextView _altitudeTextView;
@@ -54,11 +47,10 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
 
     private void SetupComponents() {
         _soundTextView = _view.findViewById(R.id.soundTextView);
-        _volumeCard = _view.findViewById(R.id.VolumeCard);
+        _volumeCard = _view.findViewById(R.id.CardViewVolume);
         _airPressurTextView = _view.findViewById(R.id.airPressurTextView);
         _humidityTextView = _view.findViewById(R.id.HumidityTextView);
         _luxTextView = _view.findViewById(R.id.lightTextView);
-        _fullTextView = _view.findViewById(R.id.fullTextView);
         _inTempTextView = _view.findViewById(R.id.InTempTextView);
         _outTempTextView = _view.findViewById(R.id.OutTempTextView);
         _altitudeTextView = _view.findViewById(R.id.altitudeTextView);
@@ -87,16 +79,22 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         _airPressurTextView.setText(_baseViewModel.MiddleZone.getPressure());
         _humidityTextView.setText(_baseViewModel.MiddleZone.getHumidity());
         _luxTextView.setText(_baseViewModel.MiddleZone.getIr());
-        _fullTextView.setText(_baseViewModel.MiddleZone.getFull());
+        _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitiude());
+        SetTempreture();
+    }
 
+
+    private void SetTempreture(){
         double temp = Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
         String tempType = (_baseViewModel.getTempType()) ? _baseViewModel.getFahrenheit() : _baseViewModel.getCelsius();
         temp = (_baseViewModel.getTempType()) ? ((1.8*temp))+32 : temp;
 
-        _inTempTextView.setText(temp + tempType);
-        _outTempTextView.setText(temp + tempType);
+        double OutTemp = _baseViewModel.OutTempreture;
+        String outTempType = (_baseViewModel.getTempType()) ? _baseViewModel.getFahrenheit() : _baseViewModel.getCelsius();
+        temp = (_baseViewModel.getTempType()) ? ((1.8*OutTemp))+32 : OutTemp;
 
-        _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitiude());
+        _inTempTextView.setText(temp + tempType);
+        _outTempTextView.setText(outTempType + tempType);
     }
 
     @Override
@@ -107,7 +105,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
                 _owner._dashboardFragment.OpenVolumeFragment();
                 break;
 
-            case R.id.VolumeCard:
+            case R.id.CardViewVolume:
                 break;
         }
 
