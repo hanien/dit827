@@ -116,10 +116,14 @@ public class Profile implements Serializable {
     }
 
     public String getLight() {
-        return lux;
+        return light;
     }
 
     public void setLight(String light) {
         this.light = light;
     }
+
+    public String getLux() { return lux; }
+
+    public void setLux(String lux) { this.lux = lux; }
 }
