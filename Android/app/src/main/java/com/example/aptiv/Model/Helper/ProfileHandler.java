@@ -61,7 +61,7 @@ public class ProfileHandler {
         HashMap<String, Boolean> driver = checkZone(profile, _driver);
 
         if(driver.containsValue(Boolean.FALSE)){
-            _dashboardFragment.showError(_driver);
+            _dashboardFragment.toggleError(_driver, Boolean.TRUE);
         }
     }
 
