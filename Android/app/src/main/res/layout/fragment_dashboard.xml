@@ -58,19 +58,43 @@
                     android:alpha="0.3"
                     android:src="@drawable/driverseatselected"
                     android:visibility="invisible"/>
+
+                <ImageView
+                    android:id="@+id/driverseaterror"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.3"
+                    android:src="@drawable/driverseatred"
+                    android:visibility="invisible" />
+
                 <ImageView
                     android:id="@+id/frontseat"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/frontseatselected"
                     android:alpha="0.3"
-                    android:visibility="invisible"/>
+                    android:src="@drawable/frontseatselected"
+                    android:visibility="invisible" />
+                <ImageView
+                    android:id="@+id/frontseaterror"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.3"
+                    android:src="@drawable/frontseatred"
+                    android:visibility="invisible" />
+
                 <ImageView
                     android:id="@+id/backseat"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:alpha="0.3"
                     android:src="@drawable/backseatselected"
+                    android:visibility="invisible"/>
+                <ImageView
+                    android:id="@+id/backseaterror"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.3"
+                    android:src="@drawable/backseatred"
                     android:visibility="invisible"/>
 
                 <Button

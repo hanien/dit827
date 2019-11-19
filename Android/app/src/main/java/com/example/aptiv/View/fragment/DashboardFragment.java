@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.aptiv.Model.Classe.Zone;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.R;
@@ -34,6 +36,10 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     private ImageView _frontSeat;
     private ImageView _driverSeat;
     private ImageView _backSeat;
+    private ImageView _frontSeatError;
+    private ImageView _driverSeatError;
+    private ImageView _backSeatError;
+
     public Boolean _frontSeatSelected = false;
     public Boolean _backSeatSelected = false;
     public Boolean _driverSeatSelected = false;
@@ -60,6 +66,10 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         _frontSeat = _view.findViewById(R.id.frontseat);
         _backSeat = _view.findViewById(R.id.backseat);
         _driverSeat = _view.findViewById(R.id.driverseat);
+
+        _frontSeatError = _view.findViewById(R.id.frontseaterror);
+        _backSeatError = _view.findViewById(R.id.backseaterror);
+        _driverSeatError = _view.findViewById(R.id.driverseaterror);
     }
 
     private void SetupEvents() {
@@ -183,6 +193,45 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         return true;
     }
 
+    public void toggleError(Zone zone, boolean show)
+    {
+        switch(zone.getName())
+        {
+            case DRIVER:
+                if(show)
+                {
+                    _driverSeatError.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    _driverSeatError.setVisibility(View.INVISIBLE);
+                }
+                break;
+            case PASSENGER:
+                if(show)
+                { _frontSeatError.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    _frontSeatError.setVisibility(View.INVISIBLE);
+                }
+                break;
+            case BACK:
+                if(show)
+                {
+                    _backSeatError.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    _backSeatError.setVisibility(View.INVISIBLE);
+                }
+                break;
+            default:
+                //TODO: behavior for invalid zone name. this should never happen.
+                break;
+
+        }
+    }
     //seat selection in the car image is base on color
     //in the background of the car image there is img with 3 colors representing every single zone
     //check car_mask.png
