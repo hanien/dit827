@@ -3,6 +3,15 @@ package com.example.aptiv.Model.Classe;
 import static java.lang.Float.parseFloat;
 
 public class Zone {
+
+    public enum ZoneName {
+        DRIVER,
+        PASSENGER,
+        MIDDLE,
+        BACK
+    }
+
+    private ZoneName name;
     private String temperature;
     private String humidity;
     private String gain;
@@ -15,8 +24,9 @@ public class Zone {
     private String light;
     private String lux;
 
-    public Zone(String temperature, String humidity, String gain, String luminosity, String full, String ir,
+    public Zone(ZoneName name, String temperature, String humidity, String gain, String luminosity, String full, String ir,
                 String pressure , String sound, String altitude, String light,String lux){
+        this.name = name;
         this.temperature = temperature;
         this.humidity = humidity;
         this.gain = gain;
@@ -29,6 +39,8 @@ public class Zone {
         this.light = light;
         this.lux = lux;
     }
+
+    public ZoneName getName() { return name; }
     public String getTemperature() {
         return temperature;
     }
@@ -104,10 +116,14 @@ public class Zone {
     }
 
     public String getLight() {
-        return lux;
+        return light;
     }
 
     public void setLight(String light) {
         this.light = light;
     }
+
+    public String getLux() { return lux; }
+
+    public void setLux(String lux) { this.lux = lux; }
 }
