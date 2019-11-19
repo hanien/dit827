@@ -47,7 +47,8 @@
                 android:id="@+id/modes_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/CardViewTextColor" />
+                android:textColor="@color/CardViewTextColor"
+                android:choiceMode="singleChoice" />
 
         </LinearLayout>
 

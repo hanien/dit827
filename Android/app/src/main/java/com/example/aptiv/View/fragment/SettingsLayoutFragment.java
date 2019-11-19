@@ -68,6 +68,7 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
 
         mAdapter = new CustomListAdapter(context, modesList);
         listView.setAdapter(mAdapter);
+        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
     }
 
