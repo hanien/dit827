@@ -6,6 +6,7 @@ import com.example.aptiv.Model.Service.WeatherService;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.Model.Service.AptivService;
 import com.example.aptiv.Model.Helper.ProfileHandler;
+import com.example.aptiv.View.fragment.DashboardFragment;
 
 import java.sql.Driver;
 
@@ -16,10 +17,13 @@ public class BaseViewModel implements IVolleyCollback {
     private WeatherService _weatherService;
     private MainActivity _activity;
     private ProfileHandler _profileHandler;
-    public Zone DriverZone = new Zone("0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
-    public Zone PassengerZone = new Zone("0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
-    public Zone BackseatZone = new Zone("0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
-    public Zone MiddleZone = new Zone("0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
+    private DashboardFragment _dashboardFragment;
+
+    //enum to differentiate btwn incoming zones
+    public Zone DriverZone = new Zone(Zone.ZoneName.DRIVER, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
+    public Zone PassengerZone = new Zone(Zone.ZoneName.PASSENGER, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
+    public Zone BackseatZone = new Zone(Zone.ZoneName.BACK, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
+    public Zone MiddleZone = new Zone(Zone.ZoneName.MIDDLE, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
     public Double OutTempreture = 0.0;
     public Boolean tempType; //True here means that it is Fahrenheit
     private String fahrenheit;
@@ -27,10 +31,11 @@ public class BaseViewModel implements IVolleyCollback {
 
     public BaseViewModel(MainActivity activity){
         _activity = activity;
+        _dashboardFragment = _activity._dashboardFragment;
 
         _aptivService = new AptivService(_activity);
         _weatherService = new WeatherService(_activity);
-        _profileHandler = new ProfileHandler(this);
+        _profileHandler = new ProfileHandler(this, _dashboardFragment);
         fahrenheit = "° F";
         celsius = "° C";
         tempType = false;
@@ -49,19 +54,19 @@ public class BaseViewModel implements IVolleyCollback {
     @Override
     public void GetDriverReadings(Zone value) {
         DriverZone = value;
-        _profileHandler.onDataFetched(ProfileHandler.ZoneName.DRIVER, DriverZone);
+        _profileHandler.onDataFetched(DriverZone);
     }
 
     @Override
     public void GetPassengerReadings(Zone value) {
         PassengerZone = value;
-        _profileHandler.onDataFetched(ProfileHandler.ZoneName.PASSENGER, PassengerZone);
+        _profileHandler.onDataFetched(PassengerZone);
     }
 
     @Override
     public void GetAverageReadings(Zone value) {
         MiddleZone = value;
-        _profileHandler.onDataFetched(ProfileHandler.ZoneName.MIDDLE, MiddleZone);
+        _profileHandler.onDataFetched(MiddleZone);
     }
 
     @Override
@@ -72,7 +77,7 @@ public class BaseViewModel implements IVolleyCollback {
     @Override
     public void GetBackseatReadings(Zone value) {
         BackseatZone = value;
-        _profileHandler.onDataFetched(ProfileHandler.ZoneName.BACK, BackseatZone);
+        _profileHandler.onDataFetched(BackseatZone);
     }
 
     public String getFahrenheit(){
