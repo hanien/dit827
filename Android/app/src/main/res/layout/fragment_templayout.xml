@@ -138,7 +138,7 @@
                     android:orientation="vertical">
 
                     <Switch
-                        android:id="@+id/TempTypeSwitch"
+                        android:id="@+id/TempType"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="Change Temperature Scale"
