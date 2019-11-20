@@ -30,8 +30,13 @@ public class ProfileHandler {
         _passenger = passenger;
         _mid = mid;
         _back = back;
+
     }
 
+    public void SetDashboardFragment(DashboardFragment fragment){
+        _dashboardFragment = fragment;
+        checkThresholds();
+    }
     public void onDataFetched() {
         checkThresholds();
     }

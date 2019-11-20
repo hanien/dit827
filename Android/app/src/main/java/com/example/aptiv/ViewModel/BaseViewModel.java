@@ -31,7 +31,6 @@ public class BaseViewModel implements IVolleyCollback {
 
     public BaseViewModel(MainActivity activity){
         _activity = activity;
-        _dashboardFragment = _activity._dashboardFragment;
 
         _aptivService = new AptivService(_activity);
         _weatherService = new WeatherService(_activity);
@@ -44,6 +43,10 @@ public class BaseViewModel implements IVolleyCollback {
         _weatherService.GetWeather(this);
 
         UpdateData();
+    }
+    public void SetDashboardFragment(DashboardFragment fragment){
+        _dashboardFragment = fragment;
+        _profileHandler.SetDashboardFragment(fragment);
     }
 
     public void UpdateData() {
@@ -85,7 +88,6 @@ public class BaseViewModel implements IVolleyCollback {
     public String getFahrenheit(){
         return fahrenheit;
     }
-
     public Boolean getTempType(){
         return tempType;
     }

@@ -57,6 +57,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
 
         SetupButton();
         SetupEvents();
+        _baseViewModel.SetDashboardFragment(this);
 
         return _view;
     }
