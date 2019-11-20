@@ -63,7 +63,7 @@
                     android:id="@+id/driverseaterror"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:alpha="0.3"
+                    android:alpha="0.45"
                     android:src="@drawable/driverseatred"
                     android:visibility="invisible" />
 
@@ -78,7 +78,7 @@
                     android:id="@+id/frontseaterror"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:alpha="0.3"
+                    android:alpha="0.45"
                     android:src="@drawable/frontseatred"
                     android:visibility="invisible" />
 
@@ -93,7 +93,7 @@
                     android:id="@+id/backseaterror"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:alpha="0.3"
+                    android:alpha="0.45"
                     android:src="@drawable/backseatred"
                     android:visibility="invisible"/>
 
