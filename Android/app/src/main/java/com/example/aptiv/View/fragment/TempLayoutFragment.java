@@ -89,14 +89,14 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
             @Override
             public void onClick(View v) {
                 _desiredTemp++;
-                PlusMinusButtonClicked();
+                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
             }
         });
         _minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 _desiredTemp--;
-                PlusMinusButtonClicked();
+                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
             }
         });
     }
@@ -135,40 +135,33 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
             _plusMinusButtonClicked = false;
         }
         Boolean tempType = _baseViewModel.getTempType();
-        if(Driver && Passenger && Back){
+        temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
+        int count = 1;
+        if(Driver){
+            temp = temp + Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
+            count++;
+        }
+        if(Passenger){
+            temp = temp + Double.parseDouble(_baseViewModel.PassengerZone.getTemperature());
+            count++;
+        }
+        if(Back){
+            temp = temp + Double.parseDouble(_baseViewModel.PassengerZone.getTemperature());
+            count++;
+        }
+        if(count ==4){
             temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
+            count = 1;
         }
-        else if(Driver && Passenger){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+  Double.parseDouble(_baseViewModel.PassengerZone.getTemperature()) +  Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
-            temp = temp/3;
-        }
-        else if(Passenger && Back){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+  Double.parseDouble(_baseViewModel.PassengerZone.getTemperature()) + Double.parseDouble(_baseViewModel.BackseatZone.getTemperature());
-            temp = temp/3;
-        }
-        else if(Driver && Back){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature()) + Double.parseDouble(_baseViewModel.BackseatZone.getTemperature()) +  Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
-            temp = temp/3;
-        }
-        else if(Driver){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
-            temp = temp/2;
-        }
-        else if(Passenger){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+Double.parseDouble(_baseViewModel.PassengerZone.getTemperature());
-            temp = temp/2;
-        }
-        else {
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature())+Double.parseDouble(_baseViewModel.BackseatZone.getTemperature());
-            temp = temp/2;
-        }
+        temp = temp/count;
+
         temp = (tempType) ? (1.8*temp)+32 : temp;
         if(_plusMinusButtonClicked){
-            PlusMinusButtonClicked();
+            PlusMinusButtonClicked(Driver,Passenger,Back);
         }
     }
 
-    private void PlusMinusButtonClicked(){
+    private void PlusMinusButtonClicked(boolean Driver,boolean Passenger,boolean Back){
         _plusMinusButtonClicked = true;
         Boolean tempType = _baseViewModel.getTempType();
         String fahrenheit = _baseViewModel.getFahrenheit();
@@ -176,6 +169,15 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         String typeString = ((tempType)) ? fahrenheit : celsius;
         tempChangeValue.setTextSize(25);
         tempChangeValue.setText("In progress...\n Changing Tempreture\n from " +_desiredTemp+ " to "+ String.valueOf((int)temp) + typeString);
+        if(Driver){
+            _baseViewModel.DriverProfile.setTemperature(Double.toString(_desiredTemp));
+        }
+        if(Passenger){
+            _baseViewModel.PassengerProfile.setTemperature(Double.toString(_desiredTemp));
+        }
+        if(Back) {
+            _baseViewModel.BackProfile.setTemperature(Double.toString(_desiredTemp));
+        }
     }
 
     private void setUpTimer(){

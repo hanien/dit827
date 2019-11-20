@@ -1,5 +1,6 @@
 package com.example.aptiv.ViewModel;
 
+import com.example.aptiv.Model.Classe.Profile;
 import com.example.aptiv.Model.Classe.Zone;
 import com.example.aptiv.Model.Interface.IVolleyCollback;
 import com.example.aptiv.Model.Service.WeatherService;
@@ -16,6 +17,9 @@ public class BaseViewModel implements IVolleyCollback {
     public Zone PassengerZone = new Zone("0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
     public Zone BackseatZone = new Zone("0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
     public Zone MiddleZone = new Zone("0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
+    public Profile DriverProfile = new Profile(null,null,null,null,null,null,null,null,null,null,null,null);
+    public Profile PassengerProfile = new Profile(null,null,null,null,null,null,null,null,null,null,null,null);
+    public Profile BackProfile = new Profile(null,null,null,null,null,null,null,null,null,null,null,null);
     public Double OutTempreture = 0.0;
     public Boolean tempType; //True here means that it is Fahrenheit
     private String fahrenheit;
