@@ -15,6 +15,9 @@ import com.example.aptiv.View.adapter.CustomListAdapter;
 import com.example.aptiv.ViewModel.BaseViewModel;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import java.util.ArrayList;
 
 public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
@@ -23,6 +26,7 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
     private DashboardFragment _parentFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
+    private ModeLayoutFragment ModeLayoutFragment;
 
     //private ModeLayoutFragment ModeLayoutFragment;
     private IZoneSelection _callback;
@@ -72,17 +76,14 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
 
     }
 
-    /*
-        //Open mode fragment
-        public void OpenModeFragment() {
-            FragmentManager fm1 = getFragmentManager();
-            FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
-            ModeLayoutFragment = new ModeLayoutFragment(this, _owner, _baseViewModel);
-            fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, ModeLayoutFragment).commit();
-            _callback = ModeLayoutFragment;
-
-        }
-    */
+    //Open mode fragment
+    public void OpenModeFragment() {
+        FragmentManager fm1 = getFragmentManager();
+        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
+        ModeLayoutFragment = new ModeLayoutFragment(this,_owner,_baseViewModel);
+        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard,ModeLayoutFragment).commit();
+        _callback = ModeLayoutFragment;
+    }
 
     @Override
     public void zoneIsSelected() {

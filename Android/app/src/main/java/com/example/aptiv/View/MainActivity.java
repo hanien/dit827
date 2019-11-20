@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity  {
     public DashboardFragment _dashboardFragment;
     public SettingsLayoutFragment _settingsLayoutFragment;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,5 +77,9 @@ public class MainActivity extends AppCompatActivity  {
 
     public void OpenSettingsFragment(View v) {
         _dashboardFragment.OpenSettingsFragment();
+    }
+
+    public void OpenModeFragment(View v) {
+        _settingsLayoutFragment.OpenModeFragment();
     }
 }

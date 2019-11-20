@@ -22,7 +22,7 @@
         android:layout_height="68dp"
         android:layout_alignParentTop="true"
         android:layout_margin="10dp"
-
+        android:onClick="OpenModeFragment"
         android:text="Title"
         android:gravity="center_vertical"
         android:textColor="@color/CardViewTextColor"

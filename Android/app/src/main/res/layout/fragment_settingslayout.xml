@@ -29,26 +29,35 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="688dp"
+            android:layout_height="762dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:text="Settings"
-                android:layout_gravity="center_horizontal"
                 android:textColor="@color/CardViewTextColor"
-                android:textStyle="italic"
-                android:textSize="40dp" />
+                android:textSize="40dp"
+                android:textStyle="italic" />
 
             <ListView
                 android:id="@+id/modes_list"
                 android:layout_width="match_parent"
+                android:layout_height="623dp"
+                android:choiceMode="singleChoice"
+                android:textColor="@color/CardViewTextColor" />
+
+            <ImageView
+                android:id="@+id/addBtn"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/CardViewTextColor"
-                android:choiceMode="singleChoice" />
+                android:layout_gravity="center_vertical"
+                android:clickable="true"
+                android:onClick="OpenFragment"
+                card_view:srcCompat="@drawable/add" />
 
         </LinearLayout>
 
