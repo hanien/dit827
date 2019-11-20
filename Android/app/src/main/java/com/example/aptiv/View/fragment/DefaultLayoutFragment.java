@@ -91,10 +91,10 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
 
         double OutTemp = _baseViewModel.OutTempreture;
         String outTempType = (_baseViewModel.getTempType()) ? _baseViewModel.getFahrenheit() : _baseViewModel.getCelsius();
-        temp = (_baseViewModel.getTempType()) ? ((1.8*OutTemp))+32 : OutTemp;
+        OutTemp = (_baseViewModel.getTempType()) ? ((1.8*OutTemp))+32 : OutTemp;
 
         _inTempTextView.setText(temp + tempType);
-        _outTempTextView.setText(outTempType + tempType);
+        _outTempTextView.setText(OutTemp + tempType);
     }
 
     @Override

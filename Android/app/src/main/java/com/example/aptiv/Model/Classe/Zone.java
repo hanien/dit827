@@ -14,6 +14,7 @@ public class Zone {
     private String altitude;
     private String light;
     private String lux;
+    private Profile profile;
 
     public Zone(String temperature, String humidity, String gain, String luminosity, String full, String ir,
                 String pressure , String sound, String altitude, String light,String lux){
@@ -28,7 +29,17 @@ public class Zone {
         this.altitude = altitude;
         this.light = light;
         this.lux = lux;
+        this.profile = new Profile("name",temperature,humidity,gain,luminosity,full,ir,pressure,sound,altitude,light,lux);
     }
+
+    public Profile getProfile(){
+        return this.profile;
+    }
+
+    public void setProfile(Profile profile){
+        this.profile = profile;
+    }
+
     public String getTemperature() {
         return temperature;
     }
