@@ -22,32 +22,17 @@ public class ProfileHandler {
     private DashboardFragment _dashboardFragment;
     private Zone _driver, _passenger, _mid, _back;
 
-    public ProfileHandler(BaseViewModel base, DashboardFragment dashboardFragment){
+    public ProfileHandler(BaseViewModel base, DashboardFragment dashboardFragment,
+                          Zone driver, Zone passenger, Zone mid, Zone back){
         _base = base;
         _dashboardFragment = dashboardFragment;
+        _driver = driver;
+        _passenger = passenger;
+        _mid = mid;
+        _back = back;
     }
 
-    public void onDataFetched(Zone zone) {
-        //store current readings
-        switch(zone.getName()){
-            case DRIVER:
-                _driver = zone;
-                break;
-            case BACK:
-                _back = zone;
-                break;
-            case MIDDLE:
-                _mid = zone;
-                break;
-            case PASSENGER:
-                _passenger = zone;
-                break;
-            default:
-                //TODO add behavior for invalid zone - this should not be possible
-                break;
-        }
-
-        //check each zone thresholds
+    public void onDataFetched() {
         checkThresholds();
     }
 
@@ -61,6 +46,9 @@ public class ProfileHandler {
         HashMap<String, Boolean> driver = checkZone(profile, _driver);
 
         if(driver.containsValue(Boolean.FALSE)){
+            _dashboardFragment.toggleError(_driver, Boolean.TRUE);
+        }
+        else{
             _dashboardFragment.toggleError(_driver, Boolean.TRUE);
         }
     }

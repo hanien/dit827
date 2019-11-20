@@ -35,7 +35,9 @@ public class BaseViewModel implements IVolleyCollback {
 
         _aptivService = new AptivService(_activity);
         _weatherService = new WeatherService(_activity);
-        _profileHandler = new ProfileHandler(this, _dashboardFragment);
+        _profileHandler = new ProfileHandler(this, _dashboardFragment, DriverZone, PassengerZone,
+                                                MiddleZone, BackseatZone);
+
         fahrenheit = "° F";
         celsius = "° C";
         tempType = false;
@@ -54,19 +56,19 @@ public class BaseViewModel implements IVolleyCollback {
     @Override
     public void GetDriverReadings(Zone value) {
         DriverZone = value;
-        _profileHandler.onDataFetched(DriverZone);
+        _profileHandler.onDataFetched();
     }
 
     @Override
     public void GetPassengerReadings(Zone value) {
         PassengerZone = value;
-        _profileHandler.onDataFetched(PassengerZone);
+        _profileHandler.onDataFetched();
     }
 
     @Override
     public void GetAverageReadings(Zone value) {
         MiddleZone = value;
-        _profileHandler.onDataFetched(MiddleZone);
+        _profileHandler.onDataFetched();
     }
 
     @Override
@@ -77,7 +79,7 @@ public class BaseViewModel implements IVolleyCollback {
     @Override
     public void GetBackseatReadings(Zone value) {
         BackseatZone = value;
-        _profileHandler.onDataFetched(BackseatZone);
+        _profileHandler.onDataFetched();
     }
 
     public String getFahrenheit(){
