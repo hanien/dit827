@@ -17,6 +17,9 @@ public class ProfileHandler {
     private final double t_lux = 5.0;
     private final double t_pressure = 10.0;
     private final double t_temp = 0.5;
+    private final double t_luminosity = 5.0;
+    private final double t_sound = 1.0;
+    private final double t_light = 5.0;
 
     private BaseViewModel _base;
     private DashboardFragment _dashboardFragment;
@@ -64,39 +67,35 @@ public class ProfileHandler {
         //compares each value against the threshold
         //puts true in dict entry if within threshold, false if not
         //TODO: maybe see if we can convert to doubles when we gather the data?
-        checkedZone.put("temperature", (Double.parseDouble(zone.getTemperature()) > Double.parseDouble(profile.getTemperature()) - 0.5
-                                        && Double.parseDouble(zone.getTemperature()) < Double.parseDouble(profile.getTemperature()) + 0.5));
+        checkedZone.put("temperature", compareThreshold(zone.getTemperature(), t_temp));
 
-        checkedZone.put("humidity", (Double.parseDouble(zone.getHumidity()) > Double.parseDouble(profile.getHumidity()) - 0.5
-                                        && Double.parseDouble(zone.getHumidity()) < Double.parseDouble(profile.getHumidity()) + 0.5));
+        checkedZone.put("humidity", compareThreshold(zone.getHumidity(), t_humidity));
 
-        checkedZone.put("gain", (Double.parseDouble(zone.getGain()) > Double.parseDouble(profile.getGain()) - 0.5
-                                        && Double.parseDouble(zone.getGain()) < Double.parseDouble(profile.getGain()) + 0.5));
+        checkedZone.put("gain", compareThreshold(zone.getGain(), t_gain));
 
-        checkedZone.put("luminosity", (Double.parseDouble(zone.getLuminosity()) > Double.parseDouble(profile.getLuminosity()) - 0.5
-                                        && Double.parseDouble(zone.getLuminosity()) < Double.parseDouble(profile.getLuminosity()) + 0.5));
+        checkedZone.put("luminosity", compareThreshold(zone.getLuminosity(), t_luminosity));
 
-        checkedZone.put("full", (Double.parseDouble(zone.getFull()) > Double.parseDouble(profile.getFull()) - 0.5
-                                        && Double.parseDouble(zone.getTemperature()) < Double.parseDouble(profile.getFull()) + 0.5));
+        checkedZone.put("full", compareThreshold(zone.getFull(), t_full));
 
-        checkedZone.put("ir", (Double.parseDouble(zone.getIr()) > Double.parseDouble(profile.getIr()) - 0.5
-                                        && Double.parseDouble(zone.getIr()) < Double.parseDouble(profile.getIr()) + 0.5));
+        checkedZone.put("ir", compareThreshold(zone.getIr(), t_ir));
 
-        checkedZone.put("pressure", (Double.parseDouble(zone.getPressure()) > Double.parseDouble(profile.getPressure()) - 0.5
-                                        && Double.parseDouble(zone.getPressure()) < Double.parseDouble(profile.getPressure()) + 0.5));
+        checkedZone.put("pressure", compareThreshold(zone.getPressure(), t_pressure));
 
-        checkedZone.put("sound", (Double.parseDouble(zone.getSound()) > Double.parseDouble(profile.getSound()) - 0.5
-                                        && Double.parseDouble(zone.getSound()) < Double.parseDouble(profile.getSound()) + 0.5));
+        checkedZone.put("sound", compareThreshold(zone.getSound(), t_sound));
 
-        checkedZone.put("altitude", (Double.parseDouble(zone.getAltitiude()) > Double.parseDouble(profile.getAltitiude()) - 0.5
-                                        && Double.parseDouble(zone.getAltitiude()) < Double.parseDouble(profile.getAltitiude()) + 0.5));
+        checkedZone.put("altitude", compareThreshold(zone.getAltitiude(), t_altitude));
 
-        checkedZone.put("light", (Double.parseDouble(zone.getLight()) > Double.parseDouble(profile.getLight()) - 0.5
-                                        && Double.parseDouble(zone.getLight()) < Double.parseDouble(profile.getLight()) + 0.5));
+        checkedZone.put("light", compareThreshold(zone.getLight(), t_light));
 
-        checkedZone.put("lux", (Double.parseDouble(zone.getLux()) > Double.parseDouble(profile.getLux()) - 0.5
-                                        && Double.parseDouble(zone.getLux()) < Double.parseDouble(profile.getLux()) + 0.5));
+        checkedZone.put("lux", compareThreshold(zone.getLux(), t_lux));
 
         return checkedZone;
+    }
+
+    private boolean compareThreshold(String value, double threshold){
+        boolean belowThreshold = Double.parseDouble(value) > Double.parseDouble(value) - threshold;
+        boolean aboveThreshold = Double.parseDouble(value) < Double.parseDouble(value) + threshold;
+
+        return belowThreshold && aboveThreshold;
     }
 }
