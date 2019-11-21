@@ -29,8 +29,6 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
     private TextView tempChangeValue;
 
     private LinearLayout SetTempLayout;
-    private Switch TempTypeSwitch;
-
 
     public TempLayoutFragment(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
@@ -56,19 +54,6 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         tempChangeValue = _view.findViewById(R.id.tempChangeValue);
         TempValue = _view.findViewById(R.id.tempValue);
         SetTempLayout = _view.findViewById(R.id.SetTempLayout);
-        TempTypeSwitch = _view.findViewById(R.id.TempType);
-
-        TempTypeSwitch.setChecked(_baseViewModel.getTempType());
-        TempTypeSwitch.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        String tempType = (isChecked) ? _baseViewModel.getFahrenheit(): _baseViewModel.getCelsius();
-                        _baseViewModel.tempType = isChecked;
-                        updateTempValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
-                    }
-                }
-        );
 
     }
 
