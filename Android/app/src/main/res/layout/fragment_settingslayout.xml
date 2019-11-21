@@ -63,7 +63,7 @@
                     android:id="@+id/addBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start"
+                    android:layout_gravity="end"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:onClick="OpenFragment"
@@ -78,8 +78,8 @@
 
                     <TextView
                         android:id="@+id/textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_gravity="top"
                         android:layout_weight="2"
                         android:text="Temp Type"
@@ -88,7 +88,7 @@
                     <Switch
                         android:id="@+id/TempType"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="bottom"
                         android:layout_marginTop="10px"
                         android:layout_weight="2"
