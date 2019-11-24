@@ -44,8 +44,10 @@ public class MainActivity extends AppCompatActivity  {
     //it has been set to invisible from xml file
     public void addTabs(ViewPager viewPager) {
         _dashboardFragment = new DashboardFragment(this , _viewModel);
+        _settingsLayoutFragment = new SettingsLayoutFragment(_dashboardFragment, this , _viewModel);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(_dashboardFragment, "Dashboard");
+        adapter.addFrag(_settingsLayoutFragment, "Settings");
         viewPager.setAdapter(adapter);
     }
 
@@ -57,6 +59,11 @@ public class MainActivity extends AppCompatActivity  {
     //TODO: those should be moved to fragment, for now keep it here ,there is a bug i cant figure it out
     public void CloseVolumeFragment(View v){
         _dashboardFragment.SetupCarLayoutFragment();
+    }
+
+    //TODO: those should be moved to fragment, for now keep it here ,there is a bug i cant figure it out
+    public void CloseModeFragment(View v){
+        _dashboardFragment.OpenSettingsFragment();
     }
 
     public void OpenTempFragment(View v) {
@@ -81,5 +88,9 @@ public class MainActivity extends AppCompatActivity  {
 
     public void OpenModeFragment(View v) {
         _settingsLayoutFragment.OpenModeFragment();
+    }
+
+    public void OpenAddModeFragment(View v) {
+        _settingsLayoutFragment.OpenAddModeFragment();
     }
 }

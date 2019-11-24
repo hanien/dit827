@@ -55,8 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:clickable="true"
-                android:onClick="OpenFragment"
+                android:onClick="OpenAddModeFragment"
                 card_view:srcCompat="@drawable/add" />
 
         </LinearLayout>
