@@ -43,7 +43,6 @@ public class ProfileHandler {
         _passSample = new LinkedList<>();
         _midSample = new LinkedList<>();
         _backSample = new LinkedList<>();
-        //TODO init empty lists jesus fucking christ please kill me
         _driveSum = initEmptyMap();
         _passSum = initEmptyMap();
         _midSum = initEmptyMap();
