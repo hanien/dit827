@@ -187,7 +187,7 @@ public class ProfileHandler {
         sum.put("altitude", (sum.get("altitude") + element.get("altitude")));
         sum.put("light", (sum.get("light") + element.get("light")));
         sum.put("lux", (sum.get("lux") + element.get("lux")));
-
+        //TODO maybe use line below instead?
         // element.forEach((k, v) -> sum.merge(k, v, Double::sum);
         return sum;
     }
