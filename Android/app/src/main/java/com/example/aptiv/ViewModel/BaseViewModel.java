@@ -59,19 +59,19 @@ public class BaseViewModel implements IVolleyCollback {
     @Override
     public void GetDriverReadings(Zone value) {
         DriverZone = value;
-        _profileHandler.onDataFetched();
+        _profileHandler.onDataFetched(value);
     }
 
     @Override
     public void GetPassengerReadings(Zone value) {
         PassengerZone = value;
-        _profileHandler.onDataFetched();
+        _profileHandler.onDataFetched(value);
     }
 
     @Override
     public void GetAverageReadings(Zone value) {
         MiddleZone = value;
-        _profileHandler.onDataFetched();
+        _profileHandler.onDataFetched(value);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class BaseViewModel implements IVolleyCollback {
     @Override
     public void GetBackseatReadings(Zone value) {
         BackseatZone = value;
-        _profileHandler.onDataFetched();
+        _profileHandler.onDataFetched(value);
     }
 
     public String getFahrenheit(){
