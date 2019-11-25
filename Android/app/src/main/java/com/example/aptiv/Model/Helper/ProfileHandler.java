@@ -70,7 +70,6 @@ public class ProfileHandler {
                 break;
         }
         sampleZone(null, zone);
-        //TODO replace with an actual currently selected profile
         checkThresholds(null, zone);
     }
 
