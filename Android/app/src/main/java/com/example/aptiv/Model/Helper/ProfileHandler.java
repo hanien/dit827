@@ -5,6 +5,7 @@ import com.example.aptiv.Model.Classe.Zone;
 import com.example.aptiv.View.fragment.DashboardFragment;
 import com.example.aptiv.ViewModel.BaseViewModel;
 
+import java.lang.ref.PhantomReference;
 import java.sql.Driver;
 import java.util.HashMap;
 
@@ -34,7 +35,7 @@ public class ProfileHandler {
     private Zone _driver, _passenger, _mid, _back;
 
     public ProfileHandler(BaseViewModel base, DashboardFragment dashboardFragment,
-                          Zone driver, Zone passenger, Zone mid, Zone back){
+                          Zone driver, Zone passenger, Zone mid, Zone back) {
         _base = base;
         _dashboardFragment = dashboardFragment;
         _driver = driver;
@@ -44,33 +45,32 @@ public class ProfileHandler {
 
     }
 
-    public void SetDashboardFragment(DashboardFragment fragment){
+    public void SetDashboardFragment(DashboardFragment fragment) {
         _dashboardFragment = fragment;
         checkThresholds();
     }
+
     public void onDataFetched() {
         checkThresholds();
-        checkSoundLevel();
     }
 
     private void checkThresholds() {
         //take profile
         //dummy profile until profiles are implemented
-        Profile profile = new Profile("0", "0", "0","0","0","0","0","0","0","0","0","0");
+        Profile profile = new Profile("0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0");
 
         //for each zone
         ////create dict for zone
         HashMap<String, Boolean> driver = checkZone(profile, _driver);
 
-        if(driver.containsValue(Boolean.FALSE)){
+        if (driver.containsValue(Boolean.FALSE)) {
             _dashboardFragment.toggleError(_driver, Boolean.TRUE);
-        }
-        else{
+        } else {
             _dashboardFragment.toggleError(_driver, Boolean.TRUE);
         }
     }
 
-    private HashMap<String, Boolean> checkZone(Profile profile, Zone zone){
+    private HashMap<String, Boolean> checkZone(Profile profile, Zone zone) {
         HashMap<String, Boolean> checkedZone = new HashMap<>(11);
 
         //compares each value against the threshold
@@ -101,13 +101,14 @@ public class ProfileHandler {
         return checkedZone;
     }
 
-    private boolean compareThreshold(String value, double threshold){
+    private boolean compareThreshold(String value, double threshold) {
         boolean belowThreshold = Double.parseDouble(value) > Double.parseDouble(value) - threshold;
         boolean aboveThreshold = Double.parseDouble(value) < Double.parseDouble(value) + threshold;
 
         return belowThreshold && aboveThreshold;
     }
 
+    // Use this method in sound fragment to check sound level after George merge his code
 
     private boolean checkSoundLevel() {
 
@@ -122,19 +123,104 @@ public class ProfileHandler {
     }
 
 
-    private boolean compareSoundlevel(String DriverLevel,String PassangerLevel,String BackLevel){
+    private boolean compareSoundlevel(String DriverLevel, String PassangerLevel, String BackLevel) {
 
-      double Driver = Double.parseDouble(DriverLevel);
-      double Passanger = Double.parseDouble(PassangerLevel);
-      double Back = Double.parseDouble(BackLevel);
-
-
-      boolean DriverCheck = Driver < (Passanger + Back) / 2;
-      boolean PassangerCheck = Passanger < (Driver + Back) / 2;
-      boolean BackCheck = Back < (Passanger + Driver) / 2;
+        double Driver = Double.parseDouble(DriverLevel);
+        double Passanger = Double.parseDouble(PassangerLevel);
+        double Back = Double.parseDouble(BackLevel);
 
 
-      return DriverCheck && PassangerCheck && BackCheck ;
+        boolean DriverCheck = Driver < (Passanger + Back) / 2;
+        boolean PassangerCheck = Passanger < (Driver + Back) / 2;
+        boolean BackCheck = Back < (Passanger + Driver) / 2;
+
+
+        return DriverCheck && PassangerCheck && BackCheck;
     }
+
+
+    private void ZonesValueHandler(Profile profile, Zone zone) {
+
+        HashMap<String, Boolean> check = checkProfile(profile,zone);
+
+        if (check.containsValue(Boolean.FALSE)) {
+
+            //Todo: Create PopUp
+
+            boolean PopUp = false;
+
+           //PopUp = _dashboardFragment.popUp();
+
+            if (PopUp){
+
+                ChangeZoneValues(profile, zone);
+
+            }
+            else {
+
+                //User choose zone for the profile
+
+            }
+
+
+        } else {
+
+            ChangeZoneValues(profile, zone);
+
+        }
+    }
+
+
+    private HashMap<String, Boolean> checkProfile(Profile profile, Zone zone) {
+
+        HashMap<String, Boolean> checkedProfile = new HashMap<>(11);
+
+
+        checkedProfile.put("temperature", compareZonesAndProfile(zone.getTemperature(),profile.getTemperature()));
+
+        checkedProfile.put("humidity", compareZonesAndProfile(zone.getHumidity(), profile.getHumidity()));
+
+        checkedProfile.put("gain", compareZonesAndProfile(zone.getGain(), profile.getGain()));
+
+        checkedProfile.put("luminosity", compareZonesAndProfile(zone.getLuminosity(), profile.getLuminosity()));
+
+        checkedProfile.put("full", compareZonesAndProfile(zone.getFull(),profile.getFull()));
+
+        checkedProfile.put("ir", compareZonesAndProfile(zone.getIr(),profile.getIr() ));
+
+        checkedProfile.put("pressure", compareZonesAndProfile(zone.getPressure(),profile.getPressure()));
+
+        checkedProfile.put("sound", compareZonesAndProfile(zone.getSound(),profile.getSound() ));
+
+        checkedProfile.put("light", compareZonesAndProfile(zone.getLight(),profile.getLight()));
+
+        checkedProfile.put("lux", compareZonesAndProfile(zone.getLux(), profile.getLux()));
+
+        return checkedProfile;
+    }
+
+    private boolean compareZonesAndProfile(String zoneValue, String ProfileValue) {
+
+        boolean result = (Double.parseDouble(zoneValue) == Double.parseDouble(ProfileValue));
+
+        return result;
+    }
+
+    private void ChangeZoneValues(Profile profile, Zone zone) {
+
+    zone.setTemperature(profile.getTemperature());
+    zone.setHumidity(profile.getHumidity());
+    zone.setGain(profile.getGain());
+    zone.setLuminosity(profile.getLuminosity());
+    zone.setFull(profile.getFull());
+    zone.setIr(profile.getIr());
+    zone.setPressure(profile.getPressure());
+    zone.setSound(profile.getSound());
+    zone.setLight(profile.getLight());
+    zone.setLux(profile.getLux());
+
+    }
+
+
 
 }
