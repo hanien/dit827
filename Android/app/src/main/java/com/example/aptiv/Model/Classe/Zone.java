@@ -1,5 +1,7 @@
 package com.example.aptiv.Model.Classe;
 
+import java.util.HashMap;
+
 import static java.lang.Float.parseFloat;
 
 public class Zone {
@@ -126,4 +128,22 @@ public class Zone {
     public String getLux() { return lux; }
 
     public void setLux(String lux) { this.lux = lux; }
+
+    public HashMap<String, Double> getAll()
+    {
+        HashMap<String, Double> values = new HashMap<>(11);
+        values.put("temperature", Double.parseDouble(this.getTemperature()));
+        values.put("humidity", Double.parseDouble(this.getHumidity()));
+        values.put("gain", Double.parseDouble(this.getGain()));
+        values.put("luminosity", Double.parseDouble(this.getLuminosity()));
+        values.put("full", Double.parseDouble(this.getFull()));
+        values.put("ir", Double.parseDouble(this.getIr()));
+        values.put("pressure", Double.parseDouble(this.getPressure()));
+        values.put("sound", Double.parseDouble(this.getSound()));
+        values.put("altitude", Double.parseDouble(this.getAltitiude()));
+        values.put("light", Double.parseDouble(this.getLight()));
+        values.put("lux", Double.parseDouble(this.getLux()));
+
+        return values;
+    }
 }
