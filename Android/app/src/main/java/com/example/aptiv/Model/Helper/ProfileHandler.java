@@ -5,6 +5,7 @@ import com.example.aptiv.Model.Classe.Zone;
 import com.example.aptiv.View.fragment.DashboardFragment;
 import com.example.aptiv.ViewModel.BaseViewModel;
 
+import java.sql.Driver;
 import java.util.HashMap;
 
 public class ProfileHandler {
@@ -20,6 +21,13 @@ public class ProfileHandler {
     private final double t_luminosity = 5.0;
     private final double t_sound = 1.0;
     private final double t_light = 5.0;
+
+    // Ask George why Soundlevel is String !
+    private String DriverSoundLevel;
+    private String PassangerSoundLevel;
+    private String BackSoundLevel;
+
+    private boolean CheckSound;
 
     private BaseViewModel _base;
     private DashboardFragment _dashboardFragment;
@@ -42,6 +50,7 @@ public class ProfileHandler {
     }
     public void onDataFetched() {
         checkThresholds();
+        checkSoundLevel();
     }
 
     private void checkThresholds() {
@@ -98,4 +107,34 @@ public class ProfileHandler {
 
         return belowThreshold && aboveThreshold;
     }
+
+
+    private boolean checkSoundLevel() {
+
+        DriverSoundLevel = _base.DriverZone.getSound();
+        PassangerSoundLevel = _base.DriverZone.getSound();
+        BackSoundLevel = _base.DriverZone.getSound();
+
+        CheckSound = compareSoundlevel(DriverSoundLevel, PassangerSoundLevel, BackSoundLevel);
+
+        return CheckSound;
+
+    }
+
+
+    private boolean compareSoundlevel(String DriverLevel,String PassangerLevel,String BackLevel){
+
+      double Driver = Double.parseDouble(DriverLevel);
+      double Passanger = Double.parseDouble(PassangerLevel);
+      double Back = Double.parseDouble(BackLevel);
+
+
+      boolean DriverCheck = Driver < (Passanger + Back) / 2;
+      boolean PassangerCheck = Passanger < (Driver + Back) / 2;
+      boolean BackCheck = Back < (Passanger + Driver) / 2;
+
+
+      return DriverCheck && PassangerCheck && BackCheck ;
+    }
+
 }
