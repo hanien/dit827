@@ -23,38 +23,42 @@ import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 
-public class AddModeLayoutFragment extends Fragment implements IZoneSelection {
+public class EditModeLayoutFragment extends Fragment implements IZoneSelection {
 
     private MainActivity _owner;
-    private SettingsLayoutFragment _parentFragment;
+    private ModeLayoutFragment _parentFragment;
     private DashboardFragment _dashboardFragment;
+    private SettingsLayoutFragment _settingsLayoutFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
     private ModeLayoutFragment ModeLayoutFragment;
     private AddModeLayoutFragment AddModeLayoutFragment;
     private IZoneSelection _callback;
+    private Mode _currentMode;
 
     private ListView listView;
     private CustomListAdapter mAdapter;
 
-    private EditText newName;
-    private EditText newAirp;
-    private EditText newHum;
-    private EditText newLux;
-    private EditText newTemp;
-    private EditText newVolume;
-    private ImageView addBtn;
+    private EditText editName;
+    private EditText editAirp;
+    private EditText editHum;
+    private EditText editLux;
+    private EditText editTemp;
+    private EditText editVolume;
+    private ImageView saveBtn;
 
-    public AddModeLayoutFragment(SettingsLayoutFragment parentFragment, MainActivity Owner, BaseViewModel viewModel) {
+    public EditModeLayoutFragment(ModeLayoutFragment parentFragment, MainActivity Owner, BaseViewModel viewModel, Mode currentMode, SettingsLayoutFragment settingsFragment) {
         _owner = Owner;
         _baseViewModel = viewModel;
         _parentFragment = parentFragment;
+        _currentMode = currentMode;
+        _settingsLayoutFragment = settingsFragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        _view = inflater.inflate(R.layout.fragment_addmodelayout, container, false);
+        _view = inflater.inflate(R.layout.fragment_editmodelayout, container, false);
         //Context context = getActivity().getApplicationContext();
 
         setUpView();
@@ -64,30 +68,40 @@ public class AddModeLayoutFragment extends Fragment implements IZoneSelection {
 
     private void setUpView() {
 
-        newName = _view.findViewById(R.id.newName);
-        newAirp = _view.findViewById(R.id.newAirp);
-        newHum = _view.findViewById(R.id.newHum);
-        newLux = _view.findViewById(R.id.newLux);
-        newTemp = _view.findViewById(R.id.newTemp);
-        newVolume = _view.findViewById(R.id.newVolume);
-        addBtn = _view.findViewById(R.id.addBtn);
+        editName = _view.findViewById(R.id.editName);
+        editAirp = _view.findViewById(R.id.editAirp);
+        editHum = _view.findViewById(R.id.editHum);
+        editLux = _view.findViewById(R.id.editLux);
+        editTemp = _view.findViewById(R.id.editTemp);
+        editVolume = _view.findViewById(R.id.editVolume);
+        saveBtn = _view.findViewById(R.id.saveBtn);
 
-        addBtn.setOnClickListener(
+        editName.setText(_currentMode.getTitle());
+        editAirp.setText(_currentMode.getAirp());
+        editHum.setText(_currentMode.getHumidity());
+        editLux.setText(_currentMode.getLux());
+        editTemp.setText(_currentMode.getTemp());
+        editVolume.setText(_currentMode.getVolume());
+
+        saveBtn.setOnClickListener(
                 new View.OnClickListener()
                 {
                     public void onClick(View view)
                     {
                         //test
-                        Log.d("CLICKED", "add button");
+                        Log.d("CLICKED", "save button");
 
-                        _parentFragment.addNewMode(
-                                newName.getText().toString(),
-                                newLux.getText().toString(),
-                                newTemp.getText().toString(),
-                                newVolume.getText().toString(),
-                                newAirp.getText().toString(),
-                                newHum.getText().toString()
+                        _settingsLayoutFragment.editMode(
+                                _currentMode,
+                                editName.getText().toString(),
+                                editLux.getText().toString(),
+                                editTemp.getText().toString(),
+                                editVolume.getText().toString(),
+                                editAirp.getText().toString(),
+                                editHum.getText().toString()
                         );
+
+
 
                         _owner.OpenSettingsFragment(_view);
                     }

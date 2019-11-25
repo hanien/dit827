@@ -1,4 +1,6 @@
 package com.example.aptiv.View;
+import com.example.aptiv.Model.Classe.Mode;
+import com.example.aptiv.View.fragment.ModeLayoutFragment;
 import com.example.aptiv.View.fragment.SettingsLayoutFragment;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity  {
     private BaseViewModel _viewModel;
     public DashboardFragment _dashboardFragment;
     public SettingsLayoutFragment _settingsLayoutFragment;
+    public ModeLayoutFragment _modeLayoutFragment;
+    private Mode _mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +49,11 @@ public class MainActivity extends AppCompatActivity  {
     public void addTabs(ViewPager viewPager) {
         _dashboardFragment = new DashboardFragment(this , _viewModel);
         _settingsLayoutFragment = new SettingsLayoutFragment(_dashboardFragment, this , _viewModel);
+        _modeLayoutFragment = new ModeLayoutFragment(_settingsLayoutFragment, this, _viewModel, _mode);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(_dashboardFragment, "Dashboard");
         adapter.addFrag(_settingsLayoutFragment, "Settings");
+        adapter.addFrag(_modeLayoutFragment, "Mode");
         viewPager.setAdapter(adapter);
     }
 
@@ -86,11 +92,21 @@ public class MainActivity extends AppCompatActivity  {
         _dashboardFragment.OpenSettingsFragment();
     }
 
-    public void OpenModeFragment(View v) {
-        _settingsLayoutFragment.OpenModeFragment();
+    public void OpenModeFragment(View v, Mode currentMode) {
+        _settingsLayoutFragment.OpenModeFragment(currentMode);
     }
 
     public void OpenAddModeFragment(View v) {
         _settingsLayoutFragment.OpenAddModeFragment();
     }
+
+    /*
+    public void OpenEditModeFragment(View v, Mode currentMode) {
+        _modeLayoutFragment.OpenEditModeFragment(currentMode);
+    }
+
+    */
 }
+
+
+

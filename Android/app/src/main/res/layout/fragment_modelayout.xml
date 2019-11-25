@@ -24,138 +24,139 @@
             android:layout_gravity="right"
             android:layout_marginLeft="0dp"
             android:clickable="true"
-            android:onClick="CloseVolumeFragment"
+            android:onClick="CloseModeFragment"
             card_view:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="688dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/modeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Mode"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="Mode"
                 android:textColor="@color/CardViewTextColor"
-                android:textStyle="italic"
-                android:textSize="40dp" />
+                android:textSize="40dp"
+                android:textStyle="italic" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="30dp" >
+                android:layout_margin="32dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="Air pressure: "
                     android:textColor="@color/CardViewTextColor"
                     android:textSize="35dp" />
 
                 <TextView
                     android:id="@+id/modeAirp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="158dp"
+                    android:textSize="35dp"
                     android:text="-"
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
+                    android:textColor="@color/CardViewTextColor" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="30dp" >
+                android:layout_margin="32dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="Humidity: "
                     android:textColor="@color/CardViewTextColor"
                     android:textSize="35dp" />
 
                 <TextView
-                    android:id="@+id/modeHumidity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/modeHum"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="205dp"
+                    android:textSize="35dp"
                     android:text="-"
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
+                    android:textColor="@color/CardViewTextColor" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="30dp" >
+                android:layout_margin="32dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="Lux: "
                     android:textColor="@color/CardViewTextColor"
                     android:textSize="35dp" />
 
                 <TextView
                     android:id="@+id/modeLux"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="290dp"
+                    android:textSize="35dp"
                     android:text="-"
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
+                    android:textColor="@color/CardViewTextColor" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="30dp" >
+                android:layout_margin="32dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="Temperature: "
                     android:textColor="@color/CardViewTextColor"
                     android:textSize="35dp" />
 
                 <TextView
                     android:id="@+id/modeTemp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="150dp"
+                    android:textSize="35dp"
                     android:text="-"
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
+                    android:textColor="@color/CardViewTextColor" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="30dp" >
+                android:layout_margin="32dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="Volume: "
                     android:textColor="@color/CardViewTextColor"
                     android:textSize="35dp" />
 
                 <TextView
                     android:id="@+id/modeVolume"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="230dp"
+                    android:textSize="35dp"
                     android:text="-"
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
+                    android:textColor="@color/CardViewTextColor" />
             </LinearLayout>
 
             <LinearLayout
@@ -170,8 +171,6 @@
                     android:layout_width="206dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="0dp"
-                    android:clickable="true"
-                    android:onClick="OpenEditFragment"
                     card_view:srcCompat="@drawable/edit" />
 
                 <ImageView

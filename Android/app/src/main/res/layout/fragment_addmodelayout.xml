@@ -85,7 +85,7 @@
                     android:id="@+id/newAirp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="8dp"
                     android:background="@color/EditModeColor"
                     android:inputType="text"
                     android:textSize="30dp"
