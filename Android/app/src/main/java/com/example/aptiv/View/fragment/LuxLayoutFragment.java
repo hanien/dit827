@@ -8,12 +8,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.aptiv.Model.Classe.Zone;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;
-import com.sdsmdg.harjot.crollerTest.Croller;
 
 import androidx.fragment.app.Fragment;
 
@@ -78,7 +76,6 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
             luxChangeValue.setVisibility(View.GONE);
             SetLuxLayout.setVisibility(View.GONE);
 
-
         }
     }
 
@@ -123,7 +120,6 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
             luxChangeValue.setText(String.valueOf((int)lux) + " lux");
 
         }
-
 
     }
 

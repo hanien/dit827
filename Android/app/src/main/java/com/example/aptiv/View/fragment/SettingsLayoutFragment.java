@@ -3,7 +3,6 @@ package com.example.aptiv.View.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +23,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-
-import static com.microsoft.appcenter.utils.HandlerUtils.runOnUiThread;
 
 public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
 
@@ -55,12 +52,7 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
         Context context = getActivity().getApplicationContext();
 
         setUpView();
-
         loadData(context);
-
-
-        //createList(context);
-
 
         mAdapter = new CustomListAdapter(context, modesList, _owner, _view);
         listView.setAdapter(mAdapter);
@@ -85,41 +77,6 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
         saveData();
     }
 
-/*
-    private void createList(Context context) {
-
-        saveData();
-        modesList.add(new Mode("Date mode", "1111", "12", "4", "29", "21"));
-        modesList.add(new Mode("Reading mode", "2222", "22", "2", "22", "22"));
-        modesList.add(new Mode("Summer mode", "3333", "11", "33", "11", "11"));
-        modesList.add(new Mode("Winter mode", "4444", "26", "13", "25", "25"));
-        modesList.add(new Mode("Mode 1", "1111", "12", "4", "29", "21"));
-        modesList.add(new Mode("Mode 2", "1111", "12", "4", "29", "21"));
-        modesList.add(new Mode("Mode 3", "1111", "12", "4", "29", "21"));
-        modesList.add(new Mode("Mode 4", "1111", "12", "4", "29", "21"));
-        modesList.add(new Mode("Mode 5", "1111", "12", "4", "29", "21"));
-        modesList.add(new Mode("Mode 6", "1111", "12", "4", "29", "21"));
-
-        mAdapter = new CustomListAdapter(context, modesList);
-        listView.setAdapter(mAdapter);
-
-        //final ArrayAdapter adapter = ((ArrayAdapter)getListAdapter());
-        runOnUiThread(new Runnable() {
-            public void run() {
-                mAdapter.notifyDataSetChanged();
-            }
-        });
-
-
-        for (Mode mode : modesList){
-            Log.i("Mode name: " , mode.getTitle());
-        }
-
-        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
-    }
-*/
-
     private void saveData() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -142,7 +99,6 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
             createList();
         }
 
-        //context.getSharedPreferences("shared preferences", 0).edit().clear().commit();
     }
 
     //Open mode fragment
@@ -164,36 +120,11 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     public void addNewMode(String title, String lux, String temp, String volume, String airp, String humidity) {
-
-        // Context context = getActivity().getApplicationContext();
-        // modesList.clear();
-        // mAdapter.add(new Mode(title, lux, temp, volume, airp, humidity));
-
         modesList.add(new Mode(title, lux, temp, volume, airp, humidity));
         saveData();
-
-
-        for (Mode mode : modesList) {
-            Log.i("Mode name: ", mode.getTitle());
-        }
-
     }
 
     public void editMode(Mode currentMode, String title, String lux, String temp, String volume, String airp, String humidity) {
-        Log.i("editing", title+lux+temp+volume+airp+humidity);
-
-        /*
-        int i = 0;
-        for (Mode mode : modesList) {
-            if (mode.getTitle().equals(currentMode.getTitle())) {
-                mode.get(i,)
-                break;
-            }
-
-            i++;
-        }
-        */
-
         for (Mode mode : modesList) {
             if (mode.getTitle().equals(currentMode.getTitle())) {
                 mode.setTitle(title);
@@ -205,20 +136,10 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
                 break;
             }
         }
-
         saveData();
-
-        for (Mode mode : modesList) {
-            Log.i("Mode name: ", mode.getTitle());
-        }
-
-        //test
-        Log.d("edited", currentMode.getTitle());
-
     }
 
     public void deleteMode(Mode currentMode) {
-        //modesList.remove(currentMode);
 
         for (Mode mode : modesList) {
             if (mode.getTitle().equals(currentMode.getTitle())) {
@@ -229,12 +150,6 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
 
         saveData();
 
-        for (Mode mode : modesList) {
-            Log.i("Mode name: ", mode.getTitle());
-        }
-
-        //test
-        Log.d("deleted", currentMode.getTitle());
     }
 
     @Override

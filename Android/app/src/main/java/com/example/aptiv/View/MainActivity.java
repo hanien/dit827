@@ -100,12 +100,6 @@ public class MainActivity extends AppCompatActivity  {
         _settingsLayoutFragment.OpenAddModeFragment();
     }
 
-    /*
-    public void OpenEditModeFragment(View v, Mode currentMode) {
-        _modeLayoutFragment.OpenEditModeFragment(currentMode);
-    }
-
-    */
 }
 
 

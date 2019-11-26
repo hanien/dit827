@@ -1,27 +1,19 @@
 package com.example.aptiv.View.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import com.example.aptiv.Model.Classe.Mode;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
-import com.example.aptiv.View.adapter.CustomListAdapter;
 import com.example.aptiv.ViewModel.BaseViewModel;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import java.util.ArrayList;
 
 public class EditModeLayoutFragment extends Fragment implements IZoneSelection {
 
@@ -31,13 +23,8 @@ public class EditModeLayoutFragment extends Fragment implements IZoneSelection {
     private SettingsLayoutFragment _settingsLayoutFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
-    private ModeLayoutFragment ModeLayoutFragment;
-    private AddModeLayoutFragment AddModeLayoutFragment;
     private IZoneSelection _callback;
     private Mode _currentMode;
-
-    private ListView listView;
-    private CustomListAdapter mAdapter;
 
     private EditText editName;
     private EditText editAirp;
@@ -59,7 +46,6 @@ public class EditModeLayoutFragment extends Fragment implements IZoneSelection {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         _view = inflater.inflate(R.layout.fragment_editmodelayout, container, false);
-        //Context context = getActivity().getApplicationContext();
 
         setUpView();
 
@@ -88,8 +74,6 @@ public class EditModeLayoutFragment extends Fragment implements IZoneSelection {
                 {
                     public void onClick(View view)
                     {
-                        //test
-                        Log.d("CLICKED", "save button");
 
                         _settingsLayoutFragment.editMode(
                                 _currentMode,
@@ -100,8 +84,6 @@ public class EditModeLayoutFragment extends Fragment implements IZoneSelection {
                                 editAirp.getText().toString(),
                                 editHum.getText().toString()
                         );
-
-
 
                         _owner.OpenSettingsFragment(_view);
                     }

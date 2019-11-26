@@ -59,9 +59,9 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
         });
 
         RadioButton radioButton = (RadioButton) listView.findViewById(R.id.radiobutton);
-       // Log.i("current1", "pos " + selectedPosition);
+        Log.i("current1", "pos " + selectedPosition);
         radioButton.setChecked(position == selectedPosition);
-       // Log.i("current2", "pos " + selectedPosition);
+        Log.i("current2", "pos " + selectedPosition);
         radioButton.setTag(position);
 
 
@@ -73,7 +73,7 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
 
                 selectedPosition = (Integer) v.getTag();
                 notifyDataSetChanged();
-                //Log.i("current3", "pos " + selectedPosition);
+                Log.i("current3", "pos " + selectedPosition);
             }
         });
 
