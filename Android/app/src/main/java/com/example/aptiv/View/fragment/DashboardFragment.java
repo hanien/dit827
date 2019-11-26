@@ -228,8 +228,8 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         View popupView = _inflater.inflate(R.layout.fragment_pupup, null);
 
         // create the popup window
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
         boolean focusable = false;
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
@@ -243,7 +243,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         txtMessage.setText(messages);
 
         Button _overrideButton = popupView.findViewById(R.id.OverrideButton);
-        _overrideButton.setEnabled(OverrideButton);
+        _overrideButton.setVisibility(OverrideButton ? View.VISIBLE : View.GONE);
         _overrideButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
