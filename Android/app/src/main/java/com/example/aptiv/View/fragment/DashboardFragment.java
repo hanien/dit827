@@ -59,7 +59,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
 
         SetupButton();
         SetupEvents();
-        CreatePopupView(false,false,false,"",false);
+
         return _view;
     }
 
@@ -231,14 +231,14 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
             {
                 //Do Something
                 if(DriverSeat){
-                    _baseViewModel.DriverProfile.set
+                    //_baseViewModel.DriverProfile.set
                 }
                 if(PassangerSeat){
-                    _baseViewModel.PassengerProfile.set
+                   //_baseViewModel.PassengerProfile.set
 
                 }
                 if(BackSeat){
-                    _baseViewModel.BackProfile.set
+                    //_baseViewModel.BackProfile.set
 
                 }
                 popupWindow.dismiss();

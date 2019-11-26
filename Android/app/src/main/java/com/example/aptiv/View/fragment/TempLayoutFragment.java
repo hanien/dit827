@@ -29,7 +29,6 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
     private ImageView _minusButton;
     private ImageView _plusButton;
     private LinearLayout SetTempLayout;
-    private Switch TempTypeSwitch;
     private double  temp = 0;
     private double _desiredTemp;
     private boolean _plusMinusButtonClicked = false;
@@ -49,6 +48,7 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         setUpElements();
         zoneIsSelected();
         setUpTimer();
+        registerOnClickListeners();
 
         return _view;
     }
@@ -58,8 +58,6 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         tempChangeValue = _view.findViewById(R.id.tempChangeValue);
         TempValue = _view.findViewById(R.id.tempValue);
         SetTempLayout = _view.findViewById(R.id.SetTempLayout);
-        TempTypeSwitch = _view.findViewById(R.id.TempTypeSwitch);
-        SwitchContainer = _view.findViewById(R.id.SwitchContainer);
         _minusButton = _view.findViewById(R.id.minus);
         _plusButton= _view.findViewById(R.id.plus);
 
@@ -73,16 +71,6 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private void registerOnClickListeners(){
-        TempTypeSwitch.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        String tempType = (isChecked) ? _baseViewModel.getFahrenheit(): _baseViewModel.getCelsius();
-                        _baseViewModel.tempType = isChecked;
-                        updateTempValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
-                    }
-                }
-        );
         _plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
