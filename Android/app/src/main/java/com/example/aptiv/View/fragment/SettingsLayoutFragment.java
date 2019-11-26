@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
 
 import com.example.aptiv.Model.Classe.Mode;
 import android.widget.TextView;
@@ -31,6 +33,7 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
     private View _view;
     private BaseViewModel _baseViewModel;
     private ModeLayoutFragment ModeLayoutFragment;
+    private Switch TempTypeSwitch;
     private AddModeLayoutFragment AddModeLayoutFragment;
     private IZoneSelection _callback;
 
@@ -63,6 +66,19 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
 
     private void setUpView() {
         listView = (ListView) _view.findViewById(R.id.modes_list);
+        TempTypeSwitch = _view.findViewById(R.id.TempType);
+
+        TempTypeSwitch.setChecked(_baseViewModel.getTempType());
+        TempTypeSwitch.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        String tempType = (isChecked) ? _baseViewModel.getFahrenheit(): _baseViewModel.getCelsius();
+                        _baseViewModel.tempType = isChecked;
+                        //updateTempValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+                    }
+                }
+        );
     }
 
     private void createList() {

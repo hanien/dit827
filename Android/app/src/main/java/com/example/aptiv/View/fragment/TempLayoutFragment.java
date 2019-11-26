@@ -28,8 +28,6 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
     private TextView tempChangeValue;
 
     private LinearLayout SetTempLayout;
-    private Switch TempTypeSwitch;
-
 
     public TempLayoutFragment(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
