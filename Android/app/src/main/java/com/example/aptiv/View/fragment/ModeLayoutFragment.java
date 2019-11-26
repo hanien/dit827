@@ -1,23 +1,21 @@
 package com.example.aptiv.View.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.aptiv.Model.Classe.Mode;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
-import com.example.aptiv.View.adapter.CustomListAdapter;
 import com.example.aptiv.ViewModel.BaseViewModel;
 
 import androidx.fragment.app.Fragment;
-
-import java.util.ArrayList;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class ModeLayoutFragment extends Fragment implements IZoneSelection {
 
@@ -26,59 +24,95 @@ public class ModeLayoutFragment extends Fragment implements IZoneSelection {
     private DashboardFragment _dashboardFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
-
+    private EditModeLayoutFragment EditModeLayoutFragment;
     private IZoneSelection _callback;
 
+    private Mode _currentMode;
     private TextView modeLabel;
+    private TextView modeAirp;
+    private TextView modeHumidity;
+    private TextView modeLux;
+    private TextView modeTemp;
+    private TextView modeVolume;
+    private ImageView editBtn;
+    private ImageView deleteBtn;
 
-    public ModeLayoutFragment(SettingsLayoutFragment parentFragment, MainActivity Owner , BaseViewModel viewModel) {
+    public ModeLayoutFragment(SettingsLayoutFragment parentFragment, MainActivity Owner, BaseViewModel viewModel, Mode currentMode) {
         _owner = Owner;
         _baseViewModel = viewModel;
         _parentFragment = parentFragment;
+        _currentMode = currentMode;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         _view = inflater.inflate(R.layout.fragment_modelayout, container, false);
-        Context currContext = getActivity().getApplicationContext();
 
         setUpView();
-        //setUpElements();
-        //zoneIsSelected();
-        //setUpTimer();
+        setUpElements();
 
+        editBtn.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                        OpenEditModeFragment(_currentMode, _parentFragment);
+                    }
+                }
+        );
 
-
+        deleteBtn.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                        _parentFragment.deleteMode(_currentMode);
+                        _owner.OpenSettingsFragment(_view);
+                    }
+                }
+        );
         return _view;
     }
 
     private void setUpView() {
 
         modeLabel = _view.findViewById(R.id.modeLabel);
+        modeAirp = _view.findViewById(R.id.modeAirp);
+        modeHumidity = _view.findViewById(R.id.modeHum);
+        modeLux = _view.findViewById(R.id.modeLux);
+        modeTemp = _view.findViewById(R.id.modeTemp);
+        modeVolume = _view.findViewById(R.id.modeVolume);
+        editBtn = _view.findViewById(R.id.editBtn);
+        deleteBtn = _view.findViewById(R.id.deleteBtn);
 
     }
 
     private void setUpElements(){
 
-        //luxValue.setText(_baseViewModel.MiddleZone.getIr() + " lux");
+        modeLabel.setText(_currentMode.getTitle());
+        modeAirp.setText(_currentMode.getAirp());
+        modeHumidity.setText(_currentMode.getHumidity());
+        modeLux.setText(_currentMode.getLux());
+        modeTemp.setText(_currentMode.getTemp());
+        modeVolume.setText(_currentMode.getVolume());
 
     }
 
+    //Open edit mode fragment
+    public void OpenEditModeFragment(Mode cMode, SettingsLayoutFragment settingsFragment) {
+        FragmentManager fm1 = getFragmentManager();
+        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
+        EditModeLayoutFragment = new EditModeLayoutFragment(this,_owner,_baseViewModel, cMode, settingsFragment);
+        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard,EditModeLayoutFragment).commit();
+        _callback = EditModeLayoutFragment;
+    }
 
     @Override
     public void zoneIsSelected() {
         if (_dashboardFragment._backSeatSelected || _dashboardFragment._driverSeatSelected || _dashboardFragment._frontSeatSelected) {
-            //SetText.setVisibility(View.GONE);
-            //SetLuxLayout.setVisibility(View.VISIBLE);
-            //luxChangeValue.setVisibility(View.VISIBLE);
-            //updateLuxValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
 
         } else {
-            //SetText.setVisibility(View.VISIBLE);
-            //luxChangeValue.setVisibility(View.GONE);
-            //SetLuxLayout.setVisibility(View.GONE);
-
 
         }
     }

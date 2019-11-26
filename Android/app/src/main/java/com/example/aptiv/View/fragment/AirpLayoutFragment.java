@@ -5,15 +5,13 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.example.aptiv.Model.Classe.Zone;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;
-import com.sdsmdg.harjot.crollerTest.Croller;
 
 import androidx.fragment.app.Fragment;
 
@@ -23,13 +21,12 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
     private DashboardFragment _parentFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
-
+    private TextView Label;
     private TextView SetText;
     private TextView ApValue;
     private TextView ApChangeValue;
-
+    private ImageView TempImage;
     private LinearLayout SetApLayout;
-
 
     public AirpLayoutFragment(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
@@ -38,9 +35,8 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        _view = inflater.inflate(R.layout.fragment_airplayout, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        _view = inflater.inflate(R.layout.fragment_templayout, container, false);
 
         setUpView();
         setUpElements();
@@ -52,18 +48,18 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
 
     private void setUpView() {
         SetText = _view.findViewById(R.id.SelectZoneTextView);
-        ApChangeValue = _view.findViewById(R.id.ApChangeValue);
-        ApValue = _view.findViewById(R.id.ApValue);
-        SetApLayout = _view.findViewById(R.id.SetApLayout);
-
+        ApChangeValue = _view.findViewById(R.id.tempChangeValue);
+        ApValue = _view.findViewById(R.id.tempValue);
+        SetApLayout = _view.findViewById(R.id.SetTempLayout);
+        TempImage = _view.findViewById(R.id.TempImage);
+        Label = _view.findViewById(R.id.tempLabel);
     }
 
     private void setUpElements(){
-
+        Label.setText("Current air pressure");
+        TempImage.setImageResource(R.drawable.ap);
         ApValue.setText(_baseViewModel.MiddleZone.getPressure() + " hPa");
-
     }
-
 
     @Override
     public void zoneIsSelected() {

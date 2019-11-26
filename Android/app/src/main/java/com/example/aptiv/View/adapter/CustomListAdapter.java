@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.aptiv.Model.Classe.Mode;
 import com.example.aptiv.R;
+import com.example.aptiv.View.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,29 +24,46 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
 
     private Context mContext;
     private List<Mode> modeList;
-    private int selectedPosition = 0;
+    private int selectedPosition;
+    MainActivity _owner;
+    View _view;
 
-    public CustomListAdapter(@NonNull Context context, ArrayList<Mode> list) {
-        super(context, 0 , list);
+
+    public CustomListAdapter(@NonNull Context context, ArrayList<Mode> list, MainActivity Owner, View View) {
+        super(context, 0, list);
         mContext = context;
         modeList = list;
+        _owner = Owner;
+        _view = View;
     }
 
     @NonNull
     @Override
-    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable final View convertView, @NonNull ViewGroup parent) {
         View listView = convertView;
-        if(listView == null)
-            listView = LayoutInflater.from(mContext).inflate(R.layout.list_mode,parent,false);
+        if (listView == null)
+            listView = LayoutInflater.from(mContext).inflate(R.layout.list_mode, parent, false);
 
         final Mode currentMode = modeList.get(position);
 
         TextView title = (TextView) listView.findViewById(R.id.txtTitle);
         title.setText(currentMode.getTitle());
 
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //test
+                Log.d("OPENING", currentMode.getTitle());
+                _owner.OpenModeFragment(_view, currentMode);
+            }
+        });
+
         RadioButton radioButton = (RadioButton) listView.findViewById(R.id.radiobutton);
+        Log.i("current1", "pos " + selectedPosition);
         radioButton.setChecked(position == selectedPosition);
+        Log.i("current2", "pos " + selectedPosition);
         radioButton.setTag(position);
+
 
         radioButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,8 +71,9 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
                 //test
                 Log.d("CLICKED", "title: " + currentMode.getTitle());
 
-                selectedPosition = (Integer)v.getTag();
+                selectedPosition = (Integer) v.getTag();
                 notifyDataSetChanged();
+                Log.i("current3", "pos " + selectedPosition);
             }
         });
 

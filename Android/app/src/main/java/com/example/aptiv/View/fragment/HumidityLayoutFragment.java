@@ -5,16 +5,13 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.example.aptiv.Model.Classe.Zone;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;
-import com.sdsmdg.harjot.crollerTest.Croller;
-
 import androidx.fragment.app.Fragment;
 
 public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
@@ -23,11 +20,11 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
     private DashboardFragment _parentFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
-
+    private ImageView Image;
     private TextView SetText;
     private TextView HumidityValue;
     private TextView HumidityChangeValue;
-
+    private TextView Label;
     private LinearLayout SetHumidityLayout;
 
 
@@ -40,7 +37,7 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        _view = inflater.inflate(R.layout.fragment_humiditylayout, container, false);
+        _view = inflater.inflate(R.layout.fragment_templayout, container, false);
 
         setUpView();
         setUpElements();
@@ -52,16 +49,17 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
 
     private void setUpView() {
         SetText = _view.findViewById(R.id.SelectZoneTextView);
-        HumidityChangeValue = _view.findViewById(R.id.HumidityChangeValue);
-        HumidityValue = _view.findViewById(R.id.HumidityValue);
-        SetHumidityLayout = _view.findViewById(R.id.SetHumidityLayout);
-
+        HumidityChangeValue = _view.findViewById(R.id.tempChangeValue);
+        HumidityValue = _view.findViewById(R.id.tempValue);
+        SetHumidityLayout = _view.findViewById(R.id.SetTempLayout);
+        Image = _view.findViewById(R.id.TempImage);
+        Label = _view.findViewById(R.id.tempLabel);
     }
 
     private void setUpElements(){
-
+        Label.setText("Current humidity");
+        Image.setImageResource(R.drawable.humidity);
         HumidityValue.setText(_baseViewModel.MiddleZone.getHumidity() + " %");
-
     }
 
 

@@ -72,6 +72,18 @@
                     android:alpha="0.3"
                     android:src="@drawable/backseatselected"
                     android:visibility="invisible"/>
+
+                <Button
+                    android:id="@+id/HandlerBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/CardViewColor"
+                    android:onClick="OpenDHFragment"
+                    android:text="Devices Handler"
+                    android:textColor="@android:color/white"
+                    android:textSize="9dp" />
             </androidx.cardview.widget.CardView>
         </LinearLayout>
 

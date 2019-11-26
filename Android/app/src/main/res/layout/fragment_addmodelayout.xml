@@ -24,181 +24,192 @@
             android:layout_gravity="right"
             android:layout_marginLeft="0dp"
             android:clickable="true"
-            android:onClick="CloseVolumeFragment"
+            android:onClick="CloseModeFragment"
             card_view:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="688dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/addLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="Add a new mode"
-                android:layout_gravity="center_horizontal"
                 android:textColor="@color/CardViewTextColor"
-                android:textStyle="italic"
-                android:textSize="40dp" />
+                android:textSize="40dp"
+                android:textStyle="italic" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="30dp" >
+                android:fillViewport="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name: "
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
-
-                <EditText
-                    android:id="@+id/newName"
-                    android:layout_width="219dp"
-                    android:layout_height="40dp"
-                    android:background="@color/EditModeColor"
-                    android:inputType="text"
-                    android:textColor="@color/CardViewTextColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="30dp" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Air pressure: "
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
-
-                <EditText
-                    android:id="@+id/newAirp"
-                    android:layout_width="124dp"
-                    android:layout_height="40dp"
-                    android:background="@color/EditModeColor"
-                    android:inputType="text"
-                    android:textColor="@color/CardViewTextColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="30dp" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Humidity: "
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
-
-                <EditText
-                    android:id="@+id/newHum"
-                    android:layout_width="171dp"
-                    android:layout_height="40dp"
-                    android:background="@color/EditModeColor"
-                    android:inputType="text"
-                    android:textColor="@color/CardViewTextColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="30dp" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lux: "
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
-
-                <EditText
-                    android:id="@+id/newLux"
-                    android:layout_width="254dp"
-                    android:layout_height="40dp"
-                    android:background="@color/EditModeColor"
-                    android:inputType="text"
-                    android:textColor="@color/CardViewTextColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="30dp" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Temperature: "
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
-
-                <EditText
-                    android:id="@+id/newTemp"
-                    android:layout_width="112dp"
-                    android:layout_height="40dp"
-                    android:background="@color/EditModeColor"
-                    android:inputType="text"
-                    android:textColor="@color/CardViewTextColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="30dp" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Volume: "
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
-
-                <EditText
-                    android:id="@+id/newVolume"
-                    android:layout_width="191dp"
-                    android:layout_height="40dp"
-                    android:background="@color/EditModeColor"
-                    android:inputType="text"
-                    android:textColor="@color/CardViewTextColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="393dp"
-                android:layout_height="66dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/addBtn"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_gravity="right"
-                    android:layout_marginLeft="0dp"
-                    android:clickable="true"
-                    android:onClick="AddMode"
-                    card_view:srcCompat="@drawable/save" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
 
-            </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Name: "
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="35dp" />
+
+                        <EditText
+                            android:id="@+id/newName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="100dp"
+                            android:background="@color/EditModeColor"
+                            android:inputType="text"
+                            android:textSize="30dp"
+                            android:textColor="@color/CardViewTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Air pressure: "
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="35dp" />
+
+                        <EditText
+                            android:id="@+id/newAirp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="8dp"
+                            android:background="@color/EditModeColor"
+                            android:inputType="text"
+                            android:textSize="30dp"
+                            android:textColor="@color/CardViewTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Humidity: "
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="35dp" />
+
+                        <EditText
+                            android:id="@+id/newHum"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="55dp"
+                            android:background="@color/EditModeColor"
+                            android:inputType="text"
+                            android:textSize="30dp"
+                            android:textColor="@color/CardViewTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Lux: "
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="35dp" />
+
+                        <EditText
+                            android:id="@+id/newLux"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="140dp"
+                            android:background="@color/EditModeColor"
+                            android:inputType="text"
+                            android:textSize="30dp"
+                            android:textColor="@color/CardViewTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Temperature: "
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="35dp" />
+
+                        <EditText
+                            android:id="@+id/newTemp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="0dp"
+                            android:background="@color/EditModeColor"
+                            android:inputType="text"
+                            android:textSize="30dp"
+                            android:textColor="@color/CardViewTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Volume: "
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="35dp" />
+
+                        <EditText
+                            android:id="@+id/newVolume"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="80dp"
+                            android:background="@color/EditModeColor"
+                            android:inputType="text"
+                            android:textSize="30dp"
+                            android:textColor="@color/CardViewTextColor" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/addBtn"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:onClick="OpenAddModeFragment"
+                        card_view:srcCompat="@drawable/save" />
+                </LinearLayout>
+
+
+            </ScrollView>
+
 
         </LinearLayout>
 
