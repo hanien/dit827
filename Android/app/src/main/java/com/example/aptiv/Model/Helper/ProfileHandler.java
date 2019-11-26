@@ -4,7 +4,6 @@ import com.example.aptiv.Model.Classe.Profile;
 import com.example.aptiv.Model.Classe.Zone;
 import com.example.aptiv.View.fragment.DashboardFragment;
 import com.example.aptiv.ViewModel.BaseViewModel;
-import com.google.common.collect;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -107,9 +106,15 @@ public class ProfileHandler {
             HashMap<String, Double> avg = avgMap(currentSum);
 
             //check range of input
-            checkZone(profile, avg);
+            HashMap<String, Boolean> hasError = checkZone(profile, avg);
             //if bad: make red
 
+            if(hasError.containsValue(Boolean.FALSE)){
+                _dashboardFragment.toggleError(zone, Boolean.TRUE);
+            }
+            else{
+                _dashboardFragment.toggleError(zone, Boolean.TRUE);
+            }
             //add reading to queue
             currentQueue.remove();
             currentQueue.add(zone);
