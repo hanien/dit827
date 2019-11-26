@@ -14,6 +14,7 @@ public class Zone {
     private String altitude;
     private String light;
     private String lux;
+    private Profile profile;
 
     public Zone(String temperature, String humidity, String gain, String luminosity, String full, String ir,
                 String pressure , String sound, String altitude, String light,String lux){
@@ -29,6 +30,7 @@ public class Zone {
         this.light = light;
         this.lux = lux;
     }
+
     public String getTemperature() {
         return temperature;
     }

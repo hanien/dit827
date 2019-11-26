@@ -3,11 +3,17 @@ package com.example.aptiv.View.fragment;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -34,6 +40,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     private ImageView _frontSeat;
     private ImageView _driverSeat;
     private ImageView _backSeat;
+    private LayoutInflater _inflater;
     public Boolean _frontSeatSelected = false;
     public Boolean _backSeatSelected = false;
     public Boolean _driverSeatSelected = false;
@@ -46,12 +53,13 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        _inflater = inflater;
         _view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         SetupCarLayoutFragment();
 
         SetupButton();
         SetupEvents();
-
+        CreatePopupView(false,false,false,"",false);
         return _view;
     }
 
@@ -181,6 +189,75 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
                 break;
         }
         return true;
+    }
+
+    public void CreatePopupView(final boolean DriverSeat,final boolean PassangerSeat,final boolean BackSeat,String messages,boolean OverrideButton){
+        if(DriverSeat){
+            ImageView driverSeatRed = _view.findViewById(R.id.driverseatRed);
+            driverSeatRed.setVisibility(View.VISIBLE);
+        }
+        if(PassangerSeat){
+            ImageView PassangerSeatRed = _view.findViewById(R.id.frontseatRed);
+            PassangerSeatRed.setVisibility(View.VISIBLE);
+        }
+        if(BackSeat){
+            ImageView backSeatRed = _view.findViewById(R.id.backseatRed);
+            backSeatRed.setVisibility(View.VISIBLE);
+        }
+
+        View popupView = _inflater.inflate(R.layout.fragment_pupup, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = false;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(_view, Gravity.CENTER, 0, 0);
+        TextView txtMessage = popupView.findViewById(R.id.PopupVIewMessage);
+        if(messages == null|| messages == ""){
+            messages = "Opps, something went wrong!";
+        }
+        txtMessage.setText(messages);
+
+        Button _overrideButton = popupView.findViewById(R.id.OverrideButton);
+        _overrideButton.setEnabled(OverrideButton);
+        _overrideButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Do Something
+                if(DriverSeat){
+                    _baseViewModel.DriverProfile.set
+                }
+                if(PassangerSeat){
+                    _baseViewModel.PassengerProfile.set
+
+                }
+                if(BackSeat){
+                    _baseViewModel.BackProfile.set
+
+                }
+                popupWindow.dismiss();
+            }
+        });
+
+        // Getting a reference to button two and do something
+        Button _okButton = popupView.findViewById(R.id.OkButton);
+        _okButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Do Something
+
+                popupWindow.dismiss();
+            }
+        });
+
     }
 
     //seat selection in the car image is base on color
