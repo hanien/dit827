@@ -76,7 +76,6 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
             luxChangeValue.setVisibility(View.GONE);
             SetLuxLayout.setVisibility(View.GONE);
 
-
         }
     }
 
@@ -121,7 +120,6 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
             luxChangeValue.setText(String.valueOf((int)lux) + " lux");
 
         }
-
 
     }
 
