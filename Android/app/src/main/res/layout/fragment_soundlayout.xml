@@ -63,7 +63,7 @@
                 android:layout_gravity="center_horizontal">
 
                     <ImageView
-                        android:id="@+id/SoundMinus"
+                        android:id="@+id/lowbtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         card_view:srcCompat="@drawable/minus" />
@@ -79,7 +79,7 @@
                         android:layout_marginRight="20dp"/>
 
                     <ImageView
-                        android:id="@+id/SoundPlus"
+                        android:id="@+id/highbtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         card_view:srcCompat="@drawable/plus" />

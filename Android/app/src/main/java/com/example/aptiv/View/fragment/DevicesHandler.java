@@ -3,11 +3,12 @@ package com.example.aptiv.View.fragment;
 import android.os.Bundle;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -25,15 +26,15 @@ public class DevicesHandler extends Fragment {
     private DashboardFragment _parentFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
+    private TextView MuteText;
 
     MessageListener mMessageListener;
     Message mActiveMessage;
 
 
-     Button muteBtn;
-     Button unmuteBtn;
-     Button HvolumeBtn;
-     Button LvolumeBtn ;
+    ImageButton muteBtn;
+    ImageButton HvolumeBtn;
+    ImageButton LvolumeBtn;
 
     public DevicesHandler(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
@@ -47,14 +48,24 @@ public class DevicesHandler extends Fragment {
         _view = inflater.inflate(R.layout.pop_up, container, false);
 
         muteBtn = _view.findViewById(R.id.mutebtn);
-       unmuteBtn = _view.findViewById(R.id.unmutebtn);
-    HvolumeBtn = _view.findViewById(R.id.highbtn);
-       LvolumeBtn = _view.findViewById(R.id.lowbtn);
-
+        HvolumeBtn = _view.findViewById(R.id.highbtn);
+        LvolumeBtn = _view.findViewById(R.id.lowbtn);
+        MuteText = _view.findViewById(R.id.MuteText);
         muteBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                MutePublish();
+                if(_baseViewModel.isMuted){
+                    UnmutePublish();
+                    muteBtn.setImageResource(R.drawable.speaker);
+                    MuteText.setText("Mute");
+                }
+                else {
+                    MutePublish();
+                    muteBtn.setImageResource(R.drawable.muted);
+                    MuteText.setText("Unmute");
+                }
+                _baseViewModel.isMuted = !_baseViewModel.isMuted;
+
                 HideBtns();
 
                 Handler handler = new Handler();
@@ -67,26 +78,6 @@ public class DevicesHandler extends Fragment {
 
             }
         });
-
-
-
-        unmuteBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                UnmutePublish();
-                HideBtns();
-
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        Unpublish();
-                        ShowBtns();
-                    }
-                }, 3000);
-
-            }
-        });
-
 
 
         HvolumeBtn.setOnClickListener(new View.OnClickListener() {
@@ -167,7 +158,7 @@ public class DevicesHandler extends Fragment {
     public void HideBtns() {
 
         muteBtn.setEnabled(false);
-        unmuteBtn.setEnabled(false);
+        //unmuteBtn.setEnabled(false);
         HvolumeBtn.setEnabled(false);
         LvolumeBtn.setEnabled(false);
 
@@ -176,7 +167,6 @@ public class DevicesHandler extends Fragment {
     public void ShowBtns() {
 
         muteBtn.setEnabled(true);
-        unmuteBtn.setEnabled(true);
         HvolumeBtn.setEnabled(true);
         LvolumeBtn.setEnabled(true);
 

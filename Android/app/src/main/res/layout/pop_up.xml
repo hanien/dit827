@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
@@ -57,37 +58,83 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp">
 
-                <Button
+                <TextView
+                    android:id="@+id/MuteText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Mute"
+                    android:textColor="@color/CardViewTextColor"
+                    android:textSize="24sp" />
+
+                <ImageButton
                     android:id="@+id/mutebtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mute" />
+                    android:background="@color/CardViewColor"
+                    card_view:srcCompat="@drawable/speaker" />
 
-                <Button
-                    android:id="@+id/unmutebtn"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Unmute" />
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/highbtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Volume +" />
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Change volume\nof local devices"
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="24sp" />
 
-                <Button
-                    android:id="@+id/lowbtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Volume -" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/IOT"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    card_view:srcCompat="@drawable/cloud"
-                    android:layout_marginTop="50dp"
-                    android:layout_gravity="center"/>
+
+                        <ImageButton
+                            android:id="@+id/lowbtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/CardViewColor"
+                            card_view:srcCompat="@drawable/minus" />
+
+                        <TextView
+                            android:id="@+id/SoundValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:text="10"
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="45dp"
+                            android:visibility="invisible" />
+
+                        <ImageButton
+                            android:id="@+id/highbtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/CardViewColor"
+                            card_view:srcCompat="@drawable/plus" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/IOT"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="60dp"
+                        card_view:srcCompat="@drawable/cloud" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
 

@@ -17,6 +17,7 @@ public class BaseViewModel implements IVolleyCollback {
     public Zone BackseatZone = new Zone("0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
     public Zone MiddleZone = new Zone("0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
     public Double OutTempreture = 0.0;
+    public Boolean isMuted = false;
     public Boolean tempType; //True here means that it is Fahrenheit
     private String fahrenheit;
     private String celsius;
