@@ -22,14 +22,11 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
     private DashboardFragment _parentFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
-    private LinearLayout SwitchContainer;
     private TextView SetText;
     private TextView TempValue;
     private TextView tempChangeValue;
 
     private LinearLayout SetTempLayout;
-    private Switch TempTypeSwitch;
-
 
     public TempLayoutFragment(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
@@ -46,7 +43,6 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         setUpElements();
         zoneIsSelected();
         setUpTimer();
-        registerOnClickListeners();
 
         return _view;
     }
@@ -56,32 +52,13 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         tempChangeValue = _view.findViewById(R.id.tempChangeValue);
         TempValue = _view.findViewById(R.id.tempValue);
         SetTempLayout = _view.findViewById(R.id.SetTempLayout);
-        TempTypeSwitch = _view.findViewById(R.id.TempTypeSwitch);
-        SwitchContainer = _view.findViewById(R.id.SwitchContainer);
-
-
     }
 
     private void setUpElements(){
-        SwitchContainer.setVisibility(View.VISIBLE);
-        TempTypeSwitch.setChecked(_baseViewModel.getTempType());
         double temp = Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
         temp = (_baseViewModel.getTempType()) ? ((1.8*temp))+32 : temp;
         String tempType = (_baseViewModel.getTempType()) ? _baseViewModel.getFahrenheit() : _baseViewModel.getCelsius();
         TempValue.setText( temp + tempType);
-    }
-
-    private void registerOnClickListeners(){
-        TempTypeSwitch.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        String tempType = (isChecked) ? _baseViewModel.getFahrenheit(): _baseViewModel.getCelsius();
-                        _baseViewModel.tempType = isChecked;
-                        updateTempValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
-                    }
-                }
-        );
     }
 
     @Override
@@ -96,8 +73,6 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
               SetText.setVisibility(View.VISIBLE);
               tempChangeValue.setVisibility(View.GONE);
               SetTempLayout.setVisibility(View.GONE);
-
-
         }
     }
 

@@ -13,10 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/default_margin_cardview"
-        android:layout_marginTop="@dimen/default_margin_cardview"
-        android:layout_marginRight="@dimen/default_margin_cardview"
-        android:layout_marginBottom="@dimen/default_margin_cardview"
+        android:layout_margin="@dimen/default_margin_cardview"
         card_view:cardBackgroundColor="@color/CardViewColor"
         card_view:cardCornerRadius="@dimen/cardview_corner_radius"
         card_view:cardUseCompatPadding="true">
@@ -91,10 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/default_margin_cardview"
-                android:layout_marginTop="@dimen/default_margin_cardview"
-                android:layout_marginRight="@dimen/default_margin_cardview"
-                android:layout_marginBottom="@dimen/default_margin_cardview"
+                android:layout_margin="@dimen/default_margin_cardview"
                 card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
                 card_view:cardBackgroundColor = "@color/CardViewColor"
                 card_view:cardUseCompatPadding="true">

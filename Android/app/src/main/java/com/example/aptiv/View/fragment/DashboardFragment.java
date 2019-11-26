@@ -124,9 +124,10 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     public void OpenSettingsFragment() {
         FragmentManager fm1 = getFragmentManager();
         FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
-        SettingsLayoutFragment = new SettingsLayoutFragment(this,_owner,_baseViewModel);
-        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard,SettingsLayoutFragment).commit();
+        SettingsLayoutFragment = new SettingsLayoutFragment(this, _owner, _baseViewModel);
+        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, SettingsLayoutFragment).commit();
         _callback = SettingsLayoutFragment;
+    }
 
     //Open Devices Handler fragment
     public void OpenDHFragment() {
