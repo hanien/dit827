@@ -11,7 +11,6 @@ import android.widget.ListView;
 import android.widget.Switch;
 
 import com.example.aptiv.Model.Classe.Mode;
-import android.widget.TextView;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -20,9 +19,6 @@ import com.example.aptiv.ViewModel.BaseViewModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -32,11 +28,7 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
     private DashboardFragment _parentFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
-    private ModeLayoutFragment ModeLayoutFragment;
     private Switch TempTypeSwitch;
-    private AddModeLayoutFragment AddModeLayoutFragment;
-    private IZoneSelection _callback;
-
     private ListView listView;
     private CustomListAdapter mAdapter;
 
@@ -57,7 +49,7 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
         setUpView();
         loadData(context);
 
-        mAdapter = new CustomListAdapter(context, modesList, _owner, _view);
+        mAdapter = new CustomListAdapter(context, modesList, _owner, _view,_parentFragment,_baseViewModel);
         listView.setAdapter(mAdapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
@@ -117,24 +109,6 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
 
     }
 
-    //Open mode fragment
-    public void OpenModeFragment(Mode _currentMode) {
-        FragmentManager fm1 = getFragmentManager();
-        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
-        ModeLayoutFragment = new ModeLayoutFragment(this, _owner, _baseViewModel, _currentMode);
-        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, ModeLayoutFragment).commit();
-        _callback = ModeLayoutFragment;
-    }
-
-    //Open add mode fragment
-    public void OpenAddModeFragment() {
-        FragmentManager fm1 = getFragmentManager();
-        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
-        AddModeLayoutFragment = new AddModeLayoutFragment(this, _owner, _baseViewModel);
-        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, AddModeLayoutFragment).commit();
-        _callback = AddModeLayoutFragment;
-    }
-
     public void addNewMode(String title, String lux, String temp, String volume, String airp, String humidity) {
         modesList.add(new Mode(title, lux, temp, volume, airp, humidity));
         saveData();
@@ -173,7 +147,6 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
         if (_parentFragment._backSeatSelected || _parentFragment._driverSeatSelected || _parentFragment._frontSeatSelected) {
 
         } else {
-
         }
     }
 }

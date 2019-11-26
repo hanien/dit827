@@ -17,6 +17,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.aptiv.Model.Classe.Mode;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.R;
@@ -34,6 +36,8 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     private HumidityLayoutFragment HumidityLayoutFragment;
     private LuxLayoutFragment LuxLayoutFragment;
     private SettingsLayoutFragment SettingsLayoutFragment;
+    private ModeLayoutFragment ModeLayoutFragment;
+    private AddModeLayoutFragment AddModeLayoutFragment;
     private DevicesHandler DevicesHandler;
     private IZoneSelection _callback;
     private ImageView _carMaskView;
@@ -108,6 +112,22 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         AirpLayoutFragment = new AirpLayoutFragment(this,_owner,_baseViewModel);
         fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard,AirpLayoutFragment).commit();
         _callback = AirpLayoutFragment;
+    }
+
+    //Open mode fragment
+    public void OpenModeFragment(Mode _currentMode) {
+        FragmentManager fm1 = getFragmentManager();
+        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
+        ModeLayoutFragment = new ModeLayoutFragment(SettingsLayoutFragment, _owner, _baseViewModel, _currentMode);
+        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, ModeLayoutFragment).commit();
+    }
+
+    //Open add mode fragment
+    public void OpenAddModeFragment() {
+        FragmentManager fm1 = getFragmentManager();
+        FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
+        AddModeLayoutFragment = new AddModeLayoutFragment(SettingsLayoutFragment, _owner, _baseViewModel);
+        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, AddModeLayoutFragment).commit();
     }
 
     //Open humidity fragment

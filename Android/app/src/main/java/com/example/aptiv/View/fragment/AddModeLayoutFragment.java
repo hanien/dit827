@@ -14,14 +14,12 @@ import com.example.aptiv.ViewModel.BaseViewModel;
 
 import androidx.fragment.app.Fragment;
 
-public class AddModeLayoutFragment extends Fragment implements IZoneSelection {
+public class AddModeLayoutFragment extends Fragment {
 
     private MainActivity _owner;
     private SettingsLayoutFragment _parentFragment;
-    private DashboardFragment _dashboardFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
-    private IZoneSelection _callback;
 
     private EditText newName;
     private EditText newAirp;
@@ -77,14 +75,5 @@ public class AddModeLayoutFragment extends Fragment implements IZoneSelection {
                 }
         );
 
-    }
-
-    @Override
-    public void zoneIsSelected() {
-        if (_dashboardFragment._backSeatSelected || _dashboardFragment._driverSeatSelected || _dashboardFragment._frontSeatSelected) {
-
-        } else {
-
-        }
     }
 }
