@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.aptiv.Model.Classe.Mode;
+import android.widget.TextView;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -16,7 +17,6 @@ import com.example.aptiv.View.adapter.CustomListAdapter;
 import com.example.aptiv.ViewModel.BaseViewModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;

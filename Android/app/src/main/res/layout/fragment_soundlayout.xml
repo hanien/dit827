@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
 
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/Temperature"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -15,62 +17,75 @@
         android:layout_marginTop="@dimen/default_margin_cardview"
         android:layout_marginRight="@dimen/default_margin_cardview"
         android:layout_marginBottom="@dimen/default_margin_cardview"
-        card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-        card_view:cardBackgroundColor = "@color/CardViewColor"
+        card_view:cardBackgroundColor="@color/CardViewColor"
+        card_view:cardCornerRadius="@dimen/cardview_corner_radius"
         card_view:cardUseCompatPadding="true">
 
 
+
         <ImageView
-            android:id="@+id/cancel"
+            android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            card_view:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
-            android:layout_marginLeft="0dp"
             android:layout_gravity="right"
+            android:layout_marginLeft="0dp"
             android:clickable="true"
-            android:onClick="CloseVolumeFragment"/>
+            android:onClick="CloseFragment"
+            card_view:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tempLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Current Sound Level"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/CardViewTextColor"
+                android:textStyle="italic"
+                android:textSize="40dp" />
+            <ImageView
+                android:id="@+id/SoundImage"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                card_view:srcCompat="@drawable/speaker"
+                android:layout_gravity="center_horizontal"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:layout_gravity="center_horizontal">
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    card_view:srcCompat="@drawable/speaker"
-                    android:layout_marginRight="50dp"/>
 
-                <TextView
-                    android:id="@+id/TempratureTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10"
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="50dp" />
+                    <ImageView
+                        android:id="@+id/SoundMinus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        card_view:srcCompat="@drawable/minus" />
+
+                    <TextView
+                        android:id="@+id/SoundValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10"
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"/>
+
+                    <ImageView
+                        android:id="@+id/SoundPlus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        card_view:srcCompat="@drawable/plus" />
+
+
             </LinearLayout>
-            <com.sdsmdg.harjot.crollerTest.Croller
-                android:id="@+id/DefaultController"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                app:back_circle_color="#EDEDED"
-                app:indicator_color="#0B3C49"
-                app:indicator_width="10"
-                app:is_continuous="true"
-                app:label_color="#FFFFFF"
-                app:label =""
-                app:main_circle_color="#FFFFFF"
-                app:max="1000"
-                app:progress_primary_color="#0B3C49"
-                app:progress_secondary_color="#EEEEEE"
-                app:start_offset="45"
-                android:layout_gravity="center_horizontal"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -94,36 +109,52 @@
                     android:text="Please click on specific zone to change value in it"
                     android:textSize="25dp"
                     android:visibility="gone"/>
+
+
+                <TextView
+                    android:id="@+id/SoundZoneValue"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/CardViewTextColor"
+                    android:text="10"
+                    android:textSize="50dp"
+                    android:visibility="visible"/>
+
                 <LinearLayout
                     android:id="@+id/zoneCrollerLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center">
 
-                    <com.sdsmdg.harjot.crollerTest.Croller
-                        android:id="@+id/ZoneController"
+                    <ImageView
+                        android:id="@+id/SoundZoneMinus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="center"
-                        app:back_circle_color="#EDEDED"
-                        app:indicator_color="#0B3C49"
-                        app:indicator_width="10"
-                        app:is_continuous="true"
-                        app:label=""
-                        app:label_color="#FFFFFF"
-                        app:main_circle_color="#FFFFFF"
-                        app:max="1000"
-                        app:progress_primary_color="#0B3C49"
-                        app:progress_secondary_color="#EEEEEE"
-                        app:start_offset="45" />
+                        card_view:srcCompat="@drawable/minus" />
+
+                    <ImageView
+                        android:id="@+id/SoundZoneArc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        card_view:srcCompat="@drawable/arc" />
+
+                    <ImageView
+                        android:id="@+id/SoundZonePlus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        card_view:srcCompat="@drawable/plus" />
+
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
+
         </LinearLayout>
 
-
-
     </androidx.cardview.widget.CardView>
+
 
 </LinearLayout>
