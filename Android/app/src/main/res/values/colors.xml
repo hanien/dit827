@@ -7,5 +7,5 @@
   <color name="CardViewTextColor">#ffffff</color>
   <color name="PopupVIewColor">#5C6972</color>
   <color name="PopupVIewShadow">#C6C7CA</color>
-
+  <color name="EditModeColor">#29445E</color>
 </resources>
