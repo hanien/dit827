@@ -38,162 +38,176 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:text="Edit mode"
                 android:textColor="@color/CardViewTextColor"
                 android:textSize="40dp"
                 android:textStyle="italic" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="27dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Name: "
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
-
-                <EditText
-                    android:id="@+id/editName"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="100dp"
-                    android:background="@color/EditModeColor"
-                    android:inputType="text"
-                    android:textSize="30dp"
-                    android:textColor="@color/CardViewTextColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="27dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Air pressure: "
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
-
-                <EditText
-                    android:id="@+id/editAirp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
-                    android:background="@color/EditModeColor"
-                    android:inputType="text"
-                    android:textSize="30dp"
-                    android:textColor="@color/CardViewTextColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="27dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Humidity: "
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
-
-                <EditText
-                    android:id="@+id/editHum"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="55dp"
-                    android:background="@color/EditModeColor"
-                    android:inputType="text"
-                    android:textSize="30dp"
-                    android:textColor="@color/CardViewTextColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="27dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Lux: "
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
-
-                <EditText
-                    android:id="@+id/editLux"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="140dp"
-                    android:background="@color/EditModeColor"
-                    android:inputType="text"
-                    android:textSize="30dp"
-                    android:textColor="@color/CardViewTextColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="27dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Temperature: "
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
-
-                <EditText
-                    android:id="@+id/editTemp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="0dp"
-                    android:background="@color/EditModeColor"
-                    android:inputType="text"
-                    android:textSize="30dp"
-                    android:textColor="@color/CardViewTextColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="27dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Volume: "
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="35dp" />
-
-                <EditText
-                    android:id="@+id/editVolume"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="80dp"
-                    android:background="@color/EditModeColor"
-                    android:inputType="text"
-                    android:textSize="30dp"
-                    android:textColor="@color/CardViewTextColor" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/saveBtn"
+            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                card_view:srcCompat="@drawable/save" />
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Name: "
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="30dp" />
+
+                    <EditText
+                        android:id="@+id/editName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="100dp"
+                        android:background="@color/EditModeColor"
+                        android:inputType="text"
+                        android:textSize="30dp"
+                        android:textColor="@color/CardViewTextColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Air pressure: "
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="35dp" />
+
+                    <EditText
+                        android:id="@+id/editAirp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:background="@color/EditModeColor"
+                        android:inputType="text"
+                        android:textSize="30dp"
+                        android:textColor="@color/CardViewTextColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Humidity: "
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="30dp" />
+
+                    <EditText
+                        android:id="@+id/editHum"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="55dp"
+                        android:background="@color/EditModeColor"
+                        android:inputType="text"
+                        android:textSize="30dp"
+                        android:textColor="@color/CardViewTextColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Lux: "
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="35dp" />
+
+                    <EditText
+                        android:id="@+id/editLux"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="140dp"
+                        android:background="@color/EditModeColor"
+                        android:inputType="text"
+                        android:textSize="30dp"
+                        android:textColor="@color/CardViewTextColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Temperature: "
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="30dp" />
+
+                    <EditText
+                        android:id="@+id/editTemp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="0dp"
+                        android:background="@color/EditModeColor"
+                        android:inputType="text"
+                        android:textSize="30dp"
+                        android:textColor="@color/CardViewTextColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Volume: "
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="30dp" />
+
+                    <EditText
+                        android:id="@+id/editVolume"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="80dp"
+                        android:background="@color/EditModeColor"
+                        android:inputType="text"
+                        android:textSize="30dp"
+                        android:textColor="@color/CardViewTextColor" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/saveBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_vertical"
+                    card_view:srcCompat="@drawable/save" />
+                </LinearLayout>
+            </ScrollView>
+
+
+
 
         </LinearLayout>
 
