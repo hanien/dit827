@@ -19,7 +19,7 @@ public class Profile implements Serializable {
     private String lux;
 
 
-    public Profile (String ProfileName,String temperature, String humidity, String gain, String luminosity, String full, String ir,
+    public Profile (String ProfileName, String temperature, String humidity, String gain, String luminosity, String full, String ir,
                     String pressure , String sound, String altitude, String light,String lux) {
         this.ProfileName = ProfileName;
         this.temperature = temperature;
