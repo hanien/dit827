@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import android.util.Log;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,10 +29,9 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
     private DashboardFragment _parentFragment;
     private List<Mode> modeList;
     private BaseViewModel _viewModel;
-    private int selectedPosition;
     MainActivity _owner;
     View _view;
-
+    private int selectedPosition;
 
     public CustomListAdapter(@NonNull Context context, ArrayList<Mode> list, MainActivity Owner, View View,DashboardFragment parentFragment, BaseViewModel viewModel) {
         super(context, 0, list);
@@ -48,11 +47,11 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
     @Override
     public View getView(final int position, @Nullable final View convertView, @NonNull ViewGroup parent) {
         View listView = convertView;
+
         if (listView == null)
             listView = LayoutInflater.from(mContext).inflate(R.layout.list_mode, parent, false);
 
         final Mode currentMode = modeList.get(position);
-
         TextView title = listView.findViewById(R.id.txtTitle);
         title.setText(currentMode.getTitle());
 
@@ -63,14 +62,18 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
             }
         });
 
+        loadData();
         RadioButton radioButton = listView.findViewById(R.id.radiobutton);
         radioButton.setChecked(position == selectedPosition);
         radioButton.setTag(position);
 
-
         radioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectedPosition = (Integer) v.getTag();
+                notifyDataSetChanged();
+                saveData();
+              
                 boolean DriverSeat = _parentFragment == null ? false : _parentFragment._driverSeatSelected;
                 boolean PassengerSeat =  _parentFragment == null ? false : _parentFragment._frontSeatSelected;
                 boolean BackSeat =  _parentFragment == null ? false : _parentFragment._backSeatSelected;
@@ -100,10 +103,21 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
                         _viewModel.BackProfile.setHumidity(currentMode.getHumidity());
                     }
                 }
-                notifyDataSetChanged();
             }
         });
 
         return listView;
+    }
+
+    private void saveData() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared_pref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("selected_pos", selectedPosition);
+        editor.commit();
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared_pref", Context.MODE_PRIVATE);
+        selectedPosition = sharedPreferences.getInt("selected_pos", 0);
     }
 }
