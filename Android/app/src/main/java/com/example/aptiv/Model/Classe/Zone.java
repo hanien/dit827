@@ -146,4 +146,17 @@ public class Zone {
 
         return values;
     }
+    public void setAll(HashMap<String, Double> values){
+        this.setTemperature((values.get("temperature")).toString());
+        this.setHumidity((values.get("humidity")).toString());
+        this.setGain((values.get("gain")).toString());
+        this.setLuminosity((values.get("luminosity")).toString());
+        this.setFull((values.get("full")).toString());
+        this.setIr((values.get("ir")).toString());
+        this.setPressure((values.get("pressure")).toString());
+        this.setSound((values.get("sound")).toString());
+        this.setAltitiude((values.get("altitude")).toString());
+        this.setLight((values.get("light")).toString());
+        this.setLux((values.get("lux")).toString());
+    }
 }
