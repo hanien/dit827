@@ -161,4 +161,5 @@ public class Zone {
         this.setLight((values.get("light")).toString());
         this.setLux((values.get("lux")).toString());
     }
+
 }
