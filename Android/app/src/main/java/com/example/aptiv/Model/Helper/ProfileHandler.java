@@ -5,6 +5,8 @@ import com.example.aptiv.Model.Classe.Zone;
 import com.example.aptiv.View.fragment.DashboardFragment;
 import com.example.aptiv.ViewModel.BaseViewModel;
 
+import java.lang.ref.PhantomReference;
+import java.sql.Driver;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -31,7 +33,7 @@ public class ProfileHandler {
     private HashMap<String, Double> _driveSum, _passSum, _midSum, _backSum;
 
     public ProfileHandler(BaseViewModel base, DashboardFragment dashboardFragment,
-                          Zone driver, Zone passenger, Zone mid, Zone back){
+                          Zone driver, Zone passenger, Zone mid, Zone back) {
         _base = base;
         _dashboardFragment = dashboardFragment;
         _driver = driver;
@@ -48,7 +50,7 @@ public class ProfileHandler {
         _backSum = initEmptyMap();
     }
 
-    public void SetDashboardFragment(DashboardFragment fragment){
+    public void SetDashboardFragment(DashboardFragment fragment) {
         _dashboardFragment = fragment;
     }
 
@@ -129,8 +131,7 @@ public class ProfileHandler {
 
         if(checkedZone.containsValue(Boolean.FALSE)){
             _dashboardFragment.toggleError(_driver, Boolean.TRUE);
-        }
-        else{
+        } else {
             _dashboardFragment.toggleError(_driver, Boolean.TRUE);
         }
     }
