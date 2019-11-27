@@ -17,15 +17,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class ModeLayoutFragment extends Fragment implements IZoneSelection {
+public class ModeLayoutFragment extends Fragment{
 
     private MainActivity _owner;
     private SettingsLayoutFragment _parentFragment;
-    private DashboardFragment _dashboardFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
     private EditModeLayoutFragment EditModeLayoutFragment;
-    private IZoneSelection _callback;
 
     private Mode _currentMode;
     private TextView modeLabel;
@@ -51,7 +49,12 @@ public class ModeLayoutFragment extends Fragment implements IZoneSelection {
 
         setUpView();
         setUpElements();
+        RegisterListener();
 
+        return _view;
+    }
+
+    private void RegisterListener() {
         editBtn.setOnClickListener(
                 new View.OnClickListener()
                 {
@@ -72,11 +75,9 @@ public class ModeLayoutFragment extends Fragment implements IZoneSelection {
                     }
                 }
         );
-        return _view;
     }
 
     private void setUpView() {
-
         modeLabel = _view.findViewById(R.id.modeLabel);
         modeAirp = _view.findViewById(R.id.modeAirp);
         modeHumidity = _view.findViewById(R.id.modeHum);
@@ -85,18 +86,15 @@ public class ModeLayoutFragment extends Fragment implements IZoneSelection {
         modeVolume = _view.findViewById(R.id.modeVolume);
         editBtn = _view.findViewById(R.id.editBtn);
         deleteBtn = _view.findViewById(R.id.deleteBtn);
-
     }
 
     private void setUpElements(){
-
         modeLabel.setText(_currentMode.getTitle());
         modeAirp.setText(_currentMode.getAirp());
         modeHumidity.setText(_currentMode.getHumidity());
         modeLux.setText(_currentMode.getLux());
         modeTemp.setText(_currentMode.getTemp());
         modeVolume.setText(_currentMode.getVolume());
-
     }
 
     //Open edit mode fragment
@@ -105,16 +103,6 @@ public class ModeLayoutFragment extends Fragment implements IZoneSelection {
         FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
         EditModeLayoutFragment = new EditModeLayoutFragment(this,_owner,_baseViewModel, cMode, settingsFragment);
         fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard,EditModeLayoutFragment).commit();
-        _callback = EditModeLayoutFragment;
-    }
-
-    @Override
-    public void zoneIsSelected() {
-        if (_dashboardFragment._backSeatSelected || _dashboardFragment._driverSeatSelected || _dashboardFragment._frontSeatSelected) {
-
-        } else {
-
-        }
     }
 
 }

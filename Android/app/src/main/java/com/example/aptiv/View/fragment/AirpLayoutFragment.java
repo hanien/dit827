@@ -27,6 +27,11 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
     private TextView ApChangeValue;
     private ImageView TempImage;
     private LinearLayout SetApLayout;
+    private ImageView _minusButton;
+    private ImageView _plusButton;
+    private double _desiredAir;
+    private boolean _plusMinusButtonClicked = false;
+    double air = 0;
 
     public AirpLayoutFragment(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
@@ -42,8 +47,26 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
         setUpElements();
         zoneIsSelected();
         setUpTimer();
+        registerOnClickListeners();
 
         return _view;
+    }
+
+    private void registerOnClickListeners(){
+        _plusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _desiredAir++;
+                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+            }
+        });
+        _minusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _desiredAir--;
+                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+            }
+        });
     }
 
     private void setUpView() {
@@ -53,6 +76,8 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
         SetApLayout = _view.findViewById(R.id.SetTempLayout);
         TempImage = _view.findViewById(R.id.TempImage);
         Label = _view.findViewById(R.id.tempLabel);
+        _minusButton = _view.findViewById(R.id.minus);
+        _plusButton= _view.findViewById(R.id.plus);
     }
 
     private void setUpElements(){
@@ -63,64 +88,71 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
 
     @Override
     public void zoneIsSelected() {
+        _desiredAir = air;
         if(_parentFragment._backSeatSelected || _parentFragment._driverSeatSelected || _parentFragment._frontSeatSelected ){
             SetText.setVisibility(View.GONE);
             SetApLayout.setVisibility(View.VISIBLE);
             ApChangeValue.setVisibility(View.VISIBLE);
             updateApValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
-
         }else{
             SetText.setVisibility(View.VISIBLE);
             ApChangeValue.setVisibility(View.GONE);
             SetApLayout.setVisibility(View.GONE);
-
-
         }
     }
 
     private void updateApValue(boolean Driver, boolean Passenger , boolean Back) {
-        double AP = 0;
-        if(Driver && Passenger && Back){
-            AP =  Double.parseDouble(_baseViewModel.MiddleZone.getPressure())+  Double.parseDouble(_baseViewModel.PassengerZone.getPressure()) + Double.parseDouble(_baseViewModel.BackseatZone.getPressure()) +  Double.parseDouble(_baseViewModel.DriverZone.getPressure());
-            AP = AP / 4;
-        }
-        else if(Driver && Passenger){
-            AP =  Double.parseDouble(_baseViewModel.MiddleZone.getPressure())+  Double.parseDouble(_baseViewModel.PassengerZone.getPressure()) +  Double.parseDouble(_baseViewModel.DriverZone.getPressure());
-            AP = AP / 3;
-        }
-        else if(Passenger && Back){
-            AP =  Double.parseDouble(_baseViewModel.MiddleZone.getPressure())+  Double.parseDouble(_baseViewModel.PassengerZone.getPressure()) + Double.parseDouble(_baseViewModel.BackseatZone.getPressure());
-            AP = AP / 3;
-        }
-        else if(Driver && Back){
-            AP =  Double.parseDouble(_baseViewModel.MiddleZone.getPressure()) + Double.parseDouble(_baseViewModel.BackseatZone.getPressure()) +  Double.parseDouble(_baseViewModel.DriverZone.getPressure());
-            AP = AP / 3;
-        }
-        else if(Driver){
-            AP =  Double.parseDouble(_baseViewModel.MiddleZone.getPressure())+Double.parseDouble(_baseViewModel.DriverZone.getPressure());
-            AP = AP / 2;
-        }
-        else if(Passenger){
-            AP =  Double.parseDouble(_baseViewModel.MiddleZone.getPressure())+Double.parseDouble(_baseViewModel.PassengerZone.getPressure());
-            AP = AP / 2;
-        }
-        else if(Back){
-            AP =  Double.parseDouble(_baseViewModel.MiddleZone.getPressure())+Double.parseDouble(_baseViewModel.BackseatZone.getPressure());
-            AP = AP / 2;
+
+        if((int)_desiredAir == (int)air){
+            _plusMinusButtonClicked = false;
         }
 
+        air =  Double.parseDouble(_baseViewModel.MiddleZone.getPressure());
 
-        if(AP == 0){
-            ApValue.setText(_baseViewModel.MiddleZone.getPressure() +  " hPa");
-            ApChangeValue.setText(_baseViewModel.MiddleZone.getPressure() +  " hPa");
+        int count = 1;
+        if(Driver){
+            air = air + Double.parseDouble(_baseViewModel.DriverZone.getPressure());
+            count++;
         }
-        else {
-            ApValue.setText(String.valueOf((int)AP) + " hPa");
-            ApChangeValue.setText(String.valueOf((int)AP) + " hPa");
-
+        if(Passenger){
+            air = air + Double.parseDouble(_baseViewModel.PassengerZone.getPressure());
+            count++;
         }
+        if(Back){
+            air = air + Double.parseDouble(_baseViewModel.PassengerZone.getPressure());
+            count++;
+        }
+        if(count ==4){
+            air =  Double.parseDouble(_baseViewModel.MiddleZone.getPressure());
+            count = 1;
+        }
+        air = air/count;
+        ApChangeValue.setText(String.valueOf((int)air));
+
+        if(!_plusMinusButtonClicked){
+            ApChangeValue.setTextSize(50);
+            ApChangeValue.setText(String.valueOf((int)air));
+        }
+        if(_plusMinusButtonClicked){
+            PlusMinusButtonClicked(Driver,Passenger,Back);
+        }
+    }
 
 
+    private void PlusMinusButtonClicked(boolean Driver,boolean Passenger,boolean Back){
+        _plusMinusButtonClicked = true;
+        ApChangeValue.setTextSize(25);
+
+        ApChangeValue.setText("In progress...\n Changing Volume\n from " +(int)_desiredAir+ " to "+ String.valueOf((int)air));
+        if(Driver){
+            _baseViewModel.DriverProfile.setPressure(Double.toString(_desiredAir));
+        }
+        if(Passenger){
+            _baseViewModel.PassengerProfile.setPressure(Double.toString(_desiredAir));
+        }
+        if(Back) {
+            _baseViewModel.BackProfile.setPressure(Double.toString(_desiredAir));
+        }
     }
 
     private void setUpTimer(){
