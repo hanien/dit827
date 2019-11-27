@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.example.aptiv.Model.Classe.Zone;
 import com.example.aptiv.Model.Classe.Mode;
 import com.example.aptiv.Model.Interface.IZoneSelection;
@@ -260,16 +261,16 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
 
         }
     }
+
     public void CreatePopupView(final boolean DriverSeat,final boolean PassangerSeat,final boolean BackSeat,String messages,boolean OverrideButton){
         if(DriverSeat){
-            toggleError(_baseViewModel.DriverZone);
+            toggleError(_baseViewModel.DriverZone,true);
         }
         if(PassangerSeat){
-            toggleError(_baseViewModel.PassengerZone);
+            toggleError(_baseViewModel.PassengerZone,true);
         }
         if(BackSeat){
-            toggleError(_baseViewModel.BackseatZone);
-
+            toggleError(_baseViewModel.BackseatZone,true);
         }
 
         View popupView = _inflater.inflate(R.layout.fragment_pupup, null);
