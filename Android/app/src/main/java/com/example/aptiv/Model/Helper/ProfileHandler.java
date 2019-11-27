@@ -23,13 +23,6 @@ public class ProfileHandler {
     private final double t_sound = 1.0;
     private final double t_light = 5.0;
 
-    // Ask George why Soundlevel is String !
-    private String DriverSoundLevel;
-    private String PassangerSoundLevel;
-    private String BackSoundLevel;
-
-    private boolean CheckSound;
-
     private BaseViewModel _base;
     private DashboardFragment _dashboardFragment;
     private Zone _driver, _passenger, _mid, _back;
@@ -108,34 +101,36 @@ public class ProfileHandler {
         return belowThreshold && aboveThreshold;
     }
 
-    // Use this method in sound fragment to check sound level after George merge his code
-
-    private boolean checkSoundLevel() {
-
-        DriverSoundLevel = _base.DriverZone.getSound();
-        PassangerSoundLevel = _base.DriverZone.getSound();
-        BackSoundLevel = _base.DriverZone.getSound();
-
-        CheckSound = compareSoundlevel(DriverSoundLevel, PassangerSoundLevel, BackSoundLevel);
-
-        return CheckSound;
-
-    }
 
 
-    private boolean compareSoundlevel(String DriverLevel, String PassangerLevel, String BackLevel) {
+    private boolean checkTempLevel() {
 
-        double Driver = Double.parseDouble(DriverLevel);
-        double Passanger = Double.parseDouble(PassangerLevel);
-        double Back = Double.parseDouble(BackLevel);
+        String  DriverTempLevel = _base.DriverZone.getTemperature();
+        String  PassangerTempLevel = _base.DriverZone.getTemperature();
+        String  BackTempLevel = _base.DriverZone.getTemperature();
 
-
-        boolean DriverCheck = Driver < (Passanger + Back) / 2;
-        boolean PassangerCheck = Passanger < (Driver + Back) / 2;
-        boolean BackCheck = Back < (Passanger + Driver) / 2;
+        boolean DriverCheck = compareThreshold(DriverTempLevel,t_temp);
+        boolean PassangerCheck = compareThreshold(PassangerTempLevel,t_temp);
+        boolean BackCheck = compareThreshold(BackTempLevel,t_temp);
 
 
         return DriverCheck && PassangerCheck && BackCheck;
+
+    }
+
+    private boolean checkSoundLevel() {
+
+        String  DriverSoundLevel = _base.DriverZone.getSound();
+        String  PassangerSoundLevel = _base.DriverZone.getSound();
+        String  BackSoundLevel = _base.DriverZone.getSound();
+
+        boolean DriverCheck = compareThreshold(DriverSoundLevel,t_sound);
+        boolean PassangerCheck = compareThreshold(PassangerSoundLevel,t_sound);
+        boolean BackCheck = compareThreshold(BackSoundLevel,t_sound);
+
+
+        return DriverCheck && PassangerCheck && BackCheck;
+
     }
 
 
@@ -145,22 +140,8 @@ public class ProfileHandler {
 
         if (check.containsValue(Boolean.FALSE)) {
 
-            //Todo: Create PopUp
 
-            boolean PopUp = false;
-
-           //PopUp = _dashboardFragment.popUp();
-
-            if (PopUp){
-
-                ChangeZoneValues(profile, zone);
-
-            }
-            else {
-
-                //User choose zone for the profile
-
-            }
+          // _dashboardFragment.popUp();
 
 
         } else {
@@ -201,7 +182,10 @@ public class ProfileHandler {
 
     private boolean compareZonesAndProfile(String zoneValue, String ProfileValue) {
 
-        boolean result = (Double.parseDouble(zoneValue) == Double.parseDouble(ProfileValue));
+        boolean result =  (Double.parseDouble(ProfileValue) < (Double.parseDouble(zoneValue) + 5 ) )
+                &&  (Double.parseDouble(ProfileValue) >  (Double.parseDouble(zoneValue) - 5 ));
+        
+      //  boolean result = (Double.parseDouble(zoneValue) == Double.parseDouble(ProfileValue));
 
         return result;
     }
