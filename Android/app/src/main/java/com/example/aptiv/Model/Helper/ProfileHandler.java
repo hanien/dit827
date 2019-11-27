@@ -54,7 +54,6 @@ public class ProfileHandler {
 
     public void SetDashboardFragment(DashboardFragment fragment) {
         _dashboardFragment = fragment;
-        checkThresholds();
     }
 
     public void onDataFetched(Zone zone) {
@@ -199,9 +198,9 @@ public class ProfileHandler {
         String  PassangerTempLevel = _base.DriverZone.getTemperature();
         String  BackTempLevel = _base.DriverZone.getTemperature();
 
-        boolean DriverCheck = compareThreshold(DriverTempLevel,t_temp);
-        boolean PassangerCheck = compareThreshold(PassangerTempLevel,t_temp);
-        boolean BackCheck = compareThreshold(BackTempLevel,t_temp);
+        boolean DriverCheck = compareThreshold(Double.parseDouble(DriverTempLevel),t_temp);
+        boolean PassangerCheck = compareThreshold(Double.parseDouble(PassangerTempLevel),t_temp);
+        boolean BackCheck = compareThreshold(Double.parseDouble(BackTempLevel),t_temp);
 
 
         return DriverCheck && PassangerCheck && BackCheck;
@@ -214,9 +213,9 @@ public class ProfileHandler {
         String  PassangerSoundLevel = _base.DriverZone.getSound();
         String  BackSoundLevel = _base.DriverZone.getSound();
 
-        boolean DriverCheck = compareThreshold(DriverSoundLevel,t_sound);
-        boolean PassangerCheck = compareThreshold(PassangerSoundLevel,t_sound);
-        boolean BackCheck = compareThreshold(BackSoundLevel,t_sound);
+        boolean DriverCheck = compareThreshold(Double.parseDouble(DriverSoundLevel),t_sound);
+        boolean PassangerCheck = compareThreshold(Double.parseDouble(PassangerSoundLevel),t_sound);
+        boolean BackCheck = compareThreshold(Double.parseDouble(BackSoundLevel),t_sound);
 
 
         return DriverCheck && PassangerCheck && BackCheck;
@@ -294,10 +293,6 @@ public class ProfileHandler {
     zone.setLux(profile.getLux());
 
     }
-
-
-
-}
 
     private HashMap<String, Double> sumMaps(HashMap<String, Double> sum, HashMap<String, Double> element){
         sum.put("temperature", (sum.get("temperature") + element.get("temperature")));
