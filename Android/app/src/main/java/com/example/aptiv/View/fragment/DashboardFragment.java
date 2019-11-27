@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.aptiv.Model.Classe.Zone;
 import com.example.aptiv.Model.Classe.Mode;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.View.MainActivity;
@@ -44,7 +45,12 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     private ImageView _frontSeat;
     private ImageView _driverSeat;
     private ImageView _backSeat;
+    private ImageView _frontSeatError;
+    private ImageView _driverSeatError;
+    private ImageView _backSeatError;
+
     private LayoutInflater _inflater;
+
     public Boolean _frontSeatSelected = false;
     public Boolean _backSeatSelected = false;
     public Boolean _driverSeatSelected = false;
@@ -63,6 +69,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
 
         SetupButton();
         SetupEvents();
+        _baseViewModel.SetDashboardFragment(this);
 
         return _view;
     }
@@ -72,6 +79,10 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         _frontSeat = _view.findViewById(R.id.frontseat);
         _backSeat = _view.findViewById(R.id.backseat);
         _driverSeat = _view.findViewById(R.id.driverseat);
+
+        _frontSeatError = _view.findViewById(R.id.frontseaterror);
+        _backSeatError = _view.findViewById(R.id.backseaterror);
+        _driverSeatError = _view.findViewById(R.id.driverseaterror);
     }
 
     private void SetupEvents() {
@@ -211,18 +222,55 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         return true;
     }
 
+    public void toggleError(Zone zone, boolean show)
+    {
+        switch(zone.getName())
+        {
+            case DRIVER:
+                if(show)
+                {
+                    _driverSeatError.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    _driverSeatError.setVisibility(View.INVISIBLE);
+                }
+                break;
+            case PASSENGER:
+                if(show)
+                { _frontSeatError.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    _frontSeatError.setVisibility(View.INVISIBLE);
+                }
+                break;
+            case BACK:
+                if(show)
+                {
+                    _backSeatError.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    _backSeatError.setVisibility(View.INVISIBLE);
+                }
+                break;
+            default:
+                //TODO: behavior for invalid zone name. this should never happen.
+                break;
+
+        }
+    }
+
     public void CreatePopupView(final boolean DriverSeat,final boolean PassangerSeat,final boolean BackSeat,String messages,boolean OverrideButton){
         if(DriverSeat){
-            ImageView driverSeatRed = _view.findViewById(R.id.driverseatRed);
-            driverSeatRed.setVisibility(View.VISIBLE);
+            toggleError(_baseViewModel.DriverZone,true);
         }
         if(PassangerSeat){
-            ImageView PassangerSeatRed = _view.findViewById(R.id.frontseatRed);
-            PassangerSeatRed.setVisibility(View.VISIBLE);
+            toggleError(_baseViewModel.PassengerZone,true);
         }
         if(BackSeat){
-            ImageView backSeatRed = _view.findViewById(R.id.backseatRed);
-            backSeatRed.setVisibility(View.VISIBLE);
+            toggleError(_baseViewModel.BackseatZone,true);
         }
 
         View popupView = _inflater.inflate(R.layout.fragment_pupup, null);

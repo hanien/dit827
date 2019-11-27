@@ -58,34 +58,28 @@
                     android:alpha="0.3"
                     android:src="@drawable/driverseatselected"
                     android:visibility="invisible"/>
+
+                <ImageView
+                    android:id="@+id/driverseaterror"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.45"
+                    android:src="@drawable/driverseatred"
+                    android:visibility="invisible" />
                 <ImageView
                     android:id="@+id/frontseat"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:alpha="0.3"
                     android:src="@drawable/frontseatselected"
-                    android:alpha="0.3"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
                 <ImageView
-                    android:id="@+id/backseatRed"
+                    android:id="@+id/frontseaterror"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:alpha="0.3"
-                    android:src="@drawable/backseatred"
-                    android:visibility="invisible"/>
-                <ImageView
-                    android:id="@+id/driverseatRed"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:alpha="0.3"
-                    android:src="@drawable/driverseatred"
-                    android:visibility="invisible"/>
-                <ImageView
-                    android:id="@+id/frontseatRed"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:alpha="0.45"
                     android:src="@drawable/frontseatred"
-                    android:alpha="0.3"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
                 <ImageView
                     android:id="@+id/backseat"
                     android:layout_width="match_parent"
@@ -93,6 +87,14 @@
                     android:alpha="0.3"
                     android:src="@drawable/backseatselected"
                     android:visibility="invisible"/>
+                <ImageView
+                    android:id="@+id/backseaterror"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.45"
+                    android:src="@drawable/backseatred"
+                    android:visibility="invisible"/>
+
                 <Button
                     android:id="@+id/HandlerBtn"
                     android:layout_width="wrap_content"
