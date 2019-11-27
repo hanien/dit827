@@ -27,7 +27,7 @@ public class ProfileHandler {
     private BaseViewModel _base;
     private DashboardFragment _dashboardFragment;
     private Zone _driver, _passenger, _mid, _back;
-    private Queue<Zone> _driveSample, _passSample, _midSample, _backSample;
+    private Queue<Map> _driveSample, _passSample, _midSample, _backSample;
     private HashMap<String, Double> _driveSum, _passSum, _midSum, _backSum;
 
     public ProfileHandler(BaseViewModel base, DashboardFragment dashboardFragment,
@@ -71,8 +71,18 @@ public class ProfileHandler {
         checkThresholds(null, zone);
     }
 
+    public void onProfileChange(Profile profile, Zone zone) {
+        if(checkZone(profile, zone).containsValue(Boolean.FALSE)){
+            //TODO add popup here
+        }
+    }
+
+    public void alignToZone(Profile profile, Zone zone){
+
+    }
+
     private void sampleZone(Profile profile, Zone zone) {
-        Queue<Zone> currentQueue = null;
+        Queue<Map> currentQueue = null;
         HashMap<String, Double> currentSum = null;
 
         switch(zone.getName()){
@@ -94,7 +104,7 @@ public class ProfileHandler {
                 break;
         }
         if(currentQueue.size() < 5) {
-            currentQueue.add(zone);
+            currentQueue.add(zone.getAll());
         }
         else if (currentQueue.size() == 5){
             //sum the contents
@@ -117,7 +127,7 @@ public class ProfileHandler {
             }
             //add reading to queue
             currentQueue.remove();
-            currentQueue.add(zone);
+            currentQueue.add(zone.getAll());
         }
 
     }
