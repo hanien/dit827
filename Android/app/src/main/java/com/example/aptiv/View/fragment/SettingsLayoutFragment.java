@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
 
+    private SharedPreferences sharedPreferences;
     private MainActivity _owner;
     private DashboardFragment _parentFragment;
     private View _view;
@@ -85,17 +86,21 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
         saveData();
     }
 
+
     private void saveData() {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
+        if(sharedPreferences == null){
+            sharedPreferences = getContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
+        }
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(modesList);
         editor.putString("mode list", json);
         editor.apply();
     }
-
     private void loadData(Context context) {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
+        if(sharedPreferences == null){
+            sharedPreferences = getContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
+        }
         Gson gson = new Gson();
         String json = sharedPreferences.getString("mode list", null);
         Type type = new TypeToken<ArrayList<Mode>>() {
