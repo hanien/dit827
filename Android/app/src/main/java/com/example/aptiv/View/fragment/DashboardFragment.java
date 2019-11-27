@@ -49,7 +49,6 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     private ImageView _driverSeatError;
     private ImageView _backSeatError;
 
-
     private LayoutInflater _inflater;
 
     public Boolean _frontSeatSelected = false;
