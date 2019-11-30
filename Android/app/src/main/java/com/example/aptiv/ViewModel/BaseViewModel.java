@@ -1,7 +1,13 @@
 package com.example.aptiv.ViewModel;
 
+import android.content.Intent;
+import android.view.View;
+
+import androidx.core.content.ContextCompat;
+
 import com.example.aptiv.Model.Classe.Profile;
 import com.example.aptiv.Model.Classe.Zone;
+import com.example.aptiv.Model.Helper.ReceiverService;
 import com.example.aptiv.Model.Interface.IVolleyCollback;
 import com.example.aptiv.Model.Service.WeatherService;
 import com.example.aptiv.View.MainActivity;
@@ -77,6 +83,7 @@ public class BaseViewModel implements IVolleyCollback {
     @Override
     public void GetAverageReadings(Zone value) {
         MiddleZone = value;
+        BackseatZone.setIr(MiddleZone.getIr());
         _profileHandler.onDataFetched(value);
     }
 
@@ -88,6 +95,7 @@ public class BaseViewModel implements IVolleyCollback {
     @Override
     public void GetBackseatReadings(Zone value) {
         BackseatZone = value;
+        BackseatZone.setIr(MiddleZone.getIr());
         _profileHandler.onDataFetched(value);
     }
 
@@ -100,6 +108,5 @@ public class BaseViewModel implements IVolleyCollback {
     public String getCelsius(){
         return celsius;
     }
-
-
+    
 }

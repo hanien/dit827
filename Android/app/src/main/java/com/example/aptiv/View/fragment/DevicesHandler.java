@@ -25,15 +25,12 @@ public class DevicesHandler extends Fragment {
     private DashboardFragment _parentFragment;
     private View _view;
     private BaseViewModel _baseViewModel;
-
-    MessageListener mMessageListener;
-    Message mActiveMessage;
-
-
-     Button muteBtn;
-     Button unmuteBtn;
-     Button HvolumeBtn;
-     Button LvolumeBtn ;
+    private MessageListener mMessageListener;
+    private Message mActiveMessage;
+    private Button muteBtn;
+    private Button unmuteBtn;
+    private Button HvolumeBtn;
+    private Button LvolumeBtn ;
 
     public DevicesHandler(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
@@ -46,11 +43,13 @@ public class DevicesHandler extends Fragment {
                              Bundle savedInstanceState) {
         _view = inflater.inflate(R.layout.pop_up, container, false);
 
-        muteBtn = _view.findViewById(R.id.mutebtn);
-       unmuteBtn = _view.findViewById(R.id.unmutebtn);
-    HvolumeBtn = _view.findViewById(R.id.highbtn);
-       LvolumeBtn = _view.findViewById(R.id.lowbtn);
+        SetupView();
+        RegisterOnClickListeners();
 
+        return _view;
+    }
+
+    private void RegisterOnClickListeners() {
         muteBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -67,9 +66,6 @@ public class DevicesHandler extends Fragment {
 
             }
         });
-
-
-
         unmuteBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -86,9 +82,6 @@ public class DevicesHandler extends Fragment {
 
             }
         });
-
-
-
         HvolumeBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -105,9 +98,6 @@ public class DevicesHandler extends Fragment {
 
             }
         });
-
-
-
         LvolumeBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -124,10 +114,14 @@ public class DevicesHandler extends Fragment {
 
             }
         });
-
-        return _view;
     }
 
+    private void SetupView() {
+        muteBtn = _view.findViewById(R.id.mutebtn);
+        unmuteBtn = _view.findViewById(R.id.unmutebtn);
+        HvolumeBtn = _view.findViewById(R.id.highbtn);
+        LvolumeBtn = _view.findViewById(R.id.lowbtn);
+    }
 
 
     public void Publish(String message) {
@@ -137,7 +131,6 @@ public class DevicesHandler extends Fragment {
 
     public void Unpublish() {
         Nearby.getMessagesClient(_owner).unpublish(mActiveMessage);
-
     }
 
     public void MutePublish() {

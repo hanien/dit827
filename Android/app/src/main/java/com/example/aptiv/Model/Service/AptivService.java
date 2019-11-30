@@ -45,7 +45,7 @@ public class AptivService implements IAptivService {
                         final Zone Zone = gson.fromJson(dataArray, Zone.class);
                         _collback.GetDriverReadings(Zone);
                     }catch (Exception e){
-                        Log.e(this.getClass().toString(), e.getMessage());
+                        Log.e(this.getClass().toString(), "something bad happend");
                     }
                 }
             }, new Response.ErrorListener() {
@@ -77,7 +77,7 @@ public class AptivService implements IAptivService {
                         final Zone Zone = gson.fromJson(dataArray, Zone.class);
                         _collback.GetPassengerReadings(Zone);
                     } catch (Exception e) {
-                        Log.e(this.getClass().toString(), e.getMessage());
+                        Log.e(this.getClass().toString(), "something bad happend");
                     }
                 }
             }, new Response.ErrorListener() {
@@ -110,7 +110,7 @@ public class AptivService implements IAptivService {
                         final Zone Zone = gson.fromJson(dataArray, Zone.class);
                         _collback.GetAverageReadings(Zone);
                     } catch (Exception e) {
-                        Log.e(this.getClass().toString(), e.getMessage());
+                        Log.e(this.getClass().toString(), "something bad happend");
                     }
                 }
             }, new Response.ErrorListener() {
@@ -143,7 +143,7 @@ public class AptivService implements IAptivService {
                         final Zone Zone = gson.fromJson(dataArray, Zone.class);
                         _collback.GetBackseatReadings(Zone);
                     } catch (Exception e) {
-                        Log.e(this.getClass().toString(), e.getMessage());
+                        Log.e(this.getClass().toString(), "something bad happend");
                     }
                 }
             }, new Response.ErrorListener() {

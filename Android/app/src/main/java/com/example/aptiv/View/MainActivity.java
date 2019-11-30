@@ -1,12 +1,16 @@
 package com.example.aptiv.View;
 import com.example.aptiv.Model.Classe.Mode;
+import com.example.aptiv.Model.Helper.ReceiverService;
 import com.example.aptiv.ViewModel.DashboardViewModel;
 
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -26,6 +30,7 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         AppCenter.start(getApplication(), "98489794-5ff9-4db1-bc55-a9d9fbea5220",Analytics.class, Crashes.class);
         SetupActivity();
+        startReceiverService();
     }
 
     private void SetupActivity(){
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity  {
 
     @Override
     protected void onDestroy() {
+        stopReceiverService();
         super.onDestroy();
     }
 
@@ -99,6 +105,16 @@ public class MainActivity extends AppCompatActivity  {
 
     public void CloseDHFragment(View v){
         _dashboardFragment.SetupCarLayoutFragment();
+    }
+
+    public void startReceiverService() {
+        Intent serviceIntent = new Intent(this, ReceiverService.class);
+        ContextCompat.startForegroundService(this, serviceIntent);
+    }
+
+    public void stopReceiverService() {
+        Intent serviceIntent = new Intent(this, ReceiverService.class);
+        this.stopService(serviceIntent);
     }
 }
 
