@@ -42,6 +42,9 @@ public class Zone {
         this.light = light;
         this.lux = lux;
     }
+    public void setName(ZoneName Name){
+        this.name = Name;
+    }
 
     public ZoneName getName() { return name; }
 

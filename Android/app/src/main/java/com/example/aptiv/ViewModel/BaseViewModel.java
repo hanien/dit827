@@ -71,18 +71,21 @@ public class BaseViewModel implements IVolleyCollback {
     @Override
     public void GetDriverReadings(Zone value) {
         DriverZone = value;
+        DriverZone.setName(Zone.ZoneName.DRIVER);
         _profileHandler.onDataFetched(value);
     }
 
     @Override
     public void GetPassengerReadings(Zone value) {
         PassengerZone = value;
+        PassengerZone.setName(Zone.ZoneName.PASSENGER);
         _profileHandler.onDataFetched(value);
     }
 
     @Override
     public void GetAverageReadings(Zone value) {
         MiddleZone = value;
+        MiddleZone.setName(Zone.ZoneName.MIDDLE);
         BackseatZone.setIr(MiddleZone.getIr());
         _profileHandler.onDataFetched(value);
     }
@@ -95,6 +98,7 @@ public class BaseViewModel implements IVolleyCollback {
     @Override
     public void GetBackseatReadings(Zone value) {
         BackseatZone = value;
+        BackseatZone.setName(Zone.ZoneName.BACK);
         BackseatZone.setIr(MiddleZone.getIr());
         _profileHandler.onDataFetched(value);
     }
@@ -108,5 +112,5 @@ public class BaseViewModel implements IVolleyCollback {
     public String getCelsius(){
         return celsius;
     }
-    
+
 }
