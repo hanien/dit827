@@ -66,6 +66,14 @@ public class DevicesHandler extends Fragment {
                     MuteText.setText("Unmute");
                 }
                 _baseViewModel.isMuted = !_baseViewModel.isMuted;
+                HideBtns();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        Unpublish();
+                        ShowBtns();
+                    }
+                }, 3000);
 
             }
         });
@@ -106,7 +114,7 @@ public class DevicesHandler extends Fragment {
 
     private void SetupView() {
         muteBtn = _view.findViewById(R.id.mutebtn);
-        unmuteBtn = _view.findViewById(R.id.unmutebtn);
+        MuteText = _view.findViewById(R.id.MuteText);
         HvolumeBtn = _view.findViewById(R.id.highbtn);
         LvolumeBtn = _view.findViewById(R.id.lowbtn);
     }
@@ -146,20 +154,21 @@ public class DevicesHandler extends Fragment {
     }
 
     public void HideBtns() {
-
-        muteBtn.setEnabled(false);
-        //unmuteBtn.setEnabled(false);
-        HvolumeBtn.setEnabled(false);
-        LvolumeBtn.setEnabled(false);
-
+        muteBtn.setAlpha(0.5f);
+        HvolumeBtn.setAlpha(0.5f);
+        LvolumeBtn.setAlpha(0.5f);
+        muteBtn.setClickable(false);
+        LvolumeBtn.setClickable(false);
+        HvolumeBtn.setClickable(false);
     }
 
     public void ShowBtns() {
-
-        muteBtn.setEnabled(true);
-        HvolumeBtn.setEnabled(true);
-        LvolumeBtn.setEnabled(true);
-
+        muteBtn.setAlpha(1f);
+        HvolumeBtn.setAlpha(1f);
+        LvolumeBtn.setAlpha(1f);
+        muteBtn.setClickable(true);
+        LvolumeBtn.setClickable(true);
+        HvolumeBtn.setClickable(true);
     }
 
 
