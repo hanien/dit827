@@ -25,7 +25,6 @@ public class Zone {
     private String altitude;
     private String light;
     private String lux;
-    private Profile profile;
 
     public Zone(ZoneName name, String temperature, String humidity, String gain, String luminosity, String full, String ir,
                 String pressure , String sound, String altitude, String light,String lux){

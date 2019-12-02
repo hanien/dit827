@@ -94,18 +94,17 @@
                     android:alpha="0.45"
                     android:src="@drawable/backseatred"
                     android:visibility="invisible"/>
-
-                <Button
+                <ImageView
                     android:id="@+id/HandlerBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:src="@drawable/iot"
+                    android:backgroundTint="@color/CardViewColor"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:background="@color/CardViewColor"
                     android:onClick="OpenDHFragment"
-                    android:text="Devices Handler"
-                    android:textColor="@android:color/white"
-                    android:textSize="9dp" />
+                    android:clickable="true">
+                </ImageView>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
 

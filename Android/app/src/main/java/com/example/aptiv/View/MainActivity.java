@@ -13,6 +13,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.example.aptiv.R;
 import com.example.aptiv.View.adapter.ViewPagerAdapter;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppCenter.start(getApplication(), "98489794-5ff9-4db1-bc55-a9d9fbea5220",Analytics.class, Crashes.class);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         SetupActivity();
         startReceiverService();
     }
