@@ -95,7 +95,7 @@
                     android:layout_weight="1"
                     android:layout_margin="10dp"
                     android:textSize="20dp"
-                    android:text="Switch temperature scale:"
+                    android:text="Switch temperature:"
                     android:textColor="@color/CardViewTextColor" />
 
                 <TextView
@@ -107,7 +107,7 @@
                     android:layout_weight="1"
                     android:layout_margin="10dp"
                     android:textSize="20dp"
-                    android:text="Celsius"
+                    android:text="C"
                     android:textColor="@color/CardViewTextColor" />
 
                 <Switch
@@ -127,7 +127,7 @@
                     android:layout_weight="1"
                     android:layout_margin="10dp"
                     android:textSize="20dp"
-                    android:text="Fahrenheit"
+                    android:text="F"
                     android:textColor="@color/CardViewTextColor" />
 
               </LinearLayout>
