@@ -37,6 +37,7 @@ public class BaseViewModel implements IVolleyCollback {
     public Profile BackProfile = new Profile(null,null,null,null,null,null,null,null,null,null,null,null);
 
     public Double OutTempreture = 0.0;
+    public Boolean isMuted = false;
     public Boolean tempType; //True here means that it is Fahrenheit
     private String fahrenheit;
     private String celsius;
