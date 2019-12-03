@@ -82,6 +82,8 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
                 }
                 else{
                     if(DriverSeat){
+                        //check differences for every variable
+                        //if all check out, set new profile
                         _viewModel.DriverProfile.setIr(currentMode.getLux());
                         _viewModel.DriverProfile.setTemperature(currentMode.getTemp());
                         _viewModel.DriverProfile.setSound(currentMode.getVolume());

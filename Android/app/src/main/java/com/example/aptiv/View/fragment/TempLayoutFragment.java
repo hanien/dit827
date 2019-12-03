@@ -123,6 +123,8 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         Boolean tempType = _baseViewModel.getTempType();
         temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
         int count = 1;
+        //TODO check and compare against other zones
+
         if(Driver){
             temp = temp + Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
             count++;
@@ -147,22 +149,61 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         }
     }
 
+    private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
+        double driverTemp = Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
+        double passengerTemp = Double.parseDouble(_baseViewModel.PassengerZone.getTemperature());
+        double backTemp = Double.parseDouble(_baseViewModel.BackseatZone.getTemperature());
+
+        double frontDiff = Math.abs(driverTemp - passengerTemp);
+        double leftDiff = Math.abs(driverTemp - backTemp);
+        double rightDiff = Math.abs(passengerTemp - backTemp);
+
+        if(driver) {
+            if(rightDiff+2 < frontDiff && rightDiff+2 < leftDiff) {
+                return false;
+            }
+            return true;
+        }
+        else if(passenger){
+            if(leftDiff+2 < frontDiff && leftDiff+2 < rightDiff){
+                return false;
+            }
+            return true;
+        }
+        else if(backseat){
+            if(frontDiff+2 < leftDiff && frontDiff+2 < rightDiff){
+                return false;
+            }
+            return true;
+        }
+        return true;
+    }
+
     private void PlusMinusButtonClicked(boolean Driver,boolean Passenger,boolean Back){
         _plusMinusButtonClicked = true;
         Boolean tempType = _baseViewModel.getTempType();
         String fahrenheit = _baseViewModel.getFahrenheit();
         String celsius = _baseViewModel.getCelsius();
         String typeString = ((tempType)) ? fahrenheit : celsius;
-        tempChangeValue.setTextSize(25);
-        tempChangeValue.setText("In progress...\n Changing Tempreture\n from " +_desiredTemp+ " to "+ String.valueOf((int)temp) + typeString);
-        if(Driver){
-            _baseViewModel.DriverProfile.setTemperature(Double.toString(_desiredTemp));
+
+        if(checkZoneDifferences(Driver, Passenger, Back)) {
+            tempChangeValue.setTextSize(25);
+            tempChangeValue.setText("In progress...\n Changing Tempreture\n from " +_desiredTemp+ " to "+ String.valueOf((int)temp) + typeString);
+            if(Driver){
+                _baseViewModel.DriverProfile.setTemperature(Double.toString(_desiredTemp));
+            }
+            if(Passenger){
+                _baseViewModel.PassengerProfile.setTemperature(Double.toString(_desiredTemp));
+            }
+            if(Back) {
+                _baseViewModel.BackProfile.setTemperature(Double.toString(_desiredTemp));
+            }
         }
-        if(Passenger){
-            _baseViewModel.PassengerProfile.setTemperature(Double.toString(_desiredTemp));
-        }
-        if(Back) {
-            _baseViewModel.BackProfile.setTemperature(Double.toString(_desiredTemp));
+        else {
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Temperature is too different from other zones! Adjust other zones and try again.", false);
+            //TODO
+            //if yes: implement adjustment behavior
+            //else: reset to original value
         }
     }
 

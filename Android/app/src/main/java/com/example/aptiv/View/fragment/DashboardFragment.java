@@ -263,15 +263,6 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     }
 
     public void CreatePopupView(final boolean DriverSeat,final boolean PassangerSeat,final boolean BackSeat,String messages,boolean OverrideButton){
-        if(DriverSeat){
-            toggleError(_baseViewModel.DriverZone,true);
-        }
-        if(PassangerSeat){
-            toggleError(_baseViewModel.PassengerZone,true);
-        }
-        if(BackSeat){
-            toggleError(_baseViewModel.BackseatZone,true);
-        }
 
         View popupView = _inflater.inflate(R.layout.fragment_pupup, null);
 
