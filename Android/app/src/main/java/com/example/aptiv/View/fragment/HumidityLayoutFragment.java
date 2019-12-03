@@ -123,7 +123,7 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
             count++;
         }
         if(Back){
-            Humidity = Humidity + Double.parseDouble(_baseViewModel.PassengerZone.getHumidity());
+            Humidity = Humidity + Double.parseDouble(_baseViewModel.BackseatZone.getHumidity());
             count++;
         }
         if(count ==4){

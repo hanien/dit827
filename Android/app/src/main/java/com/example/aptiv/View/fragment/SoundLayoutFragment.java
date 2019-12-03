@@ -116,7 +116,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
             count++;
         }
         if(Back){
-            temp = temp + Double.parseDouble(_baseViewModel.PassengerZone.getSound());
+            temp = temp + Double.parseDouble(_baseViewModel.BackseatZone.getSound());
             count++;
         }
         if(count ==4){

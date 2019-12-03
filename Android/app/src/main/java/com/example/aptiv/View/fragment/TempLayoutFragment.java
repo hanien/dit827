@@ -132,7 +132,7 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
             count++;
         }
         if(Back){
-            temp = temp + Double.parseDouble(_baseViewModel.PassengerZone.getTemperature());
+            temp = temp + Double.parseDouble(_baseViewModel.BackseatZone.getTemperature());
             count++;
         }
         if(count ==4){

@@ -119,7 +119,7 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
             count++;
         }
         if(Back){
-            air = air + Double.parseDouble(_baseViewModel.PassengerZone.getPressure());
+            air = air + Double.parseDouble(_baseViewModel.BackseatZone.getPressure());
             count++;
         }
         if(count ==4){

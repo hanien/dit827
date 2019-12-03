@@ -119,7 +119,7 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
             count++;
         }
         if(Back){
-            lux = lux + Double.parseDouble(_baseViewModel.PassengerZone.getIr());
+            lux = lux + Double.parseDouble(_baseViewModel.BackseatZone.getIr());
             count++;
         }
         if(count ==4){
