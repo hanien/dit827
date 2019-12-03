@@ -50,6 +50,10 @@ public class Zone {
     }
 
     public String getTemperature() {
+        if(temperature == null)
+        {
+            return "0.0";
+        }
         return temperature;
     }
 
@@ -58,6 +62,10 @@ public class Zone {
     }
 
     public String getHumidity() {
+        if(humidity != null)
+        {
+            return "0.0";
+        }
         String hum = String.format("%.2f", parseFloat(humidity));
         return hum;
     }
@@ -67,6 +75,10 @@ public class Zone {
     }
 
     public String getGain() {
+        if(gain == null)
+        {
+            return "0.0";
+        }
         return gain;
     }
 
@@ -75,6 +87,10 @@ public class Zone {
     }
 
     public String getLuminosity() {
+        if(luminosity == null)
+        {
+            return "0.0";
+        }
         return luminosity;
     }
 
@@ -83,6 +99,10 @@ public class Zone {
     }
 
     public String getFull() {
+        if(full == null)
+        {
+            return "0.0";
+        }
         return full;
     }
 
@@ -91,6 +111,10 @@ public class Zone {
     }
 
     public String getIr() {
+        if(ir == null)
+        {
+            return "0.0";
+        }
         String infra = String.format("%.2f", parseFloat(ir));
         return infra;
     }
@@ -100,6 +124,10 @@ public class Zone {
     }
 
     public String getPressure() {
+        if(pressure == null)
+        {
+            return "0.0";
+        }
         return pressure;
     }
 
@@ -108,6 +136,10 @@ public class Zone {
     }
 
     public String getSound() {
+        if(sound == null)
+        {
+            return "0.0";
+        }
         return sound;
     }
 
@@ -116,6 +148,10 @@ public class Zone {
     }
 
     public String getAltitiude() {
+        if(altitude == null)
+        {
+            return "0.0";
+        }
         return altitude;
     }
 
@@ -124,6 +160,10 @@ public class Zone {
     }
 
     public String getLight() {
+        if(light == null)
+        {
+            return "0.0";
+        }
         return light;
     }
 
@@ -131,7 +171,13 @@ public class Zone {
         this.light = light;
     }
 
-    public String getLux() { return lux; }
+    public String getLux() {
+        if(lux == null)
+        {
+            return "0.0";
+        }
+        return lux;
+    }
 
     public void setLux(String lux) { this.lux = lux; }
 

@@ -113,6 +113,8 @@ public class ProfileHandler {
                 currentSum = _backSum;
                 break;
         }
+        if(zone.getName().equals(Zone.ZoneName.DRIVER))
+            _driveSample.add(zone.getAll());
         if(currentQueue.size() < 5) {
             currentQueue.add(zone.getAll());
         }
