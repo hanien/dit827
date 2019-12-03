@@ -43,7 +43,11 @@ public class Zone {
         this.lux = lux;
     }
 
-    public ZoneName getName() { return name; }
+    public Zone.ZoneName getName() { return name; }
+
+    public void setName(ZoneName name) {
+        this.name = name;
+    }
 
     public String getTemperature() {
         return temperature;

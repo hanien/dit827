@@ -138,21 +138,59 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
         }
     }
 
+    private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
+        double driverPressure = Double.parseDouble(_baseViewModel.DriverZone.getPressure());
+        double passengerPressure = Double.parseDouble(_baseViewModel.PassengerZone.getPressure());
+        double backPressure = Double.parseDouble(_baseViewModel.BackseatZone.getPressure());
+
+        double frontDiff = Math.abs(driverPressure - passengerPressure);
+        double leftDiff = Math.abs(driverPressure - backPressure);
+        double rightDiff = Math.abs(passengerPressure - backPressure);
+
+        if(driver) {
+            if(rightDiff+30 < frontDiff && rightDiff+30 < leftDiff) {
+                return false;
+            }
+            return true;
+        }
+        else if(passenger){
+            if(leftDiff+30 < frontDiff && leftDiff+30 < rightDiff){
+                return false;
+            }
+            return true;
+        }
+        else if(backseat){
+            if(frontDiff+30 < leftDiff && frontDiff+30 < rightDiff){
+                return false;
+            }
+            return true;
+        }
+        return true;
+    }
 
     private void PlusMinusButtonClicked(boolean Driver,boolean Passenger,boolean Back){
         _plusMinusButtonClicked = true;
-        ApChangeValue.setTextSize(25);
 
-        ApChangeValue.setText("In progress...\n Changing Volume\n from " +(int)_desiredAir+ " to "+ String.valueOf((int)air));
-        if(Driver){
-            _baseViewModel.DriverProfile.setPressure(Double.toString(_desiredAir));
+        if(checkZoneDifferences(Driver, Passenger, Back))
+        {
+            ApChangeValue.setTextSize(25);
+            ApChangeValue.setText("In progress...\n Changing Volume\n from " +(int)_desiredAir+ " to "+ String.valueOf((int)air));
+            if(Driver){
+                _baseViewModel.DriverProfile.setPressure(Double.toString(_desiredAir));
+            }
+            if(Passenger){
+                _baseViewModel.PassengerProfile.setPressure(Double.toString(_desiredAir));
+            }
+            if(Back) {
+                _baseViewModel.BackProfile.setPressure(Double.toString(_desiredAir));
+            }
         }
-        if(Passenger){
-            _baseViewModel.PassengerProfile.setPressure(Double.toString(_desiredAir));
-        }
-        if(Back) {
-            _baseViewModel.BackProfile.setPressure(Double.toString(_desiredAir));
-        }
+        else{
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Air pressure is too different from other zones! Adjust other zones and try again.", false);
+            //TODO
+            //if yes: implement adjustment behavior
+            //else: reset to original value
+            }
     }
 
     private void setUpTimer(){

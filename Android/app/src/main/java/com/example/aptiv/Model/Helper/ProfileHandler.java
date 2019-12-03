@@ -129,11 +129,18 @@ public class ProfileHandler {
             HashMap<String, Boolean> hasError = checkZone(profile, avg);
             //if bad: make red
 
+            //TODO might have to add a check whether popup already exists here.
             if(hasError.containsValue(Boolean.FALSE)){
                 _dashboardFragment.toggleError(zone, Boolean.TRUE);
+                _dashboardFragment.CreatePopupView(
+                        zone.getName() == Zone.ZoneName.DRIVER,
+                        zone.getName() == Zone.ZoneName.PASSENGER,
+                        zone.getName() == Zone.ZoneName.BACK,
+                        "dummy message", true
+                );
             }
             else{
-                _dashboardFragment.toggleError(zone, Boolean.TRUE);
+                _dashboardFragment.toggleError(zone, Boolean.FALSE);
             }
             //add reading to queue
             currentQueue.remove();

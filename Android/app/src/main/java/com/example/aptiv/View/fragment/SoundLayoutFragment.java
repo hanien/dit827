@@ -135,19 +135,60 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
         }
     }
 
+    private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
+        double driverSound = Double.parseDouble(_baseViewModel.DriverZone.getSound());
+        double passengerSound = Double.parseDouble(_baseViewModel.PassengerZone.getSound());
+        double backSound = Double.parseDouble(_baseViewModel.BackseatZone.getSound());
+
+        double frontDiff = Math.abs(driverSound - passengerSound);
+        double leftDiff = Math.abs(driverSound - backSound);
+        double rightDiff = Math.abs(passengerSound - backSound);
+
+        if(driver) {
+            if(rightDiff+5 < frontDiff && rightDiff+5 < leftDiff) {
+                return false;
+            }
+            return true;
+        }
+        else if(passenger){
+            if(leftDiff+5 < frontDiff && leftDiff+5 < rightDiff){
+                return false;
+            }
+            return true;
+        }
+        else if(backseat){
+            if(frontDiff+5 < leftDiff && frontDiff+5 < rightDiff){
+                return false;
+            }
+            return true;
+        }
+        return true;
+    }
+
     private void PlusMinusButtonClicked(boolean Driver,boolean Passenger,boolean Back){
         _plusMinusButtonClicked = true;
-        _zoneSoundTextView.setTextSize(25);
 
-        _zoneSoundTextView.setText("In progress...\n Changing Volume\n from " +(int)_desiredTemp+ " to "+ String.valueOf((int)temp));
-        if(Driver){
-            _baseViewModel.DriverProfile.setSound(Double.toString(_desiredTemp));
+        if(checkZoneDifferences(Driver, Passenger, Back))
+        {
+            _zoneSoundTextView.setTextSize(25);
+            _zoneSoundTextView.setText("In progress...\n Changing Volume\n from " +(int)_desiredTemp+ " to "+ String.valueOf((int)temp));
+            if(Driver){
+                _baseViewModel.DriverProfile.setSound(Double.toString(_desiredTemp));
+            }
+            if(Passenger){
+                _baseViewModel.PassengerProfile.setSound(Double.toString(_desiredTemp));
+            }
+            if(Back) {
+                _baseViewModel.BackProfile.setSound(Double.toString(_desiredTemp));
+            }
         }
-        if(Passenger){
-            _baseViewModel.PassengerProfile.setSound(Double.toString(_desiredTemp));
-        }
-        if(Back) {
-            _baseViewModel.BackProfile.setSound(Double.toString(_desiredTemp));
+        else
+        {
+
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Sound is too different from other zones! Adjust other zones and try again.", false);
+            //TODO
+            //if yes: implement adjustment behavior
+            //else: reset to original value
         }
     }
 

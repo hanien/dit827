@@ -50,6 +50,10 @@ public class BaseViewModel implements IVolleyCollback {
 
         UpdateData();
     }
+
+    public void onProfileChange(){
+        //_profileHandler.onProfileChange();
+    }
     public void SetDashboardFragment(DashboardFragment fragment){
         _dashboardFragment = fragment;
         _profileHandler.SetDashboardFragment(fragment);
@@ -65,18 +69,21 @@ public class BaseViewModel implements IVolleyCollback {
     @Override
     public void GetDriverReadings(Zone value) {
         DriverZone = value;
+        DriverZone.setName(Zone.ZoneName.DRIVER);
         _profileHandler.onDataFetched(value);
     }
 
     @Override
     public void GetPassengerReadings(Zone value) {
         PassengerZone = value;
+        PassengerZone.setName(Zone.ZoneName.PASSENGER);
         _profileHandler.onDataFetched(value);
     }
 
     @Override
     public void GetAverageReadings(Zone value) {
         MiddleZone = value;
+        MiddleZone.setName(Zone.ZoneName.BACK);
         _profileHandler.onDataFetched(value);
     }
 
