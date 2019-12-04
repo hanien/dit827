@@ -71,8 +71,11 @@ public class ProfileHandler {
                 _back = zone;
                 break;
         }
-        sampleZone(getProfileOfZone(zone), zone);
-        checkThresholds(zone);
+        //===============
+        //UNSTABLE CODE: comment out only while working on it
+        //===============
+        //sampleZone(getProfileOfZone(zone), zone);
+        //checkThresholds(zone);
     }
 
     public void onProfileChange(Profile profile, Zone zone) {
