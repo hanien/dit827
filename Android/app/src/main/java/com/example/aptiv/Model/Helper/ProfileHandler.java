@@ -332,9 +332,16 @@ public class ProfileHandler {
 
     private boolean compareZonesAndProfile(String zoneValue, String ProfileValue) {
 
-        boolean result =  (Double.parseDouble(ProfileValue) < (Double.parseDouble(zoneValue) + 5 ) )
-                &&  (Double.parseDouble(ProfileValue) >  (Double.parseDouble(zoneValue) - 5 ));
-        
+        boolean result;
+
+        if (ProfileValue == null){
+            result = true;
+        } else {
+
+             result = (Double.parseDouble(ProfileValue) < (Double.parseDouble(zoneValue) + 5))
+                    && (Double.parseDouble(ProfileValue) > (Double.parseDouble(zoneValue) - 5));
+        }
+
       //  boolean result = (Double.parseDouble(zoneValue) == Double.parseDouble(ProfileValue));
 
         return result;
