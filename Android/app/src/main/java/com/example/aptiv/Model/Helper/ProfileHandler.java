@@ -284,20 +284,20 @@ public class ProfileHandler {
     }
 
 
-    private void ZonesValueHandler(Profile profile, Zone zone) {
+    public boolean ZonesValueHandler(Profile profile, Zone zone) {
 
         HashMap<String, Boolean> check = checkProfile(profile,zone);
 
         if (check.containsValue(Boolean.FALSE)) {
 
 
-          // _dashboardFragment.popUp();
+          return false;
 
 
         } else {
 
             ChangeZoneValues(profile, zone);
-
+            return true;
         }
     }
 

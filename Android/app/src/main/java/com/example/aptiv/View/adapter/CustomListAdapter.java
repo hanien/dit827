@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.aptiv.Model.Classe.Mode;
+import com.example.aptiv.Model.Helper.ProfileHandler;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.View.fragment.DashboardFragment;
@@ -32,6 +33,7 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
     MainActivity _owner;
     View _view;
     private int selectedPosition;
+    private ProfileHandler _handler;
 
     public CustomListAdapter(@NonNull Context context, ArrayList<Mode> list, MainActivity Owner, View View,DashboardFragment parentFragment, BaseViewModel viewModel) {
         super(context, 0, list);
@@ -41,6 +43,7 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
         _view = View;
         _parentFragment = parentFragment;
         _viewModel = viewModel;
+        _handler = new ProfileHandler(_viewModel,_parentFragment,_viewModel.DriverZone,_viewModel.PassengerZone,_viewModel.MiddleZone,_viewModel.BackseatZone);
     }
 
     @NonNull
@@ -89,6 +92,9 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
                         _viewModel.DriverProfile.setSound(currentMode.getVolume());
                         _viewModel.DriverProfile.setPressure(currentMode.getAirp());
                         _viewModel.DriverProfile.setHumidity(currentMode.getHumidity());
+                        if(!_handler.ZonesValueHandler(_viewModel.DriverProfile,_viewModel.DriverZone)){
+                            _parentFragment.CreatePopupView(false,false,false,"Can't Change values for this profile because it's overlapping!",false);
+                        }
                     }
                     if(PassengerSeat){
                         _viewModel.PassengerProfile.setIr(currentMode.getLux());
@@ -96,6 +102,9 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
                         _viewModel.PassengerProfile.setSound(currentMode.getVolume());
                         _viewModel.PassengerProfile.setPressure(currentMode.getAirp());
                         _viewModel.PassengerProfile.setHumidity(currentMode.getHumidity());
+                        if(!_handler.ZonesValueHandler(_viewModel.PassengerProfile,_viewModel.PassengerZone)) {
+                            _parentFragment.CreatePopupView(false,false,false,"Can't Change values for this profile because it's overlapping!",false);
+                        }
                     }
                     if(BackSeat){
                         _viewModel.BackProfile.setIr(currentMode.getLux());
@@ -103,6 +112,9 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
                         _viewModel.BackProfile.setSound(currentMode.getVolume());
                         _viewModel.BackProfile.setPressure(currentMode.getAirp());
                         _viewModel.BackProfile.setHumidity(currentMode.getHumidity());
+                        if(!_handler.ZonesValueHandler(_viewModel.BackProfile,_viewModel.BackseatZone)){
+                            _parentFragment.CreatePopupView(false,false,false,"Can't Change values for this profile because it's overlapping!",false);
+                        }
                     }
                 }
             }
