@@ -87,31 +87,60 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
                     if(DriverSeat){
                         //check differences for every variable
                         //if all check out, set new profile
+
+                        /*
                         _viewModel.DriverProfile.setIr(currentMode.getLux());
                         _viewModel.DriverProfile.setTemperature(currentMode.getTemp());
                         _viewModel.DriverProfile.setSound(currentMode.getVolume());
                         _viewModel.DriverProfile.setPressure(currentMode.getAirp());
                         _viewModel.DriverProfile.setHumidity(currentMode.getHumidity());
+                        */
+
+                        _viewModel.DriverProfile.setIr("1");
+                        _viewModel.DriverProfile.setTemperature("1");
+                        _viewModel.DriverProfile.setSound("1");
+                        _viewModel.DriverProfile.setPressure("1");
+                        _viewModel.DriverProfile.setHumidity("1");
+
                         if(!_handler.ZonesValueHandler(_viewModel.DriverProfile,_viewModel.DriverZone)){
                             _parentFragment.CreatePopupView(false,false,false,"Can't Change values for this profile because it's overlapping!",false);
                         }
                     }
                     if(PassengerSeat){
+                   /*
                         _viewModel.PassengerProfile.setIr(currentMode.getLux());
                         _viewModel.PassengerProfile.setTemperature(currentMode.getTemp());
                         _viewModel.PassengerProfile.setSound(currentMode.getVolume());
                         _viewModel.PassengerProfile.setPressure(currentMode.getAirp());
                         _viewModel.PassengerProfile.setHumidity(currentMode.getHumidity());
+
+                    */
+
+                        _viewModel.PassengerProfile.setIr("1");
+                        _viewModel.PassengerProfile.setTemperature("1");
+                        _viewModel.PassengerProfile.setSound("1");
+                        _viewModel.PassengerProfile.setPressure("1");
+                        _viewModel.PassengerProfile.setHumidity("1");
+
                         if(!_handler.ZonesValueHandler(_viewModel.PassengerProfile,_viewModel.PassengerZone)) {
                             _parentFragment.CreatePopupView(false,false,false,"Can't Change values for this profile because it's overlapping!",false);
                         }
                     }
                     if(BackSeat){
+                        /*
                         _viewModel.BackProfile.setIr(currentMode.getLux());
                         _viewModel.BackProfile.setTemperature(currentMode.getTemp());
                         _viewModel.BackProfile.setSound(currentMode.getVolume());
                         _viewModel.BackProfile.setPressure(currentMode.getAirp());
                         _viewModel.BackProfile.setHumidity(currentMode.getHumidity());
+                        */
+
+                        _viewModel.BackProfile.setIr("1");
+                        _viewModel.BackProfile.setTemperature("1");
+                        _viewModel.BackProfile.setSound("1");
+                        _viewModel.BackProfile.setPressure("1");
+                        _viewModel.BackProfile.setHumidity("1");
+
                         if(!_handler.ZonesValueHandler(_viewModel.BackProfile,_viewModel.BackseatZone)){
                             _parentFragment.CreatePopupView(false,false,false,"Can't Change values for this profile because it's overlapping!",false);
                         }

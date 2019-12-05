@@ -334,7 +334,7 @@ public class ProfileHandler {
 
         boolean result;
 
-        if (ProfileValue == null){
+        if (ProfileValue == null || zoneValue == null){
             result = true;
         } else {
 
