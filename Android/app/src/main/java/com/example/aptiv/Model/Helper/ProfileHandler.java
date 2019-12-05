@@ -285,7 +285,9 @@ public class ProfileHandler {
 
 
     public boolean ZonesValueHandler(Profile profile, Zone zone) {
-
+        if(profile == null || zone == null){
+            return false;
+        }
         HashMap<String, Boolean> check = checkProfile(profile,zone);
 
         if (check.containsValue(Boolean.FALSE)) {

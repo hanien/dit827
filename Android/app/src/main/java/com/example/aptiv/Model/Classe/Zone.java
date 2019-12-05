@@ -62,7 +62,7 @@ public class Zone {
     }
 
     public String getHumidity() {
-        if(humidity != null)
+        if(humidity == null)
         {
             return "0.0";
         }
