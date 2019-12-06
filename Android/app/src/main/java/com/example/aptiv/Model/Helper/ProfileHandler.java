@@ -162,7 +162,7 @@ public class ProfileHandler {
         if(checkedZone.containsValue(Boolean.FALSE)){
             _dashboardFragment.toggleError(zone, Boolean.TRUE);
         } else {
-            _dashboardFragment.toggleError(zone, Boolean.TRUE);
+            _dashboardFragment.toggleError(zone, Boolean.FALSE );
         }
     }
 
