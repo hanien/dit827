@@ -50,6 +50,9 @@ public class Profile implements Serializable {
     }
 
     public String getHumidity() {
+        if(humidity == null){
+            return "0.0";
+        }
         String hum = String.format("%.2f", parseFloat(humidity));
         return hum;
     }
@@ -83,6 +86,9 @@ public class Profile implements Serializable {
     }
 
     public String getIr() {
+        if(ir == null){
+            return "0.0";
+        }
         String infra = String.format("%.2f", parseFloat(ir));
         return infra;
     }

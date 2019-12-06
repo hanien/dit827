@@ -284,20 +284,22 @@ public class ProfileHandler {
     }
 
 
-    private void ZonesValueHandler(Profile profile, Zone zone) {
-
+    public boolean ZonesValueHandler(Profile profile, Zone zone) {
+        if(profile == null || zone == null){
+            return false;
+        }
         HashMap<String, Boolean> check = checkProfile(profile,zone);
 
         if (check.containsValue(Boolean.FALSE)) {
 
 
-          // _dashboardFragment.popUp();
+          return false;
 
 
         } else {
 
             ChangeZoneValues(profile, zone);
-
+            return true;
         }
     }
 
@@ -332,9 +334,16 @@ public class ProfileHandler {
 
     private boolean compareZonesAndProfile(String zoneValue, String ProfileValue) {
 
-        boolean result =  (Double.parseDouble(ProfileValue) < (Double.parseDouble(zoneValue) + 5 ) )
-                &&  (Double.parseDouble(ProfileValue) >  (Double.parseDouble(zoneValue) - 5 ));
-        
+        boolean result;
+
+        if (ProfileValue == null || zoneValue == null){
+            result = true;
+        } else {
+
+             result = (Double.parseDouble(ProfileValue) < (Double.parseDouble(zoneValue) + 5))
+                    && (Double.parseDouble(ProfileValue) > (Double.parseDouble(zoneValue) - 5));
+        }
+
       //  boolean result = (Double.parseDouble(zoneValue) == Double.parseDouble(ProfileValue));
 
         return result;
