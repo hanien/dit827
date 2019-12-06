@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import com.example.aptiv.Model.Classe.Zone;
+import com.example.aptiv.Model.Helper.DifferenceChecker;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -150,31 +153,20 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
-        double driverTemp = Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
-        double passengerTemp = Double.parseDouble(_baseViewModel.PassengerZone.getTemperature());
-        double backTemp = Double.parseDouble(_baseViewModel.BackseatZone.getTemperature());
-
-        double frontDiff = Math.abs(driverTemp - passengerTemp);
-        double leftDiff = Math.abs(driverTemp - backTemp);
-        double rightDiff = Math.abs(passengerTemp - backTemp);
-
         if(driver) {
-            if(rightDiff+2 < frontDiff && rightDiff+2 < leftDiff) {
-                return false;
-            }
-            return true;
+                return DifferenceChecker.checkTemp(_baseViewModel.DriverZone,
+                                        _baseViewModel.PassengerZone,
+                                        _baseViewModel.BackseatZone);
         }
-        else if(passenger){
-            if(leftDiff+2 < frontDiff && leftDiff+2 < rightDiff){
-                return false;
-            }
-            return true;
+        if(passenger){
+            return DifferenceChecker.checkTemp(_baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone,
+                    _baseViewModel.BackseatZone);
         }
-        else if(backseat){
-            if(frontDiff+2 < leftDiff && frontDiff+2 < rightDiff){
-                return false;
-            }
-            return true;
+        if(backseat){
+            return DifferenceChecker.checkTemp(_baseViewModel.BackseatZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone);
         }
         return true;
     }

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.aptiv.Model.Helper.DifferenceChecker;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -144,31 +146,20 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
 
 
     private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
-        double driverHumidity = Double.parseDouble(_baseViewModel.DriverZone.getHumidity());
-        double passengerHumidity = Double.parseDouble(_baseViewModel.PassengerZone.getHumidity());
-        double backHumidity = Double.parseDouble(_baseViewModel.BackseatZone.getHumidity());
-
-        double frontDiff = Math.abs(driverHumidity - passengerHumidity);
-        double leftDiff = Math.abs(driverHumidity - backHumidity);
-        double rightDiff = Math.abs(passengerHumidity - backHumidity);
-
         if(driver) {
-            if(rightDiff+5 < frontDiff && rightDiff+5 < leftDiff) {
-                return false;
-            }
-            return true;
+            return DifferenceChecker.checkHumidity(_baseViewModel.DriverZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.BackseatZone);
         }
-        else if(passenger){
-            if(leftDiff+5 < frontDiff && leftDiff+5 < rightDiff){
-                return false;
-            }
-            return true;
+        if(passenger){
+            return DifferenceChecker.checkHumidity(_baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone,
+                    _baseViewModel.BackseatZone);
         }
-        else if(backseat){
-            if(frontDiff+5 < leftDiff && frontDiff+5 < rightDiff){
-                return false;
-            }
-            return true;
+        if(backseat){
+            return DifferenceChecker.checkHumidity(_baseViewModel.BackseatZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone);
         }
         return true;
     }

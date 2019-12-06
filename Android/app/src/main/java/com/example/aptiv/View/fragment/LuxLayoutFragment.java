@@ -9,6 +9,8 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.aptiv.Model.Helper.DifferenceChecker;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -139,31 +141,20 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
-        double driverLux = Double.parseDouble(_baseViewModel.DriverZone.getLux());
-        double passengerLux = Double.parseDouble(_baseViewModel.PassengerZone.getLux());
-        double backLux = Double.parseDouble(_baseViewModel.BackseatZone.getLux());
-
-        double frontDiff = Math.abs(driverLux - passengerLux);
-        double leftDiff = Math.abs(driverLux - backLux);
-        double rightDiff = Math.abs(passengerLux - backLux);
-
         if(driver) {
-            if(rightDiff+15 < frontDiff && rightDiff+15 < leftDiff) {
-                return false;
-            }
-            return true;
+            return DifferenceChecker.checkLux(_baseViewModel.DriverZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.BackseatZone);
         }
-        else if(passenger){
-            if(leftDiff+15 < frontDiff && leftDiff+15 < rightDiff){
-                return false;
-            }
-            return true;
+        if(passenger){
+            return DifferenceChecker.checkLux(_baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone,
+                    _baseViewModel.BackseatZone);
         }
-        else if(backseat){
-            if(frontDiff+15 < leftDiff && frontDiff+15 < rightDiff){
-                return false;
-            }
-            return true;
+        if(backseat){
+            return DifferenceChecker.checkLux(_baseViewModel.BackseatZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone);
         }
         return true;
     }
