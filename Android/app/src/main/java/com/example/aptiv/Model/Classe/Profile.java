@@ -126,4 +126,18 @@ public class Profile implements Serializable {
     public String getLux() { return lux; }
 
     public void setLux(String lux) { this.lux = lux; }
+
+    public void setFromZone(Zone zone){
+        this.temperature = zone.getTemperature();
+        this.humidity = zone.getHumidity();
+        this.gain = zone.getGain();
+        this.luminosity = zone.getLuminosity();
+        this.full = zone.getFull();
+        this.ir = zone.getIr();
+        this.pressure = zone.getPressure();
+        this.sound = zone.getSound();
+        this.altitude = zone.getAltitiude();
+        this.light = zone.getLight();
+        this.lux = zone.getLux();
+    }
 }
