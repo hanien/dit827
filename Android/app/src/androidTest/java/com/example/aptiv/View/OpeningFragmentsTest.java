@@ -247,6 +247,7 @@ public class OpeningFragmentsTest {
                                 0),
                         isDisplayed()));
         appCompatTextView.perform(click());
+
     }
 
     private static Matcher<View> childAtPosition(
