@@ -11,6 +11,7 @@
         android:alpha="0.4">
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/PopUpWindow"
         android:layout_width="600dp"
         android:layout_height="200dp"
         android:orientation="vertical"
@@ -59,6 +60,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
 </RelativeLayout>
