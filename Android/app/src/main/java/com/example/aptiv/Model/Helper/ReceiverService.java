@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.example.aptiv.Model.Classe.Zone;
 import com.example.aptiv.View.MainActivity;
@@ -52,6 +53,8 @@ public class ReceiverService extends Service {
             @Override
             public void onFound(Message message) {
                 String value = new String(message.getContent());
+                Log.d("M1", value);
+                /*
                 list.add(Integer.parseInt(value));
                 valueCounter++;
                 if(valueCounter > 5){
@@ -62,6 +65,8 @@ public class ReceiverService extends Service {
                     }
                     SaveSoundValue(value);
                 }
+
+                 */
             }
             @Override
             public void onLost(Message message) {
@@ -70,6 +75,7 @@ public class ReceiverService extends Service {
                 valueCounter++;
             }
         };
+
         Nearby.getMessagesClient(this).subscribe(mMessageListener);
         return START_NOT_STICKY;
     }
