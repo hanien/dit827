@@ -5,17 +5,16 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
 
+import com.example.aptiv.Model.Helper.DifferenceChecker;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;
-import com.sdsmdg.harjot.crollerTest.Croller;
-import com.sdsmdg.harjot.crollerTest.OnCrollerChangeListener;
 
 public class SoundLayoutFragment extends Fragment implements IZoneSelection {
 
@@ -27,8 +26,11 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
     private TextView _zoneSoundTextView;
     private TextView _zoneTextView;
     private LinearLayout _zoneCrollerLayout;
-
-
+    private ImageView _minusButton;
+    private ImageView _plusButton;
+    private double _desiredTemp;
+    private boolean _plusMinusButtonClicked = false;
+    double temp = 0;
 
     public SoundLayoutFragment(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
@@ -44,8 +46,26 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
         setUpElements();
         zoneIsSelected();
         setUpTimer();
+        registerOnClickListeners();
 
         return _view;
+    }
+
+    private void registerOnClickListeners(){
+        _plusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _desiredTemp++;
+                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+            }
+        });
+        _minusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _desiredTemp--;
+                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+            }
+        });
     }
 
     private void setUpView() {
@@ -53,6 +73,8 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
         _zoneSoundTextView = _view.findViewById(R.id.SoundZoneValue);
         _zoneTextView = _view.findViewById(R.id.SelectZoneTextView);
         _zoneCrollerLayout = _view.findViewById(R.id.zoneCrollerLayout);
+        _minusButton = _view.findViewById(R.id.minus);
+        _plusButton= _view.findViewById(R.id.plus);
     }
 
     private void setUpElements(){
@@ -65,6 +87,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
     //values needs to be changes base on zone
     @Override
     public void zoneIsSelected() {
+        _desiredTemp = temp;
         if(_parentFragment._backSeatSelected || _parentFragment._driverSeatSelected || _parentFragment._frontSeatSelected ){
             _zoneTextView.setVisibility(View.GONE);
             _zoneSoundTextView.setVisibility(View.VISIBLE);
@@ -79,37 +102,87 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
 
     //calculate average temp base on zone that is selected
     private void updateSoundValue(boolean Driver, boolean Passenger , boolean Back) {
-        double temp = 0;
-        if(Driver && Passenger && Back){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound())+  Double.parseDouble(_baseViewModel.PassengerZone.getSound()) + Double.parseDouble(_baseViewModel.BackseatZone.getSound()) +  Double.parseDouble(_baseViewModel.DriverZone.getSound());
-            temp = temp / 4;
+        if((int)_desiredTemp == (int)temp){
+            _plusMinusButtonClicked = false;
         }
-        else if(Driver && Passenger){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound())+  Double.parseDouble(_baseViewModel.PassengerZone.getSound()) +  Double.parseDouble(_baseViewModel.DriverZone.getSound());
-            temp = temp / 3;
+
+        temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound());
+
+        int count = 1;
+        if(Driver){
+            temp = temp + Double.parseDouble(_baseViewModel.DriverZone.getSound());
+            count++;
         }
-        else if(Passenger && Back){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound())+  Double.parseDouble(_baseViewModel.PassengerZone.getSound()) + Double.parseDouble(_baseViewModel.BackseatZone.getSound());
-            temp = temp / 3;
+        if(Passenger){
+            temp = temp + Double.parseDouble(_baseViewModel.PassengerZone.getSound());
+            count++;
         }
-        else if(Driver && Back){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound()) + Double.parseDouble(_baseViewModel.BackseatZone.getSound()) +  Double.parseDouble(_baseViewModel.DriverZone.getSound());
-            temp = temp / 3;
+        if(Back){
+            temp = temp + Double.parseDouble(_baseViewModel.BackseatZone.getSound());
+            count++;
         }
-        else if(Driver){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound())+Double.parseDouble(_baseViewModel.DriverZone.getSound());
-            temp = temp / 2;
+        if(count ==4){
+            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound());
+            count = 1;
         }
-        else if(Passenger){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound())+Double.parseDouble(_baseViewModel.PassengerZone.getSound());
-            temp = temp / 2;
-        }
-        else if(Back){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound())+Double.parseDouble(_baseViewModel.BackseatZone.getSound());
-            temp = temp / 2;
-        }
+        temp = temp/count;
         _zoneSoundTextView.setText(String.valueOf((int)temp));
+
+        if(!_plusMinusButtonClicked){
+            _zoneSoundTextView.setTextSize(50);
+            _zoneSoundTextView.setText(String.valueOf((int)temp));
+        }
+        if(_plusMinusButtonClicked){
+            PlusMinusButtonClicked(Driver,Passenger,Back);
+        }
     }
+
+    private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
+        if(driver) {
+            return DifferenceChecker.checkSound(_baseViewModel.DriverZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.BackseatZone);
+        }
+        if(passenger){
+            return DifferenceChecker.checkSound(_baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone,
+                    _baseViewModel.BackseatZone);
+        }
+        if(backseat){
+            return DifferenceChecker.checkSound(_baseViewModel.BackseatZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone);
+        }
+        return true;
+    }
+
+    private void PlusMinusButtonClicked(boolean Driver,boolean Passenger,boolean Back){
+        _plusMinusButtonClicked = true;
+
+        if(checkZoneDifferences(Driver, Passenger, Back))
+        {
+            _zoneSoundTextView.setTextSize(25);
+            _zoneSoundTextView.setText("In progress...\n Changing Volume\n from " +(int)_desiredTemp+ " to "+ String.valueOf((int)temp));
+            if(Driver){
+                _baseViewModel.DriverProfile.setSound(Double.toString(_desiredTemp));
+            }
+            if(Passenger){
+                _baseViewModel.PassengerProfile.setSound(Double.toString(_desiredTemp));
+            }
+            if(Back) {
+                _baseViewModel.BackProfile.setSound(Double.toString(_desiredTemp));
+            }
+        }
+        else
+        {
+
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Sound is too different from other zones! Adjust other zones and try again.", false);
+            //TODO
+            //if yes: implement adjustment behavior
+            //else: reset to original value
+        }
+    }
+
 
     //region Timer method
     private void setUpTimer(){

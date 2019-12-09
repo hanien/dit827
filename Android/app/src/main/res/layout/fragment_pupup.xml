@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/PopupVIewShadow"
+        android:alpha="0.4">
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/PopUpWindow"
+        android:layout_width="600dp"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:background="@color/PopupVIewColor">
+        <TextView
+            android:id="@+id/PopupVIewMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:text="This is a popup window."/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="bottom"
+            android:layout_weight="2">
+
+            <Button
+                android:id="@+id/OverrideButton"
+                android:layout_weight="1"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
+                android:gravity="center"
+                android:text="Override"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/OkButton"
+                android:layout_weight="1"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                android:gravity="center"
+                android:text="ok"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

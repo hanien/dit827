@@ -9,13 +9,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.aptiv.Model.Classe.Zone;
+import com.example.aptiv.Model.Helper.DifferenceChecker;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;
-import com.sdsmdg.harjot.crollerTest.Croller;
-
 import androidx.fragment.app.Fragment;
 
 public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
@@ -30,7 +28,11 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
     private TextView HumidityChangeValue;
     private TextView Label;
     private LinearLayout SetHumidityLayout;
-
+    private ImageView _minusButton;
+    private ImageView _plusButton;
+    private double _desiredHumidity;
+    double Humidity = 0;
+    private boolean _plusMinusButtonClicked = false;
 
     public HumidityLayoutFragment(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
         _owner = Owner;
@@ -47,8 +49,26 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
         setUpElements();
         zoneIsSelected();
         setUpTimer();
+        registerOnClickListeners();
 
         return _view;
+    }
+
+    private void registerOnClickListeners(){
+        _plusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _desiredHumidity++;
+                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+            }
+        });
+        _minusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _desiredHumidity--;
+                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+            }
+        });
     }
 
     private void setUpView() {
@@ -58,6 +78,8 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
         SetHumidityLayout = _view.findViewById(R.id.SetTempLayout);
         Image = _view.findViewById(R.id.TempImage);
         Label = _view.findViewById(R.id.tempLabel);
+        _minusButton = _view.findViewById(R.id.minus);
+        _plusButton= _view.findViewById(R.id.plus);
     }
 
     private void setUpElements(){
@@ -69,6 +91,7 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
 
     @Override
     public void zoneIsSelected() {
+        _desiredHumidity = Humidity;
         if(_parentFragment._backSeatSelected || _parentFragment._driverSeatSelected || _parentFragment._frontSeatSelected ){
             SetText.setVisibility(View.GONE);
             SetHumidityLayout.setVisibility(View.VISIBLE);
@@ -85,48 +108,84 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private void updateHumidityValue(boolean Driver, boolean Passenger , boolean Back) {
-        double hum = 0;
-        if(Driver && Passenger && Back){
-            hum =  Double.parseDouble(_baseViewModel.MiddleZone.getHumidity())+  Double.parseDouble(_baseViewModel.PassengerZone.getHumidity()) + Double.parseDouble(_baseViewModel.BackseatZone.getHumidity()) +  Double.parseDouble(_baseViewModel.DriverZone.getHumidity());
-            hum = hum / 4;
-        }
-        else if(Driver && Passenger){
-            hum =  Double.parseDouble(_baseViewModel.MiddleZone.getHumidity())+  Double.parseDouble(_baseViewModel.PassengerZone.getHumidity()) +  Double.parseDouble(_baseViewModel.DriverZone.getHumidity());
-            hum = hum / 3;
-        }
-        else if(Passenger && Back){
-            hum =  Double.parseDouble(_baseViewModel.MiddleZone.getHumidity())+  Double.parseDouble(_baseViewModel.PassengerZone.getHumidity()) + Double.parseDouble(_baseViewModel.BackseatZone.getHumidity());
-            hum = hum / 3;
-        }
-        else if(Driver && Back){
-            hum =  Double.parseDouble(_baseViewModel.MiddleZone.getHumidity()) + Double.parseDouble(_baseViewModel.BackseatZone.getHumidity()) +  Double.parseDouble(_baseViewModel.DriverZone.getHumidity());
-            hum = hum / 3;
-        }
-        else if(Driver){
-            hum =  Double.parseDouble(_baseViewModel.MiddleZone.getHumidity())+Double.parseDouble(_baseViewModel.DriverZone.getHumidity());
-            hum = hum / 2;
-        }
-        else if(Passenger){
-            hum =  Double.parseDouble(_baseViewModel.MiddleZone.getHumidity())+Double.parseDouble(_baseViewModel.PassengerZone.getHumidity());
-            hum = hum / 2;
-        }
-        else if(Back){
-            hum =  Double.parseDouble(_baseViewModel.MiddleZone.getHumidity())+Double.parseDouble(_baseViewModel.BackseatZone.getHumidity());
-            hum = hum / 2;
+
+        if((int)_desiredHumidity == (int)Humidity){
+            _plusMinusButtonClicked = false;
         }
 
+        Humidity =  Double.parseDouble(_baseViewModel.MiddleZone.getHumidity());
 
-        if(hum == 0){
-            HumidityValue.setText(_baseViewModel.MiddleZone.getHumidity() +  " %");
-            HumidityChangeValue.setText(_baseViewModel.MiddleZone.getHumidity() +  " %");
+        int count = 1;
+        if(Driver){
+            Humidity = Humidity + Double.parseDouble(_baseViewModel.DriverZone.getHumidity());
+            count++;
         }
-        else {
-            HumidityValue.setText(_baseViewModel.MiddleZone.getHumidity() +  " %");
-            HumidityChangeValue.setText(String.valueOf((int)hum) + " %");
-
+        if(Passenger){
+            Humidity = Humidity + Double.parseDouble(_baseViewModel.PassengerZone.getHumidity());
+            count++;
         }
+        if(Back){
+            Humidity = Humidity + Double.parseDouble(_baseViewModel.BackseatZone.getHumidity());
+            count++;
+        }
+        if(count ==4){
+            Humidity =  Double.parseDouble(_baseViewModel.MiddleZone.getHumidity());
+            count = 1;
+        }
+        Humidity = Humidity/count;
+        HumidityChangeValue.setText(String.valueOf((int)Humidity)  +  " %");
+
+        if(!_plusMinusButtonClicked){
+            HumidityChangeValue.setTextSize(50);
+            HumidityChangeValue.setText(String.valueOf((int)Humidity  +  " %"));
+        }
+        if(_plusMinusButtonClicked){
+            PlusMinusButtonClicked(Driver,Passenger,Back);
+        }
+    }
 
 
+    private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
+        if(driver) {
+            return DifferenceChecker.checkHumidity(_baseViewModel.DriverZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.BackseatZone);
+        }
+        if(passenger){
+            return DifferenceChecker.checkHumidity(_baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone,
+                    _baseViewModel.BackseatZone);
+        }
+        if(backseat){
+            return DifferenceChecker.checkHumidity(_baseViewModel.BackseatZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone);
+        }
+        return true;
+    }
+
+    private void PlusMinusButtonClicked(boolean Driver,boolean Passenger,boolean Back){
+        _plusMinusButtonClicked = true;
+
+        if(checkZoneDifferences(Driver, Passenger, Back)){
+            HumidityChangeValue.setTextSize(25);
+            HumidityChangeValue.setText("In progress...\n Changing Humidity \n from " +  String.valueOf((int)Humidity)+ " to "+ (int)_desiredHumidity );
+            if(Driver){
+                _baseViewModel.DriverProfile.setHumidity(Double.toString(_desiredHumidity));
+            }
+            if(Passenger){
+                _baseViewModel.PassengerProfile.setHumidity(Double.toString(_desiredHumidity));
+            }
+            if(Back) {
+                _baseViewModel.BackProfile.setHumidity(Double.toString(_desiredHumidity));
+            }
+        }
+        else{
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Humidity is too different from other zones! Adjust other zones and try again.", false);
+            //TODO
+            //if yes: implement adjustment behavior
+            //else: reset to original value
+            }
     }
 
     private void setUpTimer(){

@@ -11,10 +11,7 @@
             android:minHeight="40dp"
             android:layout_height="0dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/default_margin_cardview"
-            android:layout_marginTop="@dimen/default_margin_cardview"
-            android:layout_marginRight="@dimen/default_margin_cardview"
-            android:layout_marginBottom="@dimen/default_margin_cardview"
+            android:layout_margin="@dimen/default_margin_cardview"
             card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
             card_view:cardBackgroundColor = "@color/CardViewColor"
             card_view:cardUseCompatPadding="true">
@@ -29,10 +26,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/default_margin_cardview"
-                    android:layout_marginTop="@dimen/default_margin_cardview"
-                    android:layout_marginRight="@dimen/default_margin_cardview"
-                    android:layout_marginBottom="@dimen/default_margin_cardview"
+                    android:layout_margin="@dimen/default_margin_cardview"
                     android:layout_weight="1"
                     android:minHeight="40dp"
                     android:onClick="OpenLuxFragment"
@@ -50,7 +44,7 @@
                         android:weightSum="2">
 
                         <ImageView
-                            android:id="@+id/sound"
+                            android:id="@+id/lightImage"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
@@ -78,10 +72,7 @@
                     android:minHeight="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/default_margin_cardview"
-                    android:layout_marginTop="@dimen/default_margin_cardview"
-                    android:layout_marginRight="@dimen/default_margin_cardview"
-                    android:layout_marginBottom="@dimen/default_margin_cardview"
+                    android:layout_margin="@dimen/default_margin_cardview"
                     card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
                     card_view:cardBackgroundColor = "@color/CardViewColor"
                     card_view:cardUseCompatPadding="true">
@@ -119,16 +110,15 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/CardViewFull"
+                    android:layout_weight="1"
                     android:layout_width="match_parent"
+                    android:minHeight="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/default_margin_cardview"
-                    android:layout_marginTop="@dimen/default_margin_cardview"
-                    android:layout_marginRight="@dimen/default_margin_cardview"
-                    android:layout_marginBottom="@dimen/default_margin_cardview"
-                    android:layout_weight="1"
-                    android:minHeight="40dp"
+                    android:layout_margin="@dimen/default_margin_cardview"
+                    card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
                     android:onClick="OpenSettingsFragment"
+                    card_view:cardBackgroundColor = "@color/CardViewColor"
                     card_view:cardUseCompatPadding="true">
 
                     <LinearLayout
@@ -158,7 +148,7 @@
                             android:gravity="center"
                             android:text="Settings"
                             android:textColor="@color/CardViewTextColor"
-                            android:textSize="40dp"></TextView>
+                            android:textSize="30dp"></TextView>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -172,10 +162,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/default_margin_cardview"
-            android:layout_marginTop="@dimen/default_margin_cardview"
-            android:layout_marginRight="@dimen/default_margin_cardview"
-            android:layout_marginBottom="@dimen/default_margin_cardview"
+            android:layout_margin="@dimen/default_margin_cardview"
             card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
             card_view:cardBackgroundColor = "@color/CardViewColor"
             card_view:cardUseCompatPadding="true">
@@ -184,7 +171,6 @@
                 android:id="@+id/LinearLayoutTemp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:onClick="OpenTempFragment"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -193,11 +179,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/default_margin_cardview"
-                    android:layout_marginTop="@dimen/default_margin_cardview"
-                    android:layout_marginRight="@dimen/default_margin_cardview"
-                    android:layout_marginBottom="@dimen/default_margin_cardview"
+                    android:layout_margin="@dimen/default_margin_cardview"
                     android:layout_weight="1"
+                    android:onClick="OpenTempFragment"
                     android:minHeight="40dp"
                     card_view:cardBackgroundColor="@color/CardViewColor"
                     card_view:cardCornerRadius="@dimen/cardview_corner_radius"
@@ -255,10 +239,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/default_margin_cardview"
-                    android:layout_marginTop="@dimen/default_margin_cardview"
-                    android:layout_marginRight="@dimen/default_margin_cardview"
-                    android:layout_marginBottom="@dimen/default_margin_cardview"
+                    android:layout_margin="@dimen/default_margin_cardview"
                     android:layout_weight="1"
                     android:minHeight="40dp"
                     card_view:cardBackgroundColor="@color/CardViewColor"
@@ -301,8 +282,8 @@
 
                         <TextView
                             android:id="@+id/OutTempTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_width="240dp"
+                            android:layout_height="129dp"
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="center"
@@ -323,10 +304,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/default_margin_cardview"
-            android:layout_marginTop="@dimen/default_margin_cardview"
-            android:layout_marginRight="@dimen/default_margin_cardview"
-            android:layout_marginBottom="@dimen/default_margin_cardview"
+            android:layout_margin="@dimen/default_margin_cardview"
             card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
             card_view:cardBackgroundColor = "@color/CardViewColor"
             card_view:cardUseCompatPadding="true">
@@ -341,10 +319,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/default_margin_cardview"
-                    android:layout_marginTop="@dimen/default_margin_cardview"
-                    android:layout_marginRight="@dimen/default_margin_cardview"
-                    android:layout_marginBottom="@dimen/default_margin_cardview"
+                    android:layout_margin="@dimen/default_margin_cardview"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:minHeight="40dp"
@@ -395,10 +370,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/default_margin_cardview"
-                    android:layout_marginTop="@dimen/default_margin_cardview"
-                    android:layout_marginRight="@dimen/default_margin_cardview"
-                    android:layout_marginBottom="@dimen/default_margin_cardview"
+                    android:layout_margin="@dimen/default_margin_cardview"
                     android:layout_weight="1"
                     android:minHeight="40dp"
                     android:onClick="OpenAPFragment"
@@ -443,10 +415,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/default_margin_cardview"
-                    android:layout_marginTop="@dimen/default_margin_cardview"
-                    android:layout_marginRight="@dimen/default_margin_cardview"
-                    android:layout_marginBottom="@dimen/default_margin_cardview"
+                    android:layout_margin="@dimen/default_margin_cardview"
                     android:layout_weight="1"
                     android:minHeight="40dp"
                     android:onClick="OpenHumidityFragment"

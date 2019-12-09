@@ -2,12 +2,14 @@ package com.example.sensor.sensorsapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 
+import android.view.View;
 import android.widget.TextView;
 import android.util.Log;
 
@@ -20,9 +22,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.nearby.Nearby;
+import com.google.android.gms.nearby.messages.Message;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import androidx.core.content.ContextCompat;
 
 public class MainActivity extends Activity implements SensorEventListener {
 
@@ -35,6 +41,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     private Sensor Light;
     private Sensor Temp;
+    private Message mActiveMessage;
 
     private double lightvalue;
     private double tempvalue;
@@ -45,7 +52,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     private boolean Recording = false;
 
-    private String url = "https://dit827aptiv.herokuapp.com";
+   // private String url = "https://dit827aptiv.herokuapp.com/api/sensors/driver";
 
     private TextView LightView;
     private TextView TempView;
@@ -62,8 +69,16 @@ public class MainActivity extends Activity implements SensorEventListener {
         public void run() {
 
             amp = voiceSensor.getAmplitude();
-            VoiceView.setText("Voice value: " + amp);
-
+            int amp_Fixed = (int) Math.floor(amp * 100);
+            VoiceView.setText("Voice value: " + amp_Fixed);
+            Publish(String.valueOf(amp_Fixed));
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    Unpublish();
+                }
+            }, 3000);
+/*
             queue = Volley.newRequestQueue(MainActivity.this);
 
             JSONObject param = new JSONObject();
@@ -75,7 +90,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                 e.printStackTrace();
             }
 
-            JsonObjectRequest soundPatch = new JsonObjectRequest(Request.Method.PATCH, url + "/sound", param,
+            JsonObjectRequest soundPatch = new JsonObjectRequest(Request.Method.PATCH, url , param,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -91,12 +106,19 @@ public class MainActivity extends Activity implements SensorEventListener {
             });
 
             queue.add(soundPatch);
-
+*/
             Handler.postDelayed(PollTask, 300);
 
         }
     };
+    public void Publish(String message) {
+        mActiveMessage = new Message(message.getBytes());
+        Nearby.getMessagesClient(this).publish(mActiveMessage);
+    }
 
+    public void Unpublish() {
+        Nearby.getMessagesClient(this).unpublish(mActiveMessage);
+    }
 
 
     @Override
@@ -174,7 +196,7 @@ public class MainActivity extends Activity implements SensorEventListener {
             lightvalue = event.values[0];
             LightView.setText("Light Value: " + lightvalue);
 
-
+/*
             queue = Volley.newRequestQueue(this);
 
             JSONObject param = new JSONObject();
@@ -203,14 +225,14 @@ public class MainActivity extends Activity implements SensorEventListener {
 
             queue.add(lightPatch);
 
-
+*/
         }
 
         if (sensor.getType() == sensor.TYPE_AMBIENT_TEMPERATURE) {
 
             tempvalue = event.values[0];
             TempView.setText("Temperature Value: " + tempvalue);
-
+/*
             queue = Volley.newRequestQueue(this);
 
             JSONObject param = new JSONObject();
@@ -238,7 +260,7 @@ public class MainActivity extends Activity implements SensorEventListener {
             });
 
             queue.add(tempPatch);
-
+*/
         }
 
     }
@@ -275,6 +297,16 @@ public class MainActivity extends Activity implements SensorEventListener {
             Log.d(TAG, "Sensor Not Available!");
         }
 
+    }
+
+    public void startReceiverService(View v) {
+        Intent serviceIntent = new Intent(this, ReceiverService.class);
+        ContextCompat.startForegroundService(this, serviceIntent);
+    }
+
+    public void stopReceiverService(View v) {
+        Intent serviceIntent = new Intent(this, ReceiverService.class);
+        stopService(serviceIntent);
     }
 
 
