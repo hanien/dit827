@@ -58,15 +58,13 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
         _plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _desiredAir++;
-                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+                PlusMinusButtonClicked(true,_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
             }
         });
         _minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _desiredAir--;
-                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+                PlusMinusButtonClicked(false,_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
             }
         });
     }
@@ -136,34 +134,43 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
             ApChangeValue.setText(String.valueOf((int)air));
         }
         if(_plusMinusButtonClicked){
-            PlusMinusButtonClicked(Driver,Passenger,Back);
+            PlusMinusButtonClicked(true,Driver,Passenger,Back);
         }
     }
 
-    private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
+    private boolean checkZoneDifferences(boolean plus,boolean driver, boolean passenger, boolean backseat){
         if(driver) {
-            return DifferenceChecker.checkAirPressure(_baseViewModel.DriverZone,
+            return DifferenceChecker.checkAirPressure(plus,
+                    _baseViewModel.DriverZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
         }
         if(passenger){
-            return DifferenceChecker.checkAirPressure(_baseViewModel.PassengerZone,
+            return DifferenceChecker.checkAirPressure(plus,
+                    _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
-            return DifferenceChecker.checkAirPressure(_baseViewModel.BackseatZone,
+            return DifferenceChecker.checkAirPressure(plus,
+                    _baseViewModel.BackseatZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
         }
         return true;
     }
 
-    private void PlusMinusButtonClicked(boolean Driver,boolean Passenger,boolean Back){
+    private void PlusMinusButtonClicked(boolean plus,boolean Driver,boolean Passenger,boolean Back){
         _plusMinusButtonClicked = true;
 
-        if(checkZoneDifferences(Driver, Passenger, Back))
+        if(checkZoneDifferences(plus,Driver, Passenger, Back))
         {
+            if(plus){
+                _desiredAir++;
+            }
+            else {
+                _desiredAir--;
+            }
             ApChangeValue.setTextSize(25);
             ApChangeValue.setText("In progress...\n Changing Air Pressure \n from " + String.valueOf((int)air) + " to "+ (int)_desiredAir);
             if(Driver){

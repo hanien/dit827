@@ -77,15 +77,13 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         _plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _desiredTemp++;
-                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+                PlusMinusButtonClicked(true,_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
             }
         });
         _minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _desiredTemp--;
-                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+                PlusMinusButtonClicked(false,_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
             }
         });
     }
@@ -148,37 +146,46 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
 
         temp = (tempType) ? (1.8*temp)+32 : temp;
         if(_plusMinusButtonClicked){
-            PlusMinusButtonClicked(Driver,Passenger,Back);
+            PlusMinusButtonClicked(true,Driver,Passenger,Back);
         }
     }
 
-    private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
+    private boolean checkZoneDifferences(boolean increasing, boolean driver, boolean passenger, boolean backseat){
         if(driver) {
-                return DifferenceChecker.checkTemp(_baseViewModel.DriverZone,
+                return DifferenceChecker.checkTemp(increasing,
+                                        _baseViewModel.DriverZone,
                                         _baseViewModel.PassengerZone,
                                         _baseViewModel.BackseatZone);
         }
         if(passenger){
-            return DifferenceChecker.checkTemp(_baseViewModel.PassengerZone,
+            return DifferenceChecker.checkTemp(increasing,
+                    _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
-            return DifferenceChecker.checkTemp(_baseViewModel.BackseatZone,
+            return DifferenceChecker.checkTemp(increasing,
+                    _baseViewModel.BackseatZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
         }
         return true;
     }
 
-    private void PlusMinusButtonClicked(boolean Driver,boolean Passenger,boolean Back){
+    private void PlusMinusButtonClicked(boolean plus,boolean Driver,boolean Passenger,boolean Back){
         _plusMinusButtonClicked = true;
         Boolean tempType = _baseViewModel.getTempType();
         String fahrenheit = _baseViewModel.getFahrenheit();
         String celsius = _baseViewModel.getCelsius();
         String typeString = ((tempType)) ? fahrenheit : celsius;
 
-        if(checkZoneDifferences(Driver, Passenger, Back)) {
+        if(checkZoneDifferences(plus,Driver, Passenger, Back)) {
+            if(plus){
+                _desiredTemp++;
+            }
+            else {
+                _desiredTemp--;
+            }
             tempChangeValue.setTextSize(25);
             tempChangeValue.setText("In progress...\n Changing Tempreture\n from " + String.valueOf((int)temp) + " to "+_desiredTemp  + typeString);
             if(Driver){

@@ -21,88 +21,88 @@ public class DifferenceCheckerTest {
     @Test
     public void TempDifference_Correct()
     {
-        assertTrue(DifferenceChecker.checkTemp(targetSuccess, comparison1, comparison2));
+        assertTrue(DifferenceChecker.checkTemp(false,targetSuccess, comparison1, comparison2));
     }
 
     @Test
     public void SoundDifference_Correct()
     {
-        assertTrue(DifferenceChecker.checkSound(targetSuccess, comparison1, comparison2));
+        assertTrue(DifferenceChecker.checkSound(false,targetSuccess, comparison1, comparison2));
     }
 
     @Test
     public void HumidityDifference_Correct()
     {
-        assertTrue(DifferenceChecker.checkHumidity(targetSuccess, comparison1, comparison2));
+        assertTrue(DifferenceChecker.checkHumidity(false,targetSuccess, comparison1, comparison2));
     }
 
     @Test
     public void PressureDifference_Correct()
     {
-        assertTrue(DifferenceChecker.checkAirPressure(targetSuccess, comparison1, comparison2));
+        assertTrue(DifferenceChecker.checkAirPressure(false,targetSuccess, comparison1, comparison2));
     }
 
     @Test
     public void LightDifference_Correct()
     {
-        assertTrue(DifferenceChecker.checkLux(targetSuccess, comparison1, comparison2));
+        assertTrue(DifferenceChecker.checkLux(false,targetSuccess, comparison1, comparison2));
     }
     private Zone targetFailSmall = new Zone(Zone.ZoneName.DRIVER, "17.0", "44.0", "0.0", "60.0", "0.0", "24.0", "894.0", "24.0", "0.0", "0.0", "21.0");
 
     @Test
     public void TempDifference_Fail_Small()
     {
-        assertFalse(DifferenceChecker.checkTemp(targetFailSmall, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkTemp(false,targetFailSmall, comparison1, comparison2));
     }
 
     @Test
     public void SoundDifference_Fail_Small()
     {
-        assertFalse(DifferenceChecker.checkSound(targetFailSmall, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkSound(false,targetFailSmall, comparison1, comparison2));
     }
     @Test
     public void HumidityDifference_Fail_Small()
     {
-        assertFalse(DifferenceChecker.checkHumidity(targetFailSmall, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkHumidity(false,targetFailSmall, comparison1, comparison2));
     }
     @Test
     public void PressureDifference_Fail_Small()
     {
-        assertFalse(DifferenceChecker.checkAirPressure(targetFailSmall, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkAirPressure(false,targetFailSmall, comparison1, comparison2));
     }
     @Test
     public void LightDifference_Fail_Small()
     {
-        assertFalse(DifferenceChecker.checkLux(targetFailSmall, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkLux(false,targetFailSmall, comparison1, comparison2));
     }
 
-    private Zone targetFailMed = new Zone(Zone.ZoneName.DRIVER, "14.0", "38.0", "0.0", "60.0", "0.0", "56.0", "882.0", "12.0", "0.0", "0.0", "21.0");
+    private Zone targetFailMed = new Zone(Zone.ZoneName.DRIVER, "14.0", "38.0", "0.0", "60.0", "0.0", "16.0", "882.0", "12.0", "0.0", "0.0", "21.0");
 
     @Test
     public void TempDifference_Fail_Med()
     {
-        assertFalse(DifferenceChecker.checkTemp(targetFailMed, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkTemp(false,targetFailMed, comparison1, comparison2));
     }
 
     @Test
     public void SoundDifference_Fail_Med()
     {
-        assertFalse(DifferenceChecker.checkSound(targetFailMed, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkSound(false,targetFailMed, comparison1, comparison2));
     }
     @Test
     public void HumidityDifference_Fail_Med()
     {
-        assertFalse(DifferenceChecker.checkHumidity(targetFailMed, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkHumidity(false,targetFailMed, comparison1, comparison2));
     }
     @Test
     public void PressureDifference_Fail_Med()
     {
-        assertFalse(DifferenceChecker.checkAirPressure(targetFailMed, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkAirPressure(false,targetFailMed, comparison1, comparison2));
     }
     @Test
     public void LightDifference_Fail_Med()
     {
-        assertFalse(DifferenceChecker.checkLux(targetFailMed, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkLux(false,targetFailMed, comparison1, comparison2));
     }
 
     private Zone targetFailLarge = new Zone(Zone.ZoneName.DRIVER, "11.0", "32.0", "0.0", "60.0", "0.0", "0.0", "888.0", "18.0", "0.0", "0.0", "21.0");
@@ -110,27 +110,27 @@ public class DifferenceCheckerTest {
     @Test
     public void TempDifference_Fail_Large()
     {
-        assertFalse(DifferenceChecker.checkTemp(targetFailLarge, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkTemp(false,targetFailLarge, comparison1, comparison2));
     }
 
     @Test
     public void SoundDifference_Fail_Large()
     {
-        assertFalse(DifferenceChecker.checkSound(targetFailLarge, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkSound(false,targetFailLarge, comparison1, comparison2));
     }
     @Test
     public void HumidityDifference_Fail_Large()
     {
-        assertFalse(DifferenceChecker.checkHumidity(targetFailLarge, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkHumidity(false,targetFailLarge, comparison1, comparison2));
     }
     @Test
     public void PressureDifference_Fail_Large()
     {
-        assertFalse(DifferenceChecker.checkAirPressure(targetFailLarge, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkAirPressure(false,targetFailLarge, comparison1, comparison2));
     }
     @Test
     public void LightDifference_Fail_Large()
     {
-        assertFalse(DifferenceChecker.checkLux(targetFailLarge, comparison1, comparison2));
+        assertFalse(DifferenceChecker.checkLux(false,targetFailLarge, comparison1, comparison2));
     }
 }
