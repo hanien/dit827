@@ -94,7 +94,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     public void SetupCarLayoutFragment(){
         FragmentManager fm1 = getFragmentManager();
         FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
-        DefaultLayoutFragment = new DefaultLayoutFragment(_owner,_baseViewModel);
+        DefaultLayoutFragment = new DefaultLayoutFragment(this, _owner,_baseViewModel);
         fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, DefaultLayoutFragment).commit();
         _callback = DefaultLayoutFragment;
     }
