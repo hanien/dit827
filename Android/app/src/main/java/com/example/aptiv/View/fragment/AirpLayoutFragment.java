@@ -165,7 +165,7 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
         if(checkZoneDifferences(Driver, Passenger, Back))
         {
             ApChangeValue.setTextSize(25);
-            ApChangeValue.setText("In progress...\n Changing Volume\n from " +(int)_desiredAir+ " to "+ String.valueOf((int)air));
+            ApChangeValue.setText("In progress...\n Changing Air Pressure \n from " + String.valueOf((int)air) + " to "+ (int)_desiredAir);
             if(Driver){
                 _baseViewModel.DriverProfile.setPressure(Double.toString(_desiredAir));
             }

@@ -171,7 +171,6 @@
                 android:id="@+id/LinearLayoutTemp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:onClick="OpenTempFragment"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -182,6 +181,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/default_margin_cardview"
                     android:layout_weight="1"
+                    android:onClick="OpenTempFragment"
                     android:minHeight="40dp"
                     card_view:cardBackgroundColor="@color/CardViewColor"
                     card_view:cardCornerRadius="@dimen/cardview_corner_radius"
@@ -282,8 +282,8 @@
 
                         <TextView
                             android:id="@+id/OutTempTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_width="240dp"
+                            android:layout_height="129dp"
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="center"
