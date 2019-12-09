@@ -180,7 +180,7 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
 
         if(checkZoneDifferences(Driver, Passenger, Back)) {
             tempChangeValue.setTextSize(25);
-            tempChangeValue.setText("In progress...\n Changing Tempreture\n from " +_desiredTemp+ " to "+ String.valueOf((int)temp) + typeString);
+            tempChangeValue.setText("In progress...\n Changing Tempreture\n from " + String.valueOf((int)temp) + " to "+_desiredTemp  + typeString);
             if(Driver){
                 _baseViewModel.DriverProfile.setTemperature(Double.toString(_desiredTemp));
             }

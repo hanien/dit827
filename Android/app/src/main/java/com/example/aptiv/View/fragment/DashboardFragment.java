@@ -3,6 +3,7 @@ package com.example.aptiv.View.fragment;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -276,6 +277,8 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         //TODO if statement here
         if(!popUpShown)
         {
+
+
             // show the popup window
             // which view you pass in doesn't matter, it is only used for the window tolken
             popupWindow.showAtLocation(_view, Gravity.CENTER, 0, 0);
@@ -306,7 +309,14 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
 
                     }
                     popupWindow.dismiss();
-                    popUpShown = false;
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            popUpShown = false;
+                        }
+                    }, 30000);
                 }
             });
 
@@ -319,7 +329,15 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
                 {
                     //Do Something
                     popupWindow.dismiss();
-                    popUpShown = false;
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            popUpShown = false;
+                        }
+                    }, 30000);
+
                 }
             });
         }

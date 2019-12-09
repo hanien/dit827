@@ -169,7 +169,7 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
 
         if(checkZoneDifferences(Driver, Passenger, Back)){
             HumidityChangeValue.setTextSize(25);
-            HumidityChangeValue.setText("In progress...\n Changing Volume\n from " +(int)_desiredHumidity+ " to "+ String.valueOf((int)Humidity));
+            HumidityChangeValue.setText("In progress...\n Changing Humidity \n from " +  String.valueOf((int)Humidity)+ " to "+ (int)_desiredHumidity );
             if(Driver){
                 _baseViewModel.DriverProfile.setHumidity(Double.toString(_desiredHumidity));
             }
