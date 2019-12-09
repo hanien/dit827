@@ -54,7 +54,7 @@ public class ProfileHandler {
 
     public void SetDashboardFragment(DashboardFragment fragment) {
         _dashboardFragment = fragment;
-        checkThresholds();
+       // checkThresholds();
     }
 
     public void onDataFetched(Zone zone) {
@@ -192,7 +192,7 @@ public class ProfileHandler {
         boolean aboveThreshold = value < value + threshold;
         return belowThreshold && aboveThreshold;
     }
-
+/*
     private boolean checkTempLevel() {
 
         String  DriverTempLevel = _base.DriverZone.getTemperature();
@@ -222,7 +222,7 @@ public class ProfileHandler {
         return DriverCheck && PassangerCheck && BackCheck;
 
     }
-
+*/
 
     private void ZonesValueHandler(Profile profile, Zone zone) {
 
@@ -295,9 +295,6 @@ public class ProfileHandler {
 
     }
 
-
-
-}
 
     private HashMap<String, Double> sumMaps(HashMap<String, Double> sum, HashMap<String, Double> element){
         sum.put("temperature", (sum.get("temperature") + element.get("temperature")));

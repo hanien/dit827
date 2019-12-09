@@ -59,14 +59,28 @@
                     android:layout_height="90dp"
                     android:layout_marginRight="50dp"
                     card_view:srcCompat="@drawable/speaker" />
+                    <ImageView
+                        android:id="@+id/lowbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        card_view:srcCompat="@drawable/minus" />
 
-                <TextView
-                    android:id="@+id/SoundValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10"
-                    android:textColor="@color/CardViewTextColor"
-                    android:textSize="45dp"/>
+                    <TextView
+                        android:id="@+id/SoundValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10"
+                        android:textColor="@color/CardViewTextColor"
+                        android:textSize="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"/>
+
+                    <ImageView
+                        android:id="@+id/highbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        card_view:srcCompat="@drawable/plus" />
+
             </LinearLayout>
 
             <androidx.cardview.widget.CardView

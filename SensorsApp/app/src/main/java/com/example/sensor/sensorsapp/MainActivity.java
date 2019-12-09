@@ -22,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.nearby.Nearby;
+import com.google.android.gms.nearby.messages.Message;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +41,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     private Sensor Light;
     private Sensor Temp;
+    private Message mActiveMessage;
 
     private double lightvalue;
     private double tempvalue;
@@ -66,7 +69,15 @@ public class MainActivity extends Activity implements SensorEventListener {
         public void run() {
 
             amp = voiceSensor.getAmplitude();
-            VoiceView.setText("Voice value: " + amp);
+            int amp_Fixed = (int) Math.floor(amp * 100);
+            VoiceView.setText("Voice value: " + amp_Fixed);
+            Publish(String.valueOf(amp_Fixed));
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    Unpublish();
+                }
+            }, 3000);
 /*
             queue = Volley.newRequestQueue(MainActivity.this);
 
@@ -100,7 +111,14 @@ public class MainActivity extends Activity implements SensorEventListener {
 
         }
     };
+    public void Publish(String message) {
+        mActiveMessage = new Message(message.getBytes());
+        Nearby.getMessagesClient(this).publish(mActiveMessage);
+    }
 
+    public void Unpublish() {
+        Nearby.getMessagesClient(this).unpublish(mActiveMessage);
+    }
 
 
     @Override
@@ -282,7 +300,6 @@ public class MainActivity extends Activity implements SensorEventListener {
     }
 
     public void startReceiverService(View v) {
-
         Intent serviceIntent = new Intent(this, ReceiverService.class);
         ContextCompat.startForegroundService(this, serviceIntent);
     }

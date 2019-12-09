@@ -9,8 +9,6 @@ import com.example.aptiv.Model.Service.AptivService;
 import com.example.aptiv.Model.Helper.ProfileHandler;
 import com.example.aptiv.View.fragment.DashboardFragment;
 
-import java.sql.Driver;
-
 
 public class BaseViewModel implements IVolleyCollback {
 
@@ -21,16 +19,17 @@ public class BaseViewModel implements IVolleyCollback {
     private DashboardFragment _dashboardFragment;
 
     //enum to differentiate btwn incoming zones
-    public Zone DriverZone = new Zone(Zone.ZoneName.DRIVER, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
-    public Zone PassengerZone = new Zone(Zone.ZoneName.PASSENGER, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
-    public Zone BackseatZone = new Zone(Zone.ZoneName.BACK, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
-    public Zone MiddleZone = new Zone(Zone.ZoneName.MIDDLE, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
+    public static Zone DriverZone = new Zone(Zone.ZoneName.DRIVER, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
+    public static Zone PassengerZone = new Zone(Zone.ZoneName.PASSENGER, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
+    public static Zone BackseatZone = new Zone(Zone.ZoneName.BACK, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
+    public static Zone MiddleZone = new Zone(Zone.ZoneName.MIDDLE, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
 
     public Profile DriverProfile = new Profile(null,null,null,null,null,null,null,null,null,null,null,null);
     public Profile PassengerProfile = new Profile(null,null,null,null,null,null,null,null,null,null,null,null);
     public Profile BackProfile = new Profile(null,null,null,null,null,null,null,null,null,null,null,null);
 
     public Double OutTempreture = 0.0;
+    public Boolean isMuted = false;
     public Boolean tempType; //True here means that it is Fahrenheit
     private String fahrenheit;
     private String celsius;
@@ -65,18 +64,22 @@ public class BaseViewModel implements IVolleyCollback {
     @Override
     public void GetDriverReadings(Zone value) {
         DriverZone = value;
+        DriverZone.setName(Zone.ZoneName.DRIVER);
         _profileHandler.onDataFetched(value);
     }
 
     @Override
     public void GetPassengerReadings(Zone value) {
         PassengerZone = value;
+        PassengerZone.setName(Zone.ZoneName.PASSENGER);
         _profileHandler.onDataFetched(value);
     }
 
     @Override
     public void GetAverageReadings(Zone value) {
         MiddleZone = value;
+        MiddleZone.setName(Zone.ZoneName.MIDDLE);
+        BackseatZone.setIr(MiddleZone.getIr());
         _profileHandler.onDataFetched(value);
     }
 
@@ -88,6 +91,8 @@ public class BaseViewModel implements IVolleyCollback {
     @Override
     public void GetBackseatReadings(Zone value) {
         BackseatZone = value;
+        BackseatZone.setName(Zone.ZoneName.BACK);
+        BackseatZone.setIr(MiddleZone.getIr());
         _profileHandler.onDataFetched(value);
     }
 
@@ -100,6 +105,5 @@ public class BaseViewModel implements IVolleyCollback {
     public String getCelsius(){
         return celsius;
     }
-
 
 }
