@@ -88,7 +88,7 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
         HumidityValue.setText(_baseViewModel.MiddleZone.getHumidity() + " %");
     }
 
-
+    private  boolean check = false;
     @Override
     public void zoneIsSelected() {
         _desiredHumidity = Humidity;
@@ -96,13 +96,14 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
             SetText.setVisibility(View.GONE);
             SetHumidityLayout.setVisibility(View.VISIBLE);
             HumidityChangeValue.setVisibility(View.VISIBLE);
+            check = false;
             updateHumidityValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
 
         }else{
             SetText.setVisibility(View.VISIBLE);
             HumidityChangeValue.setVisibility(View.GONE);
             SetHumidityLayout.setVisibility(View.GONE);
-
+            HumidityValue.setText(_baseViewModel.MiddleZone.getHumidity() + " %");
 
         }
     }
@@ -133,6 +134,11 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
             count = 1;
         }
         Humidity = Humidity/count;
+        HumidityValue.setText(String.valueOf((int)Humidity)  +  " %");
+        if(check == false){
+            _desiredHumidity = Humidity;
+            check = true;
+        }
         HumidityChangeValue.setText(String.valueOf((int)Humidity)  +  " %");
 
         if(!_plusMinusButtonClicked){
@@ -169,7 +175,7 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
 
         if(checkZoneDifferences(Driver, Passenger, Back)){
             HumidityChangeValue.setTextSize(25);
-            HumidityChangeValue.setText("In progress...\n Changing Humidity \n from " +  String.valueOf((int)Humidity)+ " to "+ (int)_desiredHumidity );
+            HumidityChangeValue.setText("Changing Humidity \n to " + (int)_desiredHumidity );
             if(Driver){
                 _baseViewModel.DriverProfile.setHumidity(Double.toString(_desiredHumidity));
             }
