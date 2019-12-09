@@ -48,6 +48,13 @@ public class BaseViewModel implements IVolleyCollback {
         _weatherService.GetWeather(this);
 
         UpdateData();
+        DriverProfile.setFromZone(DriverZone);
+        PassengerProfile.setFromZone(PassengerZone);
+        BackProfile.setFromZone(BackseatZone);
+    }
+
+    public void onProfileChange(){
+        //_profileHandler.onProfileChange();
     }
     public void SetDashboardFragment(DashboardFragment fragment){
         _dashboardFragment = fragment;

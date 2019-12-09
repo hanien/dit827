@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
+
+import com.example.aptiv.Model.Helper.DifferenceChecker;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -116,7 +118,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
             count++;
         }
         if(Back){
-            temp = temp + Double.parseDouble(_baseViewModel.PassengerZone.getSound());
+            temp = temp + Double.parseDouble(_baseViewModel.BackseatZone.getSound());
             count++;
         }
         if(count ==4){
@@ -135,19 +137,49 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
         }
     }
 
+    private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
+        if(driver) {
+            return DifferenceChecker.checkSound(_baseViewModel.DriverZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.BackseatZone);
+        }
+        if(passenger){
+            return DifferenceChecker.checkSound(_baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone,
+                    _baseViewModel.BackseatZone);
+        }
+        if(backseat){
+            return DifferenceChecker.checkSound(_baseViewModel.BackseatZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone);
+        }
+        return true;
+    }
+
     private void PlusMinusButtonClicked(boolean Driver,boolean Passenger,boolean Back){
         _plusMinusButtonClicked = true;
-        _zoneSoundTextView.setTextSize(25);
 
-        _zoneSoundTextView.setText("In progress...\n Changing Volume\n from " +(int)_desiredTemp+ " to "+ String.valueOf((int)temp));
-        if(Driver){
-            _baseViewModel.DriverProfile.setSound(Double.toString(_desiredTemp));
+        if(checkZoneDifferences(Driver, Passenger, Back))
+        {
+            _zoneSoundTextView.setTextSize(25);
+            _zoneSoundTextView.setText("In progress...\n Changing Volume\n from " +(int)_desiredTemp+ " to "+ String.valueOf((int)temp));
+            if(Driver){
+                _baseViewModel.DriverProfile.setSound(Double.toString(_desiredTemp));
+            }
+            if(Passenger){
+                _baseViewModel.PassengerProfile.setSound(Double.toString(_desiredTemp));
+            }
+            if(Back) {
+                _baseViewModel.BackProfile.setSound(Double.toString(_desiredTemp));
+            }
         }
-        if(Passenger){
-            _baseViewModel.PassengerProfile.setSound(Double.toString(_desiredTemp));
-        }
-        if(Back) {
-            _baseViewModel.BackProfile.setSound(Double.toString(_desiredTemp));
+        else
+        {
+
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Sound is too different from other zones! Adjust other zones and try again.", false);
+            //TODO
+            //if yes: implement adjustment behavior
+            //else: reset to original value
         }
     }
 

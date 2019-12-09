@@ -9,6 +9,8 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.aptiv.Model.Helper.DifferenceChecker;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -119,7 +121,7 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
             count++;
         }
         if(Back){
-            lux = lux + Double.parseDouble(_baseViewModel.PassengerZone.getIr());
+            lux = lux + Double.parseDouble(_baseViewModel.BackseatZone.getIr());
             count++;
         }
         if(count ==4){
@@ -138,20 +140,48 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
         }
     }
 
+    private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
+        if(driver) {
+            return DifferenceChecker.checkLux(_baseViewModel.DriverZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.BackseatZone);
+        }
+        if(passenger){
+            return DifferenceChecker.checkLux(_baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone,
+                    _baseViewModel.BackseatZone);
+        }
+        if(backseat){
+            return DifferenceChecker.checkLux(_baseViewModel.BackseatZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone);
+        }
+        return true;
+    }
+
     private void PlusMinusButtonClicked(boolean Driver,boolean Passenger,boolean Back){
         _plusMinusButtonClicked = true;
-        luxChangeValue.setTextSize(25);
 
-        luxChangeValue.setText("In progress...\n Changing Volume\n from " +(int)_desiredLux+ " to "+ String.valueOf((int)lux));
-        if(Driver){
-            _baseViewModel.DriverProfile.setIr(Double.toString(_desiredLux));
+        if(checkZoneDifferences(Driver, Passenger, Back)){
+            luxChangeValue.setTextSize(25);
+            luxChangeValue.setText("In progress...\n Changing Volume\n from " +(int)_desiredLux+ " to "+ String.valueOf((int)lux));
+            if(Driver){
+                _baseViewModel.DriverProfile.setIr(Double.toString(_desiredLux));
+            }
+            if(Passenger){
+                _baseViewModel.PassengerProfile.setIr(Double.toString(_desiredLux));
+            }
+            if(Back) {
+                _baseViewModel.BackProfile.setIr(Double.toString(_desiredLux));
+            }
         }
-        if(Passenger){
-            _baseViewModel.PassengerProfile.setIr(Double.toString(_desiredLux));
-        }
-        if(Back) {
-            _baseViewModel.BackProfile.setIr(Double.toString(_desiredLux));
-        }
+        else{
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Light level is too different from other zones! Adjust other zones and try again.", false);
+            //TODO
+            //if yes: implement adjustment behavior
+            //else: reset to original value
+            }
+
     }
 
     private void setUpTimer(){

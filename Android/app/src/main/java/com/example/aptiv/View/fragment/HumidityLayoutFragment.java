@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.aptiv.Model.Helper.DifferenceChecker;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -123,7 +125,7 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
             count++;
         }
         if(Back){
-            Humidity = Humidity + Double.parseDouble(_baseViewModel.PassengerZone.getHumidity());
+            Humidity = Humidity + Double.parseDouble(_baseViewModel.BackseatZone.getHumidity());
             count++;
         }
         if(count ==4){
@@ -142,20 +144,48 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
         }
     }
 
+
+    private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
+        if(driver) {
+            return DifferenceChecker.checkHumidity(_baseViewModel.DriverZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.BackseatZone);
+        }
+        if(passenger){
+            return DifferenceChecker.checkHumidity(_baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone,
+                    _baseViewModel.BackseatZone);
+        }
+        if(backseat){
+            return DifferenceChecker.checkHumidity(_baseViewModel.BackseatZone,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.DriverZone);
+        }
+        return true;
+    }
+
     private void PlusMinusButtonClicked(boolean Driver,boolean Passenger,boolean Back){
         _plusMinusButtonClicked = true;
-        HumidityChangeValue.setTextSize(25);
 
-        HumidityChangeValue.setText("In progress...\n Changing Volume\n from " +(int)_desiredHumidity+ " to "+ String.valueOf((int)Humidity));
-        if(Driver){
-            _baseViewModel.DriverProfile.setHumidity(Double.toString(_desiredHumidity));
+        if(checkZoneDifferences(Driver, Passenger, Back)){
+            HumidityChangeValue.setTextSize(25);
+            HumidityChangeValue.setText("In progress...\n Changing Volume\n from " +(int)_desiredHumidity+ " to "+ String.valueOf((int)Humidity));
+            if(Driver){
+                _baseViewModel.DriverProfile.setHumidity(Double.toString(_desiredHumidity));
+            }
+            if(Passenger){
+                _baseViewModel.PassengerProfile.setHumidity(Double.toString(_desiredHumidity));
+            }
+            if(Back) {
+                _baseViewModel.BackProfile.setHumidity(Double.toString(_desiredHumidity));
+            }
         }
-        if(Passenger){
-            _baseViewModel.PassengerProfile.setHumidity(Double.toString(_desiredHumidity));
-        }
-        if(Back) {
-            _baseViewModel.BackProfile.setHumidity(Double.toString(_desiredHumidity));
-        }
+        else{
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Humidity is too different from other zones! Adjust other zones and try again.", false);
+            //TODO
+            //if yes: implement adjustment behavior
+            //else: reset to original value
+            }
     }
 
     private void setUpTimer(){

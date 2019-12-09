@@ -48,6 +48,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     private ImageView _frontSeatError;
     private ImageView _driverSeatError;
     private ImageView _backSeatError;
+    private boolean popUpShown = false;
 
     private LayoutInflater _inflater;
 
@@ -263,17 +264,8 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     }
 
     public void CreatePopupView(final boolean DriverSeat,final boolean PassangerSeat,final boolean BackSeat,String messages,boolean OverrideButton){
-        if(DriverSeat){
-            toggleError(_baseViewModel.DriverZone,true);
-        }
-        if(PassangerSeat){
-            toggleError(_baseViewModel.PassengerZone,true);
-        }
-        if(BackSeat){
-            toggleError(_baseViewModel.BackseatZone,true);
-        }
 
-        View popupView = _inflater.inflate(R.layout.fragment_pupup, null);
+        final View popupView = _inflater.inflate(R.layout.fragment_pupup, null);
 
         // create the popup window
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -281,51 +273,56 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         boolean focusable = false;
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
-        popupWindow.showAtLocation(_view, Gravity.CENTER, 0, 0);
-        TextView txtMessage = popupView.findViewById(R.id.PopupVIewMessage);
-        if(messages == null|| messages == ""){
-            messages = "Opps, something went wrong!";
+        //TODO if statement here
+        if(!popUpShown)
+        {
+            // show the popup window
+            // which view you pass in doesn't matter, it is only used for the window tolken
+            popupWindow.showAtLocation(_view, Gravity.CENTER, 0, 0);
+            popUpShown = true;
+            TextView txtMessage = popupView.findViewById(R.id.PopupVIewMessage);
+            if(messages == null|| messages == ""){
+                messages = "Opps, something went wrong!";
+            }
+            txtMessage.setText(messages);
+
+            Button _overrideButton = popupView.findViewById(R.id.OverrideButton);
+            _overrideButton.setVisibility(OverrideButton ? View.VISIBLE : View.GONE);
+            _overrideButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    //Do Something
+                    if(DriverSeat){
+                        //_baseViewModel.DriverProfile.set
+                    }
+                    if(PassangerSeat){
+                        //_baseViewModel.PassengerProfile.set
+
+                    }
+                    if(BackSeat){
+                        //_baseViewModel.BackProfile.set
+
+                    }
+                    popupWindow.dismiss();
+                    popUpShown = false;
+                }
+            });
+
+            // Getting a reference to button two and do something
+            Button _okButton = popupView.findViewById(R.id.OkButton);
+            _okButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    //Do Something
+                    popupWindow.dismiss();
+                    popUpShown = false;
+                }
+            });
         }
-        txtMessage.setText(messages);
-
-        Button _overrideButton = popupView.findViewById(R.id.OverrideButton);
-        _overrideButton.setVisibility(OverrideButton ? View.VISIBLE : View.GONE);
-        _overrideButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                //Do Something
-                if(DriverSeat){
-                    //_baseViewModel.DriverProfile.set
-                }
-                if(PassangerSeat){
-                   //_baseViewModel.PassengerProfile.set
-
-                }
-                if(BackSeat){
-                    //_baseViewModel.BackProfile.set
-
-                }
-                popupWindow.dismiss();
-            }
-        });
-
-        // Getting a reference to button two and do something
-        Button _okButton = popupView.findViewById(R.id.OkButton);
-        _okButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                //Do Something
-
-                popupWindow.dismiss();
-            }
-        });
-
     }
 
     //seat selection in the car image is base on color
