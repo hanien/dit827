@@ -25,7 +25,6 @@ public class Zone {
     private String altitude;
     private String light;
     private String lux;
-    private Profile profile;
 
     public Zone(ZoneName name, String temperature, String humidity, String gain, String luminosity, String full, String ir,
                 String pressure , String sound, String altitude, String light,String lux){
@@ -41,6 +40,9 @@ public class Zone {
         this.altitude = altitude;
         this.light = light;
         this.lux = lux;
+    }
+    public void setName(ZoneName Name){
+        this.name = Name;
     }
 
     public Zone.ZoneName getName() { return name; }
@@ -144,7 +146,7 @@ public class Zone {
     }
 
     public void setSound(String sound) {
-        this.sound = sound;
+            this.sound = sound;
     }
 
     public String getAltitiude() {

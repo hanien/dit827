@@ -7,6 +7,9 @@ verify_ssl = true
 pytest = "*"
 
 [packages]
+requests = "*"
+board = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.6"

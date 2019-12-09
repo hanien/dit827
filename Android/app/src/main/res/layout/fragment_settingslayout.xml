@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="40dp">
+                android:layout_marginBottom="60dp">
                 <ImageView
                     android:id="@+id/addBtn"
                     android:layout_width="40dp"
@@ -83,29 +83,53 @@
                 android:weightSum="2"
                 android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal">
 
-                  <TextView
-                      android:id="@+id/textView"
-                      android:layout_width="match_parent"
-                      android:layout_height="40dp"
-                      android:layout_gravity="top"
-                      android:layout_weight="1"
-                      android:layout_margin="10dp"
-                      android:textSize="20dp"
-                      android:text="Use fahrenheit for temperature"
-                      android:textColor="@color/CardViewTextColor" />
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:textSize="20dp"
+                    android:text="Switch temperature:"
+                    android:textColor="@color/CardViewTextColor" />
 
-                  <Switch
-                      android:id="@+id/TempType"
-                      android:layout_width="wrap_content"
-                      android:layout_height="40dp"
-                      android:layout_gravity="bottom"
-                      android:layout_weight="1"
-                      android:textColor="@color/CardViewTextColor"
-                      tools:visibility="visible" />
+                <TextView
+                    android:id="@+id/textCelsius"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top"
+                    android:gravity="right"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:textSize="20dp"
+                    android:text="C"
+                    android:textColor="@color/CardViewTextColor" />
+
+                <Switch
+                    android:id="@+id/TempType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="1"
+                    android:textColor="@color/CardViewTextColor"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/textFahrenheit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:textSize="20dp"
+                    android:text="F"
+                    android:textColor="@color/CardViewTextColor" />
+
               </LinearLayout>
 
         </RelativeLayout>

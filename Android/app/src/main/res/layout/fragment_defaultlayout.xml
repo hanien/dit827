@@ -44,7 +44,7 @@
                         android:weightSum="2">
 
                         <ImageView
-                            android:id="@+id/sound"
+                            android:id="@+id/lightImage"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"

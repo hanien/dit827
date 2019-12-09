@@ -54,6 +54,7 @@ public class ProfileHandler {
 
     public void SetDashboardFragment(DashboardFragment fragment) {
         _dashboardFragment = fragment;
+       // checkThresholds();
     }
 
     public void onDataFetched(Zone zone) {
@@ -252,7 +253,7 @@ public class ProfileHandler {
         boolean aboveThreshold = target < source + threshold;
         return belowThreshold && aboveThreshold;
     }
-
+/*
     private boolean checkTempLevel() {
 
         String  DriverTempLevel = _base.DriverZone.getTemperature();
@@ -282,7 +283,7 @@ public class ProfileHandler {
         return DriverCheck && PassangerCheck && BackCheck;
 
     }
-
+*/
 
     public boolean ZonesValueHandler(Profile profile, Zone zone) {
         if(profile == null || zone == null){
