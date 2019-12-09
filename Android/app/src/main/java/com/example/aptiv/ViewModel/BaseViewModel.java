@@ -1,21 +1,13 @@
 package com.example.aptiv.ViewModel;
 
-import android.content.Intent;
-import android.view.View;
-
-import androidx.core.content.ContextCompat;
-
 import com.example.aptiv.Model.Classe.Profile;
 import com.example.aptiv.Model.Classe.Zone;
-import com.example.aptiv.Model.Helper.ReceiverService;
 import com.example.aptiv.Model.Interface.IVolleyCollback;
 import com.example.aptiv.Model.Service.WeatherService;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.Model.Service.AptivService;
 import com.example.aptiv.Model.Helper.ProfileHandler;
 import com.example.aptiv.View.fragment.DashboardFragment;
-
-import java.sql.Driver;
 
 
 public class BaseViewModel implements IVolleyCollback {
@@ -27,10 +19,10 @@ public class BaseViewModel implements IVolleyCollback {
     private DashboardFragment _dashboardFragment;
 
     //enum to differentiate btwn incoming zones
-    public Zone DriverZone = new Zone(Zone.ZoneName.DRIVER, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
-    public Zone PassengerZone = new Zone(Zone.ZoneName.PASSENGER, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
-    public Zone BackseatZone = new Zone(Zone.ZoneName.BACK, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
-    public Zone MiddleZone = new Zone(Zone.ZoneName.MIDDLE, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
+    public static Zone DriverZone = new Zone(Zone.ZoneName.DRIVER, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
+    public static Zone PassengerZone = new Zone(Zone.ZoneName.PASSENGER, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
+    public static Zone BackseatZone = new Zone(Zone.ZoneName.BACK, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
+    public static Zone MiddleZone = new Zone(Zone.ZoneName.MIDDLE, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
 
     public Profile DriverProfile = new Profile(null,null,null,null,null,null,null,null,null,null,null,null);
     public Profile PassengerProfile = new Profile(null,null,null,null,null,null,null,null,null,null,null,null);

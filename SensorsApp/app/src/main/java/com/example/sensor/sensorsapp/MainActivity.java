@@ -69,8 +69,9 @@ public class MainActivity extends Activity implements SensorEventListener {
         public void run() {
 
             amp = voiceSensor.getAmplitude();
-            VoiceView.setText("Voice value: " + amp);
-            Publish(String.valueOf(amp));
+            int amp_Fixed = (int) Math.floor(amp * 100);
+            VoiceView.setText("Voice value: " + amp_Fixed);
+            Publish(String.valueOf(amp_Fixed));
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {

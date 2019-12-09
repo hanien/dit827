@@ -110,7 +110,7 @@ public class Zone {
     }
 
     public void setSound(String sound) {
-        this.sound = sound;
+            this.sound = sound;
     }
 
     public String getAltitiude() {

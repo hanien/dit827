@@ -1,12 +1,8 @@
 package com.example.aptiv.View;
 import com.example.aptiv.Model.Classe.Mode;
 import com.example.aptiv.Model.Helper.ReceiverService;
-import com.example.aptiv.Model.Helper.ReceiverService2;
 import com.example.aptiv.ViewModel.DashboardViewModel;
 
-import com.google.android.gms.nearby.Nearby;
-import com.google.android.gms.nearby.messages.Message;
-import com.google.android.gms.nearby.messages.MessageListener;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
@@ -16,7 +12,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,7 +26,6 @@ public class MainActivity extends AppCompatActivity  {
 
     private DashboardViewModel _viewModel;
     public DashboardFragment _dashboardFragment;
-   // MessageListener mMessageListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,27 +35,6 @@ public class MainActivity extends AppCompatActivity  {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         SetupActivity();
         startReceiverService();
-/*
-        mMessageListener = new MessageListener() {
-            @Override
-            public void onFound(Message message) {
-
-                String value = new String(message.getContent());
-                Log.v("M1", value);
-
-            }
-
-            @Override
-            public void onLost(Message message) {
-
-                String value = new String(message.getContent());
-                Log.v("M1", value);
-
-            }
-        };
-
-        Nearby.getMessagesClient(this).subscribe(mMessageListener);
-*/
     }
 
     private void SetupActivity(){
@@ -140,12 +113,12 @@ public class MainActivity extends AppCompatActivity  {
 
 
     public void startReceiverService() {
-        Intent serviceIntent = new Intent(this,ReceiverService2.class);
+        Intent serviceIntent = new Intent(this, ReceiverService.class);
         ContextCompat.startForegroundService(this, serviceIntent);
     }
 
     public void stopReceiverService() {
-        Intent serviceIntent = new Intent(this, ReceiverService2.class);
+        Intent serviceIntent = new Intent(this, ReceiverService.class);
         this.stopService(serviceIntent);
     }
 
