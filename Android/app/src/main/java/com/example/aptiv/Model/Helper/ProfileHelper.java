@@ -104,11 +104,12 @@ public class ProfileHelper {
 
     public static boolean sampleZone(Profile target, Zone zone, Queue<Map> queue, HashMap<String, Double> sum)
     {
-        if(queue.size() < 5) {
+        if(queue.size() < 4) {
             queue.add(zone.getAll());
             return true;
         }
-        else if(queue.size() == 5) {
+        else if(queue.size() == 4) {
+            queue.add(zone.getAll());
             for(int i = 0; i < queue.size(); i++){
                 sum = sumMaps(sum, (HashMap<String, Double>)queue.toArray()[i]);
             }
@@ -168,67 +169,67 @@ public class ProfileHelper {
         //compares each value against the threshold
         //puts true in dict entry if within threshold, false if not
 
-        if(values.get("temperature").equals(null))
+        if(!values.get("temperature").equals(null))
             checkedZone.put("temperature", compareThreshold(Double.parseDouble(profile.getTemperature()),
                     values.get("temperature"), t_temp));
         else
             checkedZone.put("temperature", true);
 
-        if(values.get("humidity").equals(null))
+        if(!values.get("humidity").equals(null))
             checkedZone.put("humidity", values.get("humidity") == null || compareThreshold(Double.parseDouble(profile.getTemperature()),
                     values.get("humidity"), t_humidity));
         else
             checkedZone.put("humidity", true);
 
-        if(values.get("gain").equals(null))
+        if(!values.get("gain").equals(null))
             checkedZone.put("gain", values.get("gain") == null || compareThreshold(Double.parseDouble(profile.getGain()),
                     values.get("gain"), t_gain));
         else
             checkedZone.put("gain", true);
 
-        if(values.get("luminosity").equals(null))
+        if(!values.get("luminosity").equals(null))
             checkedZone.put("luminosity", values.get("luminosity") == null || compareThreshold(Double.parseDouble(profile.getLuminosity()),
                     values.get("luminosity"), t_luminosity));
         else
             checkedZone.put("luminosity", true);
 
-        if(values.get("full").equals(null))
+        if(!values.get("full").equals(null))
             checkedZone.put("full", values.get("full") == null || compareThreshold(Double.parseDouble(profile.getFull()),
                     values.get("full"), t_full));
         else
             checkedZone.put("full", true);
 
-        if(values.get("ir").equals(null))
+        if(!values.get("ir").equals(null))
             checkedZone.put("ir", values.get("ir") == null || compareThreshold(Double.parseDouble(profile.getIr()),
                     values.get("ir"), t_ir));
         else
             checkedZone.put("ir", true);
 
-        if(values.get("pressure").equals(null))
+        if(!values.get("pressure").equals(null))
             checkedZone.put("pressure", values.get("pressure") == null || compareThreshold(Double.parseDouble(profile.getPressure()),
                     values.get("pressure"), t_pressure));
         else
             checkedZone.put("pressure", true);
 
-        if(values.get("sound").equals(null))
+        if(!values.get("sound").equals(null))
             checkedZone.put("sound", values.get("sound") == null || compareThreshold(Double.parseDouble(profile.getSound()),
                     values.get("sound"), t_sound));
         else
             checkedZone.put("sound", true);
 
-        if(values.get("altitude").equals(null))
+        if(!values.get("altitude").equals(null))
             checkedZone.put("altitude", values.get("altitude") == null || compareThreshold(Double.parseDouble(profile.getAltitiude()),
                     values.get("altitude"), t_altitude));
         else
             checkedZone.put("altitude", true);
 
-        if(values.get("light").equals(null))
+        if(!values.get("light").equals(null))
             checkedZone.put("light", values.get("light") == null || compareThreshold(Double.parseDouble(profile.getLight()),
                     values.get("light"), t_light));
         else
             checkedZone.put("light", true);
 
-        if(values.get("ir").equals(null))
+        if(!values.get("ir").equals(null))
             checkedZone.put("lux", values.get("lux") == null || compareThreshold(Double.parseDouble(profile.getLux()),
                     values.get("lux"), t_lux));
         else
@@ -237,8 +238,8 @@ public class ProfileHelper {
     }
 
     private static boolean compareThreshold(double target, double source, double threshold){
-        boolean belowThreshold = target > source - threshold;
-        boolean aboveThreshold = target < source + threshold;
+        boolean belowThreshold = source >= target - threshold;
+        boolean aboveThreshold = source <= target + threshold;
         return belowThreshold && aboveThreshold;
     }
 }
