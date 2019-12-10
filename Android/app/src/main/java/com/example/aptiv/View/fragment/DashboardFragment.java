@@ -266,7 +266,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
 
     public void CreatePopupView(final boolean DriverSeat,final boolean PassangerSeat,final boolean BackSeat,String messages,boolean OverrideButton){
 
-        final View popupView = _inflater.inflate(R.layout.fragment_pupup, null);
+        final View popupView = _inflater.inflate(R.layout.fragment_popup, null);
 
         // create the popup window
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -283,7 +283,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
             // which view you pass in doesn't matter, it is only used for the window tolken
             popupWindow.showAtLocation(_view, Gravity.CENTER, 0, 0);
             popUpShown = true;
-            TextView txtMessage = popupView.findViewById(R.id.PopupVIewMessage);
+            TextView txtMessage = popupView.findViewById(R.id.PopupViewMessage);
             if(messages == null|| messages == ""){
                 messages = "Opps, something went wrong!";
             }

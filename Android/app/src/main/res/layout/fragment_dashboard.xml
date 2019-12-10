@@ -18,11 +18,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal">
+
             <FrameLayout
+                android:id="@+id/fragmentPlaceHolderDashboard"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/fragmentPlaceHolderDashboard">
-            </FrameLayout>
+                android:layout_height="match_parent"></FrameLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -30,6 +30,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal">
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -38,26 +39,28 @@
                 android:layout_marginTop="@dimen/default_margin_cardview"
                 android:layout_marginRight="@dimen/default_margin_cardview"
                 android:layout_marginBottom="@dimen/default_margin_cardview"
-                card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                card_view:cardBackgroundColor="@android:color/transparent">
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardCornerRadius="@dimen/cardview_corner_radius">
 
                 <ImageView
                     android:id="@+id/car_mask"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/car_mask" />
+
                 <ImageView
                     android:id="@+id/default_car"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/fullcar"/>
+                    android:src="@drawable/fullcar" />
+
                 <ImageView
                     android:id="@+id/driverseat"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:alpha="0.3"
                     android:src="@drawable/driverseatselected"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
 
                 <ImageView
                     android:id="@+id/driverseaterror"
@@ -66,6 +69,7 @@
                     android:alpha="0.45"
                     android:src="@drawable/driverseatred"
                     android:visibility="invisible" />
+
                 <ImageView
                     android:id="@+id/frontseat"
                     android:layout_width="match_parent"
@@ -73,6 +77,7 @@
                     android:alpha="0.3"
                     android:src="@drawable/frontseatselected"
                     android:visibility="invisible" />
+
                 <ImageView
                     android:id="@+id/frontseaterror"
                     android:layout_width="match_parent"
@@ -80,20 +85,22 @@
                     android:alpha="0.45"
                     android:src="@drawable/frontseatred"
                     android:visibility="invisible" />
+
                 <ImageView
                     android:id="@+id/backseat"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:alpha="0.3"
                     android:src="@drawable/backseatselected"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
+
                 <ImageView
                     android:id="@+id/backseaterror"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:alpha="0.45"
                     android:src="@drawable/backseatred"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
 
                 <ImageView
                     android:id="@+id/HandlerBtn"

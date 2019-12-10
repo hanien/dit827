@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/AddMode"
@@ -53,6 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -73,8 +75,8 @@
                             android:layout_marginLeft="100dp"
                             android:background="@color/EditModeColor"
                             android:inputType="text"
-                            android:textSize="30dp"
-                            android:textColor="@color/CardViewTextColor" />
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="30dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -97,8 +99,8 @@
                             android:layout_marginLeft="8dp"
                             android:background="@color/EditModeColor"
                             android:inputType="text"
-                            android:textSize="30dp"
-                            android:textColor="@color/CardViewTextColor" />
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="30dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -121,8 +123,8 @@
                             android:layout_marginLeft="55dp"
                             android:background="@color/EditModeColor"
                             android:inputType="text"
-                            android:textSize="30dp"
-                            android:textColor="@color/CardViewTextColor" />
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="30dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -145,8 +147,8 @@
                             android:layout_marginLeft="140dp"
                             android:background="@color/EditModeColor"
                             android:inputType="text"
-                            android:textSize="30dp"
-                            android:textColor="@color/CardViewTextColor" />
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="30dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -169,8 +171,8 @@
                             android:layout_marginLeft="0dp"
                             android:background="@color/EditModeColor"
                             android:inputType="text"
-                            android:textSize="30dp"
-                            android:textColor="@color/CardViewTextColor" />
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="30dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -193,8 +195,8 @@
                             android:layout_marginLeft="80dp"
                             android:background="@color/EditModeColor"
                             android:inputType="text"
-                            android:textSize="30dp"
-                            android:textColor="@color/CardViewTextColor" />
+                            android:textColor="@color/CardViewTextColor"
+                            android:textSize="30dp" />
                     </LinearLayout>
 
                     <ImageView

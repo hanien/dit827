@@ -18,7 +18,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
     private View _view;
     private MainActivity _owner;
     private TextView _soundTextView;
-    private TextView _airPressurTextView;
+    private TextView _airPressureTextView;
     private TextView _humidityTextView;
     private TextView _luxTextView;
     private TextView _inTempTextView;
@@ -57,7 +57,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
     private void SetupComponents() {
         _soundTextView = _view.findViewById(R.id.soundTextView);
         _volumeCard = _view.findViewById(R.id.CardViewVolume);
-        _airPressurTextView = _view.findViewById(R.id.airPressurTextView);
+        _airPressureTextView = _view.findViewById(R.id.airPressureTextView);
         _humidityTextView = _view.findViewById(R.id.HumidityTextView);
         _luxTextView = _view.findViewById(R.id.lightTextView);
         _inTempTextView = _view.findViewById(R.id.InTempTextView);
@@ -85,7 +85,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
 
     private void updateView() {
         _soundTextView.setText(_baseViewModel.MiddleZone.getSound());
-        _airPressurTextView.setText(_baseViewModel.MiddleZone.getPressure());
+        _airPressureTextView.setText(_baseViewModel.MiddleZone.getPressure());
         _humidityTextView.setText(_baseViewModel.MiddleZone.getHumidity());
         _luxTextView.setText(_baseViewModel.MiddleZone.getIr());
         _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitiude());
@@ -176,7 +176,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
 
         SetTempreture(temp);
         _soundTextView.setText(String.valueOf(sound));
-        _airPressurTextView.setText(String.valueOf(airP));
+        _airPressureTextView.setText(String.valueOf(airP));
         _humidityTextView.setText(String.valueOf(humidity));
         _luxTextView.setText(String.valueOf(lux));
         _altitudeTextView.setText(String.valueOf(altitude));
