@@ -19,8 +19,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.aptiv.Model.Classe.Zone;
-import com.example.aptiv.Model.Classe.Mode;
+import com.example.aptiv.Model.Class.Zone;
+import com.example.aptiv.Model.Class.Mode;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.R;
@@ -264,7 +264,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         }
     }
 
-    public void CreatePopupView(final boolean DriverSeat,final boolean PassangerSeat,final boolean BackSeat,String messages,boolean OverrideButton){
+    public void CreatePopupView(final boolean DriverSeat,final boolean PassengerSeat,final boolean BackSeat,String messages,boolean OverrideButton){
 
         final View popupView = _inflater.inflate(R.layout.fragment_popup, null);
 
@@ -280,12 +280,12 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
 
 
             // show the popup window
-            // which view you pass in doesn't matter, it is only used for the window tolken
+            // which view you pass in doesn't matter, it is only used for the window token
             popupWindow.showAtLocation(_view, Gravity.CENTER, 0, 0);
             popUpShown = true;
             TextView txtMessage = popupView.findViewById(R.id.PopupViewMessage);
             if(messages == null|| messages == ""){
-                messages = "Opps, something went wrong!";
+                messages = "Oops, something went wrong!";
             }
             txtMessage.setText(messages);
 
@@ -300,7 +300,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
                     if(DriverSeat){
                         //_baseViewModel.DriverProfile.set
                     }
-                    if(PassangerSeat){
+                    if(PassengerSeat){
                         //_baseViewModel.PassengerProfile.set
 
                     }

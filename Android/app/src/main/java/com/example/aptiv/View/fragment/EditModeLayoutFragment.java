@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.example.aptiv.Model.Classe.Mode;
-import com.example.aptiv.Model.Interface.IZoneSelection;
+import com.example.aptiv.Model.Class.Mode;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;

@@ -5,13 +5,10 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
-import com.example.aptiv.Model.Classe.Zone;
 import com.example.aptiv.Model.Helper.DifferenceChecker;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
@@ -180,7 +177,7 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
 
         if(checkZoneDifferences(Driver, Passenger, Back)) {
             tempChangeValue.setTextSize(25);
-            tempChangeValue.setText("In progress...\n Changing Tempreture\n from " + String.valueOf((int)temp) + " to "+_desiredTemp  + typeString);
+            tempChangeValue.setText("In progress...\n Changing Temperature\n from " + String.valueOf((int)temp) + " to "+_desiredTemp  + typeString);
             if(Driver){
                 _baseViewModel.DriverProfile.setTemperature(Double.toString(_desiredTemp));
             }

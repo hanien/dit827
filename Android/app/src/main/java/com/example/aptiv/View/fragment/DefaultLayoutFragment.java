@@ -88,15 +88,15 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         _airPressureTextView.setText(_baseViewModel.MiddleZone.getPressure());
         _humidityTextView.setText(_baseViewModel.MiddleZone.getHumidity());
         _luxTextView.setText(_baseViewModel.MiddleZone.getIr());
-        _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitiude());
-        SetTempreture(Double.parseDouble(_baseViewModel.MiddleZone.getTemperature()));
+        _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitude());
+        SetTemperature(Double.parseDouble(_baseViewModel.MiddleZone.getTemperature()));
     }
 
-    private void SetTempreture(double temp){
+    private void SetTemperature(double temp){
         String tempType = (_baseViewModel.getTempType()) ? _baseViewModel.getFahrenheit() : _baseViewModel.getCelsius();
         temp = (_baseViewModel.getTempType()) ? ((1.8*temp))+32 : temp;
 
-        double OutTemp = _baseViewModel.OutTempreture;
+        double OutTemp = _baseViewModel.OutTemperature;
         OutTemp = (_baseViewModel.getTempType()) ? ((1.8*OutTemp))+32 : OutTemp;
 
         _inTempTextView.setText(temp + tempType);
@@ -126,7 +126,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         airP = Double.parseDouble(_baseViewModel.MiddleZone.getPressure());
         humidity = Double.parseDouble(_baseViewModel.MiddleZone.getHumidity());
         lux = Double.parseDouble(_baseViewModel.MiddleZone.getLux());
-        altitude = Double.parseDouble(_baseViewModel.MiddleZone.getAltitiude());
+        altitude = Double.parseDouble(_baseViewModel.MiddleZone.getAltitude());
 
         int count = 1;
 
@@ -136,7 +136,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
             airP = airP + Double.parseDouble(_baseViewModel.DriverZone.getPressure());
             humidity = humidity + Double.parseDouble(_baseViewModel.DriverZone.getHumidity());
             lux = lux + Double.parseDouble(_baseViewModel.DriverZone.getLux());
-            altitude = altitude + Double.parseDouble(_baseViewModel.DriverZone.getAltitiude());
+            altitude = altitude + Double.parseDouble(_baseViewModel.DriverZone.getAltitude());
             count++;
         }
         if(_parentFragment._frontSeatSelected){
@@ -145,7 +145,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
             airP = airP + Double.parseDouble(_baseViewModel.PassengerZone.getPressure());
             humidity = humidity + Double.parseDouble(_baseViewModel.PassengerZone.getHumidity());
             lux = lux + Double.parseDouble(_baseViewModel.PassengerZone.getLux());
-            altitude = altitude + Double.parseDouble(_baseViewModel.PassengerZone.getAltitiude());
+            altitude = altitude + Double.parseDouble(_baseViewModel.PassengerZone.getAltitude());
             count++;
         }
         if(_parentFragment._backSeatSelected){
@@ -154,7 +154,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
             airP = airP + Double.parseDouble(_baseViewModel.BackseatZone.getPressure());
             humidity = humidity + Double.parseDouble(_baseViewModel.BackseatZone.getHumidity());
             lux = lux + Double.parseDouble(_baseViewModel.BackseatZone.getLux());
-            altitude = altitude + Double.parseDouble(_baseViewModel.BackseatZone.getAltitiude());
+            altitude = altitude + Double.parseDouble(_baseViewModel.BackseatZone.getAltitude());
             count++;
         }
         if(count ==4){
@@ -163,7 +163,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
             airP = Double.parseDouble(_baseViewModel.MiddleZone.getPressure());
             humidity = Double.parseDouble(_baseViewModel.MiddleZone.getHumidity());
             lux = Double.parseDouble(_baseViewModel.MiddleZone.getLux());
-            altitude = Double.parseDouble(_baseViewModel.MiddleZone.getAltitiude());
+            altitude = Double.parseDouble(_baseViewModel.MiddleZone.getAltitude());
             count = 1;
         }
 
@@ -174,7 +174,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         lux = lux/count;
         altitude = altitude/count;
 
-        SetTempreture(temp);
+        SetTemperature(temp);
         _soundTextView.setText(String.valueOf(sound));
         _airPressureTextView.setText(String.valueOf(airP));
         _humidityTextView.setText(String.valueOf(humidity));

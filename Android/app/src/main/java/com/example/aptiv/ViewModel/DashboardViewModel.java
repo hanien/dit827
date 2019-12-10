@@ -1,6 +1,6 @@
 package com.example.aptiv.ViewModel;
 
-import com.example.aptiv.Model.Classe.Profile;;
+import com.example.aptiv.Model.Class.Profile;;
 import com.example.aptiv.View.MainActivity;
 import java.util.ArrayList;
 

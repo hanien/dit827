@@ -10,7 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
 
-import com.example.aptiv.Model.Classe.Mode;
+import com.example.aptiv.Model.Class.Mode;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;

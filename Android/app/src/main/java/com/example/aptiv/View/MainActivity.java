@@ -1,5 +1,5 @@
 package com.example.aptiv.View;
-import com.example.aptiv.Model.Classe.Mode;
+import com.example.aptiv.Model.Class.Mode;
 import com.example.aptiv.Model.Helper.ReceiverService;
 import com.example.aptiv.ViewModel.DashboardViewModel;
 

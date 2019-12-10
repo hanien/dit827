@@ -13,13 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.example.aptiv.Model.Classe.Mode;
+import com.example.aptiv.Model.Class.Mode;
 import com.example.aptiv.Model.Helper.ProfileHandler;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.View.fragment.DashboardFragment;
 import com.example.aptiv.ViewModel.BaseViewModel;
-import com.example.aptiv.ViewModel.DashboardViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

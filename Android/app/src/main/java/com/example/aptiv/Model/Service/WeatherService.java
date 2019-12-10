@@ -8,11 +8,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.aptiv.Model.Classe.Zone;
-import com.example.aptiv.Model.Interface.IVolleyCollback;
+import com.example.aptiv.Model.Interface.IVolleyCallback;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,26 +18,29 @@ import org.json.JSONObject;
 public class WeatherService {
     private MainActivity _activity;
 
-    public  WeatherService(MainActivity activity){ _activity = activity; }
+    public WeatherService(MainActivity activity) {
+        _activity = activity;
+    }
 
 
-    public void GetWeather(final IVolleyCollback _collback) {
+    public void GetWeather(final IVolleyCallback _callback) {
         RequestQueue queue = Volley.newRequestQueue(_activity);
-        String url = _activity.getResources().getString(R.string.WeatherAPI);;
+        String url = _activity.getResources().getString(R.string.WeatherAPI);
+        ;
 
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
-                try{
+                try {
                     JSONObject mainObject = response.getJSONObject("main");
                     JSONArray array = response.getJSONArray("weather");
                     JSONObject object = array.getJSONObject(0);
                     String OutTemp = String.valueOf(mainObject.getDouble("temp"));
                     double temp_double = Double.parseDouble(OutTemp);
                     temp_double = Math.round(temp_double - 273.15);
-                    _collback.OutTempreture(temp_double);
-                }catch (Exception e){
+                    _callback.OutTemperature(temp_double);
+                } catch (Exception e) {
                     Log.e(this.getClass().toString(), e.getMessage());
                 }
             }

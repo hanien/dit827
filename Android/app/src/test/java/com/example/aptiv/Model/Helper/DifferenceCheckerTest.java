@@ -1,8 +1,6 @@
 package com.example.aptiv.Model.Helper;
 
-import com.example.aptiv.Model.Classe.Zone;
-
-import org.junit.Test;
+import com.example.aptiv.Model.Class.Zone;
 
 import org.junit.Test;
 

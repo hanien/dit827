@@ -1,4 +1,4 @@
-package com.example.aptiv.Model.Classe;
+package com.example.aptiv.Model.Class;
 
 import java.io.Serializable;
 
@@ -19,8 +19,8 @@ public class Profile implements Serializable {
     private String lux;
 
 
-    public Profile (String ProfileName, String temperature, String humidity, String gain, String luminosity, String full, String ir,
-                    String pressure , String sound, String altitude, String light,String lux) {
+    public Profile(String ProfileName, String temperature, String humidity, String gain, String luminosity, String full, String ir,
+                   String pressure, String sound, String altitude, String light, String lux) {
         this.ProfileName = ProfileName;
         this.temperature = temperature;
         this.humidity = humidity;
@@ -35,7 +35,9 @@ public class Profile implements Serializable {
         this.lux = lux;
     }
 
-    public String getProfileName(){return this.ProfileName;}
+    public String getProfileName() {
+        return this.ProfileName;
+    }
 
     public void setProfileName(String profileName) {
         ProfileName = profileName;
@@ -50,7 +52,7 @@ public class Profile implements Serializable {
     }
 
     public String getHumidity() {
-        if(humidity == null){
+        if (humidity == null) {
             return "0.0";
         }
         String hum = String.format("%.2f", parseFloat(humidity));
@@ -86,7 +88,7 @@ public class Profile implements Serializable {
     }
 
     public String getIr() {
-        if(ir == null){
+        if (ir == null) {
             return "0.0";
         }
         String infra = String.format("%.2f", parseFloat(ir));
@@ -113,12 +115,12 @@ public class Profile implements Serializable {
         this.sound = sound;
     }
 
-    public String getAltitiude() {
+    public String getAltitude() {
         return altitude;
     }
 
-    public void setAltitiude(String altitiude) {
-        this.altitude = altitiude;
+    public void setAltitude(String altitude) {
+        this.altitude = altitude;
     }
 
     public String getLight() {
@@ -129,11 +131,15 @@ public class Profile implements Serializable {
         this.light = light;
     }
 
-    public String getLux() { return lux; }
+    public String getLux() {
+        return lux;
+    }
 
-    public void setLux(String lux) { this.lux = lux; }
+    public void setLux(String lux) {
+        this.lux = lux;
+    }
 
-    public void setFromZone(Zone zone){
+    public void setFromZone(Zone zone) {
         this.temperature = zone.getTemperature();
         this.humidity = zone.getHumidity();
         this.gain = zone.getGain();
@@ -142,7 +148,7 @@ public class Profile implements Serializable {
         this.ir = zone.getIr();
         this.pressure = zone.getPressure();
         this.sound = zone.getSound();
-        this.altitude = zone.getAltitiude();
+        this.altitude = zone.getAltitude();
         this.light = zone.getLight();
         this.lux = zone.getLux();
     }

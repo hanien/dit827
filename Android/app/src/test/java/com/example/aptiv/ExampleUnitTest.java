@@ -1,7 +1,7 @@
 package com.example.aptiv;
 
-import com.example.aptiv.Model.Classe.Profile;
-import com.example.aptiv.Model.Classe.Zone;
+import com.example.aptiv.Model.Class.Profile;
+import com.example.aptiv.Model.Class.Zone;
 import com.example.aptiv.Model.Helper.ProfileHandler;
 
 import org.junit.Test;

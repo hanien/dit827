@@ -1,8 +1,8 @@
 package com.example.aptiv.ViewModel;
 
-import com.example.aptiv.Model.Classe.Profile;
-import com.example.aptiv.Model.Classe.Zone;
-import com.example.aptiv.Model.Interface.IVolleyCollback;
+import com.example.aptiv.Model.Class.Profile;
+import com.example.aptiv.Model.Class.Zone;
+import com.example.aptiv.Model.Interface.IVolleyCallback;
 import com.example.aptiv.Model.Service.WeatherService;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.Model.Service.AptivService;
@@ -10,7 +10,7 @@ import com.example.aptiv.Model.Helper.ProfileHandler;
 import com.example.aptiv.View.fragment.DashboardFragment;
 
 
-public class BaseViewModel implements IVolleyCollback {
+public class BaseViewModel implements IVolleyCallback {
 
     private AptivService _aptivService;
     private WeatherService _weatherService;
@@ -28,7 +28,7 @@ public class BaseViewModel implements IVolleyCollback {
     public Profile PassengerProfile = new Profile(null,null,null,null,null,null,null,null,null,null,null,null);
     public Profile BackProfile = new Profile(null,null,null,null,null,null,null,null,null,null,null,null);
 
-    public Double OutTempreture = 0.0;
+    public Double OutTemperature = 0.0;
     public Boolean isMuted = false;
     public Boolean tempType; //True here means that it is Fahrenheit
     private String fahrenheit;
@@ -91,8 +91,8 @@ public class BaseViewModel implements IVolleyCollback {
     }
 
     @Override
-    public void OutTempreture(double temp) {
-        OutTempreture = temp;
+    public void OutTemperature(double temp) {
+        OutTemperature = temp;
     }
 
     @Override
