@@ -59,9 +59,6 @@ public class ProfileHandler {
         sampleZone(getProfileOfZone(zone), zone);
     }
 
-    public void alignToZone(Profile profile, Zone zone) {
-
-    }
 
     public void sampleZone(Profile profile, Zone zone) {
         Queue<Map> currentQueue = null;
@@ -91,48 +88,11 @@ public class ProfileHandler {
         //TODO: fix naming conventions a little
         if(!ProfileHelper.sampleZone(profile, zone, currentQueue, currentSum)){
             _dashboardFragment.toggleError(zone, Boolean.TRUE);
-            _dashboardFragment.CreatePopupView(
-                    zone.getName() == Zone.ZoneName.DRIVER,
-                    zone.getName() == Zone.ZoneName.PASSENGER,
-                    zone.getName() == Zone.ZoneName.BACK,
-                    "dummy message", true
-            );
         }
         else{
             _dashboardFragment.toggleError(zone, Boolean.FALSE);
         }
     }
-/*
-    private boolean checkTempLevel() {
-
-        String  DriverTempLevel = _base.DriverZone.getTemperature();
-        String  PassengerTempLevel = _base.DriverZone.getTemperature();
-        String  BackTempLevel = _base.DriverZone.getTemperature();
-
-        boolean DriverCheck = compareThreshold(Double.parseDouble(_base.DriverProfile.getTemperature()), Double.parseDouble(DriverTempLevel),t_temp);
-        boolean PassengerCheck = compareThreshold(Double.parseDouble(_base.PassengerProfile.getTemperature()), Double.parseDouble(PassengerTempLevel),t_temp);
-        boolean BackCheck = compareThreshold(Double.parseDouble(_base.BackProfile.getTemperature()), Double.parseDouble(BackTempLevel),t_temp);
-
-
-        return DriverCheck && PassengerCheck && BackCheck;
-
-    }
-
-    private boolean checkSoundLevel() {
-
-        String  DriverSoundLevel = _base.DriverZone.getSound();
-        String  PassengerSoundLevel = _base.PassengerZone.getSound();
-        String  BackSoundLevel = _base.BackseatZone.getSound();
-
-        boolean DriverCheck = compareThreshold(Double.parseDouble(_base.DriverProfile.getSound()), Double.parseDouble(DriverSoundLevel),t_sound);
-        boolean PassengerCheck = compareThreshold(Double.parseDouble(_base.PassengerProfile.getSound()), Double.parseDouble(PassengerSoundLevel),t_sound);
-        boolean BackCheck = compareThreshold(Double.parseDouble(_base.BackProfile.getSound()), Double.parseDouble(BackSoundLevel),t_sound);
-
-
-        return DriverCheck && PassengerCheck && BackCheck;
-
-    }
-*/
 
     public boolean ZonesValueHandler(Profile profile, Zone zone) {
         if (profile == null || zone == null) {
