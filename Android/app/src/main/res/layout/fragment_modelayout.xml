@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/Settings"
@@ -41,40 +42,43 @@
                 android:textStyle="italic" />
 
             <androidx.cardview.widget.CardView
-                android:layout_weight="45"
                 android:layout_width="match_parent"
-                android:minHeight="40dp"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/default_margin_cardview"
-                card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                card_view:cardBackgroundColor = "@color/CardViewColor"
+                android:layout_weight="45"
+                android:minHeight="40dp"
+                card_view:cardBackgroundColor="@color/CardViewColor"
+                card_view:cardCornerRadius="@dimen/cardview_corner_radius"
                 card_view:cardUseCompatPadding="true">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:weightSum="3"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
                     <androidx.cardview.widget.CardView
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:minHeight="40dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/default_margin_cardview"
                         android:layout_marginTop="@dimen/default_margin_cardview"
                         android:layout_marginRight="@dimen/default_margin_cardview"
                         android:layout_marginBottom="@dimen/default_margin_cardview"
-                        card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                        card_view:cardBackgroundColor = "@color/CardViewColor"
+                        android:layout_weight="1"
+                        android:minHeight="40dp"
+                        card_view:cardBackgroundColor="@color/CardViewColor"
+                        card_view:cardCornerRadius="@dimen/cardview_corner_radius"
                         card_view:cardUseCompatPadding="true">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
                             android:layout_gravity="center"
-                            android:weightSum="2"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:weightSum="2">
 
                             <ImageView
                                 android:id="@+id/sound"
@@ -98,26 +102,28 @@
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
+
                     <androidx.cardview.widget.CardView
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:minHeight="40dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/default_margin_cardview"
                         android:layout_marginTop="@dimen/default_margin_cardview"
                         android:layout_marginRight="@dimen/default_margin_cardview"
                         android:layout_marginBottom="@dimen/default_margin_cardview"
-                        card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                        card_view:cardBackgroundColor = "@color/CardViewColor"
+                        android:layout_weight="1"
+                        android:minHeight="40dp"
+                        card_view:cardBackgroundColor="@color/CardViewColor"
+                        card_view:cardCornerRadius="@dimen/cardview_corner_radius"
                         card_view:cardUseCompatPadding="true">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
                             android:layout_gravity="center"
-                            android:weightSum="2"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:weightSum="2">
 
                             <ImageView
                                 android:id="@+id/altitudeimg"
@@ -140,26 +146,28 @@
                                 android:textSize="40dp"></TextView>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
+
                     <androidx.cardview.widget.CardView
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:minHeight="40dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/default_margin_cardview"
                         android:layout_marginTop="@dimen/default_margin_cardview"
                         android:layout_marginRight="@dimen/default_margin_cardview"
                         android:layout_marginBottom="@dimen/default_margin_cardview"
-                        card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                        card_view:cardBackgroundColor = "@color/CardViewColor"
+                        android:layout_weight="1"
+                        android:minHeight="40dp"
+                        card_view:cardBackgroundColor="@color/CardViewColor"
+                        card_view:cardCornerRadius="@dimen/cardview_corner_radius"
                         card_view:cardUseCompatPadding="true">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
                             android:layout_gravity="center"
-                            android:weightSum="2"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:weightSum="2">
 
                             <ImageView
                                 android:id="@+id/settingsImageView"
@@ -188,14 +196,14 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:minHeight="40dp"
-                android:layout_weight="45"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/default_margin_cardview"
-                card_view:cardCornerRadius = "@dimen/cardview_corner_radius"
-                card_view:cardBackgroundColor = "@color/CardViewColor"
+                android:layout_weight="45"
+                android:minHeight="40dp"
+                card_view:cardBackgroundColor="@color/CardViewColor"
+                card_view:cardCornerRadius="@dimen/cardview_corner_radius"
                 card_view:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -225,11 +233,11 @@
                             android:weightSum="2">
 
                             <ImageView
-                                android:layout_weight="1"
                                 android:id="@+id/imageView2"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
+                                android:layout_weight="1"
                                 android:gravity="center"
                                 card_view:srcCompat="@drawable/temp" />
 
@@ -267,14 +275,13 @@
                             android:weightSum="2">
 
                             <ImageView
-                                android:layout_weight="1"
                                 android:id="@+id/imageView3"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
+                                android:layout_weight="1"
                                 android:gravity="center"
                                 card_view:srcCompat="@drawable/speaker" />
-
 
                             <TextView
                                 android:id="@+id/modeVolume"
@@ -299,21 +306,21 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="5"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <ImageView
-                    android:layout_weight="1"
                     android:id="@+id/editBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     card_view:srcCompat="@drawable/edit" />
 
                 <ImageView
-                    android:layout_weight="1"
                     android:id="@+id/deleteBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:clickable="true"
                     android:onClick="DeleteMode"
                     card_view:srcCompat="@drawable/delete" />

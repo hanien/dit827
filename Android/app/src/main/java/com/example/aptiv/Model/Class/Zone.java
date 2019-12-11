@@ -1,4 +1,4 @@
-package com.example.aptiv.Model.Classe;
+package com.example.aptiv.Model.Class;
 
 import java.util.HashMap;
 
@@ -27,7 +27,7 @@ public class Zone {
     private String lux;
 
     public Zone(ZoneName name, String temperature, String humidity, String gain, String luminosity, String full, String ir,
-                String pressure , String sound, String altitude, String light,String lux){
+                String pressure, String sound, String altitude, String light, String lux) {
         this.name = name;
         this.temperature = temperature;
         this.humidity = humidity;
@@ -41,16 +41,18 @@ public class Zone {
         this.light = light;
         this.lux = lux;
     }
-    public void setName(ZoneName Name){
+
+    public void setName(ZoneName Name) {
         this.name = Name;
     }
 
-    public Zone.ZoneName getName() { return name; }
+    public Zone.ZoneName getName() {
+        return name;
+    }
 
 
     public String getTemperature() {
-        if(temperature == null)
-        {
+        if (temperature == null) {
             return "0.0";
         }
         return temperature;
@@ -61,8 +63,7 @@ public class Zone {
     }
 
     public String getHumidity() {
-        if(humidity == null)
-        {
+        if (humidity == null) {
             return "0.0";
         }
         String hum = String.format("%.2f", parseFloat(humidity));
@@ -74,8 +75,7 @@ public class Zone {
     }
 
     public String getGain() {
-        if(gain == null)
-        {
+        if (gain == null) {
             return "0.0";
         }
         return gain;
@@ -86,8 +86,7 @@ public class Zone {
     }
 
     public String getLuminosity() {
-        if(luminosity == null)
-        {
+        if (luminosity == null) {
             return "0.0";
         }
         return luminosity;
@@ -98,8 +97,7 @@ public class Zone {
     }
 
     public String getFull() {
-        if(full == null)
-        {
+        if (full == null) {
             return "0.0";
         }
         return full;
@@ -110,8 +108,7 @@ public class Zone {
     }
 
     public String getIr() {
-        if(ir == null)
-        {
+        if (ir == null) {
             return "0.0";
         }
         String infra = String.format("%.2f", parseFloat(ir));
@@ -123,8 +120,7 @@ public class Zone {
     }
 
     public String getPressure() {
-        if(pressure == null)
-        {
+        if (pressure == null) {
             return "0.0";
         }
         return pressure;
@@ -135,32 +131,29 @@ public class Zone {
     }
 
     public String getSound() {
-        if(sound == null)
-        {
+        if (sound == null) {
             return "0.0";
         }
         return sound;
     }
 
     public void setSound(String sound) {
-            this.sound = sound;
+        this.sound = sound;
     }
 
-    public String getAltitiude() {
-        if(altitude == null)
-        {
+    public String getAltitude() {
+        if (altitude == null) {
             return "0.0";
         }
         return altitude;
     }
 
-    public void setAltitiude(String altitiude) {
-        this.altitude = altitiude;
+    public void setAltitude(String altitude) {
+        this.altitude = altitude;
     }
 
     public String getLight() {
-        if(light == null)
-        {
+        if (light == null) {
             return "0.0";
         }
         return light;
@@ -171,17 +164,17 @@ public class Zone {
     }
 
     public String getLux() {
-        if(lux == null)
-        {
+        if (lux == null) {
             return "0.0";
         }
         return lux;
     }
 
-    public void setLux(String lux) { this.lux = lux; }
+    public void setLux(String lux) {
+        this.lux = lux;
+    }
 
-    public HashMap<String, Double> getAll()
-    {
+    public HashMap<String, Double> getAll() {
         HashMap<String, Double> values = new HashMap<>(11);
         values.put("temperature", Double.parseDouble(this.getTemperature()));
         values.put("humidity", Double.parseDouble(this.getHumidity()));
@@ -191,13 +184,14 @@ public class Zone {
         values.put("ir", Double.parseDouble(this.getIr()));
         values.put("pressure", Double.parseDouble(this.getPressure()));
         values.put("sound", Double.parseDouble(this.getSound()));
-        values.put("altitude", Double.parseDouble(this.getAltitiude()));
+        values.put("altitude", Double.parseDouble(this.getAltitude()));
         values.put("light", Double.parseDouble(this.getLight()));
         values.put("lux", Double.parseDouble(this.getLux()));
 
         return values;
     }
-    public void setAll(HashMap<String, Double> values){
+
+    public void setAll(HashMap<String, Double> values) {
         this.setTemperature((values.get("temperature")).toString());
         this.setHumidity((values.get("humidity")).toString());
         this.setGain((values.get("gain")).toString());
@@ -206,7 +200,7 @@ public class Zone {
         this.setIr((values.get("ir")).toString());
         this.setPressure((values.get("pressure")).toString());
         this.setSound((values.get("sound")).toString());
-        this.setAltitiude((values.get("altitude")).toString());
+        this.setAltitude((values.get("altitude")).toString());
         this.setLight((values.get("light")).toString());
         this.setLux((values.get("lux")).toString());
     }

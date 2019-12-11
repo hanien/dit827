@@ -10,7 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
 
-import com.example.aptiv.Model.Classe.Mode;
+import com.example.aptiv.Model.Class.Mode;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -18,7 +18,9 @@ import com.example.aptiv.View.adapter.CustomListAdapter;
 import com.example.aptiv.ViewModel.BaseViewModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import androidx.fragment.app.Fragment;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -50,7 +52,7 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
         setUpView();
         loadData(context);
 
-        mAdapter = new CustomListAdapter(context, modesList, _owner, _view,_parentFragment,_baseViewModel);
+        mAdapter = new CustomListAdapter(context, modesList, _owner, _view, _parentFragment, _baseViewModel);
         listView.setAdapter(mAdapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
@@ -66,7 +68,7 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        String tempType = (isChecked) ? _baseViewModel.getFahrenheit(): _baseViewModel.getCelsius();
+                        String tempType = (isChecked) ? _baseViewModel.getFahrenheit() : _baseViewModel.getCelsius();
                         _baseViewModel.tempType = isChecked;
                         //updateTempValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
                     }
@@ -88,7 +90,7 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
 
 
     private void saveData() {
-        if(sharedPreferences == null){
+        if (sharedPreferences == null) {
             sharedPreferences = getContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
         }
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -97,8 +99,9 @@ public class SettingsLayoutFragment extends Fragment implements IZoneSelection {
         editor.putString("mode list", json);
         editor.apply();
     }
+
     private void loadData(Context context) {
-        if(sharedPreferences == null){
+        if (sharedPreferences == null) {
             sharedPreferences = getContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
         }
         Gson gson = new Gson();

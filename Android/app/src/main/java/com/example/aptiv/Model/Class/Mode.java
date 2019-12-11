@@ -1,4 +1,4 @@
-package com.example.aptiv.Model.Classe;
+package com.example.aptiv.Model.Class;
 
 public class Mode {
 
@@ -9,7 +9,7 @@ public class Mode {
     private String airp;
     private String humidity;
 
-    public Mode(String title, String lux, String temp, String volume, String airp, String humidity){
+    public Mode(String title, String lux, String temp, String volume, String airp, String humidity) {
         this.title = title;
         this.lux = lux;
         this.temp = temp;
