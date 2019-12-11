@@ -56,10 +56,8 @@ public class AddModeLayoutFragment extends Fragment {
         addBtn = _view.findViewById(R.id.addBtn);
 
         addBtn.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
+                new View.OnClickListener() {
+                    public void onClick(View view) {
 
                         _parentFragment.addNewMode(
                                 newName.getText().toString(),

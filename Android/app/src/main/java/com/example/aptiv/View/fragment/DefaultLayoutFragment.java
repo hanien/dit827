@@ -6,14 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;
 
-public class DefaultLayoutFragment extends Fragment  implements View.OnClickListener , IZoneSelection{
+public class DefaultLayoutFragment extends Fragment implements View.OnClickListener, IZoneSelection {
 
     private View _view;
     private MainActivity _owner;
@@ -65,7 +67,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         _altitudeTextView = _view.findViewById(R.id.altitudeTextView);
     }
 
-    private void SetupTimer(){
+    private void SetupTimer() {
         new CountDownTimer(30000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -92,19 +94,19 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
         SetTemperature(Double.parseDouble(_baseViewModel.MiddleZone.getTemperature()));
     }
 
-    private void SetTemperature(double temp){
+    private void SetTemperature(double temp) {
         String tempType = (_baseViewModel.getTempType()) ? _baseViewModel.getFahrenheit() : _baseViewModel.getCelsius();
-        temp = (_baseViewModel.getTempType()) ? ((1.8*temp))+32 : temp;
+        temp = (_baseViewModel.getTempType()) ? ((1.8 * temp)) + 32 : temp;
 
         double OutTemp = _baseViewModel.OutTemperature;
-        OutTemp = (_baseViewModel.getTempType()) ? ((1.8*OutTemp))+32 : OutTemp;
+        OutTemp = (_baseViewModel.getTempType()) ? ((1.8 * OutTemp)) + 32 : OutTemp;
 
         _inTempTextView.setText(temp + tempType);
         _outTempTextView.setText(OutTemp + tempType);
     }
 
     @Override
-    public void onClick(View view){
+    public void onClick(View view) {
 
         switch (view.getId()) {
             case R.id.soundImageView:
@@ -118,10 +120,10 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
     }
 
     //When a zone is selected on the car
-    //values needs to be changes base on zone
+    //values need to be changed based on zone
     @Override
     public void zoneIsSelected() {
-        temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
+        temp = Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
         sound = Double.parseDouble(_baseViewModel.MiddleZone.getSound());
         airP = Double.parseDouble(_baseViewModel.MiddleZone.getPressure());
         humidity = Double.parseDouble(_baseViewModel.MiddleZone.getHumidity());
@@ -130,7 +132,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
 
         int count = 1;
 
-        if(_parentFragment._driverSeatSelected){
+        if (_parentFragment._driverSeatSelected) {
             temp = temp + Double.parseDouble(_baseViewModel.DriverZone.getTemperature());
             sound = sound + Double.parseDouble(_baseViewModel.DriverZone.getSound());
             airP = airP + Double.parseDouble(_baseViewModel.DriverZone.getPressure());
@@ -139,7 +141,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
             altitude = altitude + Double.parseDouble(_baseViewModel.DriverZone.getAltitude());
             count++;
         }
-        if(_parentFragment._frontSeatSelected){
+        if (_parentFragment._frontSeatSelected) {
             temp = temp + Double.parseDouble(_baseViewModel.PassengerZone.getTemperature());
             sound = sound + Double.parseDouble(_baseViewModel.PassengerZone.getSound());
             airP = airP + Double.parseDouble(_baseViewModel.PassengerZone.getPressure());
@@ -148,7 +150,7 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
             altitude = altitude + Double.parseDouble(_baseViewModel.PassengerZone.getAltitude());
             count++;
         }
-        if(_parentFragment._backSeatSelected){
+        if (_parentFragment._backSeatSelected) {
             temp = temp + Double.parseDouble(_baseViewModel.BackseatZone.getTemperature());
             sound = sound + Double.parseDouble(_baseViewModel.BackseatZone.getSound());
             airP = airP + Double.parseDouble(_baseViewModel.BackseatZone.getPressure());
@@ -157,8 +159,8 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
             altitude = altitude + Double.parseDouble(_baseViewModel.BackseatZone.getAltitude());
             count++;
         }
-        if(count ==4){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
+        if (count == 4) {
+            temp = Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
             sound = Double.parseDouble(_baseViewModel.MiddleZone.getSound());
             airP = Double.parseDouble(_baseViewModel.MiddleZone.getPressure());
             humidity = Double.parseDouble(_baseViewModel.MiddleZone.getHumidity());
@@ -167,12 +169,12 @@ public class DefaultLayoutFragment extends Fragment  implements View.OnClickList
             count = 1;
         }
 
-        temp = temp/count;
-        sound = sound/count;
-        airP = airP/count;
-        humidity = humidity/count;
-        lux = lux/count;
-        altitude = altitude/count;
+        temp = temp / count;
+        sound = sound / count;
+        airP = airP / count;
+        humidity = humidity / count;
+        lux = lux / count;
+        altitude = altitude / count;
 
         SetTemperature(temp);
         _soundTextView.setText(String.valueOf(sound));

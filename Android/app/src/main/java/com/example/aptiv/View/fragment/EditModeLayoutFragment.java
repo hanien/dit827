@@ -14,7 +14,7 @@ import com.example.aptiv.ViewModel.BaseViewModel;
 
 import androidx.fragment.app.Fragment;
 
-public class EditModeLayoutFragment extends Fragment{
+public class EditModeLayoutFragment extends Fragment {
 
     private MainActivity _owner;
     private ModeLayoutFragment _parentFragment;
@@ -68,10 +68,8 @@ public class EditModeLayoutFragment extends Fragment{
         editVolume.setText(_currentMode.getVolume());
 
         saveBtn.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
+                new View.OnClickListener() {
+                    public void onClick(View view) {
 
                         _settingsLayoutFragment.editMode(
                                 _currentMode,

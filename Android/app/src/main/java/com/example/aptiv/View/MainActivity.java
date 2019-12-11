@@ -1,4 +1,5 @@
 package com.example.aptiv.View;
+
 import com.example.aptiv.Model.Class.Mode;
 import com.example.aptiv.Model.Helper.ReceiverService;
 import com.example.aptiv.ViewModel.DashboardViewModel;
@@ -6,6 +7,7 @@ import com.example.aptiv.ViewModel.DashboardViewModel;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -22,7 +24,7 @@ import com.example.aptiv.View.fragment.DashboardFragment;
 import com.google.android.material.tabs.TabLayout;
 
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
     private DashboardViewModel _viewModel;
     public DashboardFragment _dashboardFragment;
@@ -30,19 +32,19 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppCenter.start(getApplication(), "98489794-5ff9-4db1-bc55-a9d9fbea5220",Analytics.class, Crashes.class);
+        AppCenter.start(getApplication(), "98489794-5ff9-4db1-bc55-a9d9fbea5220", Analytics.class, Crashes.class);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         SetupActivity();
         startReceiverService();
     }
 
-    private void SetupActivity(){
+    private void SetupActivity() {
         setContentView(R.layout.activity_main);
         _viewModel = new DashboardViewModel(this);
         ViewPager viewPager = findViewById(R.id.viewPager);
         addTabs(viewPager);
-        ((TabLayout) findViewById(R.id.tabs)).setupWithViewPager( viewPager );
+        ((TabLayout) findViewById(R.id.tabs)).setupWithViewPager(viewPager);
     }
 
     @Override
@@ -54,24 +56,22 @@ public class MainActivity extends AppCompatActivity  {
     //initial design was with tabs, kept this code for possible future improvements
     //it has been set to invisible from xml file
     public void addTabs(ViewPager viewPager) {
-        _dashboardFragment = new DashboardFragment(this , _viewModel);
+        _dashboardFragment = new DashboardFragment(this, _viewModel);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(_dashboardFragment, "Dashboard");
         viewPager.setAdapter(adapter);
     }
 
-    //TODO: those should be moved to fragment, for now keep it here ,there is a bug i cant figure it out
+    //TODO: these should be moved to fragment, for now keep it here, there is a bug I can't figure out
     public void OpenVolumeFragment(View v) {
         _dashboardFragment.OpenVolumeFragment();
     }
 
-    //TODO: those should be moved to fragment, for now keep it here ,there is a bug i cant figure it out
-    public void CloseFragment(View v){
+    public void CloseFragment(View v) {
         _dashboardFragment.SetupCarLayoutFragment();
     }
 
-    //TODO: those should be moved to fragment, for now keep it here ,there is a bug i cant figure it out
-    public void CloseModeFragment(View v){
+    public void CloseModeFragment(View v) {
         _dashboardFragment.OpenSettingsFragment();
     }
 
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity  {
         _dashboardFragment.OpenDHFragment();
     }
 
-    public void CloseDHFragment(View v){
+    public void CloseDHFragment(View v) {
         _dashboardFragment.SetupCarLayoutFragment();
     }
 
@@ -123,8 +123,4 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-
 }
-
-
-
