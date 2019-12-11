@@ -1,7 +1,7 @@
 package com.example.aptiv.Model.Helper;
 
-import com.example.aptiv.Model.Classe.Profile;
-import com.example.aptiv.Model.Classe.Zone;
+import com.example.aptiv.Model.Class.Profile;
+import com.example.aptiv.Model.Class.Zone;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -218,7 +218,7 @@ public class ProfileHelper {
             checkedZone.put("sound", true);
 
         if(!values.get("altitude").equals(null))
-            checkedZone.put("altitude", values.get("altitude") == null || compareThreshold(Double.parseDouble(profile.getAltitiude()),
+            checkedZone.put("altitude", values.get("altitude") == null || compareThreshold(Double.parseDouble(profile.getAltitude()),
                     values.get("altitude"), t_altitude));
         else
             checkedZone.put("altitude", true);

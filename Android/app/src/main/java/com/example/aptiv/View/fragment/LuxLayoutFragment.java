@@ -15,6 +15,7 @@ import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;
+
 import androidx.fragment.app.Fragment;
 
 public class LuxLayoutFragment extends Fragment implements IZoneSelection {
@@ -36,7 +37,7 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
     private boolean _plusMinusButtonClicked = false;
 
 
-    public LuxLayoutFragment(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
+    public LuxLayoutFragment(DashboardFragment parentFragment, MainActivity Owner, BaseViewModel viewModel) {
         _owner = Owner;
         _baseViewModel = viewModel;
         _parentFragment = parentFragment;
@@ -64,28 +65,28 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
         Image = _view.findViewById(R.id.TempImage);
         Label = _view.findViewById(R.id.tempLabel);
         _minusButton = _view.findViewById(R.id.minus);
-        _plusButton= _view.findViewById(R.id.plus);
+        _plusButton = _view.findViewById(R.id.plus);
     }
 
-    private void setUpElements(){
+    private void setUpElements() {
         Label.setText("Current lux");
         Image.setImageResource(R.drawable.light);
         luxValue.setText(_baseViewModel.MiddleZone.getIr() + " lux");
     }
 
-    private void registerOnClickListeners(){
+    private void registerOnClickListeners() {
         _plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 _desiredLux++;
-                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+                PlusMinusButtonClicked(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
             }
         });
         _minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 _desiredLux--;
-                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+                PlusMinusButtonClicked(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
             }
         });
     }
@@ -93,50 +94,50 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
     @Override
     public void zoneIsSelected() {
         _desiredLux = lux;
-        if(_parentFragment._backSeatSelected || _parentFragment._driverSeatSelected || _parentFragment._frontSeatSelected ){
+        if (_parentFragment._backSeatSelected || _parentFragment._driverSeatSelected || _parentFragment._frontSeatSelected) {
             SetText.setVisibility(View.GONE);
             SetLuxLayout.setVisibility(View.VISIBLE);
             luxChangeValue.setVisibility(View.VISIBLE);
-            updateLuxValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+            updateLuxValue(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
 
-        }else{
+        } else {
             SetText.setVisibility(View.VISIBLE);
             luxChangeValue.setVisibility(View.GONE);
             SetLuxLayout.setVisibility(View.GONE);
         }
     }
 
-    private void updateLuxValue(boolean Driver, boolean Passenger , boolean Back) {
-        if((int)_desiredLux == (int)lux){
+    private void updateLuxValue(boolean Driver, boolean Passenger, boolean Back) {
+        if ((int) _desiredLux == (int) lux) {
             _plusMinusButtonClicked = false;
         }
-        lux =  Double.parseDouble(_baseViewModel.MiddleZone.getIr());
+        lux = Double.parseDouble(_baseViewModel.MiddleZone.getIr());
         int count = 1;
-        if(Driver){
+        if (Driver) {
             lux = lux + Double.parseDouble(_baseViewModel.DriverZone.getIr());
             count++;
         }
-        if(Passenger){
+        if (Passenger) {
             lux = lux + Double.parseDouble(_baseViewModel.PassengerZone.getIr());
             count++;
         }
-        if(Back){
+        if (Back) {
             lux = lux + Double.parseDouble(_baseViewModel.BackseatZone.getIr());
             count++;
         }
-        if(count ==4){
-            lux =  Double.parseDouble(_baseViewModel.MiddleZone.getIr());
+        if (count == 4) {
+            lux = Double.parseDouble(_baseViewModel.MiddleZone.getIr());
             count = 1;
         }
-        lux = lux/count;
-        luxChangeValue.setText(String.valueOf((int)lux) + " lux");
+        lux = lux / count;
+        luxChangeValue.setText(String.valueOf((int) lux) + " lux");
 
-        if(!_plusMinusButtonClicked){
+        if (!_plusMinusButtonClicked) {
             luxChangeValue.setTextSize(50);
-            luxChangeValue.setText(String.valueOf((int)lux));
+            luxChangeValue.setText(String.valueOf((int) lux));
         }
-        if(_plusMinusButtonClicked){
-            PlusMinusButtonClicked(Driver,Passenger,Back);
+        if (_plusMinusButtonClicked) {
+            PlusMinusButtonClicked(Driver, Passenger, Back);
         }
     }
 
@@ -159,32 +160,31 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
         return true;
     }
 
-    private void PlusMinusButtonClicked(boolean Driver,boolean Passenger,boolean Back){
+    private void PlusMinusButtonClicked(boolean Driver, boolean Passenger, boolean Back) {
         _plusMinusButtonClicked = true;
 
-        if(checkZoneDifferences(Driver, Passenger, Back)){
+        if (checkZoneDifferences(Driver, Passenger, Back)) {
             luxChangeValue.setTextSize(25);
-            luxChangeValue.setText("In progress...\n Changing Volume\n from " +(int)_desiredLux+ " to "+ String.valueOf((int)lux));
-            if(Driver){
+            luxChangeValue.setText("In progress...\n Changing Light\n from " + (int) _desiredLux + " to " + String.valueOf((int) lux));
+            if (Driver) {
                 _baseViewModel.DriverProfile.setIr(Double.toString(_desiredLux));
             }
-            if(Passenger){
+            if (Passenger) {
                 _baseViewModel.PassengerProfile.setIr(Double.toString(_desiredLux));
             }
-            if(Back) {
+            if (Back) {
                 _baseViewModel.BackProfile.setIr(Double.toString(_desiredLux));
             }
-        }
-        else{
+        } else {
             _parentFragment.CreatePopupView(Driver, Passenger, Back, "Light level is too different from other zones! Adjust other zones and try again.", false);
             //TODO
             //if yes: implement adjustment behavior
             //else: reset to original value
-            }
+        }
 
     }
 
-    private void setUpTimer(){
+    private void setUpTimer() {
         new CountDownTimer(4000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -203,8 +203,8 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private void updateView() {
-        luxValue.setText(_baseViewModel.MiddleZone.getIr()  + " lux");
-        updateLuxValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+        luxValue.setText(_baseViewModel.MiddleZone.getIr() + " lux");
+        updateLuxValue(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
     }
 
 

@@ -1,12 +1,10 @@
 package com.example.aptiv.Model.Helper;
 
-import com.example.aptiv.Model.Classe.Profile;
-import com.example.aptiv.Model.Classe.Zone;
+import com.example.aptiv.Model.Class.Profile;
+import com.example.aptiv.Model.Class.Zone;
 import com.example.aptiv.View.fragment.DashboardFragment;
 import com.example.aptiv.ViewModel.BaseViewModel;
 
-import java.lang.ref.PhantomReference;
-import java.sql.Driver;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -44,7 +42,7 @@ public class ProfileHandler {
     }
 
     public void onDataFetched(Zone zone) {
-        switch(zone.getName()){
+        switch (zone.getName()) {
             case DRIVER:
                 _driver = zone;
                 break;
@@ -61,8 +59,7 @@ public class ProfileHandler {
         sampleZone(getProfileOfZone(zone), zone);
     }
 
-
-    public void alignToZone(Profile profile, Zone zone){
+    public void alignToZone(Profile profile, Zone zone) {
 
     }
 
@@ -70,7 +67,7 @@ public class ProfileHandler {
         Queue<Map> currentQueue = null;
         HashMap<String, Double> currentSum = null;
 
-        switch(zone.getName()){
+        switch (zone.getName()) {
             case DRIVER:
                 currentQueue = _driveSample;
                 currentSum = _driveSum;
@@ -88,6 +85,7 @@ public class ProfileHandler {
                 currentSum = _backSum;
                 break;
         }
+
 
         //if bad: make red
         //TODO: fix naming conventions a little
@@ -108,44 +106,44 @@ public class ProfileHandler {
     private boolean checkTempLevel() {
 
         String  DriverTempLevel = _base.DriverZone.getTemperature();
-        String  PassangerTempLevel = _base.DriverZone.getTemperature();
+        String  PassengerTempLevel = _base.DriverZone.getTemperature();
         String  BackTempLevel = _base.DriverZone.getTemperature();
 
         boolean DriverCheck = compareThreshold(Double.parseDouble(_base.DriverProfile.getTemperature()), Double.parseDouble(DriverTempLevel),t_temp);
-        boolean PassangerCheck = compareThreshold(Double.parseDouble(_base.PassengerProfile.getTemperature()), Double.parseDouble(PassangerTempLevel),t_temp);
+        boolean PassengerCheck = compareThreshold(Double.parseDouble(_base.PassengerProfile.getTemperature()), Double.parseDouble(PassengerTempLevel),t_temp);
         boolean BackCheck = compareThreshold(Double.parseDouble(_base.BackProfile.getTemperature()), Double.parseDouble(BackTempLevel),t_temp);
 
 
-        return DriverCheck && PassangerCheck && BackCheck;
+        return DriverCheck && PassengerCheck && BackCheck;
 
     }
 
     private boolean checkSoundLevel() {
 
         String  DriverSoundLevel = _base.DriverZone.getSound();
-        String  PassangerSoundLevel = _base.PassengerZone.getSound();
+        String  PassengerSoundLevel = _base.PassengerZone.getSound();
         String  BackSoundLevel = _base.BackseatZone.getSound();
 
         boolean DriverCheck = compareThreshold(Double.parseDouble(_base.DriverProfile.getSound()), Double.parseDouble(DriverSoundLevel),t_sound);
-        boolean PassangerCheck = compareThreshold(Double.parseDouble(_base.PassengerProfile.getSound()), Double.parseDouble(PassangerSoundLevel),t_sound);
+        boolean PassengerCheck = compareThreshold(Double.parseDouble(_base.PassengerProfile.getSound()), Double.parseDouble(PassengerSoundLevel),t_sound);
         boolean BackCheck = compareThreshold(Double.parseDouble(_base.BackProfile.getSound()), Double.parseDouble(BackSoundLevel),t_sound);
 
 
-        return DriverCheck && PassangerCheck && BackCheck;
+        return DriverCheck && PassengerCheck && BackCheck;
 
     }
 */
 
     public boolean ZonesValueHandler(Profile profile, Zone zone) {
-        if(profile == null || zone == null){
+        if (profile == null || zone == null) {
             return false;
         }
-        HashMap<String, Boolean> check = checkProfile(profile,zone);
+        HashMap<String, Boolean> check = checkProfile(profile, zone);
 
         if (check.containsValue(Boolean.FALSE)) {
 
 
-          return false;
+            return false;
 
 
         } else {
@@ -161,7 +159,7 @@ public class ProfileHandler {
         HashMap<String, Boolean> checkedProfile = new HashMap<>(11);
 
 
-        checkedProfile.put("temperature", compareZonesAndProfile(zone.getTemperature(),profile.getTemperature()));
+        checkedProfile.put("temperature", compareZonesAndProfile(zone.getTemperature(), profile.getTemperature()));
 
         checkedProfile.put("humidity", compareZonesAndProfile(zone.getHumidity(), profile.getHumidity()));
 
@@ -169,15 +167,15 @@ public class ProfileHandler {
 
         checkedProfile.put("luminosity", compareZonesAndProfile(zone.getLuminosity(), profile.getLuminosity()));
 
-        checkedProfile.put("full", compareZonesAndProfile(zone.getFull(),profile.getFull()));
+        checkedProfile.put("full", compareZonesAndProfile(zone.getFull(), profile.getFull()));
 
-        checkedProfile.put("ir", compareZonesAndProfile(zone.getIr(),profile.getIr() ));
+        checkedProfile.put("ir", compareZonesAndProfile(zone.getIr(), profile.getIr()));
 
-        checkedProfile.put("pressure", compareZonesAndProfile(zone.getPressure(),profile.getPressure()));
+        checkedProfile.put("pressure", compareZonesAndProfile(zone.getPressure(), profile.getPressure()));
 
-        checkedProfile.put("sound", compareZonesAndProfile(zone.getSound(),profile.getSound() ));
+        checkedProfile.put("sound", compareZonesAndProfile(zone.getSound(), profile.getSound()));
 
-        checkedProfile.put("light", compareZonesAndProfile(zone.getLight(),profile.getLight()));
+        checkedProfile.put("light", compareZonesAndProfile(zone.getLight(), profile.getLight()));
 
         checkedProfile.put("lux", compareZonesAndProfile(zone.getLux(), profile.getLux()));
 
@@ -188,35 +186,63 @@ public class ProfileHandler {
 
         boolean result;
 
-        if (ProfileValue == null || zoneValue == null){
+        if (ProfileValue == null || zoneValue == null) {
             result = true;
         } else {
 
-             result = (Double.parseDouble(ProfileValue) < (Double.parseDouble(zoneValue) + 5))
+            result = (Double.parseDouble(ProfileValue) < (Double.parseDouble(zoneValue) + 5))
                     && (Double.parseDouble(ProfileValue) > (Double.parseDouble(zoneValue) - 5));
         }
 
-      //  boolean result = (Double.parseDouble(zoneValue) == Double.parseDouble(ProfileValue));
+        //  boolean result = (Double.parseDouble(zoneValue) == Double.parseDouble(ProfileValue));
 
         return result;
     }
 
     private void ChangeZoneValues(Profile profile, Zone zone) {
 
-    zone.setTemperature(profile.getTemperature());
-    zone.setHumidity(profile.getHumidity());
-    zone.setGain(profile.getGain());
-    zone.setLuminosity(profile.getLuminosity());
-    zone.setFull(profile.getFull());
-    zone.setIr(profile.getIr());
-    zone.setPressure(profile.getPressure());
-    zone.setSound(profile.getSound());
-    zone.setLight(profile.getLight());
-    zone.setLux(profile.getLux());
+        zone.setTemperature(profile.getTemperature());
+        zone.setHumidity(profile.getHumidity());
+        zone.setGain(profile.getGain());
+        zone.setLuminosity(profile.getLuminosity());
+        zone.setFull(profile.getFull());
+        zone.setIr(profile.getIr());
+        zone.setPressure(profile.getPressure());
+        zone.setSound(profile.getSound());
+        zone.setLight(profile.getLight());
+        zone.setLux(profile.getLux());
 
     }
 
-    private HashMap<String, Double> initEmptyMap(){
+    private HashMap<String, Double> sumMaps(HashMap<String, Double> sum, HashMap<String, Double> element) {
+        sum.put("temperature", (sum.get("temperature") + element.get("temperature")));
+        sum.put("humidity", (sum.get("humidity") + element.get("humidity")));
+        sum.put("gain", (sum.get("gain") + element.get("gain")));
+        sum.put("luminosity", (sum.get("luminosity") + element.get("luminosity")));
+        sum.put("full", (sum.get("full") + element.get("full")));
+        sum.put("ir", (sum.get("ir") + element.get("ir")));
+        sum.put("pressure", (sum.get("pressure") + element.get("pressure")));
+        sum.put("sound", (sum.get("sound") + element.get("sound")));
+        sum.put("altitude", (sum.get("altitude") + element.get("altitude")));
+        sum.put("light", (sum.get("light") + element.get("light")));
+        sum.put("lux", (sum.get("lux") + element.get("lux")));
+        //TODO maybe use line below instead?
+        // element.forEach((k, v) -> sum.merge(k, v, Double::sum);
+        return sum;
+    }
+
+    private HashMap<String, Double> avgMap(HashMap<String, Double> values) {
+        java.util.Iterator hmIterator = values.entrySet().iterator();
+
+        while (hmIterator.hasNext()) {
+            Map.Entry entry = (Map.Entry) hmIterator.next();
+            double newVal = ((double) entry.getValue() / 5);
+            values.put((String) entry.getKey(), newVal);
+        }
+        return values;
+    }
+
+    private HashMap<String, Double> initEmptyMap() {
         HashMap<String, Double> map = new HashMap<>(11);
         map.put("temperature", 0.0);
         map.put("humidity", 0.0);
@@ -233,9 +259,8 @@ public class ProfileHandler {
         return map;
     }
 
-    public Profile getProfileOfZone(Zone zone){
-        switch(zone.getName())
-        {
+    public Profile getProfileOfZone(Zone zone) {
+        switch (zone.getName()) {
             case DRIVER:
                 return _base.DriverProfile;
             case PASSENGER:

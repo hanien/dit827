@@ -6,17 +6,15 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.aptiv.Model.Classe.Zone;
+import com.example.aptiv.Model.Class.Zone;
 import com.example.aptiv.Model.Interface.IAptivService;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.example.aptiv.Model.Interface.IVolleyCollback;
+import com.example.aptiv.Model.Interface.IVolleyCallback;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.R;
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class AptivService implements IAptivService {
@@ -25,27 +23,31 @@ public class AptivService implements IAptivService {
     private boolean _isUpdatingPassReadings = false;
     private boolean _isUpdatingMiddleReadings = false;
     private boolean _isUpdatingBackReadings = false;
-    public  AptivService(MainActivity activity){ _activity = activity; }
+
+    public AptivService(MainActivity activity) {
+        _activity = activity;
+    }
 
     @Override
-    public void GetDriverReadings(final IVolleyCollback _collback) {
-        if(!_isUpdatingDriverReadings){
+    public void GetDriverReadings(final IVolleyCallback _callback) {
+        if (!_isUpdatingDriverReadings) {
             _isUpdatingDriverReadings = true;
             RequestQueue queue = Volley.newRequestQueue(_activity);
-            String url = _activity.getResources().getString(R.string.GetDriverReadings);;
+            String url = _activity.getResources().getString(R.string.GetDriverReadings);
+            ;
 
-            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     _isUpdatingDriverReadings = false;
                     Gson gson = new Gson();
                     String dataArray = null;
-                    try{
+                    try {
                         dataArray = response.toString();
                         final Zone Zone = gson.fromJson(dataArray, Zone.class);
-                        _collback.GetDriverReadings(Zone);
-                    }catch (Exception e){
-                        Log.e(this.getClass().toString(), "something bad happend");
+                        _callback.GetDriverReadings(Zone);
+                    } catch (Exception e) {
+                        Log.e(this.getClass().toString(), "something bad happened");
                     }
                 }
             }, new Response.ErrorListener() {
@@ -60,13 +62,14 @@ public class AptivService implements IAptivService {
     }
 
     @Override
-    public void GetPassengerReadings(final IVolleyCollback _collback) {
-        if(!_isUpdatingPassReadings){
+    public void GetPassengerReadings(final IVolleyCallback _callback) {
+        if (!_isUpdatingPassReadings) {
             _isUpdatingPassReadings = true;
             RequestQueue queue = Volley.newRequestQueue(_activity);
-            String url = _activity.getResources().getString(R.string.GetPassengerReadings);;
+            String url = _activity.getResources().getString(R.string.GetPassengerReadings);
+            ;
 
-            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     _isUpdatingPassReadings = false;
@@ -75,9 +78,9 @@ public class AptivService implements IAptivService {
                     try {
                         dataArray = response.toString();
                         final Zone Zone = gson.fromJson(dataArray, Zone.class);
-                        _collback.GetPassengerReadings(Zone);
+                        _callback.GetPassengerReadings(Zone);
                     } catch (Exception e) {
-                        Log.e(this.getClass().toString(), "something bad happend");
+                        Log.e(this.getClass().toString(), "something bad happened");
                     }
                 }
             }, new Response.ErrorListener() {
@@ -93,13 +96,14 @@ public class AptivService implements IAptivService {
     }
 
     @Override
-    public void GetAverageReadings(final IVolleyCollback _collback) {
-        if(!_isUpdatingMiddleReadings){
+    public void GetAverageReadings(final IVolleyCallback _callback) {
+        if (!_isUpdatingMiddleReadings) {
             _isUpdatingMiddleReadings = true;
             RequestQueue queue = Volley.newRequestQueue(_activity);
-            String url = _activity.getResources().getString(R.string.GetAverageReadings);;
+            String url = _activity.getResources().getString(R.string.GetAverageReadings);
+            ;
 
-            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     _isUpdatingMiddleReadings = false;
@@ -108,9 +112,9 @@ public class AptivService implements IAptivService {
                     try {
                         dataArray = response.toString();
                         final Zone Zone = gson.fromJson(dataArray, Zone.class);
-                        _collback.GetAverageReadings(Zone);
+                        _callback.GetAverageReadings(Zone);
                     } catch (Exception e) {
-                        Log.e(this.getClass().toString(), "something bad happend");
+                        Log.e(this.getClass().toString(), "something bad happened");
                     }
                 }
             }, new Response.ErrorListener() {
@@ -126,13 +130,14 @@ public class AptivService implements IAptivService {
     }
 
     @Override
-    public void GetBackseatReadings(final IVolleyCollback _collback) {
-        if(!_isUpdatingBackReadings){
+    public void GetBackseatReadings(final IVolleyCallback _callback) {
+        if (!_isUpdatingBackReadings) {
             _isUpdatingBackReadings = true;
             RequestQueue queue = Volley.newRequestQueue(_activity);
-            String url = _activity.getResources().getString(R.string.GetBackseatReadings);;
+            String url = _activity.getResources().getString(R.string.GetBackseatReadings);
+            ;
 
-            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     _isUpdatingBackReadings = false;
@@ -141,9 +146,9 @@ public class AptivService implements IAptivService {
                     try {
                         dataArray = response.toString();
                         final Zone Zone = gson.fromJson(dataArray, Zone.class);
-                        _collback.GetBackseatReadings(Zone);
+                        _callback.GetBackseatReadings(Zone);
                     } catch (Exception e) {
-                        Log.e(this.getClass().toString(), "something bad happend");
+                        Log.e(this.getClass().toString(), "something bad happened");
                     }
                 }
             }, new Response.ErrorListener() {

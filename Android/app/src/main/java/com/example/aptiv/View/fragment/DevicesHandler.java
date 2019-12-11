@@ -34,7 +34,7 @@ public class DevicesHandler extends Fragment {
     private Message mActiveMessage;
 
 
-    public DevicesHandler(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
+    public DevicesHandler(DashboardFragment parentFragment, MainActivity Owner, BaseViewModel viewModel) {
         _owner = Owner;
         _baseViewModel = viewModel;
         _parentFragment = parentFragment;
@@ -52,15 +52,14 @@ public class DevicesHandler extends Fragment {
     }
 
     private void RegisterOnClickListeners() {
-            muteBtn.setOnClickListener(new View.OnClickListener() {
+        muteBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if(_baseViewModel.isMuted){
+                if (_baseViewModel.isMuted) {
                     UnmutePublish();
                     muteBtn.setImageResource(R.drawable.speaker);
                     MuteText.setText("Mute");
-                }
-                else {
+                } else {
                     MutePublish();
                     muteBtn.setImageResource(R.drawable.muted);
                     MuteText.setText("Unmute");

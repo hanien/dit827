@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.aptiv.Model.Classe.Mode;
-import com.example.aptiv.Model.Interface.IZoneSelection;
+import com.example.aptiv.Model.Class.Mode;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;
@@ -17,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class ModeLayoutFragment extends Fragment{
+public class ModeLayoutFragment extends Fragment {
 
     private MainActivity _owner;
     private SettingsLayoutFragment _parentFragment;
@@ -56,20 +55,16 @@ public class ModeLayoutFragment extends Fragment{
 
     private void RegisterListener() {
         editBtn.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
+                new View.OnClickListener() {
+                    public void onClick(View view) {
                         OpenEditModeFragment(_currentMode, _parentFragment);
                     }
                 }
         );
 
         deleteBtn.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
+                new View.OnClickListener() {
+                    public void onClick(View view) {
                         _parentFragment.deleteMode(_currentMode);
                         _owner.OpenSettingsFragment(_view);
                     }
@@ -88,7 +83,7 @@ public class ModeLayoutFragment extends Fragment{
         deleteBtn = _view.findViewById(R.id.deleteBtn);
     }
 
-    private void setUpElements(){
+    private void setUpElements() {
         modeLabel.setText(_currentMode.getTitle());
         modeAirp.setText(_currentMode.getAirp());
         modeHumidity.setText(_currentMode.getHumidity());
@@ -101,8 +96,8 @@ public class ModeLayoutFragment extends Fragment{
     public void OpenEditModeFragment(Mode cMode, SettingsLayoutFragment settingsFragment) {
         FragmentManager fm1 = getFragmentManager();
         FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
-        EditModeLayoutFragment = new EditModeLayoutFragment(this,_owner,_baseViewModel, cMode, settingsFragment);
-        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard,EditModeLayoutFragment).commit();
+        EditModeLayoutFragment = new EditModeLayoutFragment(this, _owner, _baseViewModel, cMode, settingsFragment);
+        fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, EditModeLayoutFragment).commit();
     }
 
 }

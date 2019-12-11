@@ -7,15 +7,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.example.aptiv.Model.Classe.Mode;
-import com.example.aptiv.Model.Interface.IZoneSelection;
+import com.example.aptiv.Model.Class.Mode;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;
 
 import androidx.fragment.app.Fragment;
 
-public class EditModeLayoutFragment extends Fragment{
+public class EditModeLayoutFragment extends Fragment {
 
     private MainActivity _owner;
     private ModeLayoutFragment _parentFragment;
@@ -69,10 +68,8 @@ public class EditModeLayoutFragment extends Fragment{
         editVolume.setText(_currentMode.getVolume());
 
         saveBtn.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
+                new View.OnClickListener() {
+                    public void onClick(View view) {
 
                         _settingsLayoutFragment.editMode(
                                 _currentMode,

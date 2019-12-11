@@ -14,6 +14,7 @@ import com.google.android.gms.nearby.messages.Message;
 import com.google.android.gms.nearby.messages.MessageListener;
 
 import java.util.ArrayList;
+
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
@@ -25,13 +26,13 @@ public class ReceiverService extends Service {
     private MessageListener mMessageListener;
     private int valueCounter;
     private BaseViewModel _base;
-    ArrayList<Integer> list=new ArrayList<Integer>();
+    ArrayList<Integer> list = new ArrayList<Integer>();
 
-    public ReceiverService(){
+    public ReceiverService() {
 
     }
 
-    public ReceiverService(BaseViewModel model){
+    public ReceiverService(BaseViewModel model) {
         _base = model;
     }
 
@@ -57,20 +58,19 @@ public class ReceiverService extends Service {
         startForeground(1, notification);
 
 
-
         mMessageListener = new MessageListener() {
             @Override
             public void onFound(Message message) {
 
-            String value = new String(message.getContent());
+                String value = new String(message.getContent());
 
                 Log.v("M1", value);
 
 
                 list.add(Integer.parseInt(value));
                 valueCounter++;
-                if(valueCounter > 5){
-                    for(int i = 0 ; i < list.size() ; i++ ){
+                if (valueCounter > 5) {
+                    for (int i = 0; i < list.size(); i++) {
                         int values = 0;
                         values = values + list.get(i);
                         value = String.valueOf(values / list.size());
@@ -101,14 +101,13 @@ public class ReceiverService extends Service {
         return START_NOT_STICKY;
     }
 
-    private void SaveSoundValue(String value){
+    private void SaveSoundValue(String value) {
         _base.DriverZone.setSound(value);
         _base.PassengerZone.setSound(value);
         _base.MiddleZone.setSound(value);
         _base.BackseatZone.setSound(value);
 
     }
-
 
 
     @Override
