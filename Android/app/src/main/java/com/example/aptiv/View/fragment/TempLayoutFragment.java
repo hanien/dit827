@@ -32,6 +32,7 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
     private double temp = 0;
     private double _desiredTemp;
     private boolean _plusMinusButtonClicked = false;
+    String typeString;
 
 
     public TempLayoutFragment(DashboardFragment parentFragment, MainActivity Owner, BaseViewModel viewModel) {
@@ -84,6 +85,9 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
             }
         });
     }
+
+    private  boolean check = false;
+
     @Override
     public void zoneIsSelected() {
         _desiredTemp = temp;
@@ -91,11 +95,13 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
               SetText.setVisibility(View.GONE);
               SetTempLayout.setVisibility(View.VISIBLE);
               tempChangeValue.setVisibility(View.VISIBLE);
+              check = false;
               updateTempValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
         }else{
               SetText.setVisibility(View.VISIBLE);
               tempChangeValue.setVisibility(View.GONE);
               SetTempLayout.setVisibility(View.GONE);
+              setUpElements();
         }
     }
 
@@ -103,11 +109,13 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         Boolean tempType = _baseViewModel.getTempType();
         String fahrenheit = _baseViewModel.getFahrenheit();
         String celsius = _baseViewModel.getCelsius();
+        typeString = ((tempType)) ? fahrenheit : celsius;
+
         setValueForZone(Driver, Passenger, Back);
+        tempChangeValue.setText(String.valueOf((int)temp)+typeString);
 
-        String typeString = ((tempType)) ? fahrenheit : celsius;
 
-        TempValue.setText(_baseViewModel.MiddleZone.getTemperature() + typeString);
+      //  TempValue.setText(_baseViewModel.MiddleZone.getTemperature() + typeString);
         if (!_plusMinusButtonClicked) {
             tempChangeValue.setTextSize(50);
             tempChangeValue.setText(String.valueOf((int) temp) + typeString);
@@ -141,8 +149,16 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         }
 
         temp = temp / count;
-
         temp = (tempType) ? (1.8*temp)+32 : temp;
+        
+        TempValue.setText(String.valueOf((int)temp)+typeString);
+
+        if(check == false){
+            _desiredTemp = temp;
+            check = true;
+        }
+
+
         if(_plusMinusButtonClicked){
             PlusMinusButtonClicked(true,Driver,Passenger,Back);
         }
