@@ -22,7 +22,7 @@ public class ProfileHelper {
     private final static double t_sound = 1.0;
     private final static double t_light = 5.0;
 
-    public static boolean checkTemp(Zone checked, Zone other1, Zone other2){
+    public static boolean checkTemp(boolean increasing, Zone checked, Zone other1, Zone other2){
         double checkedTemp = Double.parseDouble(checked.getTemperature());
         double otherTemp1= Double.parseDouble(other1.getTemperature());
         double otherTemp2 = Double.parseDouble(other2.getTemperature());
@@ -31,14 +31,17 @@ public class ProfileHelper {
         double diffSecond = Math.abs(checkedTemp - otherTemp2);
         double diffOthers = Math.abs(otherTemp1 - otherTemp2);
 
+        double averageDiff = checkedTemp - (otherTemp2 + otherTemp1 + checkedTemp)/3;
+        boolean aboveAverage = averageDiff > 0;
+
         if(diffOthers+2 < diffFirst && diffOthers+2 < diffSecond)
         {
-            return false;
+            return movingToThreshold(increasing,aboveAverage);
         }
         return true;
     }
 
-    public static boolean checkAirPressure(Zone checked, Zone other1, Zone other2){
+    public static boolean checkAirPressure(boolean increasing,Zone checked, Zone other1, Zone other2){
         double checkedPressure = Double.parseDouble(checked.getPressure());
         double otherPressure1= Double.parseDouble(other1.getPressure());
         double otherPressure2 = Double.parseDouble(other2.getPressure());
@@ -47,14 +50,17 @@ public class ProfileHelper {
         double diffSecond = Math.abs(checkedPressure - otherPressure2);
         double diffOthers = Math.abs(otherPressure1 - otherPressure2);
 
+        double averageDiff = checkedPressure - (otherPressure1 + otherPressure2 + checkedPressure)/3;
+        boolean aboveAverage = averageDiff > 0;
+
         if(diffOthers+5 < diffFirst && diffOthers+5 < diffSecond)
         {
-            return false;
+            return movingToThreshold(increasing,aboveAverage);
         }
         return true;
     }
 
-    public static boolean checkLux(Zone checked, Zone other1, Zone other2){
+    public static boolean checkLux(boolean increasing,Zone checked, Zone other1, Zone other2){
         double checkedIr = Double.parseDouble(checked.getIr());
         double otherIr1= Double.parseDouble(other1.getIr());
         double otherIr2 = Double.parseDouble(other2.getIr());
@@ -63,14 +69,17 @@ public class ProfileHelper {
         double diffSecond = Math.abs(checkedIr - otherIr2);
         double diffOthers = Math.abs(otherIr1 - otherIr2);
 
+        double averageDiff = checkedIr - (otherIr1 + checkedIr + otherIr2)/3;
+        boolean aboveAverage = averageDiff > 0;
+
         if(diffOthers+15 < diffFirst && diffOthers+15 < diffSecond)
         {
-            return false;
+            return movingToThreshold(increasing,aboveAverage);
         }
         return true;
     }
 
-    public static boolean checkSound(Zone checked, Zone other1, Zone other2){
+    public static boolean checkSound(boolean increasing,Zone checked, Zone other1, Zone other2){
         double checkedSound = Double.parseDouble(checked.getSound());
         double otherSound1= Double.parseDouble(other1.getSound());
         double otherSound2 = Double.parseDouble(other2.getSound());
@@ -79,14 +88,17 @@ public class ProfileHelper {
         double diffSecond = Math.abs(checkedSound - otherSound2);
         double diffOthers = Math.abs(otherSound1 - otherSound2);
 
+        double averageDiff = checkedSound - (checkedSound + otherSound1 + otherSound2)/3;
+        boolean aboveAverage = averageDiff > 0;
+
         if(diffOthers+5 < diffFirst && diffOthers+5 < diffSecond)
         {
-            return false;
+            return movingToThreshold(increasing,aboveAverage);
         }
         return true;
     }
 
-    public static boolean checkHumidity(Zone checked, Zone other1, Zone other2){
+    public static boolean checkHumidity(boolean increasing, Zone checked, Zone other1, Zone other2){
         double checkedHumidity = Double.parseDouble(checked.getHumidity());
         double otherHumidity1= Double.parseDouble(other1.getHumidity());
         double otherHumidity2 = Double.parseDouble(other2.getHumidity());
@@ -95,9 +107,12 @@ public class ProfileHelper {
         double diffSecond = Math.abs(checkedHumidity - otherHumidity2);
         double diffOthers = Math.abs(otherHumidity1 - otherHumidity2);
 
+        double averageDiff = checkedHumidity - (otherHumidity2 + otherHumidity1 + checkedHumidity)/3;
+        boolean aboveAverage = averageDiff > 0;
+
         if(diffOthers+5 < diffFirst && diffOthers+5 < diffSecond)
         {
-            return false;
+            return movingToThreshold(increasing,aboveAverage);
         }
         return true;
     }
@@ -241,5 +256,15 @@ public class ProfileHelper {
         boolean belowThreshold = source >= target - threshold;
         boolean aboveThreshold = source <= target + threshold;
         return belowThreshold && aboveThreshold;
+    }
+
+    private static boolean movingToThreshold(boolean increasing, boolean aboveAverage){
+        if((aboveAverage && !increasing) || (!aboveAverage && increasing))
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
