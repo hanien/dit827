@@ -86,6 +86,8 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
         ApValue.setText(_baseViewModel.MiddleZone.getPressure() + " hPa");
     }
 
+    private  boolean check = false;
+
     @Override
     public void zoneIsSelected() {
         _desiredAir = air;
@@ -93,11 +95,14 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
             SetText.setVisibility(View.GONE);
             SetApLayout.setVisibility(View.VISIBLE);
             ApChangeValue.setVisibility(View.VISIBLE);
-            updateApValue(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
-        } else {
+            check = false;
+            updateApValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+        }else{
+
             SetText.setVisibility(View.VISIBLE);
             ApChangeValue.setVisibility(View.GONE);
             SetApLayout.setVisibility(View.GONE);
+            ApValue.setText(_baseViewModel.MiddleZone.getPressure() + " hPa");
         }
     }
 
@@ -126,8 +131,16 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
             air = Double.parseDouble(_baseViewModel.MiddleZone.getPressure());
             count = 1;
         }
-        air = air / count;
-        ApChangeValue.setText(String.valueOf((int) air));
+
+        air = air/count;
+        ApValue.setText(String.valueOf((int)air));
+        if(check == false){
+            _desiredAir = (int)air;
+            check = true;
+        }
+
+        ApChangeValue.setText(String.valueOf((int)air));
+
 
         if (!_plusMinusButtonClicked) {
             ApChangeValue.setTextSize(50);
@@ -170,8 +183,9 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
                 _desiredAir--;
             }
             ApChangeValue.setTextSize(25);
-            ApChangeValue.setText("In progress...\n Changing Air Pressure \n from " + String.valueOf((int) air) + " to " + (int) _desiredAir);
-            if (Driver) {
+            ApChangeValue.setText("Changing AP \n to " + (int)_desiredAir);
+            if(Driver){
+
                 _baseViewModel.DriverProfile.setPressure(Double.toString(_desiredAir));
             }
             if (Passenger) {

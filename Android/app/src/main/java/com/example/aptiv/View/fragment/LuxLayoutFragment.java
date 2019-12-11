@@ -88,7 +88,7 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
             }
         });
     }
-
+    private  boolean check = false;
     @Override
     public void zoneIsSelected() {
         _desiredLux = lux;
@@ -96,12 +96,15 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
             SetText.setVisibility(View.GONE);
             SetLuxLayout.setVisibility(View.VISIBLE);
             luxChangeValue.setVisibility(View.VISIBLE);
-            updateLuxValue(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
+            check = false;
+            updateLuxValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+
 
         } else {
             SetText.setVisibility(View.VISIBLE);
             luxChangeValue.setVisibility(View.GONE);
             SetLuxLayout.setVisibility(View.GONE);
+            luxValue.setText(_baseViewModel.MiddleZone.getIr() + " lux");
         }
     }
 
@@ -127,13 +130,15 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
             lux = Double.parseDouble(_baseViewModel.MiddleZone.getIr());
             count = 1;
         }
-        lux = lux / count;
-        luxChangeValue.setText(String.valueOf((int) lux) + " lux");
 
-        if (!_plusMinusButtonClicked) {
-            luxChangeValue.setTextSize(50);
-            luxChangeValue.setText(String.valueOf((int) lux));
+        lux = lux/count;
+        luxValue.setText(String.valueOf((int)lux) + " lux");
+        if(check == false){
+            _desiredLux = lux;
+            check = true;
         }
+        luxChangeValue.setText(String.valueOf((int)lux) + " lux");
+
         if(_plusMinusButtonClicked) {
             PlusMinusButtonClicked(true, Driver, Passenger, Back);
         }
@@ -172,8 +177,8 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
                 _desiredLux--;
             }
             luxChangeValue.setTextSize(25);
-            luxChangeValue.setText("In progress...\n Changing Light\n from " + (int) _desiredLux + " to " + String.valueOf((int) lux));
-            if (Driver) {
+            luxChangeValue.setText("Changing Lux\n to " +(int)_desiredLux);
+            if(Driver){
                 _baseViewModel.DriverProfile.setIr(Double.toString(_desiredLux));
             }
             if (Passenger) {

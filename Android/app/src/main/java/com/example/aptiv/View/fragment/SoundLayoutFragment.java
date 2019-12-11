@@ -81,6 +81,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
         _soundTextView.setText(_baseViewModel.MiddleZone.getSound());
     }
 
+    private  boolean check = false;
 
     //When a zone is selected on the car
     //values need to be changed based on zone
@@ -91,11 +92,13 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
             _zoneTextView.setVisibility(View.GONE);
             _zoneSoundTextView.setVisibility(View.VISIBLE);
             _zoneCrollerLayout.setVisibility(View.VISIBLE);
-            updateSoundValue(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
-        } else {
+            check = false;
+            updateSoundValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+        }else{
             _zoneTextView.setVisibility(View.VISIBLE);
             _zoneSoundTextView.setVisibility(View.GONE);
             _zoneCrollerLayout.setVisibility(View.GONE);
+            _soundTextView.setText(_baseViewModel.MiddleZone.getSound());
         }
     }
 
@@ -124,8 +127,14 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
             temp = Double.parseDouble(_baseViewModel.MiddleZone.getSound());
             count = 1;
         }
-        temp = temp / count;
-        _zoneSoundTextView.setText(String.valueOf((int) temp));
+        temp = temp/count;
+
+        _soundTextView.setText(String.valueOf((int)temp));
+        if(check == false){
+            _desiredTemp = temp;
+            check = true;
+        }
+        _zoneSoundTextView.setText(String.valueOf((int)temp));
 
         if (!_plusMinusButtonClicked) {
             _zoneSoundTextView.setTextSize(50);
@@ -170,8 +179,8 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
             }
 
             _zoneSoundTextView.setTextSize(25);
-            _zoneSoundTextView.setText("In progress...\n Changing Volume\n from " + (int) _desiredTemp + " to " + String.valueOf((int) temp));
-            if (Driver) {
+            _zoneSoundTextView.setText("Changing Volume\n to " +(int)_desiredTemp);
+            if(Driver){
                 _baseViewModel.DriverProfile.setSound(Double.toString(_desiredTemp));
             }
             if (Passenger) {
