@@ -18,15 +18,15 @@ public class BaseViewModel implements IVolleyCallback {
     private ProfileHandler _profileHandler;
     private DashboardFragment _dashboardFragment;
 
-    //enum to differentiate btwn incoming zones
-    public static Zone DriverZone = new Zone(Zone.ZoneName.DRIVER, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
-    public static Zone PassengerZone = new Zone(Zone.ZoneName.PASSENGER, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
-    public static Zone BackseatZone = new Zone(Zone.ZoneName.BACK, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
-    public static Zone MiddleZone = new Zone(Zone.ZoneName.MIDDLE, "0", "0", "0", "0", "0", "0", "0", "0","0", "0","0");
+    //enum to differentiate between incoming zones
+    public static Zone DriverZone = new Zone(Zone.ZoneName.DRIVER, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0");
+    public static Zone PassengerZone = new Zone(Zone.ZoneName.PASSENGER, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0");
+    public static Zone BackseatZone = new Zone(Zone.ZoneName.BACK, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0");
+    public static Zone MiddleZone = new Zone(Zone.ZoneName.MIDDLE, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0");
 
-    public Profile DriverProfile = new Profile(null,null,null,null,null,null,null,null,null,null,null,null);
-    public Profile PassengerProfile = new Profile(null,null,null,null,null,null,null,null,null,null,null,null);
-    public Profile BackProfile = new Profile(null,null,null,null,null,null,null,null,null,null,null,null);
+    public Profile DriverProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
+    public Profile PassengerProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
+    public Profile BackProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
 
     public Double OutTemperature = 0.0;
     public Boolean isMuted = false;
@@ -34,13 +34,13 @@ public class BaseViewModel implements IVolleyCallback {
     private String fahrenheit;
     private String celsius;
 
-    public BaseViewModel(MainActivity activity){
+    public BaseViewModel(MainActivity activity) {
         _activity = activity;
 
         _aptivService = new AptivService(_activity);
         _weatherService = new WeatherService(_activity);
         _profileHandler = new ProfileHandler(this, _dashboardFragment, DriverZone, PassengerZone,
-                                                MiddleZone, BackseatZone);
+                MiddleZone, BackseatZone);
 
         fahrenheit = "° F";
         celsius = "° C";
@@ -53,10 +53,11 @@ public class BaseViewModel implements IVolleyCallback {
         BackProfile.setFromZone(BackseatZone);
     }
 
-    public void onProfileChange(){
+    public void onProfileChange() {
         //_profileHandler.onProfileChange();
     }
-    public void SetDashboardFragment(DashboardFragment fragment){
+
+    public void SetDashboardFragment(DashboardFragment fragment) {
         _dashboardFragment = fragment;
         _profileHandler.SetDashboardFragment(fragment);
     }
@@ -103,13 +104,15 @@ public class BaseViewModel implements IVolleyCallback {
         _profileHandler.onDataFetched(value);
     }
 
-    public String getFahrenheit(){
+    public String getFahrenheit() {
         return fahrenheit;
     }
-    public Boolean getTempType(){
+
+    public Boolean getTempType() {
         return tempType;
     }
-    public String getCelsius(){
+
+    public String getCelsius() {
         return celsius;
     }
 
