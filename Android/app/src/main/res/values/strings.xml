@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Aptiv</string>
-    <string name="tempretureText">TEMPERATURE</string>
+    <string name="temperatureText">TEMPERATURE</string>
     <string name="autoText">SOUND VOLUME</string>
+    <string name="ProfileKey">com.example.aptiv.ProfileKey</string>
     <string name="GetAverageReadings">https://dit827aptiv.herokuapp.com/api/sensors/middle</string>
     <string name="GetDriverReadings">https://dit827aptiv.herokuapp.com/api/sensors/driver</string>
     <string name="GetPassengerReadings">https://dit827aptiv.herokuapp.com/api/sensors/passenger</string>

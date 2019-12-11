@@ -3,7 +3,6 @@ package com.example.aptiv.Model.Car;
 public class Lights {
 
 
-
     public void turn_on_back_light() {
 
     }
@@ -24,8 +23,6 @@ public class Lights {
     public void changeLight_Level(int level) {
 
     }
-
-
 
 
 }

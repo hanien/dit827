@@ -1,9 +1,12 @@
-package com.example.aptiv.Model.Classe;
+package com.example.aptiv.Model.Class;
+
+import java.io.Serializable;
 
 import static java.lang.Float.parseFloat;
 
-public class Zone {
-    public String temperature;
+public class Profile implements Serializable {
+    private String ProfileName;
+    private String temperature;
     private String humidity;
     private String gain;
     private String luminosity;
@@ -15,8 +18,10 @@ public class Zone {
     private String light;
     private String lux;
 
-    public Zone(String temperature, String humidity, String gain, String luminosity, String full, String ir,
-                String pressure , String sound, String altitude, String light,String lux){
+
+    public Profile(String ProfileName, String temperature, String humidity, String gain, String luminosity, String full, String ir,
+                   String pressure, String sound, String altitude, String light, String lux) {
+        this.ProfileName = ProfileName;
         this.temperature = temperature;
         this.humidity = humidity;
         this.gain = gain;
@@ -29,6 +34,15 @@ public class Zone {
         this.light = light;
         this.lux = lux;
     }
+
+    public String getProfileName() {
+        return this.ProfileName;
+    }
+
+    public void setProfileName(String profileName) {
+        ProfileName = profileName;
+    }
+
     public String getTemperature() {
         return temperature;
     }
@@ -38,6 +52,9 @@ public class Zone {
     }
 
     public String getHumidity() {
+        if (humidity == null) {
+            return "0.0";
+        }
         String hum = String.format("%.2f", parseFloat(humidity));
         return hum;
     }
@@ -71,6 +88,9 @@ public class Zone {
     }
 
     public String getIr() {
+        if (ir == null) {
+            return "0.0";
+        }
         String infra = String.format("%.2f", parseFloat(ir));
         return infra;
     }
@@ -95,19 +115,41 @@ public class Zone {
         this.sound = sound;
     }
 
-    public String getAltitiude() {
+    public String getAltitude() {
         return altitude;
     }
 
-    public void setAltitiude(String altitiude) {
-        this.altitude = altitiude;
+    public void setAltitude(String altitude) {
+        this.altitude = altitude;
     }
 
     public String getLight() {
-        return lux;
+        return light;
     }
 
     public void setLight(String light) {
         this.light = light;
+    }
+
+    public String getLux() {
+        return lux;
+    }
+
+    public void setLux(String lux) {
+        this.lux = lux;
+    }
+
+    public void setFromZone(Zone zone) {
+        this.temperature = zone.getTemperature();
+        this.humidity = zone.getHumidity();
+        this.gain = zone.getGain();
+        this.luminosity = zone.getLuminosity();
+        this.full = zone.getFull();
+        this.ir = zone.getIr();
+        this.pressure = zone.getPressure();
+        this.sound = zone.getSound();
+        this.altitude = zone.getAltitude();
+        this.light = zone.getLight();
+        this.lux = zone.getLux();
     }
 }
