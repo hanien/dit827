@@ -41,7 +41,6 @@ public class ProfileHandler {
 
     public void SetDashboardFragment(DashboardFragment fragment) {
         _dashboardFragment = fragment;
-       // checkThresholds();
     }
 
     public void onDataFetched(Zone zone) {
@@ -60,7 +59,6 @@ public class ProfileHandler {
                 break;
         }
         sampleZone(getProfileOfZone(zone), zone);
-        //checkThresholds(zone);
     }
 
 
