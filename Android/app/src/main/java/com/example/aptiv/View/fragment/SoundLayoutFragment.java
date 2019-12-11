@@ -56,15 +56,13 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
         _plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _desiredTemp++;
-                PlusMinusButtonClicked(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
+                PlusMinusButtonClicked(true,_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
             }
         });
         _minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _desiredTemp--;
-                PlusMinusButtonClicked(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
+                PlusMinusButtonClicked(false,_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
             }
         });
     }
@@ -142,34 +140,44 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
             _zoneSoundTextView.setTextSize(50);
             _zoneSoundTextView.setText(String.valueOf((int) temp));
         }
-        if (_plusMinusButtonClicked) {
-            PlusMinusButtonClicked(Driver, Passenger, Back);
+        if(_plusMinusButtonClicked){
+            PlusMinusButtonClicked(true,Driver,Passenger,Back);
         }
     }
 
-    private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat) {
+    private boolean checkZoneDifferences(boolean plus, boolean driver, boolean passenger, boolean backseat){
         if (driver) {
-            return ProfileHelper.checkSound(_baseViewModel.DriverZone,
+            return ProfileHelper.checkSound(plus,_baseViewModel.DriverZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
         }
         if (passenger) {
-            return ProfileHelper.checkSound(_baseViewModel.PassengerZone,
+            return ProfileHelper.checkSound(plus,_baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if (backseat) {
-            return ProfileHelper.checkSound(_baseViewModel.BackseatZone,
+            return ProfileHelper.checkSound(plus,_baseViewModel.BackseatZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
         }
         return true;
+
     }
 
-    private void PlusMinusButtonClicked(boolean Driver, boolean Passenger, boolean Back) {
+
+    private void PlusMinusButtonClicked(boolean plus,boolean Driver,boolean Passenger,boolean Back){
         _plusMinusButtonClicked = true;
 
-        if (checkZoneDifferences(Driver, Passenger, Back)) {
+        if(checkZoneDifferences(plus, Driver, Passenger, Back))
+        {
+            if(plus){
+                _desiredTemp++;
+            }
+            else {
+                _desiredTemp--;
+            }
+
             _zoneSoundTextView.setTextSize(25);
             _zoneSoundTextView.setText("Changing Volume\n to " +(int)_desiredTemp);
             if(Driver){

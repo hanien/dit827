@@ -78,15 +78,13 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
         _plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _desiredLux++;
-                PlusMinusButtonClicked(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
+                PlusMinusButtonClicked(true,_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
             }
         });
         _minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _desiredLux--;
-                PlusMinusButtonClicked(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
+                PlusMinusButtonClicked(false,_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
             }
         });
     }
@@ -141,35 +139,43 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
         }
         luxChangeValue.setText(String.valueOf((int)lux) + " lux");
 
-
-        if(_plusMinusButtonClicked){
-            PlusMinusButtonClicked(Driver,Passenger,Back);
+        if(_plusMinusButtonClicked) {
+            PlusMinusButtonClicked(true, Driver, Passenger, Back);
         }
+
     }
 
-    private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
+    private boolean checkZoneDifferences(boolean plus,boolean driver, boolean passenger, boolean backseat){
         if(driver) {
-            return ProfileHelper.checkLux(_baseViewModel.DriverZone,
+            return ProfileHelper.checkLux(plus,_baseViewModel.DriverZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
         }
         if(passenger){
-            return ProfileHelper.checkLux(_baseViewModel.PassengerZone,
+
+            return ProfileHelper.checkLux(plus,
+                    _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
-            return ProfileHelper.checkLux(_baseViewModel.BackseatZone,
+            return ProfileHelper.checkLux(plus,_baseViewModel.BackseatZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
         }
         return true;
     }
 
-    private void PlusMinusButtonClicked(boolean Driver, boolean Passenger, boolean Back) {
+    private void PlusMinusButtonClicked(boolean plus,boolean Driver,boolean Passenger,boolean Back){
         _plusMinusButtonClicked = true;
 
-        if (checkZoneDifferences(Driver, Passenger, Back)) {
+        if(checkZoneDifferences(plus, Driver, Passenger, Back)){
+            if(plus){
+                _desiredLux++;
+            }
+            else {
+                _desiredLux--;
+            }
             luxChangeValue.setTextSize(25);
             luxChangeValue.setText("Changing Lux\n to " +(int)_desiredLux);
             if(Driver){
