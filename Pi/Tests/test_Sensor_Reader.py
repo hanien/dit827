@@ -5,6 +5,7 @@ import json
 import time
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
 #import sensor 
+
 import nonBoard
 
 seat = "test"
@@ -93,6 +94,7 @@ def test_sendingData(monkeypatch):
     
     print("SendingDataTest ends \n")
     assert(totalSum == value) #Being wrong with below 10% is counted as acceptable error. 
+
 
 
 

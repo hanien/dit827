@@ -19,13 +19,26 @@ jobs:
       - run: 
           command: | #Add all requirements for python code here.
             cd Pi
-            sudo pip install pipenv
-            pipenv install pytest
+            pip install --upgrade pip
+            pipenv sync
+            #pipenv install pytest
+            #pipenv install board
+            #pipenv install requests
+            #Below here are the dependencies of the raspberry board and the sensors
+            #pipenv install adafruit-circuitpython-lis3dh
+            #pipenv install RPi.GPIO
+            #pipenv install python-tsl2591
+            #pipenv install adafruit-circuitpython-bme280
+
+      #- run: #This command was used to make board function in the VM but it still required RPi.GPIO which could not function on anything but an raspberry pi
+          #command: |
+            #sed -i 's/raise NotImplementedError("Board not supported {}".format(board_id))/from adafruit_blinka.board.raspi_40pin import */g' Pi/.venv/lib/python3.6/site-packages/board.py
+
         # Here the dependencies are saved in a cache.
       - save_cache:
           key: raspberry-{{ .Branch }}-{{ checksum "Pi/Pipfile.lock" }}
           paths:
-            - ".venv"
+            - "Pi/.venv"
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
           #Here the tests are run.
