@@ -89,7 +89,6 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
             }
         });
     }
-    private  boolean check = false;
     @Override
     public void zoneIsSelected() {
         _desiredTemp = temp;
@@ -97,14 +96,12 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
               SetText.setVisibility(View.GONE);
               SetTempLayout.setVisibility(View.VISIBLE);
               tempChangeValue.setVisibility(View.VISIBLE);
-            check = false;
               updateTempValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
         }else{
               SetText.setVisibility(View.VISIBLE);
               tempChangeValue.setVisibility(View.GONE);
               SetTempLayout.setVisibility(View.GONE);
 
-              TempValue.setText(_baseViewModel.MiddleZone.getTemperature());
         }
     }
 
@@ -149,16 +146,7 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         }
         temp = temp/count;
         temp = (tempType) ? (1.8*temp)+32 : temp;
-
-        TempValue.setText(String.valueOf((int)temp));
-
-        if(check == false){
-            _desiredTemp = temp;
-            check = true;
-        }
-        String tempType2 = (_baseViewModel.getTempType()) ? _baseViewModel.getFahrenheit() : _baseViewModel.getCelsius();
-
-        tempChangeValue.setText(String.valueOf((int)temp)+ tempType2);
+        
 
         if(_plusMinusButtonClicked){
             PlusMinusButtonClicked(Driver,Passenger,Back);
