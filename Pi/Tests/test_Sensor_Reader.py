@@ -4,6 +4,7 @@ from unittest import mock
 import json
 import time
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
+import sensor 
 import nonBoard
 
 seat = "test"

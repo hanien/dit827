@@ -13,13 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.example.aptiv.Model.Classe.Mode;
+import com.example.aptiv.Model.Class.Mode;
 import com.example.aptiv.Model.Helper.ProfileHandler;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.View.fragment.DashboardFragment;
 import com.example.aptiv.ViewModel.BaseViewModel;
-import com.example.aptiv.ViewModel.DashboardViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +34,7 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
     private int selectedPosition;
     private ProfileHandler _handler;
 
-    public CustomListAdapter(@NonNull Context context, ArrayList<Mode> list, MainActivity Owner, View View,DashboardFragment parentFragment, BaseViewModel viewModel) {
+    public CustomListAdapter(@NonNull Context context, ArrayList<Mode> list, MainActivity Owner, View View, DashboardFragment parentFragment, BaseViewModel viewModel) {
         super(context, 0, list);
         mContext = context;
         modeList = list;
@@ -43,7 +42,7 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
         _view = View;
         _parentFragment = parentFragment;
         _viewModel = viewModel;
-        _handler = new ProfileHandler(_viewModel,_parentFragment,_viewModel.DriverZone,_viewModel.PassengerZone,_viewModel.MiddleZone,_viewModel.BackseatZone);
+        _handler = new ProfileHandler(_viewModel, _parentFragment, _viewModel.DriverZone, _viewModel.PassengerZone, _viewModel.MiddleZone, _viewModel.BackseatZone);
     }
 
     @NonNull
@@ -76,15 +75,14 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
                 selectedPosition = (Integer) v.getTag();
                 notifyDataSetChanged();
                 saveData();
-              
+
                 boolean DriverSeat = _parentFragment == null ? false : _parentFragment._driverSeatSelected;
-                boolean PassengerSeat =  _parentFragment == null ? false : _parentFragment._frontSeatSelected;
-                boolean BackSeat =  _parentFragment == null ? false : _parentFragment._backSeatSelected;
-                if(!DriverSeat && !PassengerSeat && !BackSeat){
-                    _parentFragment.CreatePopupView(DriverSeat,PassengerSeat,BackSeat, "Sorry, please select a zone that you want to apply the mode on it", false);
-                }
-                else{
-                    if(DriverSeat){
+                boolean PassengerSeat = _parentFragment == null ? false : _parentFragment._frontSeatSelected;
+                boolean BackSeat = _parentFragment == null ? false : _parentFragment._backSeatSelected;
+                if (!DriverSeat && !PassengerSeat && !BackSeat) {
+                    _parentFragment.CreatePopupView(DriverSeat, PassengerSeat, BackSeat, "Sorry, please select a zone that you want to apply the mode on", false);
+                } else {
+                    if (DriverSeat) {
                         //check differences for every variable
                         //if all check out, set new profile
 
@@ -102,11 +100,11 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
                         _viewModel.DriverProfile.setPressure("1");
                         _viewModel.DriverProfile.setHumidity("1");
 
-                        if(!_handler.ZonesValueHandler(_viewModel.DriverProfile,_viewModel.DriverZone)){
-                            _parentFragment.CreatePopupView(false,false,false,"Can't Change values for this profile because it's overlapping!",false);
+                        if (!_handler.ZonesValueHandler(_viewModel.DriverProfile, _viewModel.DriverZone)) {
+                            _parentFragment.CreatePopupView(false, false, false, "Can't change values for this profile because it's overlapping!", false);
                         }
                     }
-                    if(PassengerSeat){
+                    if (PassengerSeat) {
                    /*
                         _viewModel.PassengerProfile.setIr(currentMode.getLux());
                         _viewModel.PassengerProfile.setTemperature(currentMode.getTemp());
@@ -122,11 +120,11 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
                         _viewModel.PassengerProfile.setPressure("1");
                         _viewModel.PassengerProfile.setHumidity("1");
 
-                        if(!_handler.ZonesValueHandler(_viewModel.PassengerProfile,_viewModel.PassengerZone)) {
-                            _parentFragment.CreatePopupView(false,false,false,"Can't Change values for this profile because it's overlapping!",false);
+                        if (!_handler.ZonesValueHandler(_viewModel.PassengerProfile, _viewModel.PassengerZone)) {
+                            _parentFragment.CreatePopupView(false, false, false, "Can't change values for this profile because it's overlapping!", false);
                         }
                     }
-                    if(BackSeat){
+                    if (BackSeat) {
                         /*
                         _viewModel.BackProfile.setIr(currentMode.getLux());
                         _viewModel.BackProfile.setTemperature(currentMode.getTemp());
@@ -141,8 +139,8 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
                         _viewModel.BackProfile.setPressure("1");
                         _viewModel.BackProfile.setHumidity("1");
 
-                        if(!_handler.ZonesValueHandler(_viewModel.BackProfile,_viewModel.BackseatZone)){
-                            _parentFragment.CreatePopupView(false,false,false,"Can't Change values for this profile because it's overlapping!",false);
+                        if (!_handler.ZonesValueHandler(_viewModel.BackProfile, _viewModel.BackseatZone)) {
+                            _parentFragment.CreatePopupView(false, false, false, "Can't change values for this profile because it's overlapping!", false);
                         }
                     }
                 }

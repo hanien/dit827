@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
 
-import com.example.aptiv.Model.Helper.DifferenceChecker;
+import com.example.aptiv.Model.Helper.ProfileHelper;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -32,14 +33,14 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
     private boolean _plusMinusButtonClicked = false;
     double temp = 0;
 
-    public SoundLayoutFragment(DashboardFragment parentFragment,MainActivity Owner , BaseViewModel viewModel) {
+    public SoundLayoutFragment(DashboardFragment parentFragment, MainActivity Owner, BaseViewModel viewModel) {
         _owner = Owner;
         _baseViewModel = viewModel;
         _parentFragment = parentFragment;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         _view = inflater.inflate(R.layout.fragment_soundlayout, container, false);
 
         setUpView();
@@ -51,19 +52,19 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
         return _view;
     }
 
-    private void registerOnClickListeners(){
+    private void registerOnClickListeners() {
         _plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 _desiredTemp++;
-                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+                PlusMinusButtonClicked(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
             }
         });
         _minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 _desiredTemp--;
-                PlusMinusButtonClicked(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+                PlusMinusButtonClicked(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
             }
         });
     }
@@ -74,10 +75,10 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
         _zoneTextView = _view.findViewById(R.id.SelectZoneTextView);
         _zoneCrollerLayout = _view.findViewById(R.id.zoneCrollerLayout);
         _minusButton = _view.findViewById(R.id.minus);
-        _plusButton= _view.findViewById(R.id.plus);
+        _plusButton = _view.findViewById(R.id.plus);
     }
 
-    private void setUpElements(){
+    private void setUpElements() {
         _zoneTextView.setText("Please click on specific zone to change value in it");
         _soundTextView.setText(_baseViewModel.MiddleZone.getSound());
     }
@@ -85,11 +86,11 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
     private  boolean check = false;
 
     //When a zone is selected on the car
-    //values needs to be changes base on zone
+    //values need to be changed based on zone
     @Override
     public void zoneIsSelected() {
         _desiredTemp = temp;
-        if(_parentFragment._backSeatSelected || _parentFragment._driverSeatSelected || _parentFragment._frontSeatSelected ){
+        if (_parentFragment._backSeatSelected || _parentFragment._driverSeatSelected || _parentFragment._frontSeatSelected) {
             _zoneTextView.setVisibility(View.GONE);
             _zoneSoundTextView.setVisibility(View.VISIBLE);
             _zoneCrollerLayout.setVisibility(View.VISIBLE);
@@ -103,29 +104,29 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
         }
     }
 
-    //calculate average temp base on zone that is selected
-    private void updateSoundValue(boolean Driver, boolean Passenger , boolean Back) {
-        if((int)_desiredTemp == (int)temp){
+    //calculate average temp based on zone that is selected
+    private void updateSoundValue(boolean Driver, boolean Passenger, boolean Back) {
+        if ((int) _desiredTemp == (int) temp) {
             _plusMinusButtonClicked = false;
         }
 
-        temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound());
+        temp = Double.parseDouble(_baseViewModel.MiddleZone.getSound());
 
         int count = 1;
-        if(Driver){
+        if (Driver) {
             temp = temp + Double.parseDouble(_baseViewModel.DriverZone.getSound());
             count++;
         }
-        if(Passenger){
+        if (Passenger) {
             temp = temp + Double.parseDouble(_baseViewModel.PassengerZone.getSound());
             count++;
         }
-        if(Back){
+        if (Back) {
             temp = temp + Double.parseDouble(_baseViewModel.BackseatZone.getSound());
             count++;
         }
-        if(count ==4){
-            temp =  Double.parseDouble(_baseViewModel.MiddleZone.getSound());
+        if (count == 4) {
+            temp = Double.parseDouble(_baseViewModel.MiddleZone.getSound());
             count = 1;
         }
         temp = temp/count;
@@ -137,53 +138,50 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
         }
         _zoneSoundTextView.setText(String.valueOf((int)temp));
 
-        if(!_plusMinusButtonClicked){
+        if (!_plusMinusButtonClicked) {
             _zoneSoundTextView.setTextSize(50);
-            _zoneSoundTextView.setText(String.valueOf((int)temp));
+            _zoneSoundTextView.setText(String.valueOf((int) temp));
         }
-        if(_plusMinusButtonClicked){
-            PlusMinusButtonClicked(Driver,Passenger,Back);
+        if (_plusMinusButtonClicked) {
+            PlusMinusButtonClicked(Driver, Passenger, Back);
         }
     }
 
-    private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
-        if(driver) {
-            return DifferenceChecker.checkSound(_baseViewModel.DriverZone,
+    private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat) {
+        if (driver) {
+            return ProfileHelper.checkSound(_baseViewModel.DriverZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
         }
-        if(passenger){
-            return DifferenceChecker.checkSound(_baseViewModel.PassengerZone,
+        if (passenger) {
+            return ProfileHelper.checkSound(_baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
-        if(backseat){
-            return DifferenceChecker.checkSound(_baseViewModel.BackseatZone,
+        if (backseat) {
+            return ProfileHelper.checkSound(_baseViewModel.BackseatZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
         }
         return true;
     }
 
-    private void PlusMinusButtonClicked(boolean Driver,boolean Passenger,boolean Back){
+    private void PlusMinusButtonClicked(boolean Driver, boolean Passenger, boolean Back) {
         _plusMinusButtonClicked = true;
 
-        if(checkZoneDifferences(Driver, Passenger, Back))
-        {
+        if (checkZoneDifferences(Driver, Passenger, Back)) {
             _zoneSoundTextView.setTextSize(25);
             _zoneSoundTextView.setText("Changing Volume\n to " +(int)_desiredTemp);
             if(Driver){
                 _baseViewModel.DriverProfile.setSound(Double.toString(_desiredTemp));
             }
-            if(Passenger){
+            if (Passenger) {
                 _baseViewModel.PassengerProfile.setSound(Double.toString(_desiredTemp));
             }
-            if(Back) {
+            if (Back) {
                 _baseViewModel.BackProfile.setSound(Double.toString(_desiredTemp));
             }
-        }
-        else
-        {
+        } else {
 
             _parentFragment.CreatePopupView(Driver, Passenger, Back, "Sound is too different from other zones! Adjust other zones and try again.", false);
             //TODO
@@ -194,7 +192,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
 
 
     //region Timer method
-    private void setUpTimer(){
+    private void setUpTimer() {
         new CountDownTimer(30000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -214,7 +212,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
 
     private void updateView() {
         _soundTextView.setText(_baseViewModel.MiddleZone.getSound());
-        updateSoundValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
+        updateSoundValue(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
     }
     //endregion
 }
