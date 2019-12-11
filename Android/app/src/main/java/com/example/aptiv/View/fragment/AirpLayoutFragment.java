@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.aptiv.Model.Helper.DifferenceChecker;
+import com.example.aptiv.Model.Helper.ProfileHelper;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -142,17 +142,17 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
 
     private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
         if(driver) {
-            return DifferenceChecker.checkAirPressure(_baseViewModel.DriverZone,
+            return ProfileHelper.checkAirPressure(_baseViewModel.DriverZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
         }
         if(passenger){
-            return DifferenceChecker.checkAirPressure(_baseViewModel.PassengerZone,
+            return ProfileHelper.checkAirPressure(_baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
-            return DifferenceChecker.checkAirPressure(_baseViewModel.BackseatZone,
+            return ProfileHelper.checkAirPressure(_baseViewModel.BackseatZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
         }

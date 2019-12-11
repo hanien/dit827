@@ -12,7 +12,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.aptiv.Model.Classe.Zone;
-import com.example.aptiv.Model.Helper.DifferenceChecker;
+import com.example.aptiv.Model.Helper.ProfileHelper;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -154,17 +154,17 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
 
     private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
         if(driver) {
-                return DifferenceChecker.checkTemp(_baseViewModel.DriverZone,
+                return ProfileHelper.checkTemp(_baseViewModel.DriverZone,
                                         _baseViewModel.PassengerZone,
                                         _baseViewModel.BackseatZone);
         }
         if(passenger){
-            return DifferenceChecker.checkTemp(_baseViewModel.PassengerZone,
+            return ProfileHelper.checkTemp(_baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
-            return DifferenceChecker.checkTemp(_baseViewModel.BackseatZone,
+            return ProfileHelper.checkTemp(_baseViewModel.BackseatZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
         }

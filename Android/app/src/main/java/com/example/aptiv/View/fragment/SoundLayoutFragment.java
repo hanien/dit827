@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
-import com.example.aptiv.Model.Helper.DifferenceChecker;
+import com.example.aptiv.Model.Helper.ProfileHelper;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -139,17 +139,17 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
 
     private boolean checkZoneDifferences(boolean driver, boolean passenger, boolean backseat){
         if(driver) {
-            return DifferenceChecker.checkSound(_baseViewModel.DriverZone,
+            return ProfileHelper.checkSound(_baseViewModel.DriverZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
         }
         if(passenger){
-            return DifferenceChecker.checkSound(_baseViewModel.PassengerZone,
+            return ProfileHelper.checkSound(_baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
-            return DifferenceChecker.checkSound(_baseViewModel.BackseatZone,
+            return ProfileHelper.checkSound(_baseViewModel.BackseatZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
         }
