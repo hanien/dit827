@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.aptiv.Model.Class.Zone;
 import com.example.aptiv.Model.Helper.ProfileHelper;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
@@ -147,24 +148,27 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
             ApChangeValue.setText(String.valueOf((int) air));
         }
         if(_plusMinusButtonClicked){
-            PlusMinusButtonClicked(true,Driver,Passenger,Back);
+            ApChangeValue.setTextSize(25);
+            ApChangeValue.setText("Changing AP \n to " + (int)_desiredAir);
         }
     }
 
     private boolean checkZoneDifferences(boolean plus,boolean driver, boolean passenger, boolean backseat){
+        Zone desiredVal = new Zone(Zone.ZoneName.DRIVER,"0","0","0","0","0","0","0"+_desiredAir,"0","0","0","0");
+
         if(driver) {
 
-            return ProfileHelper.checkAirPressure(plus,_baseViewModel.DriverZone,
+            return ProfileHelper.checkAirPressure(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
         }
         if(passenger){
-            return ProfileHelper.checkAirPressure(plus,_baseViewModel.PassengerZone,
+            return ProfileHelper.checkAirPressure(plus,desiredVal,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
-            return ProfileHelper.checkAirPressure(plus,_baseViewModel.BackseatZone,
+            return ProfileHelper.checkAirPressure(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
         }

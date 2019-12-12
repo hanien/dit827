@@ -23,6 +23,9 @@ public class ProfileHelper {
     private final static double t_light = 5.0;
 
     public static boolean checkTemp(boolean increasing, Zone checked, Zone other1, Zone other2){
+        if(!safetyCheck(Double.parseDouble(checked.getTemperature()))&& !increasing){
+            return false;
+        }
         double checkedTemp = Double.parseDouble(checked.getTemperature());
         double otherTemp1= Double.parseDouble(other1.getTemperature());
         double otherTemp2 = Double.parseDouble(other2.getTemperature());
@@ -42,6 +45,9 @@ public class ProfileHelper {
     }
 
     public static boolean checkAirPressure(boolean increasing,Zone checked, Zone other1, Zone other2){
+        if(!safetyCheck(Double.parseDouble(checked.getPressure()))&& !increasing){
+            return false;
+        }
         double checkedPressure = Double.parseDouble(checked.getPressure());
         double otherPressure1= Double.parseDouble(other1.getPressure());
         double otherPressure2 = Double.parseDouble(other2.getPressure());
@@ -61,6 +67,9 @@ public class ProfileHelper {
     }
 
     public static boolean checkLux(boolean increasing,Zone checked, Zone other1, Zone other2){
+        if(!safetyCheck(Double.parseDouble(checked.getIr())) && !increasing){
+            return false;
+        }
         double checkedIr = Double.parseDouble(checked.getIr());
         double otherIr1= Double.parseDouble(other1.getIr());
         double otherIr2 = Double.parseDouble(other2.getIr());
@@ -80,6 +89,9 @@ public class ProfileHelper {
     }
 
     public static boolean checkSound(boolean increasing,Zone checked, Zone other1, Zone other2){
+        if(!safetyCheck(Double.parseDouble(checked.getSound()))&& !increasing){
+            return false;
+        }
         double checkedSound = Double.parseDouble(checked.getSound());
         double otherSound1= Double.parseDouble(other1.getSound());
         double otherSound2 = Double.parseDouble(other2.getSound());
@@ -99,6 +111,9 @@ public class ProfileHelper {
     }
 
     public static boolean checkHumidity(boolean increasing, Zone checked, Zone other1, Zone other2){
+        if(!safetyCheck(Double.parseDouble(checked.getHumidity()))&& !increasing){
+            return false;
+        }
         double checkedHumidity = Double.parseDouble(checked.getHumidity());
         double otherHumidity1= Double.parseDouble(other1.getHumidity());
         double otherHumidity2 = Double.parseDouble(other2.getHumidity());
@@ -266,5 +281,9 @@ public class ProfileHelper {
         else {
             return false;
         }
+    }
+
+    private static boolean safetyCheck(double checker){
+        return checker > 0;
     }
 }
