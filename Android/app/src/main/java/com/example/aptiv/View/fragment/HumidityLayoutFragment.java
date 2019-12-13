@@ -149,7 +149,7 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
             HumidityChangeValue.setText(String.valueOf((int) Humidity + " %"));
         }
         if(_plusMinusButtonClicked){
-            PlusMinusButtonClicked(true,Driver,Passenger,Back);
+            setDesiredValue(Driver,Passenger,Back);
         }
     }
 
@@ -159,7 +159,6 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
             return ProfileHelper.checkHumidity(plus,_baseViewModel.DriverZone,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
-
         }
 
 
@@ -188,23 +187,26 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
                 _desiredHumidity--;
             }
 
-            HumidityChangeValue.setTextSize(25);
-
-            HumidityChangeValue.setText("Changing Humidity \n to " + (int)_desiredHumidity );
-            if(Driver){
-                _baseViewModel.DriverProfile.setHumidity(Double.toString(_desiredHumidity));
-            }
-            if (Passenger) {
-                _baseViewModel.PassengerProfile.setHumidity(Double.toString(_desiredHumidity));
-            }
-            if (Back) {
-                _baseViewModel.BackProfile.setHumidity(Double.toString(_desiredHumidity));
-            }
+            setDesiredValue(Driver,Passenger,Back);
         } else {
-            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Humidity is too different from other zones! Adjust other zones and try again.", false);
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Humidity is too different from other zones! Adjust other zones and try again.", false,null);
             //TODO
             //if yes: implement adjustment behavior
             //else: reset to original value
+        }
+    }
+    private void setDesiredValue(boolean Driver,boolean Passenger, boolean Back){
+        HumidityChangeValue.setTextSize(25);
+
+        HumidityChangeValue.setText("Changing Humidity \n to " + (int)_desiredHumidity );
+        if(Driver){
+            _baseViewModel.DriverProfile.setHumidity(Double.toString(_desiredHumidity));
+        }
+        if (Passenger) {
+            _baseViewModel.PassengerProfile.setHumidity(Double.toString(_desiredHumidity));
+        }
+        if (Back) {
+            _baseViewModel.BackProfile.setHumidity(Double.toString(_desiredHumidity));
         }
     }
 

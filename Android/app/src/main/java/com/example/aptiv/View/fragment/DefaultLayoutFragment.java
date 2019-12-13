@@ -68,7 +68,7 @@ public class DefaultLayoutFragment extends Fragment implements View.OnClickListe
     }
 
     private void SetupTimer() {
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(4000, 1000) {
 
             public void onTick(long millisUntilFinished) {
             }
@@ -86,12 +86,7 @@ public class DefaultLayoutFragment extends Fragment implements View.OnClickListe
     }
 
     private void updateView() {
-        _soundTextView.setText(_baseViewModel.MiddleZone.getSound());
-        _airPressureTextView.setText(_baseViewModel.MiddleZone.getPressure());
-        _humidityTextView.setText(_baseViewModel.MiddleZone.getHumidity());
-        _luxTextView.setText(_baseViewModel.MiddleZone.getIr());
-        _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitude());
-        SetTemperature(Double.parseDouble(_baseViewModel.MiddleZone.getTemperature()));
+        zoneIsSelected();
     }
 
     private void SetTemperature(double temp) {
@@ -127,7 +122,7 @@ public class DefaultLayoutFragment extends Fragment implements View.OnClickListe
         sound = Double.parseDouble(_baseViewModel.MiddleZone.getSound());
         airP = Double.parseDouble(_baseViewModel.MiddleZone.getPressure());
         humidity = Double.parseDouble(_baseViewModel.MiddleZone.getHumidity());
-        lux = Double.parseDouble(_baseViewModel.MiddleZone.getLux());
+        lux = Double.parseDouble(_baseViewModel.MiddleZone.getIr());
         altitude = Double.parseDouble(_baseViewModel.MiddleZone.getAltitude());
 
         int count = 1;
@@ -137,7 +132,7 @@ public class DefaultLayoutFragment extends Fragment implements View.OnClickListe
             sound = sound + Double.parseDouble(_baseViewModel.DriverZone.getSound());
             airP = airP + Double.parseDouble(_baseViewModel.DriverZone.getPressure());
             humidity = humidity + Double.parseDouble(_baseViewModel.DriverZone.getHumidity());
-            lux = lux + Double.parseDouble(_baseViewModel.DriverZone.getLux());
+            lux = lux + Double.parseDouble(_baseViewModel.DriverZone.getIr());
             altitude = altitude + Double.parseDouble(_baseViewModel.DriverZone.getAltitude());
             count++;
         }
@@ -146,7 +141,7 @@ public class DefaultLayoutFragment extends Fragment implements View.OnClickListe
             sound = sound + Double.parseDouble(_baseViewModel.PassengerZone.getSound());
             airP = airP + Double.parseDouble(_baseViewModel.PassengerZone.getPressure());
             humidity = humidity + Double.parseDouble(_baseViewModel.PassengerZone.getHumidity());
-            lux = lux + Double.parseDouble(_baseViewModel.PassengerZone.getLux());
+            lux = lux + Double.parseDouble(_baseViewModel.PassengerZone.getIr());
             altitude = altitude + Double.parseDouble(_baseViewModel.PassengerZone.getAltitude());
             count++;
         }
@@ -155,7 +150,7 @@ public class DefaultLayoutFragment extends Fragment implements View.OnClickListe
             sound = sound + Double.parseDouble(_baseViewModel.BackseatZone.getSound());
             airP = airP + Double.parseDouble(_baseViewModel.BackseatZone.getPressure());
             humidity = humidity + Double.parseDouble(_baseViewModel.BackseatZone.getHumidity());
-            lux = lux + Double.parseDouble(_baseViewModel.BackseatZone.getLux());
+            lux = lux + Double.parseDouble(_baseViewModel.BackseatZone.getIr());
             altitude = altitude + Double.parseDouble(_baseViewModel.BackseatZone.getAltitude());
             count++;
         }
@@ -164,7 +159,7 @@ public class DefaultLayoutFragment extends Fragment implements View.OnClickListe
             sound = Double.parseDouble(_baseViewModel.MiddleZone.getSound());
             airP = Double.parseDouble(_baseViewModel.MiddleZone.getPressure());
             humidity = Double.parseDouble(_baseViewModel.MiddleZone.getHumidity());
-            lux = Double.parseDouble(_baseViewModel.MiddleZone.getLux());
+            lux = Double.parseDouble(_baseViewModel.MiddleZone.getIr());
             altitude = Double.parseDouble(_baseViewModel.MiddleZone.getAltitude());
             count = 1;
         }

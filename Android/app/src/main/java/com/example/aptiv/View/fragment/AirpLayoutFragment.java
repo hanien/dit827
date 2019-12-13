@@ -147,7 +147,7 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
             ApChangeValue.setText(String.valueOf((int) air));
         }
         if(_plusMinusButtonClicked){
-            PlusMinusButtonClicked(true,Driver,Passenger,Back);
+            setDesiredValue(Driver,Passenger,Back);
         }
     }
 
@@ -182,28 +182,33 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
             else {
                 _desiredAir--;
             }
-            ApChangeValue.setTextSize(25);
-            ApChangeValue.setText("Changing AP \n to " + (int)_desiredAir);
-            if(Driver){
+            setDesiredValue(Driver,Passenger,Back);
 
-                _baseViewModel.DriverProfile.setPressure(Double.toString(_desiredAir));
-            }
-            if (Passenger) {
-                _baseViewModel.PassengerProfile.setPressure(Double.toString(_desiredAir));
-            }
-            if (Back) {
-                _baseViewModel.BackProfile.setPressure(Double.toString(_desiredAir));
-            }
         } else {
-            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Air pressure is too different from other zones! Adjust other zones and try again.", false);
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Air pressure is too different from other zones! Adjust other zones and try again.", false,null);
             //TODO
             //if yes: implement adjustment behavior
             //else: reset to original value
         }
     }
 
+    private void setDesiredValue(boolean Driver, boolean Passenger,boolean Back) {
+        ApChangeValue.setTextSize(25);
+        ApChangeValue.setText("Changing AP \n to " + (int)_desiredAir);
+        if(Driver){
+
+            _baseViewModel.DriverProfile.setPressure(Double.toString(_desiredAir));
+        }
+        if (Passenger) {
+            _baseViewModel.PassengerProfile.setPressure(Double.toString(_desiredAir));
+        }
+        if (Back) {
+            _baseViewModel.BackProfile.setPressure(Double.toString(_desiredAir));
+        }
+    }
+
     private void setUpTimer() {
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(4000, 1000) {
 
             public void onTick(long millisUntilFinished) {
             }

@@ -101,14 +101,9 @@ public class ProfileHandler {
         HashMap<String, Boolean> check = checkProfile(profile, zone);
 
         if (check.containsValue(Boolean.FALSE)) {
-
-
             return false;
-
-
         } else {
-
-            ChangeZoneValues(profile, zone);
+            //ChangeZoneValues(profile, zone);
             return true;
         }
     }
@@ -118,26 +113,25 @@ public class ProfileHandler {
 
         HashMap<String, Boolean> checkedProfile = new HashMap<>(11);
 
+        checkedProfile.put( "temperature", profile.getTemperature() =="0" || profile.getTemperature() == null ? true : compareZonesAndProfile(zone.getTemperature(), profile.getTemperature()));
 
-        checkedProfile.put("temperature", compareZonesAndProfile(zone.getTemperature(), profile.getTemperature()));
+        checkedProfile.put("humidity", profile.getHumidity() =="0" || profile.getHumidity() == null ? true : compareZonesAndProfile(zone.getHumidity(), profile.getHumidity()));
 
-        checkedProfile.put("humidity", compareZonesAndProfile(zone.getHumidity(), profile.getHumidity()));
+        checkedProfile.put("gain", profile.getGain() =="0" || profile.getGain() == null ? true : compareZonesAndProfile(zone.getGain(), profile.getGain()));
 
-        checkedProfile.put("gain", compareZonesAndProfile(zone.getGain(), profile.getGain()));
+        checkedProfile.put("luminosity", profile.getLuminosity() =="0" || profile.getLuminosity() == null ? true : compareZonesAndProfile(zone.getLuminosity(), profile.getLuminosity()));
 
-        checkedProfile.put("luminosity", compareZonesAndProfile(zone.getLuminosity(), profile.getLuminosity()));
+        checkedProfile.put("full",  profile.getFull() =="0" || profile.getFull() == null ? true : compareZonesAndProfile(zone.getFull(), profile.getFull()));
 
-        checkedProfile.put("full", compareZonesAndProfile(zone.getFull(), profile.getFull()));
+        checkedProfile.put("ir",  profile.getIr() =="0"|| profile.getIr() == null ? true : compareZonesAndProfile(zone.getIr(), profile.getIr()));
 
-        checkedProfile.put("ir", compareZonesAndProfile(zone.getIr(), profile.getIr()));
+        checkedProfile.put("pressure", profile.getPressure() =="0" || profile.getPressure() == null ? true : compareZonesAndProfile(zone.getPressure(), profile.getPressure()));
 
-        checkedProfile.put("pressure", compareZonesAndProfile(zone.getPressure(), profile.getPressure()));
+        checkedProfile.put("sound",  profile.getSound() =="0" || profile.getSound() == null ? true : compareZonesAndProfile(zone.getSound(), profile.getSound()));
 
-        checkedProfile.put("sound", compareZonesAndProfile(zone.getSound(), profile.getSound()));
+        checkedProfile.put("light",   profile.getLight() =="0" || profile.getLight() == null ? true : compareZonesAndProfile(zone.getLight(), profile.getLight()));
 
-        checkedProfile.put("light", compareZonesAndProfile(zone.getLight(), profile.getLight()));
-
-        checkedProfile.put("lux", compareZonesAndProfile(zone.getLux(), profile.getLux()));
+        checkedProfile.put("lux",  profile.getLux() =="0" || profile.getLux() == null ? true : compareZonesAndProfile(zone.getLux(), profile.getLux()));
 
         return checkedProfile;
     }
@@ -161,16 +155,16 @@ public class ProfileHandler {
 
     private void ChangeZoneValues(Profile profile, Zone zone) {
 
-        zone.setTemperature(profile.getTemperature());
-        zone.setHumidity(profile.getHumidity());
-        zone.setGain(profile.getGain());
-        zone.setLuminosity(profile.getLuminosity());
-        zone.setFull(profile.getFull());
-        zone.setIr(profile.getIr());
-        zone.setPressure(profile.getPressure());
-        zone.setSound(profile.getSound());
-        zone.setLight(profile.getLight());
-        zone.setLux(profile.getLux());
+        profile.setTemperature(zone.getTemperature());
+        profile.setHumidity(zone.getHumidity());
+        profile.setGain(zone.getGain());
+        profile.setLuminosity(zone.getLuminosity());
+        profile.setFull(zone.getFull());
+        profile.setIr(zone.getIr());
+        profile.setPressure(zone.getPressure());
+        profile.setSound(zone.getSound());
+        profile.setLight(zone.getLight());
+        profile.setLux(zone.getLux());
 
     }
 

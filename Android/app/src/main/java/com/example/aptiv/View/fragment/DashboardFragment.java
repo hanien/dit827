@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.aptiv.Model.Class.Profile;
 import com.example.aptiv.Model.Class.Zone;
 import com.example.aptiv.Model.Class.Mode;
 import com.example.aptiv.Model.Interface.IZoneSelection;
@@ -254,7 +255,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         }
     }
 
-    public void CreatePopupView(final boolean DriverSeat, final boolean PassengerSeat, final boolean BackSeat, String messages, boolean OverrideButton) {
+    public void CreatePopupView(final boolean DriverSeat, final boolean PassengerSeat, final boolean BackSeat, String messages, boolean OverrideButton, final Mode currentMode) {
 
         final View popupView = _inflater.inflate(R.layout.fragment_popup, null);
 
@@ -285,25 +286,16 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
                 public void onClick(View v) {
                     //Do Something
                     if (DriverSeat) {
-                        //_baseViewModel.DriverProfile.set
+                        setValues(_baseViewModel.DriverProfile, currentMode);
                     }
                     if (PassengerSeat) {
-                        //_baseViewModel.PassengerProfile.set
-
+                        setValues(_baseViewModel.PassengerProfile, currentMode);
                     }
                     if (BackSeat) {
-                        //_baseViewModel.BackProfile.set
-
+                        setValues(_baseViewModel.BackProfile, currentMode);
                     }
                     popupWindow.dismiss();
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            popUpShown = false;
-                        }
-                    }, 30000);
+                    popUpShown = false;
                 }
             });
 
@@ -314,19 +306,21 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
                 public void onClick(View v) {
                     //Do Something
                     popupWindow.dismiss();
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            popUpShown = false;
-                        }
-                    }, 30000);
+                    popUpShown = false;
 
                 }
             });
         }
     }
+
+    private void setValues(Profile p , Mode m){
+        p.setIr(m.getLux().isEmpty() ?  null : m.getLux() );
+        p.setTemperature(m.getTemp().isEmpty() ?  null :m.getTemp());
+        p.setSound(m.getVolume().isEmpty() ?  null : m.getVolume());
+        p.setPressure(m.getAirp().isEmpty() ?  null : m.getAirp());
+        p.setHumidity(m.getHumidity().isEmpty() ?  null : m.getHumidity());
+    }
+
 
     //seat selection in the car image is base on color
     //in the background of the car image there is img with 3 colors representing every single zone

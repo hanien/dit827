@@ -140,7 +140,7 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
         luxChangeValue.setText(String.valueOf((int)lux) + " lux");
 
         if(_plusMinusButtonClicked) {
-            PlusMinusButtonClicked(true, Driver, Passenger, Back);
+            setDesiredValue(Driver,Passenger,Back);
         }
 
     }
@@ -152,7 +152,6 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
                     _baseViewModel.BackseatZone);
         }
         if(passenger){
-
             return ProfileHelper.checkLux(plus,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone,
@@ -176,24 +175,28 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
             else {
                 _desiredLux--;
             }
-            luxChangeValue.setTextSize(25);
-            luxChangeValue.setText("Changing Lux\n to " +(int)_desiredLux);
-            if(Driver){
-                _baseViewModel.DriverProfile.setIr(Double.toString(_desiredLux));
-            }
-            if (Passenger) {
-                _baseViewModel.PassengerProfile.setIr(Double.toString(_desiredLux));
-            }
-            if (Back) {
-                _baseViewModel.BackProfile.setIr(Double.toString(_desiredLux));
-            }
+            setDesiredValue(Driver,Passenger,Back);
         } else {
-            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Light level is too different from other zones! Adjust other zones and try again.", false);
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Light level is too different from other zones! Adjust other zones and try again.", false,null);
             //TODO
             //if yes: implement adjustment behavior
             //else: reset to original value
         }
 
+    }
+
+    private void setDesiredValue(boolean Driver,boolean Passenger , boolean Back){
+        luxChangeValue.setTextSize(25);
+        luxChangeValue.setText("Changing Lux\n to " +(int)_desiredLux);
+        if(Driver){
+            _baseViewModel.DriverProfile.setIr(Double.toString(_desiredLux));
+        }
+        if (Passenger) {
+            _baseViewModel.PassengerProfile.setIr(Double.toString(_desiredLux));
+        }
+        if (Back) {
+            _baseViewModel.BackProfile.setIr(Double.toString(_desiredLux));
+        }
     }
 
     private void setUpTimer() {

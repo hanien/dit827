@@ -17,6 +17,8 @@ import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
 import com.example.aptiv.ViewModel.BaseViewModel;
 
+import java.net.PasswordAuthentication;
+
 public class SoundLayoutFragment extends Fragment implements IZoneSelection {
 
     private MainActivity _owner;
@@ -141,7 +143,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
             _zoneSoundTextView.setText(String.valueOf((int) temp));
         }
         if(_plusMinusButtonClicked){
-            PlusMinusButtonClicked(true,Driver,Passenger,Back);
+            setDesiredValue(Driver,Passenger,Back);
         }
     }
 
@@ -177,31 +179,34 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
             else {
                 _desiredTemp--;
             }
+            setDesiredValue(Driver,Passenger,Back);
 
-            _zoneSoundTextView.setTextSize(25);
-            _zoneSoundTextView.setText("Changing Volume\n to " +(int)_desiredTemp);
-            if(Driver){
-                _baseViewModel.DriverProfile.setSound(Double.toString(_desiredTemp));
-            }
-            if (Passenger) {
-                _baseViewModel.PassengerProfile.setSound(Double.toString(_desiredTemp));
-            }
-            if (Back) {
-                _baseViewModel.BackProfile.setSound(Double.toString(_desiredTemp));
-            }
         } else {
 
-            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Sound is too different from other zones! Adjust other zones and try again.", false);
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Sound is too different from other zones! Adjust other zones and try again.", false,null);
             //TODO
             //if yes: implement adjustment behavior
             //else: reset to original value
         }
     }
 
+    private void setDesiredValue(boolean Driver, boolean Passenger,boolean Back){
+        _zoneSoundTextView.setTextSize(25);
+        _zoneSoundTextView.setText("Changing Volume\n to " +(int)_desiredTemp);
+        if(Driver){
+            _baseViewModel.DriverProfile.setSound(Double.toString(_desiredTemp));
+        }
+        if (Passenger) {
+            _baseViewModel.PassengerProfile.setSound(Double.toString(_desiredTemp));
+        }
+        if (Back) {
+            _baseViewModel.BackProfile.setSound(Double.toString(_desiredTemp));
+        }
+    }
 
     //region Timer method
     private void setUpTimer() {
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(4000, 1000) {
 
             public void onTick(long millisUntilFinished) {
             }
