@@ -121,6 +121,4 @@ public class MainActivity extends AppCompatActivity {
         Intent serviceIntent = new Intent(this, ReceiverService.class);
         this.stopService(serviceIntent);
     }
-
-
 }
