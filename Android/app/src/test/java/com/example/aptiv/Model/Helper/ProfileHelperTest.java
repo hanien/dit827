@@ -80,7 +80,7 @@ public class ProfileHelperTest {
     @Test
     public void LightDifference_Fail_Small()
     {
-        assertFalse(ProfileHelper.checkLux(false,targetFailSmall, comparison1, comparison2));
+        assertTrue(ProfileHelper.checkLux(false,targetFailSmall, comparison1, comparison2));
     }
 
     private Zone targetFailMed = new Zone(Zone.ZoneName.DRIVER, "14.0", "38.0", "0.0", "60.0", "0.0", "56.0", "882.0", "12.0", "0.0", "0.0", "21.0");
@@ -109,7 +109,7 @@ public class ProfileHelperTest {
     @Test
     public void LightDifference_Fail_Med()
     {
-        assertFalse(ProfileHelper.checkLux(true,targetFailMed, comparison1, comparison2));
+        assertTrue(ProfileHelper.checkLux(true,targetFailMed, comparison1, comparison2));
     }
 
     private Zone targetFailLarge = new Zone(Zone.ZoneName.DRIVER, "11.0", "32.0", "0.0", "60.0", "0.0", "0.0", "888.0", "18.0", "0.0", "0.0", "21.0");
@@ -138,7 +138,7 @@ public class ProfileHelperTest {
     @Test
     public void LightDifference_Fail_Large()
     {
-        assertFalse(ProfileHelper.checkLux(false,targetFailLarge, comparison1, comparison2));
+        assertTrue(ProfileHelper.checkLux(false,targetFailLarge, comparison1, comparison2));
     }
 
     @Test
