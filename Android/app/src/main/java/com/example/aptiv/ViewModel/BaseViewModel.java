@@ -35,7 +35,7 @@ public class BaseViewModel implements IVolleyCallback {
     public Boolean tempType; //True here means that it is Fahrenheit
     private String fahrenheit;
     private String celsius;
-
+    private String SoundValue;
     public BaseViewModel(MainActivity activity) {
         _activity = activity;
 
@@ -85,6 +85,7 @@ public class BaseViewModel implements IVolleyCallback {
     public void GetDriverReadings(Zone value) {
         DriverZone = value;
         DriverZone.setName(Zone.ZoneName.DRIVER);
+        DriverZone.setSound(SoundValue);
         _profileHandler.onDataFetched(value);
     }
 
@@ -92,6 +93,7 @@ public class BaseViewModel implements IVolleyCallback {
     public void GetPassengerReadings(Zone value) {
         PassengerZone = value;
         PassengerZone.setName(Zone.ZoneName.PASSENGER);
+        PassengerZone.setSound(SoundValue);
         _profileHandler.onDataFetched(value);
     }
 
@@ -100,6 +102,7 @@ public class BaseViewModel implements IVolleyCallback {
         MiddleZone = value;
         MiddleZone.setName(Zone.ZoneName.MIDDLE);
         BackseatZone.setIr(MiddleZone.getIr());
+        MiddleZone.setSound(SoundValue);
         _profileHandler.onDataFetched(value);
     }
 
@@ -113,6 +116,7 @@ public class BaseViewModel implements IVolleyCallback {
         BackseatZone = value;
         BackseatZone.setName(Zone.ZoneName.BACK);
         BackseatZone.setIr(MiddleZone.getIr());
+        BackseatZone.setSound(SoundValue);
         _profileHandler.onDataFetched(value);
     }
 
@@ -128,4 +132,7 @@ public class BaseViewModel implements IVolleyCallback {
         return celsius;
     }
 
+    public void SetValues(String value) {
+        SoundValue = value;
+    }
 }

@@ -188,7 +188,7 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
                 _baseViewModel.BackProfile.setIr(Double.toString(_desiredLux));
             }
         } else {
-            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Light level is too different from other zones! Adjust other zones and try again.", false);
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Light level is too different from other zones! Adjust other zones and try again.", false,null);
             //TODO
             //if yes: implement adjustment behavior
             //else: reset to original value
