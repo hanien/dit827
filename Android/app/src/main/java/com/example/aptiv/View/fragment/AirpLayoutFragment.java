@@ -154,20 +154,23 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private boolean checkZoneDifferences(boolean plus,boolean driver, boolean passenger, boolean backseat){
-        Zone desiredVal = new Zone(Zone.ZoneName.DRIVER,"0","0","0","0","0","0","0"+_desiredAir,"0","0","0","0");
-
         if(driver) {
-
+            Zone desiredVal = _baseViewModel.DriverZone;
+            desiredVal.setPressure(String.valueOf(_desiredAir));
             return ProfileHelper.checkAirPressure(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
         }
         if(passenger){
+            Zone desiredVal = _baseViewModel.PassengerZone;
+            desiredVal.setPressure(String.valueOf(_desiredAir));
             return ProfileHelper.checkAirPressure(plus,desiredVal,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
+            Zone desiredVal = _baseViewModel.BackseatZone;
+            desiredVal.setPressure(String.valueOf(_desiredAir));
             return ProfileHelper.checkAirPressure(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
@@ -189,7 +192,6 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
             ApChangeValue.setTextSize(25);
             ApChangeValue.setText("Changing AP \n to " + (int)_desiredAir);
             if(Driver){
-
                 _baseViewModel.DriverProfile.setPressure(Double.toString(_desiredAir));
             }
             if (Passenger) {

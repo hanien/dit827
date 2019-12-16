@@ -121,6 +121,9 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
             tempChangeValue.setTextSize(50);
             tempChangeValue.setText(String.valueOf((int) temp) + typeString);
         }
+        if(_plusMinusButtonClicked){
+            setDesiredValue(Driver,Passenger,Back);
+        }
     }
 
     private void setValueForZone(boolean Driver, boolean Passenger, boolean Back) {
@@ -161,8 +164,7 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
 
 
         if(_plusMinusButtonClicked){
-            tempChangeValue.setTextSize(25);
-            tempChangeValue.setText("Changing Tempreture\n to " + _desiredTemp+ typeString);
+            setDesiredValue(Driver,Passenger,Back);
         }
     }
 
@@ -189,10 +191,6 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
 
     private void PlusMinusButtonClicked(boolean plus,boolean Driver,boolean Passenger,boolean Back){
         _plusMinusButtonClicked = true;
-        Boolean tempType = _baseViewModel.getTempType();
-        String fahrenheit = _baseViewModel.getFahrenheit();
-        String celsius = _baseViewModel.getCelsius();
-        String typeString = ((tempType)) ? fahrenheit : celsius;
 
         if(checkZoneDifferences(plus,Driver, Passenger, Back)) {
             if(plus){
@@ -201,17 +199,7 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
             else {
                 _desiredTemp--;
             }
-            tempChangeValue.setTextSize(25);
-            tempChangeValue.setText("Changing Tempreture\n to " + _desiredTemp+ typeString);
-            if(Driver){
-                _baseViewModel.DriverProfile.setTemperature(Double.toString(_desiredTemp));
-            }
-            if (Passenger) {
-                _baseViewModel.PassengerProfile.setTemperature(Double.toString(_desiredTemp));
-            }
-            if (Back) {
-                _baseViewModel.BackProfile.setTemperature(Double.toString(_desiredTemp));
-            }
+            setDesiredValue(Driver,Passenger,Back);
         } else {
             _parentFragment.CreatePopupView(Driver, Passenger, Back, "Temperature is too different from other zones! Adjust other zones and try again.", false,null);
             //TODO
@@ -240,5 +228,23 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
 
     private void updateView() {
         updateTempValue(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
+    }
+
+    private void setDesiredValue(boolean Driver, boolean Passenger,boolean Back){
+        Boolean tempType = _baseViewModel.getTempType();
+        String fahrenheit = _baseViewModel.getFahrenheit();
+        String celsius = _baseViewModel.getCelsius();
+        String typeString = ((tempType)) ? fahrenheit : celsius;
+        tempChangeValue.setTextSize(25);
+        tempChangeValue.setText("Changing Tempreture\n to " + _desiredTemp+ typeString);
+        if(Driver){
+            _baseViewModel.DriverProfile.setTemperature(Double.toString(_desiredTemp));
+        }
+        if (Passenger) {
+            _baseViewModel.PassengerProfile.setTemperature(Double.toString(_desiredTemp));
+        }
+        if (Back) {
+            _baseViewModel.BackProfile.setTemperature(Double.toString(_desiredTemp));
+        }
     }
 }

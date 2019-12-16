@@ -71,14 +71,6 @@ public class BaseViewModel implements IVolleyCallback {
         _aptivService.GetBackseatReadings(this);
         _aptivService.GetDriverReadings(this);
         _aptivService.GetPassengerReadings(this);
-        if(DriverProfile.getTemperature() == null && DriverZone.getTemperature() != "0")
-        {
-            /*Very clunky fix that works around profiles not being initialized to current values on startup
-            *Reason for clunkiness is that it only works at a specified point on startup
-            *that was still not identified, as well as the server fetching only null values on first
-            *fetch.*/
-            InitData();
-        }
     }
 
     @Override
@@ -134,5 +126,14 @@ public class BaseViewModel implements IVolleyCallback {
 
     public void SetValues(String value) {
         SoundValue = value;
+    }
+
+    public double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 }
