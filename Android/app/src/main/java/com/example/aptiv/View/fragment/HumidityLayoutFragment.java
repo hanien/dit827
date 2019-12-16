@@ -156,22 +156,23 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
 
 
     private boolean checkZoneDifferences(boolean plus, boolean driver, boolean passenger, boolean backseat){
-        Zone desiredVal = new Zone(Zone.ZoneName.DRIVER,"0",""+_desiredHumidity,"0","0","0","0","0","0","0","0","0");
         if(driver) {
+            Zone desiredVal = _baseViewModel.DriverZone;
+            desiredVal.setHumidity(String.valueOf(_desiredHumidity));
             return ProfileHelper.checkHumidity(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
-
         }
-
-
         if(passenger){
+            Zone desiredVal = _baseViewModel.PassengerZone;
+            desiredVal.setHumidity(String.valueOf(_desiredHumidity));
             return ProfileHelper.checkHumidity(plus,desiredVal,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
-
+            Zone desiredVal = _baseViewModel.BackseatZone;
+            desiredVal.setHumidity(String.valueOf(_desiredHumidity));
             return ProfileHelper.checkHumidity(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
@@ -203,7 +204,7 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
                 _baseViewModel.BackProfile.setHumidity(Double.toString(_desiredHumidity));
             }
         } else {
-            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Humidity is too different from other zones! Adjust other zones and try again.", false);
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Humidity is too different from other zones! Adjust other zones and try again.", false,null);
             //TODO
             //if yes: implement adjustment behavior
             //else: reset to original value
@@ -229,7 +230,7 @@ public class HumidityLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private void updateView() {
-        HumidityValue.setText(_baseViewModel.MiddleZone.getHumidity() + " %");
+        HumidityValue.setText(String.valueOf(_baseViewModel.round(Double.parseDouble(_baseViewModel.MiddleZone.getHumidity()),1)) + " %");
         updateHumidityValue(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
     }
 

@@ -17,6 +17,7 @@ public class ProfileHandler {
     private Zone _driver, _passenger, _mid, _back;
     private Queue<Map> _driveSample, _passSample, _midSample, _backSample;
     private HashMap<String, Double> _driveSum, _passSum, _midSum, _backSum;
+    private Zone _oldDriverZone , _oldPassengerZone , _oldbackZone;
 
     public ProfileHandler(BaseViewModel base, DashboardFragment dashboardFragment,
                           Zone driver, Zone passenger, Zone mid, Zone back) {
@@ -46,10 +47,22 @@ public class ProfileHandler {
             case DRIVER:
                 _driver = zone;
                 sampleZone(_base.DriverProfile, zone);
+                if(_oldDriverZone == null){
+                    _oldDriverZone = zone;
+                }else{
+                    HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDefference(_driver, _oldDriverZone);
+                    CreateNotificationForZoneDifference(true,false,false,hasError);
+                }
                 break;
             case PASSENGER:
                 _passenger = zone;
                 sampleZone(_base.PassengerProfile, zone);
+                if(_oldPassengerZone == null){
+                    _oldPassengerZone = zone;
+                }else{
+                    HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDefference(_passenger, _oldPassengerZone);
+                    CreateNotificationForZoneDifference(false,true,false,hasError);
+                }
                 break;
             case MIDDLE:
                 _mid = zone;
@@ -57,10 +70,21 @@ public class ProfileHandler {
             case BACK:
                 _back = zone;
                 sampleZone(_base.BackProfile, zone);
+                if(_oldbackZone == null){
+                    _oldbackZone = zone;
+                }else{
+                    HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDefference(_back, _oldbackZone);
+                    CreateNotificationForZoneDifference(false,false,true,hasError);
+                }
                 break;
         }
     }
 
+    private void CreateNotificationForZoneDifference(boolean Driver, boolean Passenger , boolean Back ,HashMap<String, Boolean> hasError ){
+        if(hasError.containsValue(Boolean.FALSE)){
+            _dashboardFragment.CreateTempPopupView(Driver,Passenger,Back);
+        }
+    }
 
     public void sampleZone(Profile profile, Zone zone) {
         Queue<Map> currentQueue = null;

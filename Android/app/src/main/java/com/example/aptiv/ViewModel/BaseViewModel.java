@@ -35,7 +35,7 @@ public class BaseViewModel implements IVolleyCallback {
     public Boolean tempType; //True here means that it is Fahrenheit
     private String fahrenheit;
     private String celsius;
-
+    private String SoundValue;
     public BaseViewModel(MainActivity activity) {
         _activity = activity;
 
@@ -71,20 +71,13 @@ public class BaseViewModel implements IVolleyCallback {
         _aptivService.GetBackseatReadings(this);
         _aptivService.GetDriverReadings(this);
         _aptivService.GetPassengerReadings(this);
-        if(DriverProfile.getTemperature() == null && DriverZone.getTemperature() != "0")
-        {
-            /*Very clunky fix that works around profiles not being initialized to current values on startup
-            *Reason for clunkiness is that it only works at a specified point on startup
-            *that was still not identified, as well as the server fetching only null values on first
-            *fetch.*/
-            InitData();
-        }
     }
 
     @Override
     public void GetDriverReadings(Zone value) {
         DriverZone = value;
         DriverZone.setName(Zone.ZoneName.DRIVER);
+        DriverZone.setSound(SoundValue);
         _profileHandler.onDataFetched(value);
     }
 
@@ -92,6 +85,7 @@ public class BaseViewModel implements IVolleyCallback {
     public void GetPassengerReadings(Zone value) {
         PassengerZone = value;
         PassengerZone.setName(Zone.ZoneName.PASSENGER);
+        PassengerZone.setSound(SoundValue);
         _profileHandler.onDataFetched(value);
     }
 
@@ -100,6 +94,7 @@ public class BaseViewModel implements IVolleyCallback {
         MiddleZone = value;
         MiddleZone.setName(Zone.ZoneName.MIDDLE);
         BackseatZone.setIr(MiddleZone.getIr());
+        MiddleZone.setSound(SoundValue);
         _profileHandler.onDataFetched(value);
     }
 
@@ -113,6 +108,7 @@ public class BaseViewModel implements IVolleyCallback {
         BackseatZone = value;
         BackseatZone.setName(Zone.ZoneName.BACK);
         BackseatZone.setIr(MiddleZone.getIr());
+        BackseatZone.setSound(SoundValue);
         _profileHandler.onDataFetched(value);
     }
 
@@ -128,4 +124,16 @@ public class BaseViewModel implements IVolleyCallback {
         return celsius;
     }
 
+    public void SetValues(String value) {
+        SoundValue = value;
+    }
+
+    public double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
 }

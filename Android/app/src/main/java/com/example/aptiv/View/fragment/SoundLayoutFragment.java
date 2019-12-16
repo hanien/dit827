@@ -147,19 +147,23 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private boolean checkZoneDifferences(boolean plus, boolean driver, boolean passenger, boolean backseat){
-        Zone desiredVal = new Zone(Zone.ZoneName.DRIVER,"0","0","0","0","0","0","0",""+_desiredTemp,"0","0","0");
-
         if (driver) {
+            Zone desiredVal = _baseViewModel.DriverZone;
+            desiredVal.setSound(String.valueOf(_desiredTemp));
             return ProfileHelper.checkSound(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
         }
         if (passenger) {
+            Zone desiredVal = _baseViewModel.PassengerZone;
+            desiredVal.setSound(String.valueOf(_desiredTemp));
             return ProfileHelper.checkSound(plus,desiredVal,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if (backseat) {
+            Zone desiredVal = _baseViewModel.BackseatZone;
+            desiredVal.setSound(String.valueOf(_desiredTemp));
             return ProfileHelper.checkSound(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
@@ -194,7 +198,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
             }
         } else {
 
-            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Sound is too different from other zones! Adjust other zones and try again.", false);
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Sound is too different from other zones! Adjust other zones and try again.", false,null);
             //TODO
             //if yes: implement adjustment behavior
             //else: reset to original value
@@ -222,7 +226,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private void updateView() {
-        _soundTextView.setText(_baseViewModel.MiddleZone.getSound());
+        _soundTextView.setText(String.valueOf(_baseViewModel.round(Double.parseDouble(_baseViewModel.MiddleZone.getSound()),1)));
         updateSoundValue(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
     }
     //endregion

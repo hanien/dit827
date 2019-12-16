@@ -176,12 +176,12 @@ public class DefaultLayoutFragment extends Fragment implements View.OnClickListe
         lux = lux / count;
         altitude = altitude / count;
 
-        SetTemperature(temp);
-        _soundTextView.setText(String.valueOf(sound));
-        _airPressureTextView.setText(String.valueOf(airP));
-        _humidityTextView.setText(String.valueOf(humidity));
-        _luxTextView.setText(String.valueOf(lux));
-        _altitudeTextView.setText(String.valueOf(altitude));
+        SetTemperature(_baseViewModel.round(temp,1));
+        _soundTextView.setText(String.valueOf(_baseViewModel.round(sound,1)));
+        _airPressureTextView.setText(String.valueOf(_baseViewModel.round(airP,1)));
+        _humidityTextView.setText(String.valueOf(_baseViewModel.round(humidity,1)));
+        _luxTextView.setText(String.valueOf(_baseViewModel.round(lux,1)));
+        _altitudeTextView.setText(String.valueOf(_baseViewModel.round(altitude,1)));
 
     }
 }

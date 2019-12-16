@@ -154,20 +154,23 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private boolean checkZoneDifferences(boolean plus,boolean driver, boolean passenger, boolean backseat){
-        Zone desiredVal = new Zone(Zone.ZoneName.DRIVER,"0","0","0","0","0","0","0"+_desiredAir,"0","0","0","0");
-
         if(driver) {
-
+            Zone desiredVal = _baseViewModel.DriverZone;
+            desiredVal.setPressure(String.valueOf(_desiredAir));
             return ProfileHelper.checkAirPressure(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
         }
         if(passenger){
+            Zone desiredVal = _baseViewModel.PassengerZone;
+            desiredVal.setPressure(String.valueOf(_desiredAir));
             return ProfileHelper.checkAirPressure(plus,desiredVal,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
+            Zone desiredVal = _baseViewModel.BackseatZone;
+            desiredVal.setPressure(String.valueOf(_desiredAir));
             return ProfileHelper.checkAirPressure(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
@@ -189,7 +192,6 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
             ApChangeValue.setTextSize(25);
             ApChangeValue.setText("Changing AP \n to " + (int)_desiredAir);
             if(Driver){
-
                 _baseViewModel.DriverProfile.setPressure(Double.toString(_desiredAir));
             }
             if (Passenger) {
@@ -199,7 +201,7 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
                 _baseViewModel.BackProfile.setPressure(Double.toString(_desiredAir));
             }
         } else {
-            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Air pressure is too different from other zones! Adjust other zones and try again.", false);
+            _parentFragment.CreatePopupView(Driver, Passenger, Back, "Air pressure is too different from other zones! Adjust other zones and try again.", false,null);
             //TODO
             //if yes: implement adjustment behavior
             //else: reset to original value
@@ -225,7 +227,7 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private void updateView() {
-        ApValue.setText(_baseViewModel.MiddleZone.getPressure() + " hPa");
+        ApValue.setText(String.valueOf(_baseViewModel.round(Double.parseDouble(_baseViewModel.MiddleZone.getPressure()),1))+ " hPa");
         updateApValue(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
     }
 
