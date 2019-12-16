@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.aptiv.Model.Class.Zone;
 import com.example.aptiv.Model.Helper.ProfileHelper;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
@@ -140,26 +141,29 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
         luxChangeValue.setText(String.valueOf((int)lux) + " lux");
 
         if(_plusMinusButtonClicked) {
-            PlusMinusButtonClicked(true, Driver, Passenger, Back);
+            luxChangeValue.setTextSize(25);
+            luxChangeValue.setText("Changing Lux\n to " +(int)_desiredLux);
         }
 
     }
 
     private boolean checkZoneDifferences(boolean plus,boolean driver, boolean passenger, boolean backseat){
+        Zone desiredVal = new Zone(Zone.ZoneName.DRIVER,"0","0","0","0","0",""+_desiredLux,"0","0","0","0","0");
+
         if(driver) {
-            return ProfileHelper.checkLux(plus,_baseViewModel.DriverZone,
+            return ProfileHelper.checkLux(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
         }
         if(passenger){
 
             return ProfileHelper.checkLux(plus,
-                    _baseViewModel.PassengerZone,
+                    desiredVal,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
-            return ProfileHelper.checkLux(plus,_baseViewModel.BackseatZone,
+            return ProfileHelper.checkLux(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
         }

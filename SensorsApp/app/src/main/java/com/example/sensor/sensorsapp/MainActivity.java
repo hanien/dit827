@@ -70,7 +70,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 
             amp = voiceSensor.getAmplitude();
             int amp_Fixed = (int) Math.floor(amp * 100);
-            VoiceView.setText("Voice value: " + amp_Fixed);
+            amp_Fixed = Math.abs( amp_Fixed );
+            amp_Fixed =((int) Math.log( amp_Fixed )) * 20;
+
+            VoiceView.setText("Voice value: " + amp_Fixed + "dB");
             Publish(String.valueOf(amp_Fixed));
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {

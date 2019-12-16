@@ -281,24 +281,32 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
 
             Button _overrideButton = popupView.findViewById(R.id.OverrideButton);
             _overrideButton.setVisibility(OverrideButton ? View.VISIBLE : View.GONE);
-            _overrideButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Do Something
-                    if (DriverSeat) {
-                        setValues(_baseViewModel.DriverProfile, currentMode);
-                    }
-                    if (PassengerSeat) {
-                        setValues(_baseViewModel.PassengerProfile, currentMode);
-                    }
-                    if (BackSeat) {
-                        setValues(_baseViewModel.BackProfile, currentMode);
-                    }
-                    popupWindow.dismiss();
-                    popUpShown = false;
-                }
-            });
+            if(OverrideButton){
+                _overrideButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Do Something
+                        if (DriverSeat) {
+                            setValues(_baseViewModel.DriverProfile, currentMode);
+                        }
+                        if (PassengerSeat) {
+                            setValues(_baseViewModel.PassengerProfile, currentMode);
+                        }
+                        if (BackSeat) {
+                            setValues(_baseViewModel.BackProfile, currentMode);
+                        }
+                        popupWindow.dismiss();
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
 
+                                popUpShown = false;
+                            }
+                        }, 1000);
+                    }
+                });
+            }
             // Getting a reference to button two and do something
             Button _okButton = popupView.findViewById(R.id.OkButton);
             _okButton.setOnClickListener(new View.OnClickListener() {
@@ -306,8 +314,13 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
                 public void onClick(View v) {
                     //Do Something
                     popupWindow.dismiss();
-                    popUpShown = false;
-
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            popUpShown = false;
+                        }
+                    },1000);
                 }
             });
         }

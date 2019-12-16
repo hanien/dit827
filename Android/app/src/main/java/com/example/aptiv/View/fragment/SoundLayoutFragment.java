@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.aptiv.Model.Class.Zone;
 import com.example.aptiv.Model.Helper.ProfileHelper;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
@@ -141,23 +142,25 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
             _zoneSoundTextView.setText(String.valueOf((int) temp));
         }
         if(_plusMinusButtonClicked){
-            PlusMinusButtonClicked(true,Driver,Passenger,Back);
-        }
+            _zoneSoundTextView.setTextSize(25);
+            _zoneSoundTextView.setText("Changing Volume\n to " +(int)_desiredTemp);        }
     }
 
     private boolean checkZoneDifferences(boolean plus, boolean driver, boolean passenger, boolean backseat){
+        Zone desiredVal = new Zone(Zone.ZoneName.DRIVER,"0","0","0","0","0","0","0",""+_desiredTemp,"0","0","0");
+
         if (driver) {
-            return ProfileHelper.checkSound(plus,_baseViewModel.DriverZone,
+            return ProfileHelper.checkSound(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
         }
         if (passenger) {
-            return ProfileHelper.checkSound(plus,_baseViewModel.PassengerZone,
+            return ProfileHelper.checkSound(plus,desiredVal,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if (backseat) {
-            return ProfileHelper.checkSound(plus,_baseViewModel.BackseatZone,
+            return ProfileHelper.checkSound(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
         }
