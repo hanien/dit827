@@ -45,42 +45,45 @@ public class ProfileHandler {
         switch (zone.getName()) {
             case DRIVER:
                 _driver = zone;
+                sampleZone(_base.DriverProfile, zone);
                 break;
             case PASSENGER:
                 _passenger = zone;
+                sampleZone(_base.PassengerProfile, zone);
                 break;
             case MIDDLE:
                 _mid = zone;
                 break;
             case BACK:
                 _back = zone;
+                sampleZone(_base.BackProfile, zone);
                 break;
         }
-        sampleZone(getProfileOfZone(zone), zone);
     }
 
 
     public void sampleZone(Profile profile, Zone zone) {
         Queue<Map> currentQueue = null;
         HashMap<String, Double> currentSum = null;
-
+        profile = null;
         switch (zone.getName()) {
             case DRIVER:
                 currentQueue = _driveSample;
                 currentSum = _driveSum;
+                profile = _base.DriverProfile;
                 break;
             case PASSENGER:
                 currentQueue = _passSample;
                 currentSum = _passSum;
-                break;
-            case MIDDLE:
-                currentQueue = _midSample;
-                currentSum = _midSum;
+                profile = _base.PassengerProfile;
                 break;
             case BACK:
                 currentQueue = _backSample;
                 currentSum = _backSum;
+                profile = _base.BackProfile;
                 break;
+            case MIDDLE:
+                return;
         }
 
 

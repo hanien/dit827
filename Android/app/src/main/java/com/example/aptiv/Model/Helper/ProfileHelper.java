@@ -123,7 +123,7 @@ public class ProfileHelper {
             queue.add(zone.getAll());
             return true;
         }
-        else if(queue.size() == 4) {
+        else if(queue.size() >= 4) {
             queue.add(zone.getAll());
             for(int i = 0; i < queue.size(); i++){
                 sum = sumMaps(sum, (HashMap<String, Double>)queue.toArray()[i]);
@@ -135,15 +135,11 @@ public class ProfileHelper {
             HashMap<String, Boolean> hasError = checkZone(target, avg);
 
             if(hasError.containsValue(Boolean.FALSE)){
-                //add reading to queue
                 queue.remove();
-                queue.add(zone.getAll());
                 return false;
             }
             else{
-                //add reading to queue
                 queue.remove();
-                queue.add(zone.getAll());
                 return true;
             }
         }
