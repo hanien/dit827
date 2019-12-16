@@ -108,15 +108,15 @@ public class Zone {
     }
 
     public String getIr() {
-        if (ir == null) {
+        if (lux == null) {
             return "0.0";
         }
-        String infra = String.format("%.2f", parseFloat(ir));
+        String infra = String.format("%.2f", parseFloat(lux));
         return infra;
     }
 
     public void setIr(String ir) {
-        this.ir = ir;
+        this.lux = ir;
     }
 
     public String getPressure() {
