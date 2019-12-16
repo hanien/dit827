@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Aptiv</string>
+    <string name="app_name">Comfort Zone</string>
     <string name="temperatureText">TEMPERATURE</string>
     <string name="autoText">SOUND VOLUME</string>
     <string name="ProfileKey">com.example.aptiv.ProfileKey</string>

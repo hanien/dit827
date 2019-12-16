@@ -17,6 +17,7 @@ public class ProfileHandler {
     private Zone _driver, _passenger, _mid, _back;
     private Queue<Map> _driveSample, _passSample, _midSample, _backSample;
     private HashMap<String, Double> _driveSum, _passSum, _midSum, _backSum;
+    private Zone _oldDriverZone , _oldPassengerZone , _oldbackZone;
 
     public ProfileHandler(BaseViewModel base, DashboardFragment dashboardFragment,
                           Zone driver, Zone passenger, Zone mid, Zone back) {
@@ -45,45 +46,68 @@ public class ProfileHandler {
         switch (zone.getName()) {
             case DRIVER:
                 _driver = zone;
+                sampleZone(_base.DriverProfile, zone);
+                if(_oldDriverZone == null){
+                    _oldDriverZone = zone;
+                }else{
+                    HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDefference(_driver, _oldDriverZone);
+                    CreateNotificationForZoneDifference(true,false,false,hasError);
+                }
                 break;
             case PASSENGER:
                 _passenger = zone;
+                sampleZone(_base.PassengerProfile, zone);
+                if(_oldPassengerZone == null){
+                    _oldPassengerZone = zone;
+                }else{
+                    HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDefference(_passenger, _oldPassengerZone);
+                    CreateNotificationForZoneDifference(false,true,false,hasError);
+                }
                 break;
             case MIDDLE:
                 _mid = zone;
                 break;
             case BACK:
                 _back = zone;
+                sampleZone(_base.BackProfile, zone);
+                if(_oldbackZone == null){
+                    _oldbackZone = zone;
+                }else{
+                    HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDefference(_back, _oldbackZone);
+                    CreateNotificationForZoneDifference(false,false,true,hasError);
+                }
                 break;
         }
-        sampleZone(getProfileOfZone(zone), zone);
     }
 
-    public void alignToZone(Profile profile, Zone zone) {
-
+    private void CreateNotificationForZoneDifference(boolean Driver, boolean Passenger , boolean Back ,HashMap<String, Boolean> hasError ){
+        if(hasError.containsValue(Boolean.FALSE)){
+            _dashboardFragment.CreateTempPopupView(Driver,Passenger,Back);
+        }
     }
 
     public void sampleZone(Profile profile, Zone zone) {
         Queue<Map> currentQueue = null;
         HashMap<String, Double> currentSum = null;
-
+        profile = null;
         switch (zone.getName()) {
             case DRIVER:
                 currentQueue = _driveSample;
                 currentSum = _driveSum;
+                profile = _base.DriverProfile;
                 break;
             case PASSENGER:
                 currentQueue = _passSample;
                 currentSum = _passSum;
-                break;
-            case MIDDLE:
-                currentQueue = _midSample;
-                currentSum = _midSum;
+                profile = _base.PassengerProfile;
                 break;
             case BACK:
                 currentQueue = _backSample;
                 currentSum = _backSum;
+                profile = _base.BackProfile;
                 break;
+            case MIDDLE:
+                return;
         }
 
 
@@ -91,48 +115,11 @@ public class ProfileHandler {
         //TODO: fix naming conventions a little
         if(!ProfileHelper.sampleZone(profile, zone, currentQueue, currentSum)){
             _dashboardFragment.toggleError(zone, Boolean.TRUE);
-            _dashboardFragment.CreatePopupView(
-                    zone.getName() == Zone.ZoneName.DRIVER,
-                    zone.getName() == Zone.ZoneName.PASSENGER,
-                    zone.getName() == Zone.ZoneName.BACK,
-                    "dummy message", true
-            );
         }
         else{
             _dashboardFragment.toggleError(zone, Boolean.FALSE);
         }
     }
-/*
-    private boolean checkTempLevel() {
-
-        String  DriverTempLevel = _base.DriverZone.getTemperature();
-        String  PassengerTempLevel = _base.DriverZone.getTemperature();
-        String  BackTempLevel = _base.DriverZone.getTemperature();
-
-        boolean DriverCheck = compareThreshold(Double.parseDouble(_base.DriverProfile.getTemperature()), Double.parseDouble(DriverTempLevel),t_temp);
-        boolean PassengerCheck = compareThreshold(Double.parseDouble(_base.PassengerProfile.getTemperature()), Double.parseDouble(PassengerTempLevel),t_temp);
-        boolean BackCheck = compareThreshold(Double.parseDouble(_base.BackProfile.getTemperature()), Double.parseDouble(BackTempLevel),t_temp);
-
-
-        return DriverCheck && PassengerCheck && BackCheck;
-
-    }
-
-    private boolean checkSoundLevel() {
-
-        String  DriverSoundLevel = _base.DriverZone.getSound();
-        String  PassengerSoundLevel = _base.PassengerZone.getSound();
-        String  BackSoundLevel = _base.BackseatZone.getSound();
-
-        boolean DriverCheck = compareThreshold(Double.parseDouble(_base.DriverProfile.getSound()), Double.parseDouble(DriverSoundLevel),t_sound);
-        boolean PassengerCheck = compareThreshold(Double.parseDouble(_base.PassengerProfile.getSound()), Double.parseDouble(PassengerSoundLevel),t_sound);
-        boolean BackCheck = compareThreshold(Double.parseDouble(_base.BackProfile.getSound()), Double.parseDouble(BackSoundLevel),t_sound);
-
-
-        return DriverCheck && PassengerCheck && BackCheck;
-
-    }
-*/
 
     public boolean ZonesValueHandler(Profile profile, Zone zone) {
         if (profile == null || zone == null) {

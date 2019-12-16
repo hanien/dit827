@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.aptiv.Model.Class.Mode;
+import com.example.aptiv.Model.Class.Profile;
 import com.example.aptiv.Model.Helper.ProfileHandler;
 import com.example.aptiv.R;
 import com.example.aptiv.View.MainActivity;
@@ -79,68 +80,59 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
                 boolean DriverSeat = _parentFragment == null ? false : _parentFragment._driverSeatSelected;
                 boolean PassengerSeat = _parentFragment == null ? false : _parentFragment._frontSeatSelected;
                 boolean BackSeat = _parentFragment == null ? false : _parentFragment._backSeatSelected;
+                Profile tempProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
+                setValues(tempProfile,currentMode);
+
                 if (!DriverSeat && !PassengerSeat && !BackSeat) {
-                    _parentFragment.CreatePopupView(DriverSeat, PassengerSeat, BackSeat, "Sorry, please select a zone that you want to apply the mode on", false);
+                    _parentFragment.CreatePopupView(DriverSeat, PassengerSeat, BackSeat, "Sorry, please select a zone that you want to apply the mode on", false, null);
                 } else {
-                    if (DriverSeat) {
-                        //check differences for every variable
-                        //if all check out, set new profile
-
-                        /*
-                        _viewModel.DriverProfile.setIr(currentMode.getLux());
-                        _viewModel.DriverProfile.setTemperature(currentMode.getTemp());
-                        _viewModel.DriverProfile.setSound(currentMode.getVolume());
-                        _viewModel.DriverProfile.setPressure(currentMode.getAirp());
-                        _viewModel.DriverProfile.setHumidity(currentMode.getHumidity());
-                        */
-
-                        _viewModel.DriverProfile.setIr("1");
-                        _viewModel.DriverProfile.setTemperature("1");
-                        _viewModel.DriverProfile.setSound("1");
-                        _viewModel.DriverProfile.setPressure("1");
-                        _viewModel.DriverProfile.setHumidity("1");
-
-                        if (!_handler.ZonesValueHandler(_viewModel.DriverProfile, _viewModel.DriverZone)) {
-                            _parentFragment.CreatePopupView(false, false, false, "Can't change values for this profile because it's overlapping!", false);
+                    if (DriverSeat && PassengerSeat && BackSeat) {
+                        setValues(_viewModel.DriverProfile, currentMode);
+                        setValues(_viewModel.PassengerProfile, currentMode);
+                        setValues(_viewModel.BackProfile, currentMode);
+                    }
+                    else if (DriverSeat && PassengerSeat) {
+                        if (!_handler.ZonesValueHandler(tempProfile, _viewModel.BackseatZone)) {
+                            _parentFragment.CreatePopupView(DriverSeat, PassengerSeat, BackSeat, "Can't change values for this profile because it's overlapping in the back seat!", true, currentMode);
+                        } else {
+                            setValues(_viewModel.DriverProfile, currentMode);
+                            setValues(_viewModel.PassengerProfile, currentMode);
                         }
                     }
-                    if (PassengerSeat) {
-                   /*
-                        _viewModel.PassengerProfile.setIr(currentMode.getLux());
-                        _viewModel.PassengerProfile.setTemperature(currentMode.getTemp());
-                        _viewModel.PassengerProfile.setSound(currentMode.getVolume());
-                        _viewModel.PassengerProfile.setPressure(currentMode.getAirp());
-                        _viewModel.PassengerProfile.setHumidity(currentMode.getHumidity());
-
-                    */
-
-                        _viewModel.PassengerProfile.setIr("1");
-                        _viewModel.PassengerProfile.setTemperature("1");
-                        _viewModel.PassengerProfile.setSound("1");
-                        _viewModel.PassengerProfile.setPressure("1");
-                        _viewModel.PassengerProfile.setHumidity("1");
-
-                        if (!_handler.ZonesValueHandler(_viewModel.PassengerProfile, _viewModel.PassengerZone)) {
-                            _parentFragment.CreatePopupView(false, false, false, "Can't change values for this profile because it's overlapping!", false);
+                    else if (PassengerSeat && BackSeat) {
+                        if (!_handler.ZonesValueHandler(tempProfile, _viewModel.DriverZone)) {
+                            _parentFragment.CreatePopupView(DriverSeat, PassengerSeat, BackSeat, "Can't change values for this profile because it's overlapping in the driver seat!", true, currentMode);
+                        } else {
+                            setValues(_viewModel.PassengerProfile, currentMode);
+                            setValues(_viewModel.BackProfile, currentMode);
                         }
                     }
-                    if (BackSeat) {
-                        /*
-                        _viewModel.BackProfile.setIr(currentMode.getLux());
-                        _viewModel.BackProfile.setTemperature(currentMode.getTemp());
-                        _viewModel.BackProfile.setSound(currentMode.getVolume());
-                        _viewModel.BackProfile.setPressure(currentMode.getAirp());
-                        _viewModel.BackProfile.setHumidity(currentMode.getHumidity());
-                        */
-
-                        _viewModel.BackProfile.setIr("1");
-                        _viewModel.BackProfile.setTemperature("1");
-                        _viewModel.BackProfile.setSound("1");
-                        _viewModel.BackProfile.setPressure("1");
-                        _viewModel.BackProfile.setHumidity("1");
-
-                        if (!_handler.ZonesValueHandler(_viewModel.BackProfile, _viewModel.BackseatZone)) {
-                            _parentFragment.CreatePopupView(false, false, false, "Can't change values for this profile because it's overlapping!", false);
+                    else if(DriverSeat && BackSeat){
+                        if (!_handler.ZonesValueHandler(tempProfile, _viewModel.PassengerZone) ) {
+                            _parentFragment.CreatePopupView(DriverSeat, PassengerSeat, BackSeat, "Can't change values for this profile because it's overlapping in the passenger seat!", true, currentMode);
+                        } else {
+                            setValues(_viewModel.DriverProfile, currentMode);
+                        }
+                    }
+                    else if (DriverSeat) {
+                        if (!_handler.ZonesValueHandler(tempProfile, _viewModel.PassengerZone) && !_handler.ZonesValueHandler(tempProfile, _viewModel.BackseatZone)) {
+                            _parentFragment.CreatePopupView(DriverSeat, PassengerSeat, BackSeat, "Can't change values for this profile because it's overlapping in the passenger or driver seat!", true, currentMode);
+                        } else {
+                            setValues(_viewModel.DriverProfile, currentMode);
+                        }
+                    }
+                    else if (PassengerSeat) {
+                        if (!_handler.ZonesValueHandler(tempProfile, _viewModel.DriverZone) && !_handler.ZonesValueHandler(tempProfile, _viewModel.BackseatZone)) {
+                            _parentFragment.CreatePopupView(DriverSeat, PassengerSeat, BackSeat, "Can't change values for this profile because it's overlapping in the driver or back seat!", true, currentMode);
+                        } else {
+                            setValues(_viewModel.PassengerProfile, currentMode);
+                        }
+                    }
+                    else if (BackSeat) {
+                        if (!_handler.ZonesValueHandler(tempProfile, _viewModel.PassengerZone) && !_handler.ZonesValueHandler(tempProfile, _viewModel.DriverZone)) {
+                            _parentFragment.CreatePopupView(DriverSeat, PassengerSeat, BackSeat, "Can't change values for this profile because it's overlapping in the passenger or driver seat!", true, currentMode);
+                        } else {
+                            setValues(_viewModel.BackProfile, currentMode);
                         }
                     }
                 }
@@ -148,6 +140,14 @@ public class CustomListAdapter extends ArrayAdapter<Mode> {
         });
 
         return listView;
+    }
+
+    private void setValues(Profile p , Mode m){
+        p.setIr(m.getLux().isEmpty() ?  null : m.getLux() );
+        p.setTemperature(m.getTemp().isEmpty() ?  null :m.getTemp());
+        p.setSound(m.getVolume().isEmpty() ?  null : m.getVolume());
+        p.setPressure(m.getAirp().isEmpty() ?  null : m.getAirp());
+        p.setHumidity(m.getHumidity().isEmpty() ?  null : m.getHumidity());
     }
 
     private void saveData() {

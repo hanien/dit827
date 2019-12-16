@@ -46,8 +46,9 @@ public class AptivService implements IAptivService {
                         dataArray = response.toString();
                         final Zone Zone = gson.fromJson(dataArray, Zone.class);
                         _callback.GetDriverReadings(Zone);
+                        Log.d(this.getClass().toString(), "Driver: received data");
                     } catch (Exception e) {
-                        Log.e(this.getClass().toString(), "something bad happened");
+                        Log.e(this.getClass().toString(), "Driver: " + e.toString());
                     }
                 }
             }, new Response.ErrorListener() {
@@ -79,8 +80,9 @@ public class AptivService implements IAptivService {
                         dataArray = response.toString();
                         final Zone Zone = gson.fromJson(dataArray, Zone.class);
                         _callback.GetPassengerReadings(Zone);
+                        Log.d(this.getClass().toString(), "Passenger: received data");
                     } catch (Exception e) {
-                        Log.e(this.getClass().toString(), "something bad happened");
+                        Log.e(this.getClass().toString(), "Passenger: " + e.toString());
                     }
                 }
             }, new Response.ErrorListener() {
@@ -113,8 +115,9 @@ public class AptivService implements IAptivService {
                         dataArray = response.toString();
                         final Zone Zone = gson.fromJson(dataArray, Zone.class);
                         _callback.GetAverageReadings(Zone);
+                        Log.d(this.getClass().toString(), "Mid: received data");
                     } catch (Exception e) {
-                        Log.e(this.getClass().toString(), "something bad happened");
+                        Log.e(this.getClass().toString(), "Average: " + e.toString());
                     }
                 }
             }, new Response.ErrorListener() {
@@ -147,8 +150,9 @@ public class AptivService implements IAptivService {
                         dataArray = response.toString();
                         final Zone Zone = gson.fromJson(dataArray, Zone.class);
                         _callback.GetBackseatReadings(Zone);
+                        Log.d(this.getClass().toString(), "Back: received data");
                     } catch (Exception e) {
-                        Log.e(this.getClass().toString(), "something bad happened");
+                        Log.e(this.getClass().toString(), "Back: " + e.toString());
                     }
                 }
             }, new Response.ErrorListener() {

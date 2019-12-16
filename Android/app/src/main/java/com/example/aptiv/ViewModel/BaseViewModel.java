@@ -9,6 +9,8 @@ import com.example.aptiv.Model.Service.AptivService;
 import com.example.aptiv.Model.Helper.ProfileHandler;
 import com.example.aptiv.View.fragment.DashboardFragment;
 
+import java.sql.Driver;
+
 
 public class BaseViewModel implements IVolleyCallback {
 
@@ -24,16 +26,16 @@ public class BaseViewModel implements IVolleyCallback {
     public static Zone BackseatZone = new Zone(Zone.ZoneName.BACK, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0");
     public static Zone MiddleZone = new Zone(Zone.ZoneName.MIDDLE, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0");
 
-    public Profile DriverProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
-    public Profile PassengerProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
-    public Profile BackProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
+    public static Profile DriverProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
+    public static Profile PassengerProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
+    public static Profile BackProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
 
     public Double OutTemperature = 0.0;
     public Boolean isMuted = false;
     public Boolean tempType; //True here means that it is Fahrenheit
     private String fahrenheit;
     private String celsius;
-
+    private String SoundValue;
     public BaseViewModel(MainActivity activity) {
         _activity = activity;
 
@@ -47,10 +49,6 @@ public class BaseViewModel implements IVolleyCallback {
         tempType = false;
         _weatherService.GetWeather(this);
 
-        UpdateData();
-        DriverProfile.setFromZone(DriverZone);
-        PassengerProfile.setFromZone(PassengerZone);
-        BackProfile.setFromZone(BackseatZone);
     }
 
     public void onProfileChange() {
@@ -60,6 +58,12 @@ public class BaseViewModel implements IVolleyCallback {
     public void SetDashboardFragment(DashboardFragment fragment) {
         _dashboardFragment = fragment;
         _profileHandler.SetDashboardFragment(fragment);
+    }
+
+    public void InitData(){
+        DriverProfile.setFromZone(DriverZone);
+        PassengerProfile.setFromZone(PassengerZone);
+        BackProfile.setFromZone(BackseatZone);
     }
 
     public void UpdateData() {
@@ -73,6 +77,7 @@ public class BaseViewModel implements IVolleyCallback {
     public void GetDriverReadings(Zone value) {
         DriverZone = value;
         DriverZone.setName(Zone.ZoneName.DRIVER);
+        DriverZone.setSound(SoundValue);
         _profileHandler.onDataFetched(value);
     }
 
@@ -80,6 +85,7 @@ public class BaseViewModel implements IVolleyCallback {
     public void GetPassengerReadings(Zone value) {
         PassengerZone = value;
         PassengerZone.setName(Zone.ZoneName.PASSENGER);
+        PassengerZone.setSound(SoundValue);
         _profileHandler.onDataFetched(value);
     }
 
@@ -88,6 +94,7 @@ public class BaseViewModel implements IVolleyCallback {
         MiddleZone = value;
         MiddleZone.setName(Zone.ZoneName.MIDDLE);
         BackseatZone.setIr(MiddleZone.getIr());
+        MiddleZone.setSound(SoundValue);
         _profileHandler.onDataFetched(value);
     }
 
@@ -101,6 +108,7 @@ public class BaseViewModel implements IVolleyCallback {
         BackseatZone = value;
         BackseatZone.setName(Zone.ZoneName.BACK);
         BackseatZone.setIr(MiddleZone.getIr());
+        BackseatZone.setSound(SoundValue);
         _profileHandler.onDataFetched(value);
     }
 
@@ -116,4 +124,16 @@ public class BaseViewModel implements IVolleyCallback {
         return celsius;
     }
 
+    public void SetValues(String value) {
+        SoundValue = value;
+    }
+
+    public double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
 }

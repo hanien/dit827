@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.aptiv.Model.Class.Profile;
 import com.example.aptiv.Model.Class.Zone;
 import com.example.aptiv.Model.Class.Mode;
 import com.example.aptiv.Model.Interface.IZoneSelection;
@@ -228,6 +229,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         switch (zone.getName()) {
             case DRIVER:
                 if (show) {
+                    _driverSeatError.setImageResource(R.drawable.driverseatprogressing);
                     _driverSeatError.setVisibility(View.VISIBLE);
                 } else {
                     _driverSeatError.setVisibility(View.INVISIBLE);
@@ -235,6 +237,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
                 break;
             case PASSENGER:
                 if (show) {
+                    _frontSeatError.setImageResource(R.drawable.frontseatprogressing);
                     _frontSeatError.setVisibility(View.VISIBLE);
                 } else {
                     _frontSeatError.setVisibility(View.INVISIBLE);
@@ -242,6 +245,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
                 break;
             case BACK:
                 if (show) {
+                    _backSeatError.setImageResource(R.drawable.backseatprogressing);
                     _backSeatError.setVisibility(View.VISIBLE);
                 } else {
                     _backSeatError.setVisibility(View.INVISIBLE);
@@ -254,7 +258,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         }
     }
 
-    public void CreatePopupView(final boolean DriverSeat, final boolean PassengerSeat, final boolean BackSeat, String messages, boolean OverrideButton) {
+    public void CreatePopupView(final boolean DriverSeat, final boolean PassengerSeat, final boolean BackSeat, String messages, boolean OverrideButton, final Mode currentMode) {
 
         final View popupView = _inflater.inflate(R.layout.fragment_popup, null);
 
@@ -280,33 +284,32 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
 
             Button _overrideButton = popupView.findViewById(R.id.OverrideButton);
             _overrideButton.setVisibility(OverrideButton ? View.VISIBLE : View.GONE);
-            _overrideButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Do Something
-                    if (DriverSeat) {
-                        //_baseViewModel.DriverProfile.set
-                    }
-                    if (PassengerSeat) {
-                        //_baseViewModel.PassengerProfile.set
-
-                    }
-                    if (BackSeat) {
-                        //_baseViewModel.BackProfile.set
-
-                    }
-                    popupWindow.dismiss();
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            popUpShown = false;
+            if(OverrideButton){
+                _overrideButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Do Something
+                        if (DriverSeat) {
+                            setValues(_baseViewModel.DriverProfile, currentMode);
                         }
-                    }, 30000);
-                }
-            });
+                        if (PassengerSeat) {
+                            setValues(_baseViewModel.PassengerProfile, currentMode);
+                        }
+                        if (BackSeat) {
+                            setValues(_baseViewModel.BackProfile, currentMode);
+                        }
+                        popupWindow.dismiss();
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
 
+                                popUpShown = false;
+                            }
+                        }, 1000);
+                    }
+                });
+            }
             // Getting a reference to button two and do something
             Button _okButton = popupView.findViewById(R.id.OkButton);
             _okButton.setOnClickListener(new View.OnClickListener() {
@@ -318,15 +321,22 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-
                             popUpShown = false;
                         }
-                    }, 30000);
-
+                    },1000);
                 }
             });
         }
     }
+
+    private void setValues(Profile p , Mode m){
+        p.setIr(m.getLux().isEmpty() ?  null : m.getLux() );
+        p.setTemperature(m.getTemp().isEmpty() ?  null :m.getTemp());
+        p.setSound(m.getVolume().isEmpty() ?  null : m.getVolume());
+        p.setPressure(m.getAirp().isEmpty() ?  null : m.getAirp());
+        p.setHumidity(m.getHumidity().isEmpty() ?  null : m.getHumidity());
+    }
+
 
     //seat selection in the car image is base on color
     //in the background of the car image there is img with 3 colors representing every single zone
@@ -351,4 +361,51 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
         return true;
     }
 
+    public void CreateTempPopupView(boolean driver, boolean passenger, boolean back) {
+        final View popupView = _inflater.inflate(R.layout.fragment_popup, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
+        boolean focusable = false;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        if (!popUpShown) {
+            popupWindow.showAtLocation(_view, Gravity.CENTER, 0, 0);
+            popUpShown = true;
+            TextView txtMessage = popupView.findViewById(R.id.PopupViewMessage);
+            String ZoneName = driver ? "driver": passenger ? "passenger" : "back" ;
+            String messages = "Values has unexpectedly changed in the " + ZoneName + " zone!";
+            txtMessage.setText(messages);
+
+
+            _driverSeatError.setVisibility(driver ? View.VISIBLE : View.GONE);
+            _driverSeatError.setImageResource(R.drawable.driverseatred);
+            _frontSeatError.setVisibility(passenger ? View.VISIBLE : View.GONE);
+            _frontSeatError.setImageResource(R.drawable.frontseatred);
+            _backSeatError.setVisibility(back ? View.VISIBLE : View.GONE);
+            _backSeatError.setImageResource(R.drawable.backseatred);
+
+            Button _overrideButton = popupView.findViewById(R.id.OverrideButton);
+            _overrideButton.setVisibility(View.GONE);
+            Button _okButton = popupView.findViewById(R.id.OkButton);
+            _okButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Do Something
+                    popupWindow.dismiss();
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            _driverSeatError.setVisibility(View.GONE);
+                            _frontSeatError.setVisibility(View.GONE);
+                            _backSeatError.setVisibility(View.GONE);
+                            popUpShown = false;
+                        }
+                    },60000);
+                }
+            });
+        }
+    }
 }
