@@ -141,11 +141,6 @@ public class ProfileHelperTest {
         assertFalse(ProfileHelper.checkLux(false,targetFailLarge, comparison1, comparison2));
     }
 
-    //two cases : success and fail
-    //case 1:
-    ////create empty queue and sum object
-    ////create a zone and pass it 5 times
-    ////assert truth on the 5th time
     @Test
     public void SampleTest_Pass()
     {
@@ -174,11 +169,6 @@ public class ProfileHelperTest {
         assertTrue(ProfileHelper.sampleZone(profile, zone, queue, map));
     }
 
-    //case 2:
-    ////create empty queue and sum
-    ////create 1 zone and pass it 4 times, then create another that is wildly different
-    ////run 4 times, assert false on 5th
-
     @Test
     public void sampleTest_Fail()
     {
@@ -200,6 +190,101 @@ public class ProfileHelperTest {
         map.put("light", 0.0);
         map.put("lux", 0.0);
 
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+
+        assertFalse(ProfileHelper.sampleZone(profile, zoneBad, queue, map));
+    }
+
+    @Test
+    public void sampleTestFillStart_Fail(){
+        Profile profile = new Profile("test", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0");
+        Zone zoneGood = new Zone(Zone.ZoneName.DRIVER, "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0");
+        Zone zoneBad = new Zone(Zone.ZoneName.DRIVER, "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0");
+
+        Queue<Map> queue = new LinkedList<>();
+        HashMap<String, Double> map = new HashMap<>(11);
+        map.put("temperature", 0.0);
+        map.put("humidity", 0.0);
+        map.put("gain", 0.0);
+        map.put("luminosity", 0.0);
+        map.put("full", 0.0);
+        map.put("ir", 0.0);
+        map.put("pressure", 0.0);
+        map.put("sound", 0.0);
+        map.put("altitude", 0.0);
+        map.put("light", 0.0);
+        map.put("lux", 0.0);
+
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+
+        assertFalse(ProfileHelper.sampleZone(profile, zoneBad, queue, map));
+    }
+
+    @Test
+    public void sampleTestFillMid_Fail() {
+        Profile profile = new Profile("test", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0");
+        Zone zoneGood = new Zone(Zone.ZoneName.DRIVER, "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0");
+        Zone zoneBad = new Zone(Zone.ZoneName.DRIVER, "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0");
+
+        Queue<Map> queue = new LinkedList<>();
+        HashMap<String, Double> map = new HashMap<>(11);
+        map.put("temperature", 0.0);
+        map.put("humidity", 0.0);
+        map.put("gain", 0.0);
+        map.put("luminosity", 0.0);
+        map.put("full", 0.0);
+        map.put("ir", 0.0);
+        map.put("pressure", 0.0);
+        map.put("sound", 0.0);
+        map.put("altitude", 0.0);
+        map.put("light", 0.0);
+        map.put("lux", 0.0);
+
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+
+
+        assertFalse(ProfileHelper.sampleZone(profile, zoneBad, queue, map));
+    }
+    public void sampleTestFillEnd_Fail() {
+        Profile profile = new Profile("test", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0");
+        Zone zoneGood = new Zone(Zone.ZoneName.DRIVER, "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0", "10.0");
+        Zone zoneBad = new Zone(Zone.ZoneName.DRIVER, "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0", "1000.0");
+
+        Queue<Map> queue = new LinkedList<>();
+        HashMap<String, Double> map = new HashMap<>(11);
+        map.put("temperature", 0.0);
+        map.put("humidity", 0.0);
+        map.put("gain", 0.0);
+        map.put("luminosity", 0.0);
+        map.put("full", 0.0);
+        map.put("ir", 0.0);
+        map.put("pressure", 0.0);
+        map.put("sound", 0.0);
+        map.put("altitude", 0.0);
+        map.put("light", 0.0);
+        map.put("lux", 0.0);
+
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
+        ProfileHelper.sampleZone(profile, zoneGood, queue, map);
         ProfileHelper.sampleZone(profile, zoneGood, queue, map);
         ProfileHelper.sampleZone(profile, zoneGood, queue, map);
         ProfileHelper.sampleZone(profile, zoneGood, queue, map);

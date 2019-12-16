@@ -9,6 +9,8 @@ import com.example.aptiv.Model.Service.AptivService;
 import com.example.aptiv.Model.Helper.ProfileHandler;
 import com.example.aptiv.View.fragment.DashboardFragment;
 
+import java.sql.Driver;
+
 
 public class BaseViewModel implements IVolleyCallback {
 
@@ -24,9 +26,9 @@ public class BaseViewModel implements IVolleyCallback {
     public static Zone BackseatZone = new Zone(Zone.ZoneName.BACK, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0");
     public static Zone MiddleZone = new Zone(Zone.ZoneName.MIDDLE, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0");
 
-    public Profile DriverProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
-    public Profile PassengerProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
-    public Profile BackProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
+    public static Profile DriverProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
+    public static Profile PassengerProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
+    public static Profile BackProfile = new Profile(null, null, null, null, null, null, null, null, null, null, null, null);
 
     public Double OutTemperature = 0.0;
     public Boolean isMuted = false;
@@ -47,10 +49,6 @@ public class BaseViewModel implements IVolleyCallback {
         tempType = false;
         _weatherService.GetWeather(this);
 
-        UpdateData();
-        DriverProfile.setFromZone(DriverZone);
-        PassengerProfile.setFromZone(PassengerZone);
-        BackProfile.setFromZone(BackseatZone);
     }
 
     public void onProfileChange() {
@@ -62,11 +60,25 @@ public class BaseViewModel implements IVolleyCallback {
         _profileHandler.SetDashboardFragment(fragment);
     }
 
+    public void InitData(){
+        DriverProfile.setFromZone(DriverZone);
+        PassengerProfile.setFromZone(PassengerZone);
+        BackProfile.setFromZone(BackseatZone);
+    }
+
     public void UpdateData() {
         _aptivService.GetAverageReadings(this);
         _aptivService.GetBackseatReadings(this);
         _aptivService.GetDriverReadings(this);
         _aptivService.GetPassengerReadings(this);
+        if(DriverProfile.getTemperature() == null && DriverZone.getTemperature() != "0")
+        {
+            /*Very clunky fix that works around profiles not being initialized to current values on startup
+            *Reason for clunkiness is that it only works at a specified point on startup
+            *that was still not identified, as well as the server fetching only null values on first
+            *fetch.*/
+            InitData();
+        }
     }
 
     @Override
