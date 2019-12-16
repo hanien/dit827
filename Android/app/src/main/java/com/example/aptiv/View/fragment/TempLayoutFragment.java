@@ -90,7 +90,19 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
 
     @Override
     public void zoneIsSelected() {
-        _desiredTemp = temp;
+        if(_parentFragment._driverSeatSelected && !_parentFragment._frontSeatSelected && !_parentFragment._backSeatSelected){
+            _desiredTemp =  _baseViewModel.DriverProfile.getTemperature() == null ? temp : Double.parseDouble(_baseViewModel.DriverProfile.getTemperature());
+        }
+        else if(_parentFragment._frontSeatSelected && !_parentFragment._driverSeatSelected && !_parentFragment._backSeatSelected){
+            _desiredTemp =  _baseViewModel.PassengerProfile.getTemperature() == null ? temp : Double.parseDouble(_baseViewModel.PassengerProfile.getTemperature());
+        }
+        else if(_parentFragment._backSeatSelected && !_parentFragment._frontSeatSelected && !_parentFragment._driverSeatSelected) {
+            _desiredTemp =  _baseViewModel.BackProfile.getTemperature() == null ? temp : Double.parseDouble(_baseViewModel.BackProfile.getTemperature());
+        }else{
+            _desiredTemp = temp;
+        }
+
+
         if(_parentFragment._backSeatSelected || _parentFragment._driverSeatSelected || _parentFragment._frontSeatSelected ){
               SetText.setVisibility(View.GONE);
               SetTempLayout.setVisibility(View.VISIBLE);
