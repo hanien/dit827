@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.aptiv.Model.Class.Zone;
 import com.example.aptiv.Model.Helper.ProfileHelper;
 import com.example.aptiv.Model.Interface.IZoneSelection;
 import com.example.aptiv.R;
@@ -160,23 +161,26 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
 
 
         if(_plusMinusButtonClicked){
-            PlusMinusButtonClicked(true,Driver,Passenger,Back);
+            tempChangeValue.setTextSize(25);
+            tempChangeValue.setText("Changing Tempreture\n to " + _desiredTemp+ typeString);
         }
     }
 
     private boolean checkZoneDifferences(boolean increasing, boolean driver, boolean passenger, boolean backseat){
+        Zone desiredVal = new Zone(Zone.ZoneName.DRIVER,"0"+_desiredTemp,"0","0","0","0","0","0","","0","0","0");
+
         if(driver) {
-                return ProfileHelper.checkTemp(increasing,_baseViewModel.DriverZone,
+                return ProfileHelper.checkTemp(increasing,desiredVal,
                                         _baseViewModel.PassengerZone,
                                         _baseViewModel.BackseatZone);
         }
         if(passenger){
-            return ProfileHelper.checkTemp(increasing,_baseViewModel.PassengerZone,
+            return ProfileHelper.checkTemp(increasing,desiredVal,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
-            return ProfileHelper.checkTemp(increasing,_baseViewModel.BackseatZone,
+            return ProfileHelper.checkTemp(increasing,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
         }
