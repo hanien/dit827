@@ -227,7 +227,7 @@ public class AirpLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private void updateView() {
-        ApValue.setText(_baseViewModel.MiddleZone.getPressure() + " hPa");
+        ApValue.setText(String.valueOf(_baseViewModel.round(Double.parseDouble(_baseViewModel.MiddleZone.getPressure()),1))+ " hPa");
         updateApValue(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
     }
 

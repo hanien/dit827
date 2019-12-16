@@ -69,7 +69,7 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         double temp = Double.parseDouble(_baseViewModel.MiddleZone.getTemperature());
         temp = (_baseViewModel.getTempType()) ? ((1.8 * temp)) + 32 : temp;
         String tempType = (_baseViewModel.getTempType()) ? _baseViewModel.getFahrenheit() : _baseViewModel.getCelsius();
-        TempValue.setText(temp + tempType);
+        TempValue.setText(_baseViewModel.round(temp,1) + tempType);
     }
 
     private void registerOnClickListeners() {
@@ -169,19 +169,23 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
     }
 
     private boolean checkZoneDifferences(boolean increasing, boolean driver, boolean passenger, boolean backseat){
-        Zone desiredVal = new Zone(Zone.ZoneName.DRIVER,"0"+_desiredTemp,"0","0","0","0","0","0","","0","0","0");
-
         if(driver) {
-                return ProfileHelper.checkTemp(increasing,desiredVal,
-                                        _baseViewModel.PassengerZone,
-                                        _baseViewModel.BackseatZone);
+            Zone desiredVal = _baseViewModel.DriverZone;
+            desiredVal.setTemperature(String.valueOf(_desiredTemp));
+            return ProfileHelper.checkTemp(increasing,desiredVal,
+                    _baseViewModel.PassengerZone,
+                    _baseViewModel.BackseatZone);
         }
         if(passenger){
+            Zone desiredVal = _baseViewModel.PassengerZone;
+            desiredVal.setTemperature(String.valueOf(_desiredTemp));
             return ProfileHelper.checkTemp(increasing,desiredVal,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
+            Zone desiredVal = _baseViewModel.BackseatZone;
+            desiredVal.setTemperature(String.valueOf(_desiredTemp));
             return ProfileHelper.checkTemp(increasing,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.DriverZone);
@@ -236,7 +240,7 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         String celsius = _baseViewModel.getCelsius();
         String typeString = ((tempType)) ? fahrenheit : celsius;
         tempChangeValue.setTextSize(25);
-        tempChangeValue.setText("Changing Tempreture\n to " + _desiredTemp+ typeString);
+        tempChangeValue.setText("Changing Tempreture\n to " + _baseViewModel.round(_desiredTemp,1) + typeString);
         if(Driver){
             _baseViewModel.DriverProfile.setTemperature(Double.toString(_desiredTemp));
         }
