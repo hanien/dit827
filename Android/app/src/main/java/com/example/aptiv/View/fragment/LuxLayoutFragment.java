@@ -149,14 +149,14 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
 
     private boolean checkZoneDifferences(boolean plus,boolean driver, boolean passenger, boolean backseat){
         if(driver) {
-            Zone desiredVal = _baseViewModel.DriverZone;
+            Zone desiredVal = _baseViewModel.DriverZone.CloneZone();
             desiredVal.setIr(String.valueOf(_desiredLux));
             return ProfileHelper.checkLux(plus,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
         }
         if(passenger){
-            Zone desiredVal = _baseViewModel.PassengerZone;
+            Zone desiredVal = _baseViewModel.PassengerZone.CloneZone();
             desiredVal.setIr(String.valueOf(_desiredLux));
             return ProfileHelper.checkLux(plus,
                     desiredVal,
@@ -164,7 +164,7 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
-            Zone desiredVal = _baseViewModel.BackseatZone;
+            Zone desiredVal = _baseViewModel.BackseatZone.CloneZone();
             desiredVal.setIr(String.valueOf(_desiredLux));
             return ProfileHelper.checkLux(plus,desiredVal,
                     _baseViewModel.PassengerZone,
