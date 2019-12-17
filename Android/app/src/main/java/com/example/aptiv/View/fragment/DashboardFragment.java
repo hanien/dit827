@@ -41,7 +41,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     private SettingsLayoutFragment SettingsLayoutFragment;
     private ModeLayoutFragment ModeLayoutFragment;
     private AddModeLayoutFragment AddModeLayoutFragment;
-    private DevicesHandler DevicesHandler;
+    private IoTDevicesHandlerFragment DevicesHandler;
     private IZoneSelection _callback;
     private ImageView _carMaskView;
     private ImageView _frontSeat;
@@ -175,7 +175,7 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
     public void OpenDHFragment() {
         FragmentManager fm1 = getFragmentManager();
         FragmentTransaction fragmentTransaction1 = fm1.beginTransaction();
-        DevicesHandler = new DevicesHandler(this, _owner, _baseViewModel);
+        DevicesHandler = new IoTDevicesHandlerFragment(this, _owner, _baseViewModel);
         fragmentTransaction1.replace(R.id.fragmentPlaceHolderDashboard, DevicesHandler).commit();
     }
 

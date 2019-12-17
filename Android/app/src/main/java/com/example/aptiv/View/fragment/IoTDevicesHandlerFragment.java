@@ -20,7 +20,7 @@ import com.google.android.gms.nearby.messages.MessageListener;
 
 import androidx.fragment.app.Fragment;
 
-public class DevicesHandler extends Fragment {
+public class IoTDevicesHandlerFragment extends Fragment {
 
     private MainActivity _owner;
     private DashboardFragment _parentFragment;
@@ -35,7 +35,7 @@ public class DevicesHandler extends Fragment {
     private Message mActiveMessage;
     private boolean IOTEnabled = false;
 
-    public DevicesHandler(DashboardFragment parentFragment, MainActivity Owner, BaseViewModel viewModel) {
+    public IoTDevicesHandlerFragment(DashboardFragment parentFragment, MainActivity Owner, BaseViewModel viewModel) {
         _owner = Owner;
         _baseViewModel = viewModel;
         _parentFragment = parentFragment;
@@ -47,6 +47,7 @@ public class DevicesHandler extends Fragment {
         _view = inflater.inflate(R.layout.fragment_iot, container, false);
 
         SetupView();
+        HideBtns();
         RegisterOnClickListeners();
 
         return _view;
@@ -59,19 +60,14 @@ public class DevicesHandler extends Fragment {
                     IOTEnabled = true;
                     IOTBtn.setImageResource(R.drawable.cloud);
                     _owner.startReceiverService();
+                    ShowBtns();
                 }
                 else{
                     IOTEnabled = false;
                     IOTBtn.setImageResource(R.drawable.xcloud);
                     _owner.stopReceiverService();
+                    HideBtns();
                 }
-                HideBtns();
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        ShowBtns();
-                    }
-                }, 3000);
             }
         });
         muteBtn.setOnClickListener(new View.OnClickListener() {
@@ -183,8 +179,6 @@ public class DevicesHandler extends Fragment {
         muteBtn.setAlpha(0.5f);
         HvolumeBtn.setAlpha(0.5f);
         LvolumeBtn.setAlpha(0.5f);
-        IOTBtn.setAlpha(0.5f);
-        IOTBtn.setClickable(false);
         muteBtn.setClickable(false);
         LvolumeBtn.setClickable(false);
         HvolumeBtn.setClickable(false);
@@ -194,8 +188,6 @@ public class DevicesHandler extends Fragment {
         muteBtn.setAlpha(1f);
         HvolumeBtn.setAlpha(1f);
         LvolumeBtn.setAlpha(1f);
-        IOTBtn.setAlpha(1f);
-        IOTBtn.setClickable(true);
         muteBtn.setClickable(true);
         LvolumeBtn.setClickable(true);
         HvolumeBtn.setClickable(true);
