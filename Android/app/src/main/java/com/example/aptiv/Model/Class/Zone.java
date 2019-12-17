@@ -205,4 +205,10 @@ public class Zone {
         this.setLux((values.get("lux")).toString());
     }
 
+    public Zone CloneZone(){
+        Zone z = new Zone(this.name, this.temperature, this.humidity, this.gain, this.luminosity, this.full, this.ir,
+                this.pressure, this.sound, this.altitude, this.light, this.lux);
+        return  z;
+    }
+
 }

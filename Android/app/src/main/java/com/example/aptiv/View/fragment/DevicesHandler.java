@@ -6,8 +6,8 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.aptiv.R;
@@ -27,12 +27,13 @@ public class DevicesHandler extends Fragment {
     private View _view;
     private BaseViewModel _baseViewModel;
     private TextView MuteText;
-    ImageButton muteBtn;
-    ImageButton HvolumeBtn;
-    ImageButton LvolumeBtn;
+    private ImageButton muteBtn;
+    private ImageButton HvolumeBtn;
+    private ImageButton LvolumeBtn;
+    private ImageView IOTBtn;
     private MessageListener mMessageListener;
     private Message mActiveMessage;
-
+    private boolean IOTEnabled = false;
 
     public DevicesHandler(DashboardFragment parentFragment, MainActivity Owner, BaseViewModel viewModel) {
         _owner = Owner;
@@ -43,7 +44,7 @@ public class DevicesHandler extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        _view = inflater.inflate(R.layout.pop_up, container, false);
+        _view = inflater.inflate(R.layout.fragment_iot, container, false);
 
         SetupView();
         RegisterOnClickListeners();
@@ -52,6 +53,27 @@ public class DevicesHandler extends Fragment {
     }
 
     private void RegisterOnClickListeners() {
+        IOTBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(!IOTEnabled){
+                    IOTEnabled = true;
+                    IOTBtn.setImageResource(R.drawable.cloud);
+                    _owner.startReceiverService();
+                }
+                else{
+                    IOTEnabled = false;
+                    IOTBtn.setImageResource(R.drawable.xcloud);
+                    _owner.stopReceiverService();
+                }
+                HideBtns();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        ShowBtns();
+                    }
+                }, 3000);
+            }
+        });
         muteBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -116,6 +138,11 @@ public class DevicesHandler extends Fragment {
         MuteText = _view.findViewById(R.id.MuteText);
         HvolumeBtn = _view.findViewById(R.id.highbtn);
         LvolumeBtn = _view.findViewById(R.id.lowbtn);
+        IOTBtn = _view.findViewById(R.id.IOT);
+        if(!IOTEnabled)
+        {
+            IOTBtn.setImageResource(R.drawable.xcloud);
+        }
     }
 
 
@@ -156,6 +183,8 @@ public class DevicesHandler extends Fragment {
         muteBtn.setAlpha(0.5f);
         HvolumeBtn.setAlpha(0.5f);
         LvolumeBtn.setAlpha(0.5f);
+        IOTBtn.setAlpha(0.5f);
+        IOTBtn.setClickable(false);
         muteBtn.setClickable(false);
         LvolumeBtn.setClickable(false);
         HvolumeBtn.setClickable(false);
@@ -165,6 +194,8 @@ public class DevicesHandler extends Fragment {
         muteBtn.setAlpha(1f);
         HvolumeBtn.setAlpha(1f);
         LvolumeBtn.setAlpha(1f);
+        IOTBtn.setAlpha(1f);
+        IOTBtn.setClickable(true);
         muteBtn.setClickable(true);
         LvolumeBtn.setClickable(true);
         HvolumeBtn.setClickable(true);

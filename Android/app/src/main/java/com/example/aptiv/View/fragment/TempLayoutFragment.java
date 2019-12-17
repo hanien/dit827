@@ -170,21 +170,21 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
 
     private boolean checkZoneDifferences(boolean increasing, boolean driver, boolean passenger, boolean backseat){
         if(driver) {
-            Zone desiredVal = _baseViewModel.DriverZone;
+            Zone desiredVal = _baseViewModel.DriverZone.CloneZone();
             desiredVal.setTemperature(String.valueOf(_desiredTemp));
             return ProfileHelper.checkTemp(increasing,desiredVal,
                     _baseViewModel.PassengerZone,
                     _baseViewModel.BackseatZone);
         }
         if(passenger){
-            Zone desiredVal = _baseViewModel.PassengerZone;
+            Zone desiredVal = _baseViewModel.PassengerZone.CloneZone();
             desiredVal.setTemperature(String.valueOf(_desiredTemp));
             return ProfileHelper.checkTemp(increasing,desiredVal,
                     _baseViewModel.DriverZone,
                     _baseViewModel.BackseatZone);
         }
         if(backseat){
-            Zone desiredVal = _baseViewModel.BackseatZone;
+            Zone desiredVal = _baseViewModel.BackseatZone.CloneZone();
             desiredVal.setTemperature(String.valueOf(_desiredTemp));
             return ProfileHelper.checkTemp(increasing,desiredVal,
                     _baseViewModel.PassengerZone,
