@@ -52,6 +52,7 @@ public class ProfileHandler {
                 }else{
                     HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDefference(_driver, _oldDriverZone);
                     CreateNotificationForZoneDifference(true,false,false,hasError);
+                    _oldDriverZone = _driver;
                 }
                 break;
             case PASSENGER:
@@ -62,6 +63,7 @@ public class ProfileHandler {
                 }else{
                     HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDefference(_passenger, _oldPassengerZone);
                     CreateNotificationForZoneDifference(false,true,false,hasError);
+                    _oldPassengerZone = _passenger;
                 }
                 break;
             case MIDDLE:
@@ -75,6 +77,7 @@ public class ProfileHandler {
                 }else{
                     HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDefference(_back, _oldbackZone);
                     CreateNotificationForZoneDifference(false,false,true,hasError);
+                    _oldbackZone = _back;
                 }
                 break;
         }

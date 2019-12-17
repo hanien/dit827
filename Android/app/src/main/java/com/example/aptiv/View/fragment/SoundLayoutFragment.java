@@ -142,8 +142,8 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
             _zoneSoundTextView.setText(String.valueOf((int) temp));
         }
         if(_plusMinusButtonClicked){
-            _zoneSoundTextView.setTextSize(25);
-            _zoneSoundTextView.setText("Changing Volume\n to " +(int)_desiredTemp);        }
+            setDesiredValue(Driver,Passenger,Back);
+        }
     }
 
     private boolean checkZoneDifferences(boolean plus, boolean driver, boolean passenger, boolean backseat){
@@ -185,17 +185,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
                 _desiredTemp--;
             }
 
-            _zoneSoundTextView.setTextSize(25);
-            _zoneSoundTextView.setText("Changing Volume\n to " +(int)_desiredTemp);
-            if(Driver){
-                _baseViewModel.DriverProfile.setSound(Double.toString(_desiredTemp));
-            }
-            if (Passenger) {
-                _baseViewModel.PassengerProfile.setSound(Double.toString(_desiredTemp));
-            }
-            if (Back) {
-                _baseViewModel.BackProfile.setSound(Double.toString(_desiredTemp));
-            }
+            setDesiredValue(Driver,Passenger,Back);
         } else {
 
             _parentFragment.CreatePopupView(Driver, Passenger, Back, "Sound is too different from other zones! Adjust other zones and try again.", false,null);
@@ -208,7 +198,7 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
 
     //region Timer method
     private void setUpTimer() {
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(4000, 1000) {
 
             public void onTick(long millisUntilFinished) {
             }
@@ -230,4 +220,18 @@ public class SoundLayoutFragment extends Fragment implements IZoneSelection {
         updateSoundValue(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
     }
     //endregion
+
+    private void setDesiredValue(boolean Driver, boolean Passenger,boolean Back){
+        _zoneSoundTextView.setTextSize(25);
+        _zoneSoundTextView.setText("Changing Volume\n to " +(int)_desiredTemp);
+        if(Driver){
+            _baseViewModel.DriverProfile.setSound(Double.toString(_desiredTemp));
+        }
+        if (Passenger) {
+            _baseViewModel.PassengerProfile.setSound(Double.toString(_desiredTemp));
+        }
+        if (Back) {
+            _baseViewModel.BackProfile.setSound(Double.toString(_desiredTemp));
+        }
+    }
 }

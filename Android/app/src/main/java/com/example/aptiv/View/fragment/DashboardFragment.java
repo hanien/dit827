@@ -232,7 +232,9 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
                     _driverSeatError.setImageResource(R.drawable.driverseatprogressing);
                     _driverSeatError.setVisibility(View.VISIBLE);
                 } else {
-                    _driverSeatError.setVisibility(View.INVISIBLE);
+                    if(!popUpShown){
+                        _driverSeatError.setVisibility(View.INVISIBLE);
+                    }
                 }
                 break;
             case PASSENGER:
@@ -240,7 +242,9 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
                     _frontSeatError.setImageResource(R.drawable.frontseatprogressing);
                     _frontSeatError.setVisibility(View.VISIBLE);
                 } else {
-                    _frontSeatError.setVisibility(View.INVISIBLE);
+                    if(!popUpShown) {
+                        _frontSeatError.setVisibility(View.INVISIBLE);
+                    }
                 }
                 break;
             case BACK:
@@ -248,7 +252,9 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
                     _backSeatError.setImageResource(R.drawable.backseatprogressing);
                     _backSeatError.setVisibility(View.VISIBLE);
                 } else {
-                    _backSeatError.setVisibility(View.INVISIBLE);
+                    if(!popUpShown) {
+                        _backSeatError.setVisibility(View.INVISIBLE);
+                    }
                 }
                 break;
             default:
@@ -378,7 +384,6 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
             String messages = "Values has unexpectedly changed in the " + ZoneName + " zone!";
             txtMessage.setText(messages);
 
-
             _driverSeatError.setVisibility(driver ? View.VISIBLE : View.GONE);
             _driverSeatError.setImageResource(R.drawable.driverseatred);
             _frontSeatError.setVisibility(passenger ? View.VISIBLE : View.GONE);
@@ -393,17 +398,18 @@ public class DashboardFragment extends Fragment implements View.OnTouchListener 
                 @Override
                 public void onClick(View v) {
                     //Do Something
+
                     popupWindow.dismiss();
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            popUpShown = false;
                             _driverSeatError.setVisibility(View.GONE);
                             _frontSeatError.setVisibility(View.GONE);
                             _backSeatError.setVisibility(View.GONE);
-                            popUpShown = false;
                         }
-                    },60000);
+                    },5000);
                 }
             });
         }
