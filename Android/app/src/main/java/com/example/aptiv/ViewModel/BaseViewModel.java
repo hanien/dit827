@@ -35,7 +35,8 @@ public class BaseViewModel implements IVolleyCallback {
     public Boolean tempType; //True here means that it is Fahrenheit
     private String fahrenheit;
     private String celsius;
-    private String SoundValue;
+    public static String SoundValue = "0";
+
     public BaseViewModel(MainActivity activity) {
         _activity = activity;
 
@@ -127,9 +128,6 @@ public class BaseViewModel implements IVolleyCallback {
         return celsius;
     }
 
-    public void SetValues(String value) {
-        SoundValue = value;
-    }
 
     public double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();

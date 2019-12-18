@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DashboardViewModel _viewModel;
     public DashboardFragment _dashboardFragment;
+    public boolean IOTEnabled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

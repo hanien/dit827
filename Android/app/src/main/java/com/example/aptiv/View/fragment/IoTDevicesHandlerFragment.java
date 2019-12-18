@@ -33,7 +33,6 @@ public class IoTDevicesHandlerFragment extends Fragment {
     private ImageView IOTBtn;
     private MessageListener mMessageListener;
     private Message mActiveMessage;
-    private boolean IOTEnabled = false;
 
     public IoTDevicesHandlerFragment(DashboardFragment parentFragment, MainActivity Owner, BaseViewModel viewModel) {
         _owner = Owner;
@@ -47,7 +46,13 @@ public class IoTDevicesHandlerFragment extends Fragment {
         _view = inflater.inflate(R.layout.fragment_iot, container, false);
 
         SetupView();
-        HideBtns();
+        if(_owner.IOTEnabled){
+            ShowBtns();
+            IOTBtn.setImageResource(R.drawable.cloud);
+        }else{
+            HideBtns();
+            IOTBtn.setImageResource(R.drawable.xcloud);
+        }
         RegisterOnClickListeners();
 
         return _view;
@@ -56,14 +61,14 @@ public class IoTDevicesHandlerFragment extends Fragment {
     private void RegisterOnClickListeners() {
         IOTBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(!IOTEnabled){
-                    IOTEnabled = true;
+                if(!_owner.IOTEnabled){
+                    _owner.IOTEnabled = true;
                     IOTBtn.setImageResource(R.drawable.cloud);
                     _owner.startReceiverService();
                     ShowBtns();
                 }
                 else{
-                    IOTEnabled = false;
+                    _owner.IOTEnabled = false;
                     IOTBtn.setImageResource(R.drawable.xcloud);
                     _owner.stopReceiverService();
                     HideBtns();
@@ -135,7 +140,7 @@ public class IoTDevicesHandlerFragment extends Fragment {
         HvolumeBtn = _view.findViewById(R.id.highbtn);
         LvolumeBtn = _view.findViewById(R.id.lowbtn);
         IOTBtn = _view.findViewById(R.id.IOT);
-        if(!IOTEnabled)
+        if(!_owner.IOTEnabled)
         {
             IOTBtn.setImageResource(R.drawable.xcloud);
         }

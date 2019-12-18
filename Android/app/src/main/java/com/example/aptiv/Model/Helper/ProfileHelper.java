@@ -16,7 +16,7 @@ public class ProfileHelper {
     private final static double t_humidity = 5.0;
     private final static double t_ir = 5.0;
     private final static double t_lux = 5.0;
-    private final static double t_pressure = 10.0;
+    private final static double t_pressure = 200.0;
     private final static double t_temp = 2.0;
     private final static double t_luminosity = 5.0;
     private final static double t_sound = 1.0;
@@ -218,7 +218,7 @@ public class ProfileHelper {
 
         checkedZone.put("pressure",!values.get("pressure").equals(null) && profile.getPressure() != null ? values.get("pressure") == null || compareThreshold(Double.parseDouble(profile.getPressure()), values.get("pressure"), t_pressure) : true);
 
-        checkedZone.put("sound",!values.get("sound").equals(null) && profile.getSound() != null ? values.get("sound") == null || compareThreshold(Double.parseDouble(profile.getSound()), values.get("sound"), t_sound) : true);
+        checkedZone.put("sound",true);
 
         checkedZone.put("altitude", !values.get("altitude").equals(null) && profile.getAltitude() != null ? values.get("altitude") == null || compareThreshold(Double.parseDouble(profile.getAltitude()), values.get("altitude"), t_altitude) : true);
 
@@ -249,7 +249,7 @@ public class ProfileHelper {
 
         checkedZone.put("pressure",zone1.getPressure() != null && zone2.getPressure() != null  ?  compareThreshold(Double.parseDouble(zone1.getPressure() ), Double.parseDouble(zone2.getPressure()), t_pressure) : true);
 
-        checkedZone.put("sound",zone1.getSound() != null && zone2.getSound() != null  ? compareThreshold(Double.parseDouble(zone1.getSound()), Double.parseDouble(zone2.getSound()), t_sound) : true);
+        checkedZone.put("sound",true);
 
         checkedZone.put("altitude",zone1.getAltitude() != null && zone2.getAltitude() != null  ?  compareThreshold(Double.parseDouble(zone1.getAltitude() ), Double.parseDouble(zone2.getAltitude()), t_altitude) : true);
 

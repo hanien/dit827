@@ -240,7 +240,7 @@ public class TempLayoutFragment extends Fragment implements IZoneSelection {
         String celsius = _baseViewModel.getCelsius();
         String typeString = ((tempType)) ? fahrenheit : celsius;
         tempChangeValue.setTextSize(25);
-        tempChangeValue.setText("Changing Tempreture\n to " + _baseViewModel.round(_desiredTemp,1) + typeString);
+        tempChangeValue.setText("Changing Temperature\n to " + _baseViewModel.round(_desiredTemp,1) + typeString);
         if(Driver){
             _baseViewModel.DriverProfile.setTemperature(Double.toString(_desiredTemp));
         }
