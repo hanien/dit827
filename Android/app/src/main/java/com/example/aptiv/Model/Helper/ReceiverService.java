@@ -75,8 +75,9 @@ public class ReceiverService extends Service {
                         values = values + list.get(i);
                         value = String.valueOf(values / list.size());
                     }
-
-                    SaveSoundValue(value);
+                    if(value != null){
+                        SaveSoundValue(value);
+                    }
 
                 }
 
@@ -106,7 +107,7 @@ public class ReceiverService extends Service {
         _base.PassengerZone.setSound(value);
         _base.MiddleZone.setSound(value);
         _base.BackseatZone.setSound(value);
-        _base.SetValues(value);
+        _base.SoundValue = value;
     }
 
 

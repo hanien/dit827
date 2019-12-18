@@ -68,7 +68,7 @@ public class DefaultLayoutFragment extends Fragment implements View.OnClickListe
     }
 
     private void SetupTimer() {
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(4000, 1000) {
 
             public void onTick(long millisUntilFinished) {
             }
@@ -86,12 +86,7 @@ public class DefaultLayoutFragment extends Fragment implements View.OnClickListe
     }
 
     private void updateView() {
-        _soundTextView.setText(_baseViewModel.MiddleZone.getSound());
-        _airPressureTextView.setText(_baseViewModel.MiddleZone.getPressure());
-        _humidityTextView.setText(_baseViewModel.MiddleZone.getHumidity());
-        _luxTextView.setText(_baseViewModel.MiddleZone.getIr());
-        _altitudeTextView.setText(_baseViewModel.MiddleZone.getAltitude());
-        SetTemperature(Double.parseDouble(_baseViewModel.MiddleZone.getTemperature()));
+        zoneIsSelected();
     }
 
     private void SetTemperature(double temp) {

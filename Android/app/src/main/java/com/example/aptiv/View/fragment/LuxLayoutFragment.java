@@ -99,8 +99,6 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
             luxChangeValue.setVisibility(View.VISIBLE);
             check = false;
             updateLuxValue(_parentFragment._driverSeatSelected ,_parentFragment._frontSeatSelected ,_parentFragment._backSeatSelected);
-
-
         } else {
             SetText.setVisibility(View.VISIBLE);
             luxChangeValue.setVisibility(View.GONE);
@@ -138,11 +136,13 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
             _desiredLux = lux;
             check = true;
         }
-        luxChangeValue.setText(String.valueOf((int)lux) + " lux");
 
+        if (!_plusMinusButtonClicked) {
+            luxChangeValue.setTextSize(50);
+            luxChangeValue.setText(String.valueOf((int) lux));
+        }
         if(_plusMinusButtonClicked) {
-            luxChangeValue.setTextSize(25);
-            luxChangeValue.setText("Changing Lux\n to " +(int)_desiredLux);
+            setDesiredValue(Driver,Passenger,Back);
         }
 
     }
@@ -183,17 +183,7 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
             else {
                 _desiredLux--;
             }
-            luxChangeValue.setTextSize(25);
-            luxChangeValue.setText("Changing Lux\n to " +(int)_desiredLux);
-            if(Driver){
-                _baseViewModel.DriverProfile.setIr(Double.toString(_desiredLux));
-            }
-            if (Passenger) {
-                _baseViewModel.PassengerProfile.setIr(Double.toString(_desiredLux));
-            }
-            if (Back) {
-                _baseViewModel.BackProfile.setIr(Double.toString(_desiredLux));
-            }
+            setDesiredValue(Driver,Passenger,Back);
         } else {
             _parentFragment.CreatePopupView(Driver, Passenger, Back, "Light level is too different from other zones! Adjust other zones and try again.", false,null);
             //TODO
@@ -226,5 +216,18 @@ public class LuxLayoutFragment extends Fragment implements IZoneSelection {
         updateLuxValue(_parentFragment._driverSeatSelected, _parentFragment._frontSeatSelected, _parentFragment._backSeatSelected);
     }
 
+    private void setDesiredValue(boolean Driver,boolean Passenger , boolean Back){
+        luxChangeValue.setTextSize(25);
+        luxChangeValue.setText("Changing Lux\n to " +(int)_desiredLux);
+        if(Driver){
+            _baseViewModel.DriverProfile.setIr(Double.toString(_desiredLux));
+        }
+        if (Passenger) {
+            _baseViewModel.PassengerProfile.setIr(Double.toString(_desiredLux));
+        }
+        if (Back) {
+            _baseViewModel.BackProfile.setIr(Double.toString(_desiredLux));
+        }
+    }
 
 }
