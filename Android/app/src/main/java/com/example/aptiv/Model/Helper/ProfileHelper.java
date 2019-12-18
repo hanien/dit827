@@ -208,11 +208,11 @@ public class ProfileHelper {
 
         checkedZone.put("humidity", !values.get("humidity").equals(null) && profile.getHumidity() != null ? values.get("humidity") == null || compareThreshold(Double.parseDouble(profile.getHumidity()),values.get("humidity"), t_humidity) : true);
 
-        checkedZone.put("gain", !values.get("gain").equals(null) && profile.getGain() != null ? values.get("gain") == null || compareThreshold(Double.parseDouble(profile.getGain()), values.get("gain"), t_gain) : true);
+        checkedZone.put("gain",  true);
 
         checkedZone.put("luminosity", !values.get("luminosity").equals(null) && profile.getLuminosity() != null ? values.get("luminosity") == null || compareThreshold(Double.parseDouble(profile.getLuminosity()), values.get("luminosity"), t_luminosity) : true);
 
-        checkedZone.put("full", !values.get("full").equals(null) && profile.getFull() != null ? values.get("full") == null || compareThreshold(Double.parseDouble(profile.getFull()), values.get("full"), t_full) : true);
+        checkedZone.put("full", true);
 
         checkedZone.put("ir", !values.get("ir").equals(null) && profile.getIr() != null ? values.get("ir") == null || compareThreshold(Double.parseDouble(profile.getIr()), values.get("ir"), t_ir): true);
 
@@ -229,7 +229,7 @@ public class ProfileHelper {
         return checkedZone;
     }
 
-    public static HashMap<String, Boolean> checkZoneDefference(Zone zone1, Zone zone2)
+    public static HashMap<String, Boolean> checkZoneDifference(Zone zone1, Zone zone2)
     {
         HashMap<String, Boolean> checkedZone = new HashMap<>(11);
         //compares each value against the threshold
@@ -239,11 +239,11 @@ public class ProfileHelper {
 
         checkedZone.put("humidity", zone1.getHumidity() != null && zone2.getHumidity() != null  ?  compareThreshold(Double.parseDouble(zone1.getHumidity() ),Double.parseDouble(zone2.getHumidity()), t_humidity) : true);
 
-        checkedZone.put("gain",  zone1.getGain() != null && zone2.getGain() != null  ?  compareThreshold(Double.parseDouble(zone1.getGain() ), Double.parseDouble(zone2.getGain()), t_gain) : true);
+        checkedZone.put("gain",  true);
 
         checkedZone.put("luminosity", zone1.getLuminosity() != null && zone2.getLuminosity() != null  ? compareThreshold(Double.parseDouble(zone1.getLuminosity() ), Double.parseDouble(zone2.getLuminosity()), t_luminosity) : true);
 
-        checkedZone.put("full", zone1.getFull() != null && zone2.getFull() != null  ? compareThreshold(Double.parseDouble(zone1.getFull() ), Double.parseDouble(zone2.getFull()), t_full) : true);
+        checkedZone.put("full",true);
 
         checkedZone.put("ir", zone1.getIr() != null && zone2.getIr() != null  ? compareThreshold(Double.parseDouble(zone1.getIr() ),Double.parseDouble(zone2.getIr()), t_ir): true);
 

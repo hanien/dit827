@@ -69,9 +69,9 @@ public class BaseViewModel implements IVolleyCallback {
 
     public void UpdateData() {
         _aptivService.GetAverageReadings(this);
-        _aptivService.GetBackseatReadings(this);
         _aptivService.GetDriverReadings(this);
         _aptivService.GetPassengerReadings(this);
+        _aptivService.GetBackseatReadings(this);
     }
 
     @Override
@@ -97,6 +97,8 @@ public class BaseViewModel implements IVolleyCallback {
         MiddleZone = value;
         MiddleZone.setName(Zone.ZoneName.MIDDLE);
         BackseatZone.setIr(MiddleZone.getIr());
+        BackseatZone.setGain(MiddleZone.getGain());
+        BackseatZone.setFull(MiddleZone.getFull());
         MiddleZone.setSound(SoundValue);
         _profileHandler.onDataFetched(value);
     }
@@ -111,6 +113,8 @@ public class BaseViewModel implements IVolleyCallback {
         BackseatZone = value;
         BackseatZone.setName(Zone.ZoneName.BACK);
         BackseatZone.setIr(MiddleZone.getIr());
+        BackseatZone.setGain(MiddleZone.getGain());
+        BackseatZone.setFull(MiddleZone.getFull());
         BackseatZone.setSound(SoundValue);
         Zone temp =  getAVG(value);
         _profileHandler.onDataFetched(temp);

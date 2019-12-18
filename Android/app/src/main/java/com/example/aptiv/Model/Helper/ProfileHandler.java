@@ -42,6 +42,10 @@ public class ProfileHandler {
         _dashboardFragment = fragment;
     }
 
+    private int driveCount = 0;
+    private int passCount = 0;
+    private int backCount = 0;
+
     public void onDataFetched(Zone zone) {
         switch (zone.getName()) {
             case DRIVER:
@@ -50,9 +54,20 @@ public class ProfileHandler {
                 if(_oldDriverZone == null){
                     _oldDriverZone = zone;
                 }else{
-                    HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDefference(_driver, _oldDriverZone);
-                    CreateNotificationForZoneDifference(true,false,false,hasError);
-                    _oldDriverZone = _driver;
+                    HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDifference(_driver, _oldDriverZone);
+                    if(hasError.containsValue(Boolean.FALSE)){
+                        driveCount++;
+                    }
+                    else{
+                        driveCount = 0;
+                    }
+                    if(driveCount > 1){
+                        CreateNotificationForZoneDifference(true,false,false,hasError,_driver,_oldDriverZone);
+                        driveCount = 0;
+                    }
+                    if(driveCount == 0){
+                        _oldDriverZone = _driver;
+                    }
                 }
                 break;
             case PASSENGER:
@@ -61,9 +76,19 @@ public class ProfileHandler {
                 if(_oldPassengerZone == null){
                     _oldPassengerZone = zone;
                 }else{
-                    HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDefference(_passenger, _oldPassengerZone);
-                    CreateNotificationForZoneDifference(false,true,false,hasError);
-                    _oldPassengerZone = _passenger;
+                    HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDifference(_passenger, _oldPassengerZone);
+                    if(hasError.containsValue(Boolean.FALSE)){
+                        passCount++;
+                    }else{
+                        passCount = 0;
+                    }
+                    if(passCount > 1){
+                        CreateNotificationForZoneDifference(false,true,false,hasError,_passenger,_oldPassengerZone);
+                        passCount = 0;
+                    }
+                    if(passCount == 0){
+                        _oldPassengerZone = _passenger;
+                    }
                 }
                 break;
             case MIDDLE:
@@ -75,16 +100,29 @@ public class ProfileHandler {
                 if(_oldbackZone == null){
                     _oldbackZone = zone;
                 }else{
-                    HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDefference(_back, _oldbackZone);
-                    CreateNotificationForZoneDifference(false,false,true,hasError);
-                    _oldbackZone = _back;
+                    HashMap<String, Boolean> hasError = ProfileHelper.checkZoneDifference(_back, _oldbackZone);
+                    if(hasError.containsValue(Boolean.FALSE)){
+                        backCount++;
+                    }
+                    else{
+                        backCount=0;
+                    }
+                    if(backCount > 1){
+                        CreateNotificationForZoneDifference(false,false,true,hasError,_passenger,_oldPassengerZone);
+                        backCount=0;
+                    }
+                    if(backCount == 0){
+                        _oldbackZone = _back;
+                    }
                 }
                 break;
         }
     }
 
-    private void CreateNotificationForZoneDifference(boolean Driver, boolean Passenger , boolean Back ,HashMap<String, Boolean> hasError ){
+    private void CreateNotificationForZoneDifference(boolean Driver, boolean Passenger , boolean Back ,HashMap<String, Boolean> hasError ,Zone z ,Zone oldZ ){
         if(hasError.containsValue(Boolean.FALSE)){
+            Zone z1 = z;
+            Zone oldZ1 = oldZ;
             _dashboardFragment.CreateTempPopupView(Driver,Passenger,Back);
         }
     }
